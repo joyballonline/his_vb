@@ -358,11 +358,11 @@ Partial Class MovementInput
         Me.TableLayoutPanel6.Controls.Add(Me.LblSerialNoSince, 0, 3)
         Me.TableLayoutPanel6.Controls.Add(Me.LblLocationSince, 0, 2)
         Me.TableLayoutPanel6.Controls.Add(Me.LblWarehouseSince, 0, 0)
+        Me.TableLayoutPanel6.Controls.Add(Me.TxtGoodsReceiptDate, 1, 7)
         Me.TableLayoutPanel6.Controls.Add(Me.TxtWarehouseSince, 1, 0)
         Me.TableLayoutPanel6.Controls.Add(Me.TxtStorageTypeSince, 1, 1)
         Me.TableLayoutPanel6.Controls.Add(Me.LblGoodsReceiptDate, 0, 7)
         Me.TableLayoutPanel6.Controls.Add(Me.LblUnitPrice, 0, 6)
-        Me.TableLayoutPanel6.Controls.Add(Me.TxtGoodsReceiptDate, 1, 7)
         Me.TableLayoutPanel6.Controls.Add(Me.TxtUnitPrice, 1, 6)
         Me.TableLayoutPanel6.Controls.Add(Me.TxtQuantityFrom, 1, 5)
         Me.TableLayoutPanel6.Controls.Add(Me.LblQuantityFrom, 0, 5)
@@ -536,7 +536,7 @@ Partial Class MovementInput
         Me.TableLayoutPanel4.Controls.Add(Me.TxtLocationTo, 1, 2)
         Me.TableLayoutPanel4.Location = New System.Drawing.Point(415, 30)
         Me.TableLayoutPanel4.Name = "TableLayoutPanel4"
-        Me.TableLayoutPanel4.RowCount = 9
+        Me.TableLayoutPanel4.RowCount = 8
         Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 19.85294!))
         Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20.58824!))
         Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 19.85294!))

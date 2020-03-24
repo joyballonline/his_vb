@@ -1103,3 +1103,71 @@ SELECT  m01.在庫管理区分 AS 在庫管理区分,m01.在庫表示区分 AS �
    場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\Tanux\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
    場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\Tanux\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
 SELECT  m01.在庫管理区分 AS 在庫管理区分,m01.在庫表示区分 AS 在庫表示区分  FROM m01_company m01 WHERE  m01.会社コード ILIKE 'ZENBI'
+2020/03/24 21:11:48   ERR***** データ取得失敗：ERROR: 42703: column m01.在庫管理区分 does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\Tanux\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\Tanux\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+SELECT  m01.在庫管理区分 AS 在庫管理区分,m01.在庫表示区分 AS 在庫表示区分  FROM m01_company m01 WHERE  m01.会社コード ILIKE 'ZENBI'
+2020/03/24 21:17:55   ERR***** データ取得失敗：ERROR: 42703: column m01.在庫管理区分 does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\Tanux\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\Tanux\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+SELECT  m01.在庫管理区分 AS 在庫管理区分,m01.在庫表示区分 AS 在庫表示区分  FROM m01_company m01 WHERE  m01.会社コード ILIKE 'ZENBI'
+2020/03/24 21:18:48   ERR***** データ取得失敗：ERROR: 42703: column m01.在庫管理区分 does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\Tanux\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\Tanux\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+SELECT  m01.在庫管理区分 AS 在庫管理区分,m01.在庫表示区分 AS 在庫表示区分  FROM m01_company m01 WHERE  m01.会社コード ILIKE 'ZENBI'
+2020/03/24 21:24:49   ERR***** データ取得失敗：ERROR: 42703: column m01.在庫管理区分 does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\Tanux\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\Tanux\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+SELECT  m01.在庫管理区分 AS 在庫管理区分,m01.在庫表示区分 AS 在庫表示区分  FROM m01_company m01 WHERE  m01.会社コード ILIKE 'ZENBI'
+2020/03/24 21:26:32   ERR***** データ取得失敗：ERROR: 42703: column m01.在庫管理区分 does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\Tanux\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\Tanux\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+SELECT  m01.在庫管理区分 AS 在庫管理区分,m01.在庫表示区分 AS 在庫表示区分  FROM m01_company m01 WHERE  m01.会社コード ILIKE 'ZENBI'
+2020/03/24 21:29:19   ERR***** データ取得失敗：ERROR: 42703: column m01.在庫管理区分 does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\Tanux\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\Tanux\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+SELECT  m01.在庫管理区分 AS 在庫管理区分,m01.在庫表示区分 AS 在庫表示区分  FROM m01_company m01 WHERE  m01.会社コード ILIKE 'ZENBI'
+2020/03/24 21:33:13   ERR***** データ取得失敗：ERROR: 42703: column m01.在庫管理区分 does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\Tanux\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\Tanux\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+SELECT  m01.在庫管理区分 AS 在庫管理区分,m01.在庫表示区分 AS 在庫表示区分  FROM m01_company m01 WHERE  m01.会社コード ILIKE 'ZENBI'
+2020/03/24 21:34:29   ERR***** データ取得失敗：ERROR: 42703: column m01.在庫管理区分 does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\Tanux\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\Tanux\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+SELECT  m01.在庫管理区分 AS 在庫管理区分,m01.在庫表示区分 AS 在庫表示区分  FROM m01_company m01 WHERE  m01.会社コード ILIKE 'ZENBI'
+2020/03/24 21:36:20   ERR***** データ取得失敗：ERROR: 42703: column m01.在庫管理区分 does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\Tanux\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\Tanux\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+SELECT  m01.在庫管理区分 AS 在庫管理区分,m01.在庫表示区分 AS 在庫表示区分  FROM m01_company m01 WHERE  m01.会社コード ILIKE 'ZENBI'
+2020/03/24 21:38:37   ERR***** データ取得失敗：ERROR: 42703: column m01.在庫管理区分 does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\Tanux\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\Tanux\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+SELECT  m01.在庫管理区分 AS 在庫管理区分,m01.在庫表示区分 AS 在庫表示区分  FROM m01_company m01 WHERE  m01.会社コード ILIKE 'ZENBI'
+2020/03/24 21:39:53   ERR***** データ取得失敗：ERROR: 42703: column m01.在庫管理区分 does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\Tanux\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\Tanux\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+SELECT  m01.在庫管理区分 AS 在庫管理区分,m01.在庫表示区分 AS 在庫表示区分  FROM m01_company m01 WHERE  m01.会社コード ILIKE 'ZENBI'
+2020/03/24 21:41:12   ERR***** データ取得失敗：ERROR: 42703: column m01.在庫管理区分 does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\Tanux\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\Tanux\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+SELECT  m01.在庫管理区分 AS 在庫管理区分,m01.在庫表示区分 AS 在庫表示区分  FROM m01_company m01 WHERE  m01.会社コード ILIKE 'ZENBI'
+2020/03/24 21:42:49   ERR***** データ取得失敗：ERROR: 42703: column m01.在庫管理区分 does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\Tanux\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\Tanux\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+SELECT  m01.在庫管理区分 AS 在庫管理区分,m01.在庫表示区分 AS 在庫表示区分  FROM m01_company m01 WHERE  m01.会社コード ILIKE 'ZENBI'
+2020/03/24 21:44:31   ERR***** データ取得失敗：ERROR: 42703: column m01.在庫管理区分 does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\Tanux\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\Tanux\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+SELECT  m01.在庫管理区分 AS 在庫管理区分,m01.在庫表示区分 AS 在庫表示区分  FROM m01_company m01 WHERE  m01.会社コード ILIKE 'ZENBI'
+2020/03/24 21:45:16   ERR***** データ取得失敗：ERROR: 42703: column m01.在庫管理区分 does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\Tanux\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\Tanux\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+SELECT  m01.在庫管理区分 AS 在庫管理区分,m01.在庫表示区分 AS 在庫表示区分  FROM m01_company m01 WHERE  m01.会社コード ILIKE 'ZENBI'
+2020/03/24 21:49:17   ERR***** データ取得失敗：ERROR: 42703: column m01.在庫管理区分 does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\Tanux\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\Tanux\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+SELECT  m01.在庫管理区分 AS 在庫管理区分,m01.在庫表示区分 AS 在庫表示区分  FROM m01_company m01 WHERE  m01.会社コード ILIKE 'ZENBI'
+2020/03/24 21:50:39   ERR***** データ取得失敗：ERROR: 42703: column m01.在庫管理区分 does not exist
+   場所 UtilMDL.DB.UtilPostgresHandler.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\Tanux\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresHandler.vb:行 294
+   場所 UtilMDL.DB.UtilPostgresDebugger.selectDB(String prmSQL, String prmTblName, Int32& prmRefRecCnt) 場所 C:\Users\Tanux\source\repos\his_vb\src\HanbaiKanri\UtilMDL\Util\DB\UtilPostgresDebugger.vb:行 208
+SELECT  m01.在庫管理区分 AS 在庫管理区分,m01.在庫表示区分 AS 在庫表示区分  FROM m01_company m01 WHERE  m01.会社コード ILIKE 'ZENBI'

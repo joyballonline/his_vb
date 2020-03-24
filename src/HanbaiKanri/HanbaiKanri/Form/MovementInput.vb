@@ -42,7 +42,7 @@ Public Class MovementInput
     Private CompanyCode As String = ""
     Private OrderNo As String()
     Private OrderStatus As String = ""
-    Private InventoryControl As String = "3"                 '倉庫、入出庫種別を管理初期値とする
+    Private InventoryControl As String = "7"                 '倉庫、入出庫種別を管理初期値とする
     Private InventoryViewer As String = "7"                  '倉庫、入出庫種別、ロケーションを表示初期値とする
 
 
@@ -160,56 +160,91 @@ Public Class MovementInput
         Catch ex As Exception
         End Try
 
-        '在庫表示区分から表示する在庫管理対象列を選定する
-        If "13579BDFHJLNPRTV".Contains(InventoryViewer) Then
+        TableLayoutPanel6.Controls.Clear()
+        TableLayoutPanel4.Controls.Clear()
+        Dim intTableRow As Integer = 0
+
+        '在庫管理区分から表示する在庫管理対象列を選定パネル上への配置位置を決定する
+
+        If "13579BDFHJLNPRTV".Contains(InventoryControl) Then
             LblWarehouseSince.Visible = True
             LblWarehouseTo.Visible = True
             TxtWarehouseSince.Visible = True
             CmWarehouseTo.Visible = True
+
+            TableLayoutPanel6.Controls.Add(LblWarehouseSince, 0, intTableRow)
+            TableLayoutPanel4.Controls.Add(LblWarehouseTo, 0, intTableRow)
+            TableLayoutPanel6.Controls.Add(TxtWarehouseSince, 1, intTableRow)
+            TableLayoutPanel4.Controls.Add(CmWarehouseTo, 1, intTableRow)
+            intTableRow = intTableRow + 1
         Else
             LblWarehouseSince.Visible = False
             LblWarehouseTo.Visible = False
             TxtWarehouseSince.Visible = False
             CmWarehouseTo.Visible = False
         End If
-        If "2367ABEFIJMNQRUV".Contains(InventoryViewer) Then
+        If "2367ABEFIJMNQRUV".Contains(InventoryControl) Then
             LblStorageTypeSince.Visible = True
             LblStorageTypeTo.Visible = True
             TxtStorageTypeSince.Visible = True
             CmStorageTypeTo.Visible = True
+
+            TableLayoutPanel6.Controls.Add(LblStorageTypeSince, 0, intTableRow)
+            TableLayoutPanel4.Controls.Add(LblStorageTypeTo, 0, intTableRow)
+            TableLayoutPanel6.Controls.Add(TxtStorageTypeSince, 1, intTableRow)
+            TableLayoutPanel4.Controls.Add(CmStorageTypeTo, 1, intTableRow)
+            intTableRow = intTableRow + 1
         Else
             LblStorageTypeSince.Visible = False
             LblStorageTypeTo.Visible = False
             TxtStorageTypeSince.Visible = False
             CmStorageTypeTo.Visible = False
         End If
-        If "4567CDEFKLMNSTUV".Contains(InventoryViewer) Then
+        If "4567CDEFKLMNSTUV".Contains(InventoryControl) Then
             LblLocationSince.Visible = True
             LblLocationTo.Visible = True
             TxtLocationSince.Visible = True
             TxtLocationTo.Visible = True
+
+            TableLayoutPanel6.Controls.Add(LblLocationSince, 0, intTableRow)
+            TableLayoutPanel4.Controls.Add(LblLocationTo, 0, intTableRow)
+            TableLayoutPanel6.Controls.Add(TxtLocationSince, 1, intTableRow)
+            TableLayoutPanel4.Controls.Add(TxtLocationTo, 1, intTableRow)
+            intTableRow = intTableRow + 1
         Else
             LblLocationSince.Visible = False
             LblLocationTo.Visible = False
             TxtLocationSince.Visible = False
             TxtLocationTo.Visible = False
         End If
-        If "89ABCDEFOPQRSTUV".Contains(InventoryViewer) Then
+        If "89ABCDEFOPQRSTUV".Contains(InventoryControl) Then
             LblSerialNoSince.Visible = True
             LblSerialNoTo.Visible = True
             TxtSerialNoSince.Visible = True
             TxtSerialNoTo.Visible = True
+
+            TableLayoutPanel6.Controls.Add(LblSerialNoSince, 0, intTableRow)
+            TableLayoutPanel4.Controls.Add(LblSerialNoTo, 0, intTableRow)
+            TableLayoutPanel6.Controls.Add(TxtSerialNoSince, 1, intTableRow)
+            TableLayoutPanel4.Controls.Add(TxtSerialNoTo, 1, intTableRow)
+            intTableRow = intTableRow + 1
         Else
             LblSerialNoSince.Visible = False
             LblSerialNoTo.Visible = False
             TxtSerialNoSince.Visible = False
             TxtSerialNoTo.Visible = False
         End If
-        If "GHIJKLMNOPQRSTUV".Contains(InventoryViewer) Then
+        If "GHIJKLMNOPQRSTUV".Contains(InventoryControl) Then
             LblOrderNoSince.Visible = True
             LblOrderNoTo.Visible = True
             TxtOrderNoSince.Visible = True
             TxtOrderNoTo.Visible = True
+
+            TableLayoutPanel6.Controls.Add(LblOrderNoSince, 0, intTableRow)
+            TableLayoutPanel4.Controls.Add(LblOrderNoTo, 0, intTableRow)
+            TableLayoutPanel6.Controls.Add(TxtOrderNoSince, 1, intTableRow)
+            TableLayoutPanel4.Controls.Add(TxtOrderNoTo, 1, intTableRow)
+            intTableRow = intTableRow + 1
         Else
             LblOrderNoSince.Visible = False
             LblOrderNoTo.Visible = False
@@ -217,6 +252,21 @@ Public Class MovementInput
             TxtOrderNoTo.Visible = False
         End If
 
+        TableLayoutPanel6.Controls.Add(LblQuantityFrom, 0, intTableRow)
+        TableLayoutPanel4.Controls.Add(LblQuantityTo, 0, intTableRow)
+        TableLayoutPanel6.Controls.Add(TxtQuantityFrom, 1, intTableRow)
+        TableLayoutPanel4.Controls.Add(TxtQuantityTo, 1, intTableRow)
+        intTableRow = intTableRow + 1
+        TableLayoutPanel6.Controls.Add(LblUnitPrice, 0, intTableRow)
+        TableLayoutPanel4.Controls.Add(LblUnitPriceTo, 0, intTableRow)
+        TableLayoutPanel6.Controls.Add(TxtUnitPrice, 1, intTableRow)
+        TableLayoutPanel4.Controls.Add(TxtUnitPriceTo, 1, intTableRow)
+        intTableRow = intTableRow + 1
+        TableLayoutPanel6.Controls.Add(LblGoodsReceiptDate, 0, intTableRow)
+        TableLayoutPanel4.Controls.Add(LblGoodsReceiptDateTo, 0, intTableRow)
+        TableLayoutPanel6.Controls.Add(TxtGoodsReceiptDate, 1, intTableRow)
+        TableLayoutPanel4.Controls.Add(TxtGoodsReceiptDateTo, 1, intTableRow)
+        intTableRow = intTableRow + 1
 
 
 
