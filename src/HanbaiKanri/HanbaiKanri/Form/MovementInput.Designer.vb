@@ -42,39 +42,39 @@ Partial Class MovementInput
         Me.LblMovingDestination = New System.Windows.Forms.Label()
         Me.TableLayoutPanel5 = New System.Windows.Forms.TableLayoutPanel()
         Me.TableLayoutPanel6 = New System.Windows.Forms.TableLayoutPanel()
+        Me.TxtOrderNoSince = New System.Windows.Forms.TextBox()
+        Me.TxtSerialNoSince = New System.Windows.Forms.TextBox()
+        Me.TxtLocationSince = New System.Windows.Forms.TextBox()
+        Me.LblOrderNoSince = New System.Windows.Forms.Label()
+        Me.LblSerialNoSince = New System.Windows.Forms.Label()
+        Me.LblLocationSince = New System.Windows.Forms.Label()
         Me.LblWarehouseSince = New System.Windows.Forms.Label()
-        Me.TxtQuantityFrom = New System.Windows.Forms.TextBox()
+        Me.TxtGoodsReceiptDate = New System.Windows.Forms.TextBox()
         Me.TxtWarehouseSince = New System.Windows.Forms.TextBox()
         Me.TxtStorageTypeSince = New System.Windows.Forms.TextBox()
-        Me.TxtUnitPrice = New System.Windows.Forms.TextBox()
-        Me.TxtGoodsReceiptDate = New System.Windows.Forms.TextBox()
-        Me.LblStorageTypeSince = New System.Windows.Forms.Label()
-        Me.LblQuantityFrom = New System.Windows.Forms.Label()
-        Me.LblUnitPrice = New System.Windows.Forms.Label()
         Me.LblGoodsReceiptDate = New System.Windows.Forms.Label()
+        Me.LblUnitPrice = New System.Windows.Forms.Label()
+        Me.TxtUnitPrice = New System.Windows.Forms.TextBox()
+        Me.TxtQuantityFrom = New System.Windows.Forms.TextBox()
+        Me.LblQuantityFrom = New System.Windows.Forms.Label()
+        Me.LblStorageTypeSince = New System.Windows.Forms.Label()
         Me.TableLayoutPanel4 = New System.Windows.Forms.TableLayoutPanel()
+        Me.TxtOrderNoTo = New System.Windows.Forms.TextBox()
+        Me.TxtSerialNoTo = New System.Windows.Forms.TextBox()
+        Me.TxtUnitPriceTo = New System.Windows.Forms.TextBox()
+        Me.LblGoodsReceiptDateTo = New System.Windows.Forms.Label()
+        Me.CmWarehouseTo = New System.Windows.Forms.ComboBox()
         Me.LblWarehouseTo = New System.Windows.Forms.Label()
+        Me.CmStorageTypeTo = New System.Windows.Forms.ComboBox()
         Me.LblStorageTypeTo = New System.Windows.Forms.Label()
         Me.LblLocationTo = New System.Windows.Forms.Label()
         Me.LblSerialNoTo = New System.Windows.Forms.Label()
         Me.LblQuantityTo = New System.Windows.Forms.Label()
         Me.LblUnitPriceTo = New System.Windows.Forms.Label()
         Me.LblOrderNoTo = New System.Windows.Forms.Label()
-        Me.LblLocationSince = New System.Windows.Forms.Label()
-        Me.LblSerialNoSince = New System.Windows.Forms.Label()
-        Me.LblOrderNoSince = New System.Windows.Forms.Label()
-        Me.TxtLocationSince = New System.Windows.Forms.TextBox()
-        Me.TxtSerialNoSince = New System.Windows.Forms.TextBox()
-        Me.TxtOrderNoSince = New System.Windows.Forms.TextBox()
         Me.TxtQuantityTo = New System.Windows.Forms.TextBox()
-        Me.CmStorageTypeTo = New System.Windows.Forms.ComboBox()
-        Me.CmWarehouseTo = New System.Windows.Forms.ComboBox()
-        Me.TxtUnitPriceTo = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
-        Me.LblGoodsReceiptDateTo = New System.Windows.Forms.Label()
         Me.TxtGoodsReceiptDateTo = New System.Windows.Forms.TextBox()
-        Me.TxtSerialNoTo = New System.Windows.Forms.TextBox()
-        Me.TxtOrderNoTo = New System.Windows.Forms.TextBox()
         Me.TxtLocationTo = New System.Windows.Forms.TextBox()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.TableLayoutPanel3.SuspendLayout()
@@ -382,6 +382,81 @@ Partial Class MovementInput
         Me.TableLayoutPanel6.Size = New System.Drawing.Size(386, 224)
         Me.TableLayoutPanel6.TabIndex = 76
         '
+        'TxtOrderNoSince
+        '
+        Me.TxtOrderNoSince.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TxtOrderNoSince.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.TxtOrderNoSince.Enabled = False
+        Me.TxtOrderNoSince.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtOrderNoSince.Location = New System.Drawing.Point(196, 111)
+        Me.TxtOrderNoSince.Name = "TxtOrderNoSince"
+        Me.TxtOrderNoSince.Size = New System.Drawing.Size(187, 22)
+        Me.TxtOrderNoSince.TabIndex = 9
+        Me.TxtOrderNoSince.TabStop = False
+        '
+        'TxtSerialNoSince
+        '
+        Me.TxtSerialNoSince.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TxtSerialNoSince.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.TxtSerialNoSince.Enabled = False
+        Me.TxtSerialNoSince.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtSerialNoSince.Location = New System.Drawing.Point(196, 84)
+        Me.TxtSerialNoSince.Name = "TxtSerialNoSince"
+        Me.TxtSerialNoSince.Size = New System.Drawing.Size(187, 22)
+        Me.TxtSerialNoSince.TabIndex = 7
+        Me.TxtSerialNoSince.TabStop = False
+        '
+        'TxtLocationSince
+        '
+        Me.TxtLocationSince.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TxtLocationSince.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.TxtLocationSince.Enabled = False
+        Me.TxtLocationSince.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtLocationSince.Location = New System.Drawing.Point(196, 57)
+        Me.TxtLocationSince.Name = "TxtLocationSince"
+        Me.TxtLocationSince.Size = New System.Drawing.Size(187, 22)
+        Me.TxtLocationSince.TabIndex = 5
+        Me.TxtLocationSince.TabStop = False
+        '
+        'LblOrderNoSince
+        '
+        Me.LblOrderNoSince.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.LblOrderNoSince.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblOrderNoSince.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblOrderNoSince.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblOrderNoSince.Location = New System.Drawing.Point(3, 110)
+        Me.LblOrderNoSince.Name = "LblOrderNoSince"
+        Me.LblOrderNoSince.Size = New System.Drawing.Size(187, 23)
+        Me.LblOrderNoSince.TabIndex = 8
+        Me.LblOrderNoSince.Text = "伝票番号"
+        Me.LblOrderNoSince.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'LblSerialNoSince
+        '
+        Me.LblSerialNoSince.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.LblSerialNoSince.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblSerialNoSince.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblSerialNoSince.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblSerialNoSince.Location = New System.Drawing.Point(3, 83)
+        Me.LblSerialNoSince.Name = "LblSerialNoSince"
+        Me.LblSerialNoSince.Size = New System.Drawing.Size(187, 23)
+        Me.LblSerialNoSince.TabIndex = 6
+        Me.LblSerialNoSince.Text = "製造番号"
+        Me.LblSerialNoSince.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'LblLocationSince
+        '
+        Me.LblLocationSince.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.LblLocationSince.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblLocationSince.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblLocationSince.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblLocationSince.Location = New System.Drawing.Point(3, 56)
+        Me.LblLocationSince.Name = "LblLocationSince"
+        Me.LblLocationSince.Size = New System.Drawing.Size(187, 23)
+        Me.LblLocationSince.TabIndex = 4
+        Me.LblLocationSince.Text = "ロケ番号"
+        Me.LblLocationSince.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'LblWarehouseSince
         '
         Me.LblWarehouseSince.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -395,18 +470,17 @@ Partial Class MovementInput
         Me.LblWarehouseSince.Text = "倉庫"
         Me.LblWarehouseSince.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'TxtQuantityFrom
+        'TxtGoodsReceiptDate
         '
-        Me.TxtQuantityFrom.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TxtQuantityFrom.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.TxtQuantityFrom.Enabled = False
-        Me.TxtQuantityFrom.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtQuantityFrom.Location = New System.Drawing.Point(196, 138)
-        Me.TxtQuantityFrom.Name = "TxtQuantityFrom"
-        Me.TxtQuantityFrom.Size = New System.Drawing.Size(187, 22)
-        Me.TxtQuantityFrom.TabIndex = 11
-        Me.TxtQuantityFrom.TabStop = False
-        Me.TxtQuantityFrom.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.TxtGoodsReceiptDate.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TxtGoodsReceiptDate.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.TxtGoodsReceiptDate.Enabled = False
+        Me.TxtGoodsReceiptDate.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtGoodsReceiptDate.Location = New System.Drawing.Point(196, 196)
+        Me.TxtGoodsReceiptDate.Name = "TxtGoodsReceiptDate"
+        Me.TxtGoodsReceiptDate.Size = New System.Drawing.Size(187, 22)
+        Me.TxtGoodsReceiptDate.TabIndex = 15
+        Me.TxtGoodsReceiptDate.TabStop = False
         '
         'TxtWarehouseSince
         '
@@ -432,56 +506,18 @@ Partial Class MovementInput
         Me.TxtStorageTypeSince.TabIndex = 3
         Me.TxtStorageTypeSince.TabStop = False
         '
-        'TxtUnitPrice
+        'LblGoodsReceiptDate
         '
-        Me.TxtUnitPrice.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TxtUnitPrice.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.TxtUnitPrice.Enabled = False
-        Me.TxtUnitPrice.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtUnitPrice.Location = New System.Drawing.Point(196, 165)
-        Me.TxtUnitPrice.Name = "TxtUnitPrice"
-        Me.TxtUnitPrice.Size = New System.Drawing.Size(187, 22)
-        Me.TxtUnitPrice.TabIndex = 13
-        Me.TxtUnitPrice.TabStop = False
-        Me.TxtUnitPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'TxtGoodsReceiptDate
-        '
-        Me.TxtGoodsReceiptDate.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TxtGoodsReceiptDate.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.TxtGoodsReceiptDate.Enabled = False
-        Me.TxtGoodsReceiptDate.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtGoodsReceiptDate.Location = New System.Drawing.Point(196, 196)
-        Me.TxtGoodsReceiptDate.Name = "TxtGoodsReceiptDate"
-        Me.TxtGoodsReceiptDate.Size = New System.Drawing.Size(187, 22)
-        Me.TxtGoodsReceiptDate.TabIndex = 15
-        Me.TxtGoodsReceiptDate.TabStop = False
-        '
-        'LblStorageTypeSince
-        '
-        Me.LblStorageTypeSince.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.LblStorageTypeSince.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.LblStorageTypeSince.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LblStorageTypeSince.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblStorageTypeSince.Location = New System.Drawing.Point(3, 29)
-        Me.LblStorageTypeSince.Name = "LblStorageTypeSince"
-        Me.LblStorageTypeSince.Size = New System.Drawing.Size(187, 23)
-        Me.LblStorageTypeSince.TabIndex = 2
-        Me.LblStorageTypeSince.Text = "入出庫種別"
-        Me.LblStorageTypeSince.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'LblQuantityFrom
-        '
-        Me.LblQuantityFrom.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.LblQuantityFrom.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.LblQuantityFrom.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LblQuantityFrom.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblQuantityFrom.Location = New System.Drawing.Point(3, 137)
-        Me.LblQuantityFrom.Name = "LblQuantityFrom"
-        Me.LblQuantityFrom.Size = New System.Drawing.Size(187, 23)
-        Me.LblQuantityFrom.TabIndex = 10
-        Me.LblQuantityFrom.Text = "数量"
-        Me.LblQuantityFrom.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.LblGoodsReceiptDate.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.LblGoodsReceiptDate.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblGoodsReceiptDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblGoodsReceiptDate.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblGoodsReceiptDate.Location = New System.Drawing.Point(3, 195)
+        Me.LblGoodsReceiptDate.Name = "LblGoodsReceiptDate"
+        Me.LblGoodsReceiptDate.Size = New System.Drawing.Size(187, 23)
+        Me.LblGoodsReceiptDate.TabIndex = 14
+        Me.LblGoodsReceiptDate.Text = "入庫日"
+        Me.LblGoodsReceiptDate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'LblUnitPrice
         '
@@ -496,18 +532,57 @@ Partial Class MovementInput
         Me.LblUnitPrice.Text = "単価"
         Me.LblUnitPrice.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'LblGoodsReceiptDate
+        'TxtUnitPrice
         '
-        Me.LblGoodsReceiptDate.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.LblGoodsReceiptDate.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.LblGoodsReceiptDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LblGoodsReceiptDate.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblGoodsReceiptDate.Location = New System.Drawing.Point(3, 195)
-        Me.LblGoodsReceiptDate.Name = "LblGoodsReceiptDate"
-        Me.LblGoodsReceiptDate.Size = New System.Drawing.Size(187, 23)
-        Me.LblGoodsReceiptDate.TabIndex = 14
-        Me.LblGoodsReceiptDate.Text = "入庫日"
-        Me.LblGoodsReceiptDate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.TxtUnitPrice.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TxtUnitPrice.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.TxtUnitPrice.Enabled = False
+        Me.TxtUnitPrice.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtUnitPrice.Location = New System.Drawing.Point(196, 165)
+        Me.TxtUnitPrice.Name = "TxtUnitPrice"
+        Me.TxtUnitPrice.Size = New System.Drawing.Size(187, 22)
+        Me.TxtUnitPrice.TabIndex = 13
+        Me.TxtUnitPrice.TabStop = False
+        Me.TxtUnitPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'TxtQuantityFrom
+        '
+        Me.TxtQuantityFrom.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TxtQuantityFrom.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.TxtQuantityFrom.Enabled = False
+        Me.TxtQuantityFrom.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtQuantityFrom.Location = New System.Drawing.Point(196, 138)
+        Me.TxtQuantityFrom.Name = "TxtQuantityFrom"
+        Me.TxtQuantityFrom.Size = New System.Drawing.Size(187, 22)
+        Me.TxtQuantityFrom.TabIndex = 11
+        Me.TxtQuantityFrom.TabStop = False
+        Me.TxtQuantityFrom.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'LblQuantityFrom
+        '
+        Me.LblQuantityFrom.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.LblQuantityFrom.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblQuantityFrom.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblQuantityFrom.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblQuantityFrom.Location = New System.Drawing.Point(3, 137)
+        Me.LblQuantityFrom.Name = "LblQuantityFrom"
+        Me.LblQuantityFrom.Size = New System.Drawing.Size(187, 23)
+        Me.LblQuantityFrom.TabIndex = 10
+        Me.LblQuantityFrom.Text = "数量"
+        Me.LblQuantityFrom.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'LblStorageTypeSince
+        '
+        Me.LblStorageTypeSince.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.LblStorageTypeSince.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblStorageTypeSince.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblStorageTypeSince.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblStorageTypeSince.Location = New System.Drawing.Point(3, 29)
+        Me.LblStorageTypeSince.Name = "LblStorageTypeSince"
+        Me.LblStorageTypeSince.Size = New System.Drawing.Size(187, 23)
+        Me.LblStorageTypeSince.TabIndex = 2
+        Me.LblStorageTypeSince.Text = "入出庫種別"
+        Me.LblStorageTypeSince.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'TableLayoutPanel4
         '
@@ -549,6 +624,66 @@ Partial Class MovementInput
         Me.TableLayoutPanel4.Size = New System.Drawing.Size(386, 233)
         Me.TableLayoutPanel4.TabIndex = 77
         '
+        'TxtOrderNoTo
+        '
+        Me.TxtOrderNoTo.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TxtOrderNoTo.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtOrderNoTo.Location = New System.Drawing.Point(193, 112)
+        Me.TxtOrderNoTo.Margin = New System.Windows.Forms.Padding(0)
+        Me.TxtOrderNoTo.MaxLength = 8
+        Me.TxtOrderNoTo.Name = "TxtOrderNoTo"
+        Me.TxtOrderNoTo.Size = New System.Drawing.Size(193, 22)
+        Me.TxtOrderNoTo.TabIndex = 9
+        Me.TxtOrderNoTo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'TxtSerialNoTo
+        '
+        Me.TxtSerialNoTo.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TxtSerialNoTo.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtSerialNoTo.Location = New System.Drawing.Point(193, 85)
+        Me.TxtSerialNoTo.Margin = New System.Windows.Forms.Padding(0)
+        Me.TxtSerialNoTo.MaxLength = 8
+        Me.TxtSerialNoTo.Name = "TxtSerialNoTo"
+        Me.TxtSerialNoTo.Size = New System.Drawing.Size(193, 22)
+        Me.TxtSerialNoTo.TabIndex = 7
+        Me.TxtSerialNoTo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'TxtUnitPriceTo
+        '
+        Me.TxtUnitPriceTo.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TxtUnitPriceTo.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtUnitPriceTo.Location = New System.Drawing.Point(193, 169)
+        Me.TxtUnitPriceTo.Margin = New System.Windows.Forms.Padding(0)
+        Me.TxtUnitPriceTo.MaxLength = 8
+        Me.TxtUnitPriceTo.Name = "TxtUnitPriceTo"
+        Me.TxtUnitPriceTo.Size = New System.Drawing.Size(193, 22)
+        Me.TxtUnitPriceTo.TabIndex = 13
+        Me.TxtUnitPriceTo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'LblGoodsReceiptDateTo
+        '
+        Me.LblGoodsReceiptDateTo.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.LblGoodsReceiptDateTo.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblGoodsReceiptDateTo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblGoodsReceiptDateTo.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblGoodsReceiptDateTo.Location = New System.Drawing.Point(3, 197)
+        Me.LblGoodsReceiptDateTo.Name = "LblGoodsReceiptDateTo"
+        Me.LblGoodsReceiptDateTo.Size = New System.Drawing.Size(187, 23)
+        Me.LblGoodsReceiptDateTo.TabIndex = 14
+        Me.LblGoodsReceiptDateTo.Text = "移動日"
+        Me.LblGoodsReceiptDateTo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'CmWarehouseTo
+        '
+        Me.CmWarehouseTo.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.CmWarehouseTo.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.CmWarehouseTo.FormattingEnabled = True
+        Me.CmWarehouseTo.Items.AddRange(New Object() {"RegularShip", "DHL", "Air", "Ship"})
+        Me.CmWarehouseTo.Location = New System.Drawing.Point(196, 3)
+        Me.CmWarehouseTo.Name = "CmWarehouseTo"
+        Me.CmWarehouseTo.Size = New System.Drawing.Size(187, 23)
+        Me.CmWarehouseTo.TabIndex = 1
+        '
         'LblWarehouseTo
         '
         Me.LblWarehouseTo.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -561,6 +696,17 @@ Partial Class MovementInput
         Me.LblWarehouseTo.TabIndex = 0
         Me.LblWarehouseTo.Text = "倉庫"
         Me.LblWarehouseTo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'CmStorageTypeTo
+        '
+        Me.CmStorageTypeTo.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.CmStorageTypeTo.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.CmStorageTypeTo.FormattingEnabled = True
+        Me.CmStorageTypeTo.Items.AddRange(New Object() {"RegularShip", "DHL", "Air", "Ship"})
+        Me.CmStorageTypeTo.Location = New System.Drawing.Point(196, 30)
+        Me.CmStorageTypeTo.Name = "CmStorageTypeTo"
+        Me.CmStorageTypeTo.Size = New System.Drawing.Size(187, 23)
+        Me.CmStorageTypeTo.TabIndex = 3
         '
         'LblStorageTypeTo
         '
@@ -640,81 +786,6 @@ Partial Class MovementInput
         Me.LblOrderNoTo.Text = "伝票番号"
         Me.LblOrderNoTo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'LblLocationSince
-        '
-        Me.LblLocationSince.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.LblLocationSince.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.LblLocationSince.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LblLocationSince.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblLocationSince.Location = New System.Drawing.Point(3, 56)
-        Me.LblLocationSince.Name = "LblLocationSince"
-        Me.LblLocationSince.Size = New System.Drawing.Size(187, 23)
-        Me.LblLocationSince.TabIndex = 4
-        Me.LblLocationSince.Text = "ロケ番号"
-        Me.LblLocationSince.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'LblSerialNoSince
-        '
-        Me.LblSerialNoSince.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.LblSerialNoSince.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.LblSerialNoSince.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LblSerialNoSince.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblSerialNoSince.Location = New System.Drawing.Point(3, 83)
-        Me.LblSerialNoSince.Name = "LblSerialNoSince"
-        Me.LblSerialNoSince.Size = New System.Drawing.Size(187, 23)
-        Me.LblSerialNoSince.TabIndex = 6
-        Me.LblSerialNoSince.Text = "製造番号"
-        Me.LblSerialNoSince.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'LblOrderNoSince
-        '
-        Me.LblOrderNoSince.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.LblOrderNoSince.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.LblOrderNoSince.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LblOrderNoSince.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblOrderNoSince.Location = New System.Drawing.Point(3, 110)
-        Me.LblOrderNoSince.Name = "LblOrderNoSince"
-        Me.LblOrderNoSince.Size = New System.Drawing.Size(187, 23)
-        Me.LblOrderNoSince.TabIndex = 8
-        Me.LblOrderNoSince.Text = "伝票番号"
-        Me.LblOrderNoSince.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'TxtLocationSince
-        '
-        Me.TxtLocationSince.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TxtLocationSince.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.TxtLocationSince.Enabled = False
-        Me.TxtLocationSince.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtLocationSince.Location = New System.Drawing.Point(196, 57)
-        Me.TxtLocationSince.Name = "TxtLocationSince"
-        Me.TxtLocationSince.Size = New System.Drawing.Size(187, 22)
-        Me.TxtLocationSince.TabIndex = 5
-        Me.TxtLocationSince.TabStop = False
-        '
-        'TxtSerialNoSince
-        '
-        Me.TxtSerialNoSince.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TxtSerialNoSince.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.TxtSerialNoSince.Enabled = False
-        Me.TxtSerialNoSince.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtSerialNoSince.Location = New System.Drawing.Point(196, 84)
-        Me.TxtSerialNoSince.Name = "TxtSerialNoSince"
-        Me.TxtSerialNoSince.Size = New System.Drawing.Size(187, 22)
-        Me.TxtSerialNoSince.TabIndex = 7
-        Me.TxtSerialNoSince.TabStop = False
-        '
-        'TxtOrderNoSince
-        '
-        Me.TxtOrderNoSince.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TxtOrderNoSince.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.TxtOrderNoSince.Enabled = False
-        Me.TxtOrderNoSince.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtOrderNoSince.Location = New System.Drawing.Point(196, 111)
-        Me.TxtOrderNoSince.Name = "TxtOrderNoSince"
-        Me.TxtOrderNoSince.Size = New System.Drawing.Size(187, 22)
-        Me.TxtOrderNoSince.TabIndex = 9
-        Me.TxtOrderNoSince.TabStop = False
-        '
         'TxtQuantityTo
         '
         Me.TxtQuantityTo.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -726,40 +797,6 @@ Partial Class MovementInput
         Me.TxtQuantityTo.Size = New System.Drawing.Size(193, 22)
         Me.TxtQuantityTo.TabIndex = 11
         Me.TxtQuantityTo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'CmStorageTypeTo
-        '
-        Me.CmStorageTypeTo.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.CmStorageTypeTo.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.CmStorageTypeTo.FormattingEnabled = True
-        Me.CmStorageTypeTo.Items.AddRange(New Object() {"RegularShip", "DHL", "Air", "Ship"})
-        Me.CmStorageTypeTo.Location = New System.Drawing.Point(196, 30)
-        Me.CmStorageTypeTo.Name = "CmStorageTypeTo"
-        Me.CmStorageTypeTo.Size = New System.Drawing.Size(187, 23)
-        Me.CmStorageTypeTo.TabIndex = 3
-        '
-        'CmWarehouseTo
-        '
-        Me.CmWarehouseTo.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.CmWarehouseTo.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.CmWarehouseTo.FormattingEnabled = True
-        Me.CmWarehouseTo.Items.AddRange(New Object() {"RegularShip", "DHL", "Air", "Ship"})
-        Me.CmWarehouseTo.Location = New System.Drawing.Point(196, 3)
-        Me.CmWarehouseTo.Name = "CmWarehouseTo"
-        Me.CmWarehouseTo.Size = New System.Drawing.Size(187, 23)
-        Me.CmWarehouseTo.TabIndex = 1
-        '
-        'TxtUnitPriceTo
-        '
-        Me.TxtUnitPriceTo.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TxtUnitPriceTo.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtUnitPriceTo.Location = New System.Drawing.Point(193, 169)
-        Me.TxtUnitPriceTo.Margin = New System.Windows.Forms.Padding(0)
-        Me.TxtUnitPriceTo.MaxLength = 8
-        Me.TxtUnitPriceTo.Name = "TxtUnitPriceTo"
-        Me.TxtUnitPriceTo.Size = New System.Drawing.Size(193, 22)
-        Me.TxtUnitPriceTo.TabIndex = 13
-        Me.TxtUnitPriceTo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'Label2
         '
@@ -774,19 +811,6 @@ Partial Class MovementInput
         Me.Label2.Text = "数量"
         Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'LblGoodsReceiptDateTo
-        '
-        Me.LblGoodsReceiptDateTo.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.LblGoodsReceiptDateTo.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.LblGoodsReceiptDateTo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LblGoodsReceiptDateTo.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblGoodsReceiptDateTo.Location = New System.Drawing.Point(3, 197)
-        Me.LblGoodsReceiptDateTo.Name = "LblGoodsReceiptDateTo"
-        Me.LblGoodsReceiptDateTo.Size = New System.Drawing.Size(187, 23)
-        Me.LblGoodsReceiptDateTo.TabIndex = 14
-        Me.LblGoodsReceiptDateTo.Text = "移動日"
-        Me.LblGoodsReceiptDateTo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
         'TxtGoodsReceiptDateTo
         '
         Me.TxtGoodsReceiptDateTo.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -798,30 +822,6 @@ Partial Class MovementInput
         Me.TxtGoodsReceiptDateTo.Size = New System.Drawing.Size(193, 22)
         Me.TxtGoodsReceiptDateTo.TabIndex = 15
         Me.TxtGoodsReceiptDateTo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'TxtSerialNoTo
-        '
-        Me.TxtSerialNoTo.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TxtSerialNoTo.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtSerialNoTo.Location = New System.Drawing.Point(193, 85)
-        Me.TxtSerialNoTo.Margin = New System.Windows.Forms.Padding(0)
-        Me.TxtSerialNoTo.MaxLength = 8
-        Me.TxtSerialNoTo.Name = "TxtSerialNoTo"
-        Me.TxtSerialNoTo.Size = New System.Drawing.Size(193, 22)
-        Me.TxtSerialNoTo.TabIndex = 7
-        Me.TxtSerialNoTo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'TxtOrderNoTo
-        '
-        Me.TxtOrderNoTo.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TxtOrderNoTo.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtOrderNoTo.Location = New System.Drawing.Point(193, 112)
-        Me.TxtOrderNoTo.Margin = New System.Windows.Forms.Padding(0)
-        Me.TxtOrderNoTo.MaxLength = 8
-        Me.TxtOrderNoTo.Name = "TxtOrderNoTo"
-        Me.TxtOrderNoTo.Size = New System.Drawing.Size(193, 22)
-        Me.TxtOrderNoTo.TabIndex = 9
-        Me.TxtOrderNoTo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'TxtLocationTo
         '

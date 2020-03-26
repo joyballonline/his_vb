@@ -29,6 +29,9 @@ Partial Class StockSearch
         Me.DgvList = New System.Windows.Forms.DataGridView()
         Me.BtnSelect = New System.Windows.Forms.Button()
         Me.引当 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.メーカー = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.品名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.型式 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.倉庫コード = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.倉庫 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.最終入庫日 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -37,6 +40,8 @@ Partial Class StockSearch
         Me.現在庫数 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.入庫単価 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.最終出庫日 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ロケ番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.製造番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.伝票番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.行番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.単位 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -49,7 +54,7 @@ Partial Class StockSearch
         'BtnBack
         '
         Me.BtnBack.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.BtnBack.Location = New System.Drawing.Point(537, 396)
+        Me.BtnBack.Location = New System.Drawing.Point(828, 457)
         Me.BtnBack.Name = "BtnBack"
         Me.BtnBack.Size = New System.Drawing.Size(165, 40)
         Me.BtnBack.TabIndex = 5
@@ -61,20 +66,20 @@ Partial Class StockSearch
         Me.DgvList.AllowUserToAddRows = False
         Me.DgvList.AllowUserToDeleteRows = False
         Me.DgvList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DgvList.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.引当, Me.倉庫コード, Me.倉庫, Me.最終入庫日, Me.入出庫種別区分, Me.入出庫種別, Me.現在庫数, Me.入庫単価, Me.最終出庫日, Me.伝票番号, Me.行番号, Me.単位, Me.出庫開始サイン, Me.入庫番号, Me.入庫行番号})
+        Me.DgvList.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.引当, Me.メーカー, Me.品名, Me.型式, Me.倉庫コード, Me.倉庫, Me.最終入庫日, Me.入出庫種別区分, Me.入出庫種別, Me.現在庫数, Me.入庫単価, Me.最終出庫日, Me.ロケ番号, Me.製造番号, Me.伝票番号, Me.行番号, Me.単位, Me.出庫開始サイン, Me.入庫番号, Me.入庫行番号})
         Me.DgvList.Location = New System.Drawing.Point(12, 12)
         Me.DgvList.Name = "DgvList"
         Me.DgvList.ReadOnly = True
         Me.DgvList.RowHeadersVisible = False
         Me.DgvList.RowTemplate.Height = 21
         Me.DgvList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DgvList.Size = New System.Drawing.Size(690, 367)
+        Me.DgvList.Size = New System.Drawing.Size(979, 439)
         Me.DgvList.TabIndex = 3
         '
         'BtnSelect
         '
         Me.BtnSelect.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.BtnSelect.Location = New System.Drawing.Point(366, 396)
+        Me.BtnSelect.Location = New System.Drawing.Point(657, 457)
         Me.BtnSelect.Name = "BtnSelect"
         Me.BtnSelect.Size = New System.Drawing.Size(165, 40)
         Me.BtnSelect.TabIndex = 277
@@ -89,6 +94,24 @@ Partial Class StockSearch
         Me.引当.Name = "引当"
         Me.引当.ReadOnly = True
         Me.引当.Width = 70
+        '
+        'メーカー
+        '
+        Me.メーカー.HeaderText = "メーカー"
+        Me.メーカー.Name = "メーカー"
+        Me.メーカー.ReadOnly = True
+        '
+        '品名
+        '
+        Me.品名.HeaderText = "品名"
+        Me.品名.Name = "品名"
+        Me.品名.ReadOnly = True
+        '
+        '型式
+        '
+        Me.型式.HeaderText = "型式"
+        Me.型式.Name = "型式"
+        Me.型式.ReadOnly = True
         '
         '倉庫コード
         '
@@ -144,6 +167,20 @@ Partial Class StockSearch
         Me.最終出庫日.Name = "最終出庫日"
         Me.最終出庫日.ReadOnly = True
         '
+        'ロケ番号
+        '
+        Me.ロケ番号.HeaderText = "ロケ番号"
+        Me.ロケ番号.Name = "ロケ番号"
+        Me.ロケ番号.ReadOnly = True
+        Me.ロケ番号.Visible = False
+        '
+        '製造番号
+        '
+        Me.製造番号.HeaderText = "製造番号"
+        Me.製造番号.Name = "製造番号"
+        Me.製造番号.ReadOnly = True
+        Me.製造番号.Visible = False
+        '
         '伝票番号
         '
         Me.伝票番号.HeaderText = "伝票番号"
@@ -189,7 +226,7 @@ Partial Class StockSearch
         'StockSearch
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
-        Me.ClientSize = New System.Drawing.Size(714, 448)
+        Me.ClientSize = New System.Drawing.Size(1003, 509)
         Me.Controls.Add(Me.BtnSelect)
         Me.Controls.Add(Me.BtnBack)
         Me.Controls.Add(Me.DgvList)
@@ -204,6 +241,9 @@ Partial Class StockSearch
     Friend WithEvents DgvList As DataGridView
     Friend WithEvents BtnSelect As Button
     Friend WithEvents 引当 As DataGridViewTextBoxColumn
+    Friend WithEvents メーカー As DataGridViewTextBoxColumn
+    Friend WithEvents 品名 As DataGridViewTextBoxColumn
+    Friend WithEvents 型式 As DataGridViewTextBoxColumn
     Friend WithEvents 倉庫コード As DataGridViewTextBoxColumn
     Friend WithEvents 倉庫 As DataGridViewTextBoxColumn
     Friend WithEvents 最終入庫日 As DataGridViewTextBoxColumn
@@ -212,6 +252,8 @@ Partial Class StockSearch
     Friend WithEvents 現在庫数 As DataGridViewTextBoxColumn
     Friend WithEvents 入庫単価 As DataGridViewTextBoxColumn
     Friend WithEvents 最終出庫日 As DataGridViewTextBoxColumn
+    Friend WithEvents ロケ番号 As DataGridViewTextBoxColumn
+    Friend WithEvents 製造番号 As DataGridViewTextBoxColumn
     Friend WithEvents 伝票番号 As DataGridViewTextBoxColumn
     Friend WithEvents 行番号 As DataGridViewTextBoxColumn
     Friend WithEvents 単位 As DataGridViewTextBoxColumn

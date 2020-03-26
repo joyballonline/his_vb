@@ -1,4 +1,5 @@
 ﻿'2020.01.09 ロケ番号→出庫開始サインに名称変更
+'2020.03.26 在庫管理区分、在庫表示区分を反映
 
 Option Explicit On
 
@@ -43,6 +44,9 @@ Public Class StockSearch
     Private spec As String
 
     Private _mode As String
+    Private InventoryControl As String = "3"                 '倉庫、入出庫種別を管理初期値とする
+    Private InventoryViewer As String = "7"                  '倉庫、入出庫種別、ロケーションを表示初期値とする
+
 
     '-------------------------------------------------------------------------------
     'デフォルトコンストラクタ（隠蔽）
@@ -91,14 +95,37 @@ Public Class StockSearch
         Dim reccnt As Integer = 0 'DB用（デフォルト）
         Dim Sql As String = ""
 
+        Sql = "SELECT "
+        Sql += " m01.在庫管理区分 AS 在庫管理区分,m01.在庫表示区分 AS 在庫表示区分 "
+        Sql += " FROM m01_company m01"
+        Sql += " WHERE "
+        Sql += " m01.会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonCD & "'"
+
+        Try
+
+            Dim dsM01 As DataSet = _db.selectDB(Sql, RS, reccnt)
+
+            InventoryControl = dsM01.Tables(RS).Rows(0)("在庫管理区分")
+            InventoryViewer = dsM01.Tables(RS).Rows(0)("在庫表示区分")
+
+        Catch ue As UsrDefException
+        Catch ex As Exception
+        End Try
+
         If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
             DgvList.Columns("引当").HeaderText = "Reservation"
+            DgvList.Columns("メーカー").HeaderText = "Manufacturer"
+            DgvList.Columns("品名").HeaderText = "ItemName"
+            DgvList.Columns("型式").HeaderText = "Spec"
             DgvList.Columns("倉庫").HeaderText = "Warehouse"
             DgvList.Columns("最終入庫日").HeaderText = "LastReceiptDate"
             DgvList.Columns("入出庫種別").HeaderText = "StorageType"
             DgvList.Columns("現在庫数").HeaderText = "CurrentQuontity"
             DgvList.Columns("入庫単価").HeaderText = "GoodsReceiptPrice"
             DgvList.Columns("最終出庫日").HeaderText = "LastGoodsDeliveryDate"
+            DgvList.Columns("ロケ番号").HeaderText = "Location"
+            DgvList.Columns("製造番号").HeaderText = "SerialNo"
+            DgvList.Columns("伝票番号").HeaderText = "OrderNo"
 
             BtnSelect.Text = "Select"
             BtnBack.Text = "Back"
@@ -121,6 +148,9 @@ Public Class StockSearch
             'Sql += " , SUM(m21.入庫単価) as 入庫単価, m21.最終出庫日, m20.名称, m90.文字１, m90.文字２, t43.仕入区分 "
             Sql += " m21.会社コード, m21.倉庫コード, m21.最終入庫日, m21.入出庫種別, m21.現在庫数"
             Sql += " , m21.入庫単価, m21.最終出庫日, m20.名称, m90.文字１, m90.文字２, t43.仕入区分 "
+            Sql += " , m21.メーカー, m21.品名, m21.型式 "
+            Sql += " , m21.ロケ番号 "
+            Sql += " , m21.製造番号 "
             Sql += " , m21.伝票番号, m21.行番号 "
             ''Sql += " , m21.ロケ番号, t43.入庫番号, t43.行番号 as 入庫行番号 "         '2020.01.09 DEL
             Sql += " , m21.出庫開始サイン, t43.入庫番号, t43.行番号 as 入庫行番号 "     '2020.01.09 ADD
@@ -159,9 +189,13 @@ Public Class StockSearch
             Sql += " AND m21.無効フラグ = " & CommonConst.CANCEL_KBN_ENABLED
             Sql += " AND m21.入出庫種別 <= '" & CommonConst.INOUT_KBN_SAMPLE & "'"
 
-            Sql += " AND m21.メーカー = '" & manufactuer & "'"
-            Sql += " AND m21.品名 = '" & itemName & "'"
-            Sql += " AND m21.型式 = '" & spec & "'"
+            ''2020.03.26 抽出条件を＝からILIKEとする（イコールでは検索条件が厳しすぎる）
+            ''Sql += " AND m21.メーカー = '" & manufactuer & "'"
+            ''Sql += " AND m21.品名 = '" & itemName & "'"
+            ''Sql += " AND m21.型式 = '" & spec & "'"
+            Sql += " AND m21.メーカー ILIKE '%" & manufactuer & "%'"
+            Sql += " AND m21.品名 ILIKE '%" & itemName & "%'"
+            Sql += " AND m21.型式 ILIKE '%" & spec & "%'"
 
             Sql += " AND m21.現在庫数 <> 0 "
 
@@ -198,6 +232,9 @@ Public Class StockSearch
             Sql += " , 'Scheduled goods receipt' as 文字２"
             Sql += " , t21.仕入区分 "
 
+            Sql += " , t21.メーカー, t21.品名, t21.型式 "
+            Sql += " , null as ロケ番号 "
+            Sql += " , null as 製造番号 "
             Sql += " , null as 伝票番号"
             Sql += " , null as 行番号 "
             ''Sql += " , null as ロケ番号"              '2020.01.09 ADD
@@ -217,9 +254,13 @@ Public Class StockSearch
             Sql += " t21.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
             Sql += " AND t20.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
 
-            Sql += " AND t21.メーカー = '" & manufactuer & "'"
-            Sql += " AND t21.品名 = '" & itemName & "'"
-            Sql += " AND t21.型式 = '" & spec & "'"
+            ''2020.03.26 抽出条件を＝からILIKEとする（イコールでは検索条件が厳しすぎる）
+            ''Sql += " AND t21.メーカー = '" & manufactuer & "'"
+            ''Sql += " AND t21.品名 = '" & itemName & "'"
+            ''Sql += " AND t21.型式 = '" & spec & "'"
+            Sql += " AND t21.メーカー ILIKE '%" & manufactuer & "%'"
+            Sql += " AND t21.品名 ILIKE '%" & itemName & "%'"
+            Sql += " AND t21.型式 ILIKE '%" & spec & "%'"
 
             Sql += " AND t21.発注残数 <> 0 "
             Sql += " AND (t21.仕入区分 = '" & CommonConst.Sire_KBN_Sire & "' or t21.仕入区分 = '" & CommonConst.Sire_KBN_Zaiko & "')"
@@ -242,6 +283,9 @@ Public Class StockSearch
             Sql += " , 'Number of provisions' as 文字２"
             Sql += " , t11.仕入区分 "
 
+            Sql += " , t11.メーカー, t11.品名, t11.型式 "
+            Sql += " , null as ロケ番号 "
+            Sql += " , null as 製造番号 "
             Sql += " , null as 伝票番号"
             Sql += " , t45.行番号 "
             ''Sql += " , null as ロケ番号"          '2020.01.09 DEL
@@ -262,9 +306,13 @@ Public Class StockSearch
             Sql += " t45.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
             Sql += " AND t44.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
 
-            Sql += " AND t45.メーカー = '" & manufactuer & "'"
-            Sql += " AND t45.品名 = '" & itemName & "'"
-            Sql += " AND t45.型式 = '" & spec & "'"
+            ''2020.03.26 抽出条件を＝からILIKEとする（イコールでは検索条件が厳しすぎる）
+            ''Sql += " AND t45.メーカー = '" & manufactuer & "'"
+            ''Sql += " AND t45.品名 = '" & itemName & "'"
+            ''Sql += " AND t45.型式 = '" & spec & "'"
+            Sql += " AND t45.メーカー ILIKE '%" & manufactuer & "%'"
+            Sql += " AND t45.品名 ILIKE '%" & itemName & "%'"
+            Sql += " AND t45.型式 ILIKE '%" & spec & "%'"
 
             Sql += " AND t45.出庫数量 <> 0 "
             Sql += " AND t45.出庫区分 = '" & CommonConst.SHUKO_KBN_TMP & "'"
@@ -316,6 +364,12 @@ Public Class StockSearch
                 DgvList.Rows(i).Cells("入庫番号").Value = dsZaiko.Tables(RS).Rows(i)("入庫番号") '移動入力でも使用
                 DgvList.Rows(i).Cells("入庫行番号").Value = dsZaiko.Tables(RS).Rows(i)("入庫行番号") '移動入力でも使用
 
+                DgvList.Rows(i).Cells("メーカー").Value = dsZaiko.Tables(RS).Rows(i)("メーカー") '移動入力でも使用
+                DgvList.Rows(i).Cells("品名").Value = dsZaiko.Tables(RS).Rows(i)("品名") '移動入力でも使用
+                DgvList.Rows(i).Cells("型式").Value = dsZaiko.Tables(RS).Rows(i)("型式") '移動入力でも使用
+
+                DgvList.Rows(i).Cells("ロケ番号").Value = dsZaiko.Tables(RS).Rows(i)("ロケ番号") '移動入力でも使用
+                DgvList.Rows(i).Cells("製造番号").Value = dsZaiko.Tables(RS).Rows(i)("製造番号") '移動入力でも使用
             Next
 
             '移動入力時のみ「選択」ボタンを表示
@@ -325,6 +379,113 @@ Public Class StockSearch
                 '移動入力時のみ「引当」列非表示
                 DgvList.Columns("引当").Visible = False
             End If
+
+            '在庫表示区分から表示する在庫管理対象列を選定する
+            If "13579BDFHJLNPRTV".Contains(InventoryViewer) Then
+                DgvList.Columns("倉庫").Visible = True
+            Else
+                DgvList.Columns("倉庫").Visible = False
+            End If
+            If "2367ABEFIJMNQRUV".Contains(InventoryViewer) Then
+                DgvList.Columns("入出庫種別").Visible = True
+            Else
+                DgvList.Columns("入出庫種別").Visible = False
+            End If
+            If "4567CDEFKLMNSTUV".Contains(InventoryViewer) Then
+                DgvList.Columns("ロケ番号").Visible = True
+            Else
+                DgvList.Columns("ロケ番号").Visible = False
+            End If
+            If "89ABCDEFOPQRSTUV".Contains(InventoryViewer) Then
+                DgvList.Columns("製造番号").Visible = True
+            Else
+                DgvList.Columns("製造番号").Visible = False
+            End If
+            ''If "GHIJKLMNOPQRSTUV".Contains(InventoryViewer) Then
+            ''    DgvList.Columns("伝票番号").Visible = True
+            ''Else
+            ''    DgvList.Columns("伝票番号").Visible = False
+            ''End If
+
+
+            DgvList.Columns("引当").DisplayIndex = 0
+            DgvList.Columns("メーカー").DisplayIndex = 1
+            DgvList.Columns("品名").DisplayIndex = 2
+            DgvList.Columns("型式").DisplayIndex = 3
+            DgvList.Columns("倉庫").DisplayIndex = 4
+            DgvList.Columns("入出庫種別").DisplayIndex = 5
+            DgvList.Columns("ロケ番号").DisplayIndex = 6
+            DgvList.Columns("製造番号").DisplayIndex = 7
+            DgvList.Columns("伝票番号").DisplayIndex = 8
+
+
+            Select Case InventoryControl
+                Case "1", "3", "7", "F", "V"
+                    DgvList.Columns("倉庫").DisplayIndex = 1
+                    DgvList.Columns("メーカー").DisplayIndex = 2
+                    DgvList.Columns("品名").DisplayIndex = 3
+                    DgvList.Columns("型式").DisplayIndex = 4
+                    DgvList.Columns("入出庫種別").DisplayIndex = 5
+                    DgvList.Columns("ロケ番号").DisplayIndex = 6
+                    DgvList.Columns("製造番号").DisplayIndex = 7
+                    DgvList.Columns("伝票番号").DisplayIndex = 8
+            End Select
+            Select Case InventoryControl
+                Case "3", "7", "F", "V"
+                    DgvList.Columns("入出庫種別").DisplayIndex = 1
+                    DgvList.Columns("メーカー").DisplayIndex = 2
+                    DgvList.Columns("品名").DisplayIndex = 3
+                    DgvList.Columns("型式").DisplayIndex = 4
+                    DgvList.Columns("倉庫").DisplayIndex = 5
+                    DgvList.Columns("ロケ番号").DisplayIndex = 6
+                    DgvList.Columns("製造番号").DisplayIndex = 7
+                    DgvList.Columns("伝票番号").DisplayIndex = 8
+            End Select
+            Select Case InventoryControl
+                Case "7", "F", "V"
+                    DgvList.Columns("ロケ番号").DisplayIndex = 1
+                    DgvList.Columns("メーカー").DisplayIndex = 2
+                    DgvList.Columns("品名").DisplayIndex = 3
+                    DgvList.Columns("型式").DisplayIndex = 4
+                    DgvList.Columns("倉庫").DisplayIndex = 5
+                    DgvList.Columns("入出庫種別").DisplayIndex = 6
+                    DgvList.Columns("製造番号").DisplayIndex = 7
+                    DgvList.Columns("伝票番号").DisplayIndex = 8
+            End Select
+            Select Case InventoryControl
+                Case "F", "V"
+                    DgvList.Columns("製造番号").DisplayIndex = 1
+                    DgvList.Columns("メーカー").DisplayIndex = 2
+                    DgvList.Columns("品名").DisplayIndex = 3
+                    DgvList.Columns("型式").DisplayIndex = 4
+                    DgvList.Columns("倉庫").DisplayIndex = 5
+                    DgvList.Columns("入出庫種別").DisplayIndex = 6
+                    DgvList.Columns("ロケ番号").DisplayIndex = 7
+                    DgvList.Columns("伝票番号").DisplayIndex = 8
+            End Select
+            Select Case InventoryControl
+                Case "V"
+                    DgvList.Columns("伝票番号").DisplayIndex = 1
+                    DgvList.Columns("メーカー").DisplayIndex = 2
+                    DgvList.Columns("品名").DisplayIndex = 3
+                    DgvList.Columns("型式").DisplayIndex = 4
+                    DgvList.Columns("倉庫").DisplayIndex = 5
+                    DgvList.Columns("入出庫種別").DisplayIndex = 6
+                    DgvList.Columns("ロケ番号").DisplayIndex = 7
+                    DgvList.Columns("製造番号").DisplayIndex = 8
+            End Select
+
+            DgvList.Columns("最終入庫日").DisplayIndex = 9
+
+            DgvList.Columns("現在庫数").DisplayIndex = 10
+            DgvList.Columns("入庫単価").DisplayIndex = 11
+            DgvList.Columns("最終出庫日").DisplayIndex = 12
+            DgvList.Columns("伝票番号").DisplayIndex = 13
+            DgvList.Columns("行番号").DisplayIndex = 14
+            DgvList.Columns("出庫開始サイン").DisplayIndex = 15
+            DgvList.Columns("入庫番号").DisplayIndex = 16
+            DgvList.Columns("入庫行番号").DisplayIndex = 17
+
 
         Catch ue As UsrDefException
             ue.dspMsg()
@@ -421,6 +582,11 @@ Public Class StockSearch
         frm.TxtQuantityFrom.Text = DgvList.Rows(rowIndex).Cells("現在庫数").Value.ToString
         frm.TxtUnitPrice.Text = DgvList.Rows(rowIndex).Cells("入庫単価").Value.ToString
         frm.TxtGoodsReceiptDate.Text = DgvList.Rows(rowIndex).Cells("最終入庫日").Value.ToString
+
+        frm.TxtManufacturer.Text = DgvList.Rows(rowIndex).Cells("メーカー").Value.ToString
+        frm.TxtItemName.Text = DgvList.Rows(rowIndex).Cells("品名").Value.ToString
+        frm.TxtSpec.Text = DgvList.Rows(rowIndex).Cells("型式").Value.ToString
+
 
         '2020.03.23 一旦コメントアウトする
         ''frm.TxtDenpyoNo.Text = DgvList.Rows(rowIndex).Cells("伝票番号").Value.ToString
