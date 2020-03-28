@@ -325,7 +325,7 @@ Public Class StockSearch
             For i As Integer = 0 To dsZaiko.Tables(RS).Rows.Count - 1 '在庫データ
                 DgvList.Rows.Add()
 
-                '入庫データの仕入区分が2以外、または入庫データに紐づいていない在庫は引当不可として背景をLightGrayに変更
+                '入庫データの仕入区分が2:在庫以外、または入庫データに紐づいていない在庫は引当不可として背景をLightGrayに変更
                 If dsZaiko.Tables(RS).Rows(i)("仕入区分") IsNot DBNull.Value Then
                     If dsZaiko.Tables(RS).Rows(i)("仕入区分") <> CommonConst.Sire_KBN_Zaiko And
                         dsZaiko.Tables(RS).Rows(i)("仕入区分") <> CommonConst.Sire_KBN_Move Then
@@ -353,23 +353,25 @@ Public Class StockSearch
                     Dim blnHikiate As Boolean = mCheckHikiate(strSyuko, intGyo, intSuryo)
                 End If
 
-                DgvList.Rows(i).Cells("現在庫数").Value = dsZaiko.Tables(RS).Rows(i)("現在庫数") '移動入力でも使用
+                DgvList.Rows(i).Cells("現在庫数").Value = dsZaiko.Tables(RS).Rows(i)("現在庫数")                '移動入力でも使用
 
-                DgvList.Rows(i).Cells("入庫単価").Value = dsZaiko.Tables(RS).Rows(i)("入庫単価") '移動入力でも使用
+                DgvList.Rows(i).Cells("入庫単価").Value = dsZaiko.Tables(RS).Rows(i)("入庫単価")                '移動入力でも使用
                 DgvList.Rows(i).Cells("最終出庫日").Value = dsZaiko.Tables(RS).Rows(i)("最終出庫日")
-                DgvList.Rows(i).Cells("伝票番号").Value = dsZaiko.Tables(RS).Rows(i)("伝票番号") '移動入力でも使用
-                DgvList.Rows(i).Cells("行番号").Value = dsZaiko.Tables(RS).Rows(i)("行番号") '移動入力でも使用
-                ''DgvList.Rows(i).Cells("ロケ番号").Value = dsZaiko.Tables(RS).Rows(i)("ロケ番号") '移動入力でも使用                '2020.01.09 DEL
-                DgvList.Rows(i).Cells("出庫開始サイン").Value = dsZaiko.Tables(RS).Rows(i)("出庫開始サイン") '移動入力でも使用      '2020.01.09 ADD
-                DgvList.Rows(i).Cells("入庫番号").Value = dsZaiko.Tables(RS).Rows(i)("入庫番号") '移動入力でも使用
-                DgvList.Rows(i).Cells("入庫行番号").Value = dsZaiko.Tables(RS).Rows(i)("入庫行番号") '移動入力でも使用
+                DgvList.Rows(i).Cells("伝票番号").Value = dsZaiko.Tables(RS).Rows(i)("伝票番号")                '移動入力でも使用
+                DgvList.Rows(i).Cells("行番号").Value = dsZaiko.Tables(RS).Rows(i)("行番号")                    '移動入力でも使用
 
-                DgvList.Rows(i).Cells("メーカー").Value = dsZaiko.Tables(RS).Rows(i)("メーカー") '移動入力でも使用
-                DgvList.Rows(i).Cells("品名").Value = dsZaiko.Tables(RS).Rows(i)("品名") '移動入力でも使用
-                DgvList.Rows(i).Cells("型式").Value = dsZaiko.Tables(RS).Rows(i)("型式") '移動入力でも使用
+                '2020.03.28 コメント 出庫開始サイン、入庫番号をここでセットしている意味がよくわからないが元ソースを尊重
+                ''DgvList.Rows(i).Cells("ロケ番号").Value = dsZaiko.Tables(RS).Rows(i)("ロケ番号")              '移動入力でも使用   '2020.01.09 DEL
+                DgvList.Rows(i).Cells("出庫開始サイン").Value = dsZaiko.Tables(RS).Rows(i)("出庫開始サイン")    '移動入力でも使用   '2020.01.09 ADD
+                DgvList.Rows(i).Cells("入庫番号").Value = dsZaiko.Tables(RS).Rows(i)("入庫番号")                '移動入力でも使用
+                DgvList.Rows(i).Cells("入庫行番号").Value = dsZaiko.Tables(RS).Rows(i)("入庫行番号")            '移動入力でも使用
 
-                DgvList.Rows(i).Cells("ロケ番号").Value = dsZaiko.Tables(RS).Rows(i)("ロケ番号") '移動入力でも使用
-                DgvList.Rows(i).Cells("製造番号").Value = dsZaiko.Tables(RS).Rows(i)("製造番号") '移動入力でも使用
+                DgvList.Rows(i).Cells("メーカー").Value = dsZaiko.Tables(RS).Rows(i)("メーカー")                '移動入力でも使用
+                DgvList.Rows(i).Cells("品名").Value = dsZaiko.Tables(RS).Rows(i)("品名")                        '移動入力でも使用
+                DgvList.Rows(i).Cells("型式").Value = dsZaiko.Tables(RS).Rows(i)("型式")                        '移動入力でも使用
+
+                DgvList.Rows(i).Cells("ロケ番号").Value = dsZaiko.Tables(RS).Rows(i)("ロケ番号")                '移動入力でも使用
+                DgvList.Rows(i).Cells("製造番号").Value = dsZaiko.Tables(RS).Rows(i)("製造番号")                '移動入力でも使用
             Next
 
             '移動入力時のみ「選択」ボタンを表示
@@ -401,11 +403,11 @@ Public Class StockSearch
             Else
                 DgvList.Columns("製造番号").Visible = False
             End If
-            ''If "GHIJKLMNOPQRSTUV".Contains(InventoryViewer) Then
-            ''    DgvList.Columns("伝票番号").Visible = True
-            ''Else
-            ''    DgvList.Columns("伝票番号").Visible = False
-            ''End If
+            If "GHIJKLMNOPQRSTUV".Contains(InventoryViewer) Then
+                DgvList.Columns("伝票番号").Visible = True
+            Else
+                DgvList.Columns("伝票番号").Visible = False
+            End If
 
 
             DgvList.Columns("引当").DisplayIndex = 0
@@ -588,7 +590,7 @@ Public Class StockSearch
         frm.TxtSpec.Text = DgvList.Rows(rowIndex).Cells("型式").Value.ToString
 
 
-        '2020.03.23 一旦コメントアウトする
+        '2020.03.23 項目整理のためコメントアウトする
         ''frm.TxtDenpyoNo.Text = DgvList.Rows(rowIndex).Cells("伝票番号").Value.ToString
         ''frm.TxtLineNumber.Text = DgvList.Rows(rowIndex).Cells("行番号").Value.ToString
         ''frm.TxtDenpyoNo.Tag = DgvList.Rows(rowIndex).Cells("入庫番号").Value.ToString
@@ -596,6 +598,14 @@ Public Class StockSearch
         ''''frm.TxtLocationNo.Text = DgvList.Rows(rowIndex).Cells("ロケ番号").Value.ToString          '2020.01.09 DEL
         ''frm.TxtLocationNo.Text = DgvList.Rows(rowIndex).Cells("出庫開始サイン").Value.ToString      '2020.01.09 ADD
         'frm.TxtUnit.Text = DgvList.Rows(rowIndex).Cells("単位").Value
+
+        '2020.03.28 伝票番号は伝票番号項目へリターン。入庫番号項目、出庫開始サイン項目を新たに新設してリターンする
+        frm.TxtOrderNoSince.Text = DgvList.Rows(rowIndex).Cells("伝票番号").Value.ToString
+        frm.TxtOrderNoSince.Tag = DgvList.Rows(rowIndex).Cells("行番号").Value.ToString
+        frm.txtReceivSince.Text = DgvList.Rows(rowIndex).Cells("入庫番号").Value.ToString
+        frm.txtReceivSince.Tag = DgvList.Rows(rowIndex).Cells("入庫行番号").Value.ToString
+        frm.txtShipSince.Text = DgvList.Rows(rowIndex).Cells("出庫開始サイン").Value.ToString
+        frm.txtUnitSince.Text = DgvList.Rows(rowIndex).Cells("単位").Value
 
         frm.TxtQuantityTo.Text = 0
 

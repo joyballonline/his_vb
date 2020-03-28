@@ -76,6 +76,12 @@ Partial Class MovementInput
         Me.Label2 = New System.Windows.Forms.Label()
         Me.TxtGoodsReceiptDateTo = New System.Windows.Forms.TextBox()
         Me.TxtLocationTo = New System.Windows.Forms.TextBox()
+        Me.txtReceivSince = New System.Windows.Forms.TextBox()
+        Me.txtShipSince = New System.Windows.Forms.TextBox()
+        Me.txtShipTo = New System.Windows.Forms.TextBox()
+        Me.txtReceivTo = New System.Windows.Forms.TextBox()
+        Me.txtUnitSince = New System.Windows.Forms.TextBox()
+        Me.txtUnitTo = New System.Windows.Forms.TextBox()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.TableLayoutPanel3.SuspendLayout()
         Me.TableLayoutPanel5.SuspendLayout()
@@ -651,6 +657,7 @@ Partial Class MovementInput
         'TxtUnitPriceTo
         '
         Me.TxtUnitPriceTo.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TxtUnitPriceTo.Enabled = False
         Me.TxtUnitPriceTo.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtUnitPriceTo.Location = New System.Drawing.Point(193, 169)
         Me.TxtUnitPriceTo.Margin = New System.Windows.Forms.Padding(0)
@@ -814,6 +821,7 @@ Partial Class MovementInput
         'TxtGoodsReceiptDateTo
         '
         Me.TxtGoodsReceiptDateTo.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TxtGoodsReceiptDateTo.Enabled = False
         Me.TxtGoodsReceiptDateTo.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtGoodsReceiptDateTo.Location = New System.Drawing.Point(193, 198)
         Me.TxtGoodsReceiptDateTo.Margin = New System.Windows.Forms.Padding(0)
@@ -835,10 +843,94 @@ Partial Class MovementInput
         Me.TxtLocationTo.TabIndex = 5
         Me.TxtLocationTo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
+        'txtReceivSince
+        '
+        Me.txtReceivSince.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtReceivSince.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.txtReceivSince.Enabled = False
+        Me.txtReceivSince.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.txtReceivSince.Location = New System.Drawing.Point(208, 465)
+        Me.txtReceivSince.Name = "txtReceivSince"
+        Me.txtReceivSince.Size = New System.Drawing.Size(39, 22)
+        Me.txtReceivSince.TabIndex = 68
+        Me.txtReceivSince.TabStop = False
+        Me.txtReceivSince.Visible = False
+        '
+        'txtShipSince
+        '
+        Me.txtShipSince.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtShipSince.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.txtShipSince.Enabled = False
+        Me.txtShipSince.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.txtShipSince.Location = New System.Drawing.Point(253, 465)
+        Me.txtShipSince.Name = "txtShipSince"
+        Me.txtShipSince.Size = New System.Drawing.Size(39, 22)
+        Me.txtShipSince.TabIndex = 69
+        Me.txtShipSince.TabStop = False
+        Me.txtShipSince.Visible = False
+        '
+        'txtShipTo
+        '
+        Me.txtShipTo.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtShipTo.BackColor = System.Drawing.Color.White
+        Me.txtShipTo.Enabled = False
+        Me.txtShipTo.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.txtShipTo.Location = New System.Drawing.Point(401, 465)
+        Me.txtShipTo.Name = "txtShipTo"
+        Me.txtShipTo.Size = New System.Drawing.Size(39, 22)
+        Me.txtShipTo.TabIndex = 71
+        Me.txtShipTo.TabStop = False
+        Me.txtShipTo.Visible = False
+        '
+        'txtReceivTo
+        '
+        Me.txtReceivTo.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtReceivTo.BackColor = System.Drawing.Color.White
+        Me.txtReceivTo.Enabled = False
+        Me.txtReceivTo.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.txtReceivTo.Location = New System.Drawing.Point(356, 465)
+        Me.txtReceivTo.Name = "txtReceivTo"
+        Me.txtReceivTo.Size = New System.Drawing.Size(39, 22)
+        Me.txtReceivTo.TabIndex = 70
+        Me.txtReceivTo.TabStop = False
+        Me.txtReceivTo.Visible = False
+        '
+        'txtUnitSince
+        '
+        Me.txtUnitSince.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtUnitSince.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.txtUnitSince.Enabled = False
+        Me.txtUnitSince.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.txtUnitSince.Location = New System.Drawing.Point(298, 465)
+        Me.txtUnitSince.Name = "txtUnitSince"
+        Me.txtUnitSince.Size = New System.Drawing.Size(39, 22)
+        Me.txtUnitSince.TabIndex = 72
+        Me.txtUnitSince.TabStop = False
+        Me.txtUnitSince.Visible = False
+        '
+        'txtUnitTo
+        '
+        Me.txtUnitTo.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtUnitTo.BackColor = System.Drawing.Color.White
+        Me.txtUnitTo.Enabled = False
+        Me.txtUnitTo.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.txtUnitTo.Location = New System.Drawing.Point(444, 465)
+        Me.txtUnitTo.Name = "txtUnitTo"
+        Me.txtUnitTo.Size = New System.Drawing.Size(39, 22)
+        Me.txtUnitTo.TabIndex = 73
+        Me.txtUnitTo.TabStop = False
+        Me.txtUnitTo.Visible = False
+        '
         'MovementInput
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.ClientSize = New System.Drawing.Size(836, 518)
+        Me.Controls.Add(Me.txtUnitTo)
+        Me.Controls.Add(Me.txtUnitSince)
+        Me.Controls.Add(Me.txtShipTo)
+        Me.Controls.Add(Me.txtReceivTo)
+        Me.Controls.Add(Me.txtShipSince)
+        Me.Controls.Add(Me.txtReceivSince)
         Me.Controls.Add(Me.TableLayoutPanel5)
         Me.Controls.Add(Me.BtnSearch)
         Me.Controls.Add(Me.TableLayoutPanel3)
@@ -917,4 +1009,10 @@ Partial Class MovementInput
     Friend WithEvents TxtOrderNoTo As TextBox
     Friend WithEvents TxtSerialNoTo As TextBox
     Friend WithEvents TxtLocationTo As TextBox
+    Friend WithEvents txtReceivSince As TextBox
+    Friend WithEvents txtShipSince As TextBox
+    Friend WithEvents txtShipTo As TextBox
+    Friend WithEvents txtReceivTo As TextBox
+    Friend WithEvents txtUnitSince As TextBox
+    Friend WithEvents txtUnitTo As TextBox
 End Class
