@@ -29,6 +29,10 @@ Partial Class InventoryList
         Me.rbAll = New System.Windows.Forms.RadioButton()
         Me.rbWarehouse = New System.Windows.Forms.RadioButton()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
+        Me.rbSerialNo = New System.Windows.Forms.RadioButton()
+        Me.rbSyubetsu = New System.Windows.Forms.RadioButton()
+        Me.rbOrderNo = New System.Windows.Forms.RadioButton()
+        Me.rbLocation = New System.Windows.Forms.RadioButton()
         CType(Me.DgvList, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.SuspendLayout()
@@ -95,7 +99,7 @@ Partial Class InventoryList
         '
         Me.rbWarehouse.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.rbWarehouse.AutoSize = True
-        Me.rbWarehouse.Location = New System.Drawing.Point(104, 8)
+        Me.rbWarehouse.Location = New System.Drawing.Point(107, 8)
         Me.rbWarehouse.Name = "rbWarehouse"
         Me.rbWarehouse.Size = New System.Drawing.Size(59, 16)
         Me.rbWarehouse.TabIndex = 69
@@ -105,22 +109,78 @@ Partial Class InventoryList
         '
         'TableLayoutPanel1
         '
-        Me.TableLayoutPanel1.ColumnCount = 2
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45.29148!))
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 54.70852!))
+        Me.TableLayoutPanel1.ColumnCount = 6
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.48544!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 49.51456!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100.0!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 90.0!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 107.0!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 88.0!))
         Me.TableLayoutPanel1.Controls.Add(Me.rbAll, 0, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.rbSerialNo, 3, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.rbWarehouse, 1, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.rbSyubetsu, 2, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.rbOrderNo, 5, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.rbLocation, 3, 0)
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(13, 9)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 1
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(223, 33)
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(592, 33)
         Me.TableLayoutPanel1.TabIndex = 71
+        '
+        'rbSerialNo
+        '
+        Me.rbSerialNo.Anchor = System.Windows.Forms.AnchorStyles.Left
+        Me.rbSerialNo.AutoSize = True
+        Me.rbSerialNo.Location = New System.Drawing.Point(399, 8)
+        Me.rbSerialNo.Name = "rbSerialNo"
+        Me.rbSerialNo.Size = New System.Drawing.Size(83, 16)
+        Me.rbSerialNo.TabIndex = 73
+        Me.rbSerialNo.TabStop = True
+        Me.rbSerialNo.Text = "製造番号別"
+        Me.rbSerialNo.UseVisualStyleBackColor = True
+        '
+        'rbSyubetsu
+        '
+        Me.rbSyubetsu.Anchor = System.Windows.Forms.AnchorStyles.Left
+        Me.rbSyubetsu.AutoSize = True
+        Me.rbSyubetsu.Location = New System.Drawing.Point(209, 8)
+        Me.rbSyubetsu.Name = "rbSyubetsu"
+        Me.rbSyubetsu.Size = New System.Drawing.Size(83, 16)
+        Me.rbSyubetsu.TabIndex = 72
+        Me.rbSyubetsu.TabStop = True
+        Me.rbSyubetsu.Text = "入出庫種別"
+        Me.rbSyubetsu.UseVisualStyleBackColor = True
+        '
+        'rbOrderNo
+        '
+        Me.rbOrderNo.Anchor = System.Windows.Forms.AnchorStyles.Left
+        Me.rbOrderNo.AutoSize = True
+        Me.rbOrderNo.Location = New System.Drawing.Point(506, 8)
+        Me.rbOrderNo.Name = "rbOrderNo"
+        Me.rbOrderNo.Size = New System.Drawing.Size(59, 16)
+        Me.rbOrderNo.TabIndex = 74
+        Me.rbOrderNo.TabStop = True
+        Me.rbOrderNo.Text = "伝票別"
+        Me.rbOrderNo.UseVisualStyleBackColor = True
+        '
+        'rbLocation
+        '
+        Me.rbLocation.Anchor = System.Windows.Forms.AnchorStyles.Left
+        Me.rbLocation.AutoSize = True
+        Me.rbLocation.Location = New System.Drawing.Point(309, 8)
+        Me.rbLocation.Name = "rbLocation"
+        Me.rbLocation.Size = New System.Drawing.Size(84, 16)
+        Me.rbLocation.TabIndex = 70
+        Me.rbLocation.TabStop = True
+        Me.rbLocation.Text = "ロケーション別"
+        Me.rbLocation.UseVisualStyleBackColor = True
         '
         'InventoryList
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
-        Me.ClientSize = New System.Drawing.Size(1350, 561)
+        Me.ClientSize = New System.Drawing.Size(1348, 561)
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.Controls.Add(Me.LblMode)
         Me.Controls.Add(Me.BtnExcelOutput)
@@ -143,4 +203,8 @@ Partial Class InventoryList
     Friend WithEvents rbAll As RadioButton
     Friend WithEvents rbWarehouse As RadioButton
     Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
+    Friend WithEvents rbSerialNo As RadioButton
+    Friend WithEvents rbSyubetsu As RadioButton
+    Friend WithEvents rbOrderNo As RadioButton
+    Friend WithEvents rbLocation As RadioButton
 End Class

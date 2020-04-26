@@ -1,4 +1,6 @@
 ﻿'2020.01.09 ロケ番号→出庫開始サインに名称変更
+'2020.03.23 在庫管理区分、表示区分に応じて在庫移動入力を操作する
+
 
 Option Explicit On
 
@@ -40,6 +42,8 @@ Public Class MovementInput
     Private CompanyCode As String = ""
     Private OrderNo As String()
     Private OrderStatus As String = ""
+    Private InventoryControl As String = "7"                 '倉庫、入出庫種別を管理初期値とする
+    Private InventoryViewer As String = "7"                  '倉庫、入出庫種別、ロケーションを表示初期値とする
 
 
     '-------------------------------------------------------------------------------
@@ -89,24 +93,32 @@ Public Class MovementInput
             LblProcessingDate.Text = "ProcessingDate" '処理日
             LblProcessingClassification.Text = "ProcessingClassification" '処理区分
 
+            BtnSearch.Text = "InventorySearch" '在庫検索
+
             LblManufacturer.Text = "Manufacturer" 'メーカー
             LblItemName.Text = "ItemName" '品名
             LblSpec.Text = "Spec" '型式
 
-            BtnSearch.Text = "InventorySearch" '在庫検索
+            LblMovingSource.Text = "MovingSource"               '移動元
+            LblWarehouseSince.Text = "Warehouse"                '倉庫
+            LblStorageTypeSince.Text = "StorageType"            '入出庫種別
+            LblLocationSince.Text = "Location"                  'ロケ番号
+            LblSerialNoSince.Text = "SerialNo"                  '製造番号
+            LblOrderNoSince.Text = "OrderNo"                    '伝票番号
+            LblQuantityFrom.Text = "Quantity"                   '数量
+            LblUnitPrice.Text = "UnitPrice"                     '単価
+            LblGoodsReceiptDate.Text = "LblGoodsReceiptDate"    '入庫日
 
-            LblMovingSource.Text = "MovingSource" '移動元
-            LblWarehouseSince.Text = "Warehouse" '倉庫
-            LblStorageTypeSince.Text = "StorageType" '入出庫種別
-            LblQuantityFrom.Text = "Quantity" '数量
-            LblUnitPrice.Text = "UnitPrice" '単価
-            LblGoodsReceiptDate.Text = "LblGoodsReceiptDate" '入庫日
 
-
-            LblMovingDestination.Text = "MovingDestination" '移動先
-            LblWarehouseTo.Text = "Warehouse" '倉庫
-            LblStorageTypeTo.Text = "StorageType" '入出庫種別
-            LblQuantityTo.Text = "Quantity" '数量
+            LblMovingDestination.Text = "MovingDestination"     '移動先
+            LblWarehouseTo.Text = "Warehouse"                   '倉庫
+            LblStorageTypeTo.Text = "StorageType"               '入出庫種別
+            LblLocationTo.Text = "Location"                     'ロケ番号
+            LblSerialNoTo.Text = "SerialNo"                     '製造番号
+            LblOrderNoTo.Text = "OrderNo"                       '伝票番号
+            LblQuantityTo.Text = "Quantity"                     '数量
+            LblUnitPriceTo.Text = "UnitPrice"                   '単価
+            LblGoodsReceiptDateTo.Text = "LblGoodsReceiptDate"  '入庫日
 
             'LblWarehouseSince.Text = "TargetWarehouse"
             'LblWarehouseTo.Text = "Destination"
@@ -126,9 +138,137 @@ Public Class MovementInput
 
         DtpProcessingDate.Text = DateTime.Today
 
-        createWarehouseToCombobox() '倉庫コンボボックス
-        createPCKbn() '処理区分コンボボックス
-        createInOutKbn("0,1") '入出庫種別コンボボックス
+        createPCKbn()                           '処理区分コンボボックス
+        createWarehouseToCombobox()             '倉庫コンボボックス
+        createInOutKbn("0,1")                   '入出庫種別コンボボックス
+
+        '2020.03.23 在庫管理区分、表示区分の処理
+
+        Sql = "SELECT "
+        Sql += " m01.在庫管理区分 AS 在庫管理区分,m01.在庫表示区分 AS 在庫表示区分 "
+        Sql += " FROM m01_company m01"
+        Sql += " WHERE "
+        Sql += " m01.会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonCD & "'"
+
+        Try
+            Dim dsM01 As DataSet = _db.selectDB(Sql, RS, reccnt)
+
+            InventoryControl = dsM01.Tables(RS).Rows(0)("在庫管理区分")
+            InventoryViewer = dsM01.Tables(RS).Rows(0)("在庫表示区分")
+
+        Catch ue As UsrDefException
+        Catch ex As Exception
+        End Try
+
+        TableLayoutPanel6.Controls.Clear()
+        TableLayoutPanel4.Controls.Clear()
+        Dim intTableRow As Integer = 0
+
+        '在庫管理区分から表示する在庫管理対象列を選定パネル上への配置位置を決定する
+
+        If "13579BDFHJLNPRTV".Contains(InventoryControl) Then
+            LblWarehouseSince.Visible = True
+            LblWarehouseTo.Visible = True
+            TxtWarehouseSince.Visible = True
+            CmWarehouseTo.Visible = True
+
+            TableLayoutPanel6.Controls.Add(LblWarehouseSince, 0, intTableRow)
+            TableLayoutPanel4.Controls.Add(LblWarehouseTo, 0, intTableRow)
+            TableLayoutPanel6.Controls.Add(TxtWarehouseSince, 1, intTableRow)
+            TableLayoutPanel4.Controls.Add(CmWarehouseTo, 1, intTableRow)
+            intTableRow = intTableRow + 1
+        Else
+            LblWarehouseSince.Visible = False
+            LblWarehouseTo.Visible = False
+            TxtWarehouseSince.Visible = False
+            CmWarehouseTo.Visible = False
+        End If
+        If "2367ABEFIJMNQRUV".Contains(InventoryControl) Then
+            LblStorageTypeSince.Visible = True
+            LblStorageTypeTo.Visible = True
+            TxtStorageTypeSince.Visible = True
+            CmStorageTypeTo.Visible = True
+
+            TableLayoutPanel6.Controls.Add(LblStorageTypeSince, 0, intTableRow)
+            TableLayoutPanel4.Controls.Add(LblStorageTypeTo, 0, intTableRow)
+            TableLayoutPanel6.Controls.Add(TxtStorageTypeSince, 1, intTableRow)
+            TableLayoutPanel4.Controls.Add(CmStorageTypeTo, 1, intTableRow)
+            intTableRow = intTableRow + 1
+        Else
+            LblStorageTypeSince.Visible = False
+            LblStorageTypeTo.Visible = False
+            TxtStorageTypeSince.Visible = False
+            CmStorageTypeTo.Visible = False
+        End If
+        If "4567CDEFKLMNSTUV".Contains(InventoryControl) Then
+            LblLocationSince.Visible = True
+            LblLocationTo.Visible = True
+            TxtLocationSince.Visible = True
+            TxtLocationTo.Visible = True
+
+            TableLayoutPanel6.Controls.Add(LblLocationSince, 0, intTableRow)
+            TableLayoutPanel4.Controls.Add(LblLocationTo, 0, intTableRow)
+            TableLayoutPanel6.Controls.Add(TxtLocationSince, 1, intTableRow)
+            TableLayoutPanel4.Controls.Add(TxtLocationTo, 1, intTableRow)
+            intTableRow = intTableRow + 1
+        Else
+            LblLocationSince.Visible = False
+            LblLocationTo.Visible = False
+            TxtLocationSince.Visible = False
+            TxtLocationTo.Visible = False
+        End If
+        If "89ABCDEFOPQRSTUV".Contains(InventoryControl) Then
+            LblSerialNoSince.Visible = True
+            LblSerialNoTo.Visible = True
+            TxtSerialNoSince.Visible = True
+            TxtSerialNoTo.Visible = True
+
+            TableLayoutPanel6.Controls.Add(LblSerialNoSince, 0, intTableRow)
+            TableLayoutPanel4.Controls.Add(LblSerialNoTo, 0, intTableRow)
+            TableLayoutPanel6.Controls.Add(TxtSerialNoSince, 1, intTableRow)
+            TableLayoutPanel4.Controls.Add(TxtSerialNoTo, 1, intTableRow)
+            intTableRow = intTableRow + 1
+        Else
+            LblSerialNoSince.Visible = False
+            LblSerialNoTo.Visible = False
+            TxtSerialNoSince.Visible = False
+            TxtSerialNoTo.Visible = False
+        End If
+        If "GHIJKLMNOPQRSTUV".Contains(InventoryControl) Then
+            LblOrderNoSince.Visible = True
+            LblOrderNoTo.Visible = True
+            TxtOrderNoSince.Visible = True
+            TxtOrderNoTo.Visible = True
+
+            TableLayoutPanel6.Controls.Add(LblOrderNoSince, 0, intTableRow)
+            TableLayoutPanel4.Controls.Add(LblOrderNoTo, 0, intTableRow)
+            TableLayoutPanel6.Controls.Add(TxtOrderNoSince, 1, intTableRow)
+            TableLayoutPanel4.Controls.Add(TxtOrderNoTo, 1, intTableRow)
+            intTableRow = intTableRow + 1
+        Else
+            LblOrderNoSince.Visible = False
+            LblOrderNoTo.Visible = False
+            TxtOrderNoSince.Visible = False
+            TxtOrderNoTo.Visible = False
+        End If
+
+        TableLayoutPanel6.Controls.Add(LblQuantityFrom, 0, intTableRow)
+        TableLayoutPanel4.Controls.Add(LblQuantityTo, 0, intTableRow)
+        TableLayoutPanel6.Controls.Add(TxtQuantityFrom, 1, intTableRow)
+        TableLayoutPanel4.Controls.Add(TxtQuantityTo, 1, intTableRow)
+        intTableRow = intTableRow + 1
+        TableLayoutPanel6.Controls.Add(LblUnitPrice, 0, intTableRow)
+        TableLayoutPanel4.Controls.Add(LblUnitPriceTo, 0, intTableRow)
+        TableLayoutPanel6.Controls.Add(TxtUnitPrice, 1, intTableRow)
+        TableLayoutPanel4.Controls.Add(TxtUnitPriceTo, 1, intTableRow)
+        intTableRow = intTableRow + 1
+        TableLayoutPanel6.Controls.Add(LblGoodsReceiptDate, 0, intTableRow)
+        TableLayoutPanel4.Controls.Add(LblGoodsReceiptDateTo, 0, intTableRow)
+        TableLayoutPanel6.Controls.Add(TxtGoodsReceiptDate, 1, intTableRow)
+        TableLayoutPanel4.Controls.Add(TxtGoodsReceiptDateTo, 1, intTableRow)
+        intTableRow = intTableRow + 1
+
+
 
     End Sub
 
@@ -163,6 +303,8 @@ Public Class MovementInput
 
             '在庫マスタデータを元に、入庫データ取得
             '-----------------------------
+            '2020.03.23 「在庫マスタデータを元に」と記載しているが、実際には入庫ファイルヘッダ、明細をベースとする
+
             Sql = " SELECT t43.* ,t42.* FROM t43_nyukodt t43 "
             Sql += " LEFT JOIN "
             Sql += " t42_nyukohd t42 "
@@ -175,19 +317,34 @@ Public Class MovementInput
             Sql += " t43.会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonCD & "'"
             Sql += " AND "
 
+            '2020.03.23 伝票番号、行番号部分コメントアウト
             '出庫開始サイン（旧：ロケ番号）がない場合は伝票番号をそのまま使用する
-            If TxtDenpyoNo.Tag.ToString <> "" Then
-                Sql += " t43.入庫番号 ILIKE '" & TxtDenpyoNo.Tag & "'"
+            ''If TxtDenpyoNo.Tag.ToString <> "" Then
+            ''    Sql += " t43.入庫番号 ILIKE '" & TxtDenpyoNo.Tag & "'"
+            ''Else
+            ''    Sql += " t43.入庫番号 ILIKE '" & TxtDenpyoNo.Text & "'"
+            ''End If
+
+            ''Sql += " AND "
+
+            ''If TxtLineNumber.Tag.ToString <> "" Then
+            ''    Sql += " t43.行番号 = '" & TxtLineNumber.Tag & "'"
+            ''Else
+            ''    Sql += " t43.行番号 = '" & TxtLineNumber.Text & "'"
+            ''End If
+
+            '2020.03.28 伝票番号、行番号部分項目を整理
+            '入庫Ｆ由来の入庫番号、入庫行番号が存在しない場合は在庫マスタ由来の伝票番号、行番号を検索条件とする
+            If txtReceivTo.Text <> "" Then
+                Sql += " t43.入庫番号 ILIKE '" & txtReceivTo.Text & "'"
             Else
-                Sql += " t43.入庫番号 ILIKE '" & TxtDenpyoNo.Text & "'"
+                Sql += " t43.入庫番号 ILIKE '" & TxtOrderNoTo.Text & "'"
             End If
-
             Sql += " AND "
-
-            If TxtLineNumber.Tag.ToString <> "" Then
-                Sql += " t43.行番号 = '" & TxtLineNumber.Tag & "'"
+            If txtReceivTo.Tag.ToString <> "" Then
+                Sql += " t43.行番号 = '" & txtReceivTo.Tag & "'"
             Else
-                Sql += " t43.行番号 = '" & TxtLineNumber.Text & "'"
+                Sql += " t43.行番号 = '" & TxtOrderNoTo.Tag & "'"
             End If
 
             '対象の入庫データを取得
@@ -297,55 +454,88 @@ Public Class MovementInput
                 '-----------------------------
 
                 't70_inout にデータ登録
+                '2020.03.28 SQL文の整理見直し
+                ''Sql = "INSERT INTO "
+                ''Sql += "Public."
+                ''Sql += "t70_inout("
+                ''Sql += "会社コード, 入出庫区分, 倉庫コード, 伝票番号, 行番号"
+                ''Sql += ", 入出庫種別, メーカー, 品名, 型式, 数量, 単位, 入出庫日"
+                ''''Sql += ", 取消区分, 更新者, 更新日, ロケ番号, 仕入区分)"                '2020.01.09 DEL
+                ''Sql += ", 取消区分, 更新者, 更新日, 出庫開始サイン, 仕入区分)"            '2020.01.09 ADD   
+                '''Sql += ", 取消区分, 更新者, 更新日, 仕入区分)"
+                ''Sql += " VALUES('"
+                ''Sql += frmC01F10_Login.loginValue.BumonCD '会社コード
+                ''Sql += "', '"
+                ''Sql += "2" '入出庫区分 1.入庫, 2.出庫
+                ''Sql += "', '"
+                ''Sql += TxtWarehouseSince.Tag.ToString '倉庫コード
+                ''Sql += "', '"
+                ''Sql += LS '伝票番号
+                ''Sql += "', '"
+                ''Sql += "1" '行番号
+                '''Sql += dsNyuko.Tables(RS).Rows(0)("入庫番号").ToString '伝票番号
+                '''Sql += "', '"
+                '''Sql += dsNyuko.Tables(RS).Rows(0)("行番号").ToString '行番号
+                ''Sql += "', '"
+                ''Sql += TxtStorageTypeSince.Tag '入出庫種別
+                ''Sql += "', '"
+                ''Sql += TxtManufacturer.Text 'メーカー
+                ''Sql += "', '"
+                ''Sql += TxtItemName.Text '品名
+                ''Sql += "', '"
+                ''Sql += TxtSpec.Text '型式
+                ''Sql += "', '"
+                ''Sql += TxtQuantityTo.Text '数量
+                ''Sql += "', "
+                ''Sql += IIf(dsNyuko.Tables(RS).Rows(0)("単位").ToString <> "",
+                ''               "'" & dsNyuko.Tables(RS).Rows(0)("単位").ToString & "'",
+                ''               "NULL") '単位
+                ''Sql += ", '"
+                '''Sql += UtilClass.formatDatetime(DtpProcessingDate.Text) '入出庫日
+                ''Sql += inoutDate '入出庫日
+                ''Sql += "', '"
+                ''Sql += CommonConst.CANCEL_KBN_ENABLED.ToString '取消区分
+                ''Sql += "', '"
+                ''Sql += frmC01F10_Login.loginValue.TantoNM '更新者
+                ''Sql += "', '"
+                ''Sql += UtilClass.formatDatetime(dtToday) '更新日
+                ''Sql += "', '"
+                '''Sql += IIf(TxtDenpyoNo.Tag.ToString <> "", "'" & TxtDenpyoNo.Tag & TxtLineNumber.Text & "'", "NULL") '出庫開始サイン（旧：ロケ番号）
+                ''Sql += dsNyuko.Tables(RS).Rows(0)("入庫番号").ToString & dsNyuko.Tables(RS).Rows(0)("行番号").ToString '出庫開始サイン（旧：ロケ番号）
+                ''Sql += "', '"
+                ''Sql += CommonConst.Sire_KBN_Move.ToString '仕入区分
+                ''Sql += "')"
+
                 Sql = "INSERT INTO "
                 Sql += "Public."
                 Sql += "t70_inout("
                 Sql += "会社コード, 入出庫区分, 倉庫コード, 伝票番号, 行番号"
-                Sql += ", 入出庫種別, メーカー, 品名, 型式, 数量, 単位, 入出庫日"
-                ''Sql += ", 取消区分, 更新者, 更新日, ロケ番号, 仕入区分)"                '2020.01.09 DEL
-                Sql += ", 取消区分, 更新者, 更新日, 出庫開始サイン, 仕入区分)"            '2020.01.09 ADD   
-                'Sql += ", 取消区分, 更新者, 更新日, 仕入区分)"
+                Sql += ", 入出庫種別, 引当区分, メーカー, 品名, 型式, 数量, 単位, 備考, 入出庫日"
+                Sql += ", 取消区分, 更新者, 更新日, 出庫開始サイン, 仕入区分, 製造番号, ロケ番号)"
                 Sql += " VALUES('"
-                Sql += frmC01F10_Login.loginValue.BumonCD '会社コード
-                Sql += "', '"
-                Sql += "2" '入出庫区分 1.入庫, 2.出庫
-                Sql += "', '"
-                Sql += TxtWarehouseSince.Tag.ToString '倉庫コード
-                Sql += "', '"
-                Sql += LS '伝票番号
-                Sql += "', '"
-                Sql += "1" '行番号
-                'Sql += dsNyuko.Tables(RS).Rows(0)("入庫番号").ToString '伝票番号
-                'Sql += "', '"
-                'Sql += dsNyuko.Tables(RS).Rows(0)("行番号").ToString '行番号
-                Sql += "', '"
-                Sql += TxtStorageTypeSince.Tag '入出庫種別
-                Sql += "', '"
-                Sql += TxtManufacturer.Text 'メーカー
-                Sql += "', '"
-                Sql += TxtItemName.Text '品名
-                Sql += "', '"
-                Sql += TxtSpec.Text '型式
-                Sql += "', '"
-                Sql += TxtQuantityTo.Text '数量
-                Sql += "', "
+                Sql += frmC01F10_Login.loginValue.BumonCD & "', '"                  '会社コード
+                Sql += "2" & "', '"                                                 '入出庫区分 1.入庫, 2.出庫
+                Sql += TxtWarehouseSince.Tag.ToString & "', '"                      '倉庫コード
+                Sql += LS & "', '"                                                  '伝票番号
+                Sql += "1" & "', '"                                                 '行番号
+                Sql += TxtStorageTypeSince.Tag & "', '"                             '入出庫種別
+                Sql += "0" & "', '"                                                 '引当区分
+                Sql += TxtManufacturer.Text & "', '"                                'メーカー
+                Sql += TxtItemName.Text & "', '"                                    '品名
+                Sql += TxtSpec.Text & "', '"                                        '型式
+                Sql += TxtQuantityTo.Text & "', "                                   '数量
                 Sql += IIf(dsNyuko.Tables(RS).Rows(0)("単位").ToString <> "",
                                "'" & dsNyuko.Tables(RS).Rows(0)("単位").ToString & "'",
-                               "NULL") '単位
-                Sql += ", '"
-                'Sql += UtilClass.formatDatetime(DtpProcessingDate.Text) '入出庫日
-                Sql += inoutDate '入出庫日
-                Sql += "', '"
-                Sql += CommonConst.CANCEL_KBN_ENABLED.ToString '取消区分
-                Sql += "', '"
-                Sql += frmC01F10_Login.loginValue.TantoNM '更新者
-                Sql += "', '"
-                Sql += UtilClass.formatDatetime(dtToday) '更新日
-                Sql += "', '"
-                'Sql += IIf(TxtDenpyoNo.Tag.ToString <> "", "'" & TxtDenpyoNo.Tag & TxtLineNumber.Text & "'", "NULL") '出庫開始サイン（旧：ロケ番号）
-                Sql += dsNyuko.Tables(RS).Rows(0)("入庫番号").ToString & dsNyuko.Tables(RS).Rows(0)("行番号").ToString '出庫開始サイン（旧：ロケ番号）
-                Sql += "', '"
-                Sql += CommonConst.Sire_KBN_Move.ToString '仕入区分
+                               "NULL") & ", '"                                      '単位
+                Sql += "', '"                                                       '備考
+                Sql += inoutDate & "', '"                                           '入出庫日
+                Sql += CommonConst.CANCEL_KBN_ENABLED.ToString & "', '"             '取消区分
+                Sql += frmC01F10_Login.loginValue.TantoNM & "', '"                  '更新者
+                Sql += UtilClass.formatDatetime(dtToday) & "', '"                   '更新日
+                Sql += dsNyuko.Tables(RS).Rows(0)("入庫番号").ToString & dsNyuko.Tables(RS).Rows(0)("行番号").ToString & "', '"    '出庫開始サイン
+                Sql += CommonConst.Sire_KBN_Move.ToString & "', '"                  '仕入区分
+                Sql += TxtSerialNoSince.Text & "', '"                               '製造番号
+                Sql += TxtLocationSince.Text                                        'ロケ番号
                 Sql += "')"
 
                 _db.executeDB(Sql)
@@ -529,59 +719,96 @@ Public Class MovementInput
                 _db.executeDB(Sql)
 
                 't70_inout にデータ登録
+                '2020.03.28 SQL文の整理見直し
+                ''Sql = "INSERT INTO "
+                ''Sql += "Public."
+                ''Sql += "t70_inout("
+                ''Sql += "会社コード, 入出庫区分, 倉庫コード, 伝票番号, 行番号"
+                ''Sql += ", 入出庫種別, メーカー, 品名, 型式, 数量, 単位, 入出庫日"
+                '''Sql += ", 取消区分, 更新者, 更新日, 出庫開始サイン, 仕入区分"       '2020.01.09 REP
+                ''Sql += ", 取消区分, 更新者, 更新日, 仕入区分"
+                ''Sql += " )VALUES('"
+                ''Sql += frmC01F10_Login.loginValue.BumonCD '会社コード
+                ''Sql += "', '"
+                ''Sql += "1" '入出庫区分 1.入庫, 2.出庫
+                ''Sql += "', '"
+                ''Sql += CmWarehouseTo.SelectedValue.ToString '倉庫コード
+                ''Sql += "', '"
+                ''Sql += WH '伝票番号
+                ''Sql += "', '"
+                ''Sql += "1" '行番号
+                ''Sql += "', '"
+
+                '''棚卸増選択時は、入出庫種別を引き継ぐ
+                ''If CmStorageTypeTo.SelectedValue = CommonConst.INOUT_KBN_INCREASE Then
+                ''    Sql += TxtStorageTypeSince.Tag '入出庫種別
+                ''Else
+                ''    Sql += CmStorageTypeTo.SelectedValue '入出庫種別
+                ''End If
+
+                ''Sql += "', '"
+                ''Sql += TxtManufacturer.Text 'メーカー
+                ''Sql += "', '"
+                ''Sql += TxtItemName.Text '品名
+                ''Sql += "', '"
+                ''Sql += TxtSpec.Text '型式
+                ''Sql += "', '"
+                ''Sql += UtilClass.formatNumber(TxtQuantityTo.Text) '数量
+                ''Sql += "', "
+                ''Sql += IIf(dsNyuko.Tables(RS).Rows(0)("単位").ToString <> "",
+                ''                "'" & dsNyuko.Tables(RS).Rows(0)("単位").ToString & "'",
+                ''                "NULL") '単位
+                ''Sql += ", '"
+                '''Sql += UtilClass.formatDatetime(DtpProcessingDate.Text) '入出庫日
+                ''Sql += inoutDate '入出庫日
+                ''Sql += "', '"
+                ''Sql += CommonConst.CANCEL_KBN_ENABLED.ToString '取消区分
+                ''Sql += "', '"
+                ''Sql += frmC01F10_Login.loginValue.TantoNM '更新者
+                ''Sql += "', '"
+                ''Sql += UtilClass.formatDatetime(dtToday) '更新日
+                '''Sql += "', '"
+                '''Sql += dsNyuko.Tables(RS).Rows(0)("入庫番号").ToString & dsNyuko.Tables(RS).Rows(0)("行番号").ToString '出庫開始サイン（旧：ロケ番号）
+                ''Sql += "', '"
+                ''Sql += CommonConst.Sire_KBN_Zaiko.ToString '仕入区分
+                ''Sql += "')"
                 Sql = "INSERT INTO "
                 Sql += "Public."
                 Sql += "t70_inout("
                 Sql += "会社コード, 入出庫区分, 倉庫コード, 伝票番号, 行番号"
-                Sql += ", 入出庫種別, メーカー, 品名, 型式, 数量, 単位, 入出庫日"
-                'Sql += ", 取消区分, 更新者, 更新日, 出庫開始サイン, 仕入区分"       '2020.01.09 REP
-                Sql += ", 取消区分, 更新者, 更新日, 仕入区分"
-                Sql += " )VALUES('"
-                Sql += frmC01F10_Login.loginValue.BumonCD '会社コード
-                Sql += "', '"
-                Sql += "1" '入出庫区分 1.入庫, 2.出庫
-                Sql += "', '"
-                Sql += CmWarehouseTo.SelectedValue.ToString '倉庫コード
-                Sql += "', '"
-                Sql += WH '伝票番号
-                Sql += "', '"
-                Sql += "1" '行番号
-                Sql += "', '"
-
+                Sql += ", 入出庫種別, 引当区分, メーカー, 品名, 型式, 数量, 単位, 備考, 入出庫日"
+                Sql += ", 取消区分, 更新者, 更新日,  仕入区分, 製造番号, ロケ番号)"
+                Sql += " VALUES('"
+                Sql += frmC01F10_Login.loginValue.BumonCD & "', '"                  '会社コード
+                Sql += "1" & "', '"                                                 '入出庫区分 1.入庫, 2.出庫
+                Sql += CmWarehouseTo.SelectedValue.ToString & "', '"                '倉庫コード
+                Sql += WH & "', '"                                                  '伝票番号
+                Sql += "1" & "', '"                                                 '行番号
                 '棚卸増選択時は、入出庫種別を引き継ぐ
                 If CmStorageTypeTo.SelectedValue = CommonConst.INOUT_KBN_INCREASE Then
-                    Sql += TxtStorageTypeSince.Tag '入出庫種別
+                    Sql += TxtStorageTypeSince.Tag & "', '"                         '入出庫種別
                 Else
-                    Sql += CmStorageTypeTo.SelectedValue '入出庫種別
+                    Sql += CmStorageTypeTo.SelectedValue & "', '"
                 End If
+                Sql += "0" & "', '"                                                 '引当区分
+                Sql += TxtManufacturer.Text & "', '"                                'メーカー
+                Sql += TxtItemName.Text & "', '"                                    '品名
+                Sql += TxtSpec.Text & "', '"                                        '型式
 
-                Sql += "', '"
-                Sql += TxtManufacturer.Text 'メーカー
-                Sql += "', '"
-                Sql += TxtItemName.Text '品名
-                Sql += "', '"
-                Sql += TxtSpec.Text '型式
-                Sql += "', '"
-                Sql += UtilClass.formatNumber(TxtQuantityTo.Text) '数量
-                Sql += "', "
+                Sql += TxtQuantityTo.Text & "', "                                   '数量
                 Sql += IIf(dsNyuko.Tables(RS).Rows(0)("単位").ToString <> "",
-                                "'" & dsNyuko.Tables(RS).Rows(0)("単位").ToString & "'",
-                                "NULL") '単位
-                Sql += ", '"
-                'Sql += UtilClass.formatDatetime(DtpProcessingDate.Text) '入出庫日
-                Sql += inoutDate '入出庫日
-                Sql += "', '"
-                Sql += CommonConst.CANCEL_KBN_ENABLED.ToString '取消区分
-                Sql += "', '"
-                Sql += frmC01F10_Login.loginValue.TantoNM '更新者
-                Sql += "', '"
-                Sql += UtilClass.formatDatetime(dtToday) '更新日
-                'Sql += "', '"
-                'Sql += dsNyuko.Tables(RS).Rows(0)("入庫番号").ToString & dsNyuko.Tables(RS).Rows(0)("行番号").ToString '出庫開始サイン（旧：ロケ番号）
-                Sql += "', '"
-                Sql += CommonConst.Sire_KBN_Zaiko.ToString '仕入区分
+                               "'" & dsNyuko.Tables(RS).Rows(0)("単位").ToString & "'",
+                               "NULL") & ", '"                                      '単位
+                Sql += "', '"                                                       '備考
+                Sql += inoutDate & "', '"                                           '入出庫日
+                Sql += CommonConst.CANCEL_KBN_ENABLED.ToString & "', '"             '取消区分
+                Sql += frmC01F10_Login.loginValue.TantoNM & "', '"                  '更新者
+                Sql += UtilClass.formatDatetime(dtToday) & "', '"                   '更新日
+                'Sql += dsNyuko.Tables(RS).Rows(0)("入庫番号").ToString & dsNyuko.Tables(RS).Rows(0)("行番号").ToString & "', '"    '出庫開始サイン
+                Sql += CommonConst.Sire_KBN_Move.ToString & "', '"                  '仕入区分
+                Sql += TxtSerialNoTo.Text & "', '"                                  '製造番号
+                Sql += TxtLocationTo.Text                                           'ロケ番号
                 Sql += "')"
-
                 _db.executeDB(Sql)
 
             End If
@@ -967,6 +1194,19 @@ Public Class MovementInput
             createWarehouseToCombobox(TxtWarehouseSince.Tag.ToString) '対象外にする項目を引き渡す
         End If
 
+        '以下の項目は継承を原則とする
+        TxtSerialNoTo.Text = TxtSerialNoSince.Text       '製造番号
+        TxtOrderNoTo.Text = TxtOrderNoSince.Text         '伝票番号
+        TxtOrderNoTo.Tag = TxtOrderNoSince.Tag           '行番号
+        TxtUnitPriceTo.Text = TxtUnitPrice.Text          '単価
+        txtReceivTo.Text = txtReceivSince.Text           '入庫番号
+        txtReceivTo.Tag = txtReceivSince.Tag             '入庫行番号
+        txtShipTo.Text = txtShipSince.Text               '出庫開始サイン
+        txtUnitTo.Text = txtUnitSince.Text               '単位
+
+        '移動日を新たに取得する（システム的には入力項目としたいところ）
+        TxtGoodsReceiptDateTo.Text = UtilClass.formatDatetime(Today)
+
     End Sub
 
     Private Sub TxtQuantityTo_Leave(sender As Object, e As EventArgs) Handles TxtQuantityTo.Leave
@@ -988,6 +1228,14 @@ Public Class MovementInput
             TxtQuantityTo.Focus()
             Exit Sub
         End If
+
+    End Sub
+
+    Private Sub TableLayoutPanel6_Paint(sender As Object, e As PaintEventArgs) Handles TableLayoutPanel6.Paint
+
+    End Sub
+
+    Private Sub TableLayoutPanel4_Paint(sender As Object, e As PaintEventArgs) Handles TableLayoutPanel4.Paint
 
     End Sub
 End Class
