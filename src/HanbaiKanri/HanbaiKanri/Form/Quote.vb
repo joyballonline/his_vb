@@ -3344,6 +3344,7 @@ Public Class Quote
         CmCurrency.ValueMember = "Value"
 
         Dim Sql As String = " AND 取消区分 = '" & CommonConst.FLAG_ENABLED & "'"
+        Sql += " Order by 採番キー "
 
         Dim ds As DataSet = getDsData("m25_currency", Sql)
 

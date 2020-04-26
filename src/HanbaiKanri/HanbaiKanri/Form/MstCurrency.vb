@@ -105,30 +105,11 @@ Public Class MstCurrency
 
         Dim Sql As String = ""
         Try
-            Sql = " AND "
-            Sql += " ( 名称"
-            Sql += " ILIKE "
-            Sql += "'%"
-            Sql += UtilClass.escapeSql(TxtSearch.Text)
-            Sql += "%'"
-            Sql += " OR "
-            Sql += "略称"
-            Sql += " ILIKE "
-            Sql += "'%"
-            Sql += UtilClass.escapeSql(TxtSearch.Text)
-            Sql += "%'"
-            Sql += " OR "
-            Sql += " 通貨コード "
-            Sql += " ILIKE "
-            Sql += "'%"
-            Sql += UtilClass.escapeSql(TxtSearch.Text)
-            Sql += "%'"
-            Sql += " OR "
-            Sql += "備考"
-            Sql += " ILIKE "
-            Sql += "'%"
-            Sql += UtilClass.escapeSql(TxtSearch.Text)
-            Sql += "%')"
+            Sql = " AND ( 名称 ILIKE '%" & UtilClass.escapeSql(TxtSearch.Text) & "%'"
+            Sql += " OR 略称 ILIKE '%" & UtilClass.escapeSql(TxtSearch.Text) & "%'"
+            Sql += " OR 通貨コード ILIKE '%" & UtilClass.escapeSql(TxtSearch.Text) & "%'"
+            Sql += " OR 備考 ILIKE '%" & UtilClass.escapeSql(TxtSearch.Text) & "%')"
+            Sql += " Order by 採番キー "
 
             Dim ds As DataSet = getDsData("m25_currency", Sql)
 
@@ -251,5 +232,9 @@ Public Class MstCurrency
 
     Private Sub MstWarehouse_Activated(sender As Object, e As EventArgs) Handles MyBase.Activated
         setList()
+    End Sub
+
+    Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
+
     End Sub
 End Class
