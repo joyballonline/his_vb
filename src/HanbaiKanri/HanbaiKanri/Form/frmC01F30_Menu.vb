@@ -2384,7 +2384,7 @@ Public Class frmC01F30_Menu
     End Sub
 
     Private Sub TabProcessingMenu_DoubleClick(sender As Object, e As EventArgs) Handles TabProcessingMenu.DoubleClick
-        Dim f As New InventoryRegistrationBulk(_msgHd, _db, _langHd, Me, CommonConst.STATUS_VIEW)
+        Dim f As New InitialRegistrationBulk(_msgHd, _db, _langHd, Me, CommonConst.STATUS_VIEW)
         f.ShowDialog(Me)
     End Sub
 End Class
