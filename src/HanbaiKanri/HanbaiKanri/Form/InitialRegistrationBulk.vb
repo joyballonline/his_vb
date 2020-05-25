@@ -85,7 +85,10 @@ Public Class InitialRegistrationBulk
     Private Sub MstHanyoue_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then  '英語
-            BtnRegist.Text = "Bulk registration"
+            BtnRegist.Text = "Stock registration"
+            BtnRegist2.Text = "Billing balance registration"
+            BtnRegist3.Text = "Accounts payable registration"
+
             BtnBack.Text = "Back"
 
         Else  '日本語
