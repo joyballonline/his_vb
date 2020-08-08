@@ -639,7 +639,30 @@ Public Class Ordering
             DgvItemList.Rows(i).Cells("入庫数").Value = dsHattyudt.Tables(RS).Rows(i)("入庫数")
             DgvItemList.Rows(i).Cells("未入庫数").Value = dsHattyudt.Tables(RS).Rows(i)("未入庫数")
 
-            tmp_cur += (dsHattyudt.Tables(RS).Rows(i)("発注数量") * dsHattyudt.Tables(RS).Rows(i)("仕入値"))
+            '20200808
+            If CompanyCode = "ZENBI" Then  'ゼンビさんの場合
+
+                '発注品名を取得する
+                Sql = "SELECT t21_i.*"
+                Sql += " FROM  public.t21_hattyu_item t21_i "
+
+                Sql += " WHERE t21_i.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+                Sql += " AND t21_i.発注番号 = '" & PurchaseNo.ToString & "'"
+                Sql += " AND t21_i.発注番号枝番 = '" & PurchaseSuffix.ToString & "'"
+                Sql += " AND t21_i.行番号 = '" & dsHattyudt.Tables(RS).Rows(i)("行番号") & "'"
+
+                Dim dsItem As DataTable = _db.selectDB(Sql, RS, reccnt).Tables(0)
+
+                If dsItem.Rows.Count > 0 Then
+                    'データが存在した場合は品名をセット
+                    DgvItemList.Rows(i).Cells("発注メーカー").Value = dsItem.Rows(0)("メーカー")
+                    DgvItemList.Rows(i).Cells("発注品名").Value = dsItem.Rows(0)("品名")
+                    DgvItemList.Rows(i).Cells("発注型式").Value = dsItem.Rows(0)("型式")
+                End If
+
+            End If
+
+                tmp_cur += (dsHattyudt.Tables(RS).Rows(i)("発注数量") * dsHattyudt.Tables(RS).Rows(i)("仕入値"))
             tmp_cur2 += (dsHattyudt.Tables(RS).Rows(i)("発注数量") * dsHattyudt.Tables(RS).Rows(i)("仕入値_外貨"))
 
         Next
@@ -1514,6 +1537,8 @@ Public Class Ordering
                     'レートの取得
                     strRate = setRate(CmCurrency.SelectedValue.ToString)
 
+#Region "insert_t21_hattyu"
+
                     Sql = "INSERT INTO "
                     Sql += "Public."
                     Sql += "t21_hattyu("
@@ -1636,6 +1661,32 @@ Public Class Ordering
                     Sql += " )"
 
                     _db.executeDB(Sql)
+
+#End Region
+
+                    '20200808
+                    If CompanyCode = "ZENBI" Then  'ゼンビさんの場合
+
+#Region "insert_t21_hattyu_item"
+
+                        '発注品名をinsertする
+                        Sql = ""
+                        Sql += "INSERT INTO Public.t21_hattyu_item"
+                        Sql += " (会社コード, 発注番号, 発注番号枝番, 行番号, メーカー, 品名, 型式) VALUES("
+                        Sql += "'" & CompanyCode & "'"              '会社コード
+                        Sql += ",'" & TxtOrderingNo.Text & "'"      '発注番号
+                        Sql += ",'" & TxtOrderingSuffix.Text & "'"  '発注番号枝番
+                        Sql += "," & DgvItemList.Rows(i).Cells("No").Value.ToString '行番号
+                        Sql += ",'" & DgvItemList.Rows(i).Cells("発注メーカー").Value & "'"  '発注メーカー
+                        Sql += ",'" & DgvItemList.Rows(i).Cells("発注品名").Value & "'"      '発注品名
+                        Sql += ",'" & DgvItemList.Rows(i).Cells("発注型式").Value & "'"      '発注型式
+                        Sql += ")"
+                        _db.executeDB(Sql)
+#End Region
+
+                    End If
+
+
                 Next
 
                 '発注編集時に登録した場合、一つ前の枝番を取り消す
