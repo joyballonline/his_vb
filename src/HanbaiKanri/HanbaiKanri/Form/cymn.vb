@@ -605,6 +605,16 @@ Public Class Cymn
         DgvItemList.Columns("リードタイム単位").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
         DgvItemList.Columns("備考").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
 
+        '20200807
+        If CompanyCode = "ZENBI" Then  'ゼンビさんの場合
+            '発注品名についての入力設定
+            Call mHatyuName()
+        Else
+            '発注品名を非表示
+            DgvItemList.Columns("発注メーカー").Visible = False
+            DgvItemList.Columns("発注品名").Visible = False
+            DgvItemList.Columns("発注型式").Visible = False
+        End If
 
     End Sub
 
@@ -1128,6 +1138,8 @@ Public Class Cymn
                     'レートの取得
                     strRate = setRate(tbl.Rows(i)("仕入通貨"))
 
+#Region "insert t21_hattyu"
+
                     '明細データ更新
                     Sql = ""
                     Sql += "INSERT INTO "
@@ -1219,6 +1231,32 @@ Public Class Cymn
 
                     Sql += ")"
                     _db.executeDB(Sql)
+
+#End Region
+
+
+                    '20200807
+                    If CompanyCode = "ZENBI" Then  'ゼンビさんの場合
+
+#Region "insert t21_hattyu_item"
+
+                        '発注品名をinsertする
+                        Sql = ""
+                        Sql += "INSERT INTO Public.t21_hattyu_item"
+                        Sql += " (会社コード, 発注番号, 発注番号枝番, 行番号, メーカー, 品名, 型式) VALUES("
+                        Sql += "'" & CompanyCode & "'"        '会社コード
+                        Sql += ",'" & CurrentPurchaseNo & "'"  '発注番号
+                        Sql += ",'1'"                          '発注番号枝番
+                        Sql += "," & tbl.Rows(i)("No")         '行番号
+                        Sql += ",'" & tbl.Rows(i)("発注メーカー") & "'"  '発注メーカー
+                        Sql += ",'" & tbl.Rows(i)("発注品名") & "'"      '発注品名
+                        Sql += ",'" & tbl.Rows(i)("発注型式") & "'"      '発注型式
+                        Sql += ")"
+                        _db.executeDB(Sql)
+#End Region
+
+                    End If
+
 
                     cost += tbl.Rows(i)("仕入原価")
                     tmpCuote += tbl.Rows(i)("見積金額_外貨")
@@ -1988,4 +2026,41 @@ Public Class Cymn
 
     End Function
 
+    '20200807 発注品名についての入力設定
+    Private Sub mHatyuName()
+
+        Debug.Print(DgvItemList.Rows(0).Cells("仕入区分").Value)
+
+        DgvItemList.ReadOnly = False  'グリッドを使用可能にする
+
+
+        '行数繰り返す
+        For j As Integer = 0 To DgvItemList.Rows.Count - 1
+
+            '全ての項目を一度入力不可にする
+            For i As Integer = 0 To 38
+                DgvItemList.Rows(j).Cells(i).ReadOnly = True
+            Next
+
+            Dim intShiire As Integer = DgvItemList.Rows(j).Cells("仕入区分").Value
+            If intShiire = CommonConst.Sire_KBN_Sire Then  '受発注の場合
+
+                '発注品名関係のみ入力可能に
+                For i As Integer = 36 To 38
+                    DgvItemList.Rows(j).Cells(i).ReadOnly = False
+                Next
+
+                '背景を白にする
+                DgvItemList.Rows(j).Cells("発注メーカー").Style.BackColor = Color.FromArgb(255, 255, 255)
+                DgvItemList.Rows(j).Cells("発注品名").Style.BackColor = Color.FromArgb(255, 255, 255)
+                DgvItemList.Rows(j).Cells("発注型式").Style.BackColor = Color.FromArgb(255, 255, 255)
+            Else
+
+                '背景を黄色にする
+                DgvItemList.Rows(j).Cells("発注メーカー").Style.BackColor = Color.FromArgb(255, 255, 192)
+                DgvItemList.Rows(j).Cells("発注品名").Style.BackColor = Color.FromArgb(255, 255, 192)
+                DgvItemList.Rows(j).Cells("発注型式").Style.BackColor = Color.FromArgb(255, 255, 192)
+            End If
+        Next
+    End Sub
 End Class
