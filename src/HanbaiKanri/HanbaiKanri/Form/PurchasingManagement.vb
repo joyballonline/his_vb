@@ -108,6 +108,15 @@ Public Class PurchasingManagement
             DgvPurchase.Columns.Add("発注残数", "未登録数量" & vbCrLf & "c=a-b")
             DgvPurchase.Columns.Add("仕入単価", "仕入単価")
             'DgvPurchase.Columns.Add("仕入金額", "仕入金額")
+
+            '20200809
+            If frmC01F10_Login.loginValue.BumonCD = "ZENBI" Then  'ゼンビさんの場合
+
+                DgvPurchase.Columns.Add("仕入メーカー", "仕入メーカー")
+                DgvPurchase.Columns.Add("仕入品名", "仕入品名")
+                DgvPurchase.Columns.Add("仕入型式", "仕入型式")
+            End If
+
         End If
 
         '中央寄せ
@@ -170,6 +179,15 @@ Public Class PurchasingManagement
             DgvHistory.Columns.Add("備考", "備考")
             DgvHistory.Columns.Add("発注行番号", "POLINENO")
             DgvHistory.Columns.Add("取消", "取消")
+
+            '20200809
+            If frmC01F10_Login.loginValue.BumonCD = "ZENBI" Then  'ゼンビさんの場合
+
+                DgvHistory.Columns.Add("仕入メーカー", "仕入メーカー")
+                DgvHistory.Columns.Add("仕入品名", "仕入品名")
+                DgvHistory.Columns.Add("仕入型式", "仕入型式")
+            End If
+
         End If
 
         'DgvHistory.Columns("仕入値").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
@@ -432,6 +450,21 @@ Public Class PurchasingManagement
                 'DgvPurchase.Rows(i).Cells("仕入金額").Value = dsHattyuDt.Tables(RS).Rows(i)("仕入金額_外貨")
                 DgvPurchase.Rows(i).Cells("発注残数").Value = dsHattyuDt.Tables(RS).Rows(i)("発注残数")
                 DgvPurchase.Rows(i).Cells("明細").Value = dsHattyuDt.Tables(RS).Rows(i)("行番号")
+
+
+                '20200809
+                Dim dsItem As DataTable = mSetHatyuItem(No, Suffix, dsHattyuDt.Tables(RS).Rows(i)("行番号"))
+
+                If frmC01F10_Login.loginValue.BumonCD = "ZENBI" Then  'ゼンビさんの場合
+
+                    If dsItem.Rows.Count > 0 Then
+                        'データが存在した場合は品名をセット
+                        DgvPurchase.Rows(i).Cells("仕入メーカー").Value = dsItem.Rows(0)("メーカー")
+                        DgvPurchase.Rows(i).Cells("仕入品名").Value = dsItem.Rows(0)("品名")
+                        DgvPurchase.Rows(i).Cells("仕入型式").Value = dsItem.Rows(0)("型式")
+                    End If
+                End If
+
             Next
 
             '仕入済みエリアに明細を表示
@@ -459,6 +492,20 @@ Public Class PurchasingManagement
                 DgvHistory.Rows(i).Cells("備考").Value = dsSireDt.Tables(RS).Rows(i)("備考")
                 DgvHistory.Rows(i).Cells("発注行番号").Value = dsSireDt.Tables(RS).Rows(i)("発注行番号")
                 DgvHistory.Rows(i).Cells("取消").Value = dsSireDt.Tables(RS).Rows(i)("取消区分")
+
+                '20200809
+                Dim dsItem As DataTable = mSetHatyuItem(No, Suffix, dsHattyuDt.Tables(RS).Rows(i)("行番号"))
+
+                If frmC01F10_Login.loginValue.BumonCD = "ZENBI" Then  'ゼンビさんの場合
+
+                    If dsItem.Rows.Count > 0 Then
+                        'データが存在した場合は品名をセット
+                        DgvHistory.Rows(i).Cells("仕入メーカー").Value = dsItem.Rows(0)("メーカー")
+                        DgvHistory.Rows(i).Cells("仕入品名").Value = dsItem.Rows(0)("品名")
+                        DgvHistory.Rows(i).Cells("仕入型式").Value = dsItem.Rows(0)("型式")
+                    End If
+                End If
+
             Next
 
             '今回仕入エリアに入力エリアを作成
@@ -1181,5 +1228,26 @@ Public Class PurchasingManagement
         Sql += " AND 発注番号枝番 = '" & l_ & "' and 行番号=" + pol_
         Return getDsData("t21_hattyu", Sql)
     End Function
+
+    '20200809 発注品名を取得する
+    Private Function mSetHatyuItem(ByVal No As String, ByVal Suffix As String, ByVal Gyo As Integer) As DataTable
+
+        '20200809
+        If frmC01F10_Login.loginValue.BumonCD = "ZENBI" Then  'ゼンビさんの場合
+
+            '発注品名を取得する
+            Dim Sql As String = "SELECT t21_i.*"
+            Sql += " FROM  public.t21_hattyu_item t21_i "
+
+            Sql += " WHERE t21_i.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+            Sql += " AND t21_i.発注番号 = '" & No & "'"
+            Sql += " AND t21_i.発注番号枝番 = '" & Suffix & "'"
+            Sql += " AND t21_i.行番号 = '" & Gyo & "'"
+
+            mSetHatyuItem = _db.selectDB(Sql, RS, 0).Tables(0)
+        End If
+
+    End Function
+
 
 End Class
