@@ -1906,7 +1906,41 @@ Public Class Ordering
 
             For i As Integer = 0 To DgvItemList.RowCount - 1
                 sheet.Range("A" & currentCnt).Value = num
-                sheet.Range("C" & currentCnt).Value = DgvItemList.Rows(i).Cells("メーカー").Value & vbLf & DgvItemList.Rows(i).Cells("品名").Value & vbLf & DgvItemList.Rows(i).Cells("型式").Value
+
+                '20200811
+                Dim strMaker As String = vbNullString
+                Dim strHinmei As String = vbNullString
+                Dim strKata As String = vbNullString
+
+                If frmC01F10_Login.loginValue.BumonCD = "ZENBI" Then  'ゼンビさんの場合
+                    '発注品名を取得する
+                    Sql = "SELECT t21_i.*"
+                    Sql += " FROM  public.t21_hattyu_item t21_i "
+
+                    Sql += " WHERE t21_i.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+                    Sql += " AND t21_i.発注番号 = '" & TxtOrderingNo.Text & "'"
+                    Sql += " AND t21_i.発注番号枝番 = '" & TxtOrderingSuffix.Text & "'"
+                    Sql += " AND t21_i.行番号 = '" & i + 1 & "'"
+
+                    Dim dsItem As DataTable = _db.selectDB(Sql, RS, reccnt).Tables(0)
+
+                    If dsItem.Rows.Count > 0 Then
+                        'データが存在した場合は品名をセット
+                        strMaker = dsItem.Rows(0)("メーカー")
+                        strHinmei = dsItem.Rows(0)("品名")
+                        strKata = dsItem.Rows(0)("型式")
+                    End If
+
+                End If
+
+                If strMaker = vbNullString Then
+                    strMaker = DgvItemList.Rows(i).Cells("メーカー").Value
+                    strHinmei = DgvItemList.Rows(i).Cells("品名").Value
+                    strKata = DgvItemList.Rows(i).Cells("型式").Value
+                End If
+
+                sheet.Range("C" & currentCnt).Value = strMaker & vbLf & strHinmei & vbLf & strKata
+
                 sheet.Range("L" & currentCnt).Value = DgvItemList.Rows(i).Cells("数量").Value & " " & DgvItemList.Rows(i).Cells("単位").Value
 
                 Dim strValue As String = DgvItemList.Rows(i).Cells("貿易条件").Value
