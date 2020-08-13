@@ -50,6 +50,9 @@ Partial Class PurchaseStockAmountList
         Me.ＶＡＴ = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.間接費 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.仕入計 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.仕入メーカー = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.仕入品名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.仕入型式 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.DgvList, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -92,7 +95,7 @@ Partial Class PurchaseStockAmountList
         Me.DgvList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
         Me.DgvList.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.DgvList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DgvList.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.仕入番号, Me.仕入日, Me.仕入先名, Me.メーカー, Me.品名, Me.型式, Me.数量, Me.単位, Me.仕入単価, Me.ＶＡＴ, Me.間接費, Me.仕入計})
+        Me.DgvList.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.仕入番号, Me.仕入日, Me.仕入先名, Me.メーカー, Me.品名, Me.型式, Me.数量, Me.単位, Me.仕入単価, Me.ＶＡＴ, Me.間接費, Me.仕入計, Me.仕入メーカー, Me.仕入品名, Me.仕入型式})
         Me.DgvList.Location = New System.Drawing.Point(13, 102)
         Me.DgvList.Name = "DgvList"
         Me.DgvList.ReadOnly = True
@@ -274,6 +277,27 @@ Partial Class PurchaseStockAmountList
         Me.仕入計.ReadOnly = True
         Me.仕入計.Width = 66
         '
+        '仕入メーカー
+        '
+        Me.仕入メーカー.HeaderText = "仕入メーカー"
+        Me.仕入メーカー.Name = "仕入メーカー"
+        Me.仕入メーカー.ReadOnly = True
+        Me.仕入メーカー.Width = 91
+        '
+        '仕入品名
+        '
+        Me.仕入品名.HeaderText = "仕入品名"
+        Me.仕入品名.Name = "仕入品名"
+        Me.仕入品名.ReadOnly = True
+        Me.仕入品名.Width = 78
+        '
+        '仕入型式
+        '
+        Me.仕入型式.HeaderText = "仕入型式"
+        Me.仕入型式.Name = "仕入型式"
+        Me.仕入型式.ReadOnly = True
+        Me.仕入型式.Width = 78
+        '
         'PurchaseStockAmountList
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
@@ -320,4 +344,7 @@ Partial Class PurchaseStockAmountList
     Friend WithEvents ＶＡＴ As DataGridViewTextBoxColumn
     Friend WithEvents 間接費 As DataGridViewTextBoxColumn
     Friend WithEvents 仕入計 As DataGridViewTextBoxColumn
+    Friend WithEvents 仕入メーカー As DataGridViewTextBoxColumn
+    Friend WithEvents 仕入品名 As DataGridViewTextBoxColumn
+    Friend WithEvents 仕入型式 As DataGridViewTextBoxColumn
 End Class

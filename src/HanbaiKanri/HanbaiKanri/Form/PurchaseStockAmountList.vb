@@ -126,6 +126,14 @@ Public Class PurchaseStockAmountList
         DgvList.Columns("間接費").DefaultCellStyle.Format = "N2"
         DgvList.Columns("仕入計").DefaultCellStyle.Format = "N2"
 
+
+        '20200811
+        If frmC01F10_Login.loginValue.BumonCD <> "ZENBI" Then  'ゼンビさん以外の場合
+            DgvList.Columns("仕入メーカー").Visible = False
+            DgvList.Columns("仕入品名").Visible = False
+            DgvList.Columns("仕入型式").Visible = False
+        End If
+
     End Sub
 
     '一覧取得
@@ -144,7 +152,7 @@ Public Class PurchaseStockAmountList
 
         DgvList.Rows.Clear()
 
-        Sql = "SELECT t40.仕入日,t40.取消区分,t41.仕入番号,t41.仕入先名,t41.メーカー,t41.品名,t41.型式, t41.仕入数量, t41.単位"
+        Sql = "SELECT t40.仕入日,t40.取消区分,t41.仕入番号,t41.行番号,t41.仕入先名,t41.メーカー,t41.品名,t41.型式, t41.仕入数量, t41.単位"
         Sql += ", t41.仕入値, t40.ＶＡＴ, t41.間接費, t41.仕入金額"
         Sql += " FROM  public.t41_siredt t41 "
         Sql += " INNER JOIN  t40_sirehd t40"
@@ -184,6 +192,33 @@ Public Class PurchaseStockAmountList
                 DgvList.Rows(i).Cells("間接費").Value = Format(ds.Tables(RS).Rows(i)("間接費"), "#,##0.00")
                 DgvList.Rows(i).Cells("仕入計").Value = (ds.Tables(RS).Rows(i)("仕入値") + calVAT + ds.Tables(RS).Rows(i)("間接費")) * ds.Tables(RS).Rows(i)("仕入数量")
                 totalAmount += Format((ds.Tables(RS).Rows(i)("仕入値") + calVAT + ds.Tables(RS).Rows(i)("間接費")) * ds.Tables(RS).Rows(i)("仕入数量"), "#,##0.00")
+
+                '20200811
+                If frmC01F10_Login.loginValue.BumonCD = "ZENBI" Then  'ゼンビさんの場合
+
+                    '発注品名を取得する
+                    Sql = "SELECT t21_i.*"
+                    Sql += " FROM public.t41_siredt t41 "
+                    Sql += " left join public.t21_hattyu_item t21_i "
+                    Sql += "   on t41.発注番号 = t21_i.発注番号"
+                    Sql += "  and t41.発注番号枝番 = t21_i.発注番号枝番"
+                    Sql += "  and t41.発注行番号 = t21_i.行番号"
+
+                    Sql += " WHERE t41.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+                    Sql += " AND t41.仕入番号 = '" & ds.Tables(RS).Rows(i)("仕入番号") & "'"
+                    Sql += " AND t41.行番号 = '" & ds.Tables(RS).Rows(i)("行番号") & "'"
+
+                    'Dim dsItem As DataTable = _db.selectDB(Sql, RS, 0).Tables(0)
+                    Dim dsItem As DataSet = _db.selectDB(Sql, RS, 0)
+
+                    If dsItem.Tables(RS).Rows.Count > 0 Then
+                        'データが存在した場合は品名をセット
+                        DgvList.Rows(i).Cells("仕入メーカー").Value = dsItem.Tables(RS).Rows(0)("メーカー")
+                        DgvList.Rows(i).Cells("仕入品名").Value = dsItem.Tables(RS).Rows(0)("品名")
+                        DgvList.Rows(i).Cells("仕入型式").Value = dsItem.Tables(RS).Rows(0)("型式")
+                    End If
+
+                End If
 
             Next
 
