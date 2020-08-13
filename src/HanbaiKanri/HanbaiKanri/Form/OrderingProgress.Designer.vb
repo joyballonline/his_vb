@@ -22,7 +22,7 @@ Partial Class OrderingProgress
     'コード エディターを使って変更しないでください。
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.BtnOrderView = New System.Windows.Forms.Button()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
@@ -43,19 +43,6 @@ Partial Class OrderingProgress
         Me.BtnOrderSearch = New System.Windows.Forms.Button()
         Me.BtnBack = New System.Windows.Forms.Button()
         Me.DgvCymnhd = New System.Windows.Forms.DataGridView()
-        Me.発注日 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.発注番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.発注番号枝番 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.行番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.メーカー = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.品名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.型式 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.受注番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.受注日 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.仕入登録 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.入庫登録 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.買掛登録 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.支払登録 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.LblMode = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.TxtCustomerPO = New System.Windows.Forms.TextBox()
@@ -71,6 +58,22 @@ Partial Class OrderingProgress
         Me.LblItemName = New System.Windows.Forms.Label()
         Me.txtMaker = New System.Windows.Forms.TextBox()
         Me.lblMaker = New System.Windows.Forms.Label()
+        Me.発注日 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.発注番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.発注番号枝番 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.行番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.メーカー = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.品名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.型式 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.受注番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.受注日 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.仕入登録 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.入庫登録 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.買掛登録 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.支払登録 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.発注メーカー = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.発注品名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.発注型式 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.DgvCymnhd, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.SuspendLayout()
@@ -92,7 +95,7 @@ Partial Class OrderingProgress
         Me.Label10.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.Label10.Location = New System.Drawing.Point(10, 179)
         Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(163, 30)
+        Me.Label10.Size = New System.Drawing.Size(87, 15)
         Me.Label10.TabIndex = 58
         Me.Label10.Text = "■表示形式"
         Me.Label10.Visible = False
@@ -102,7 +105,7 @@ Partial Class OrderingProgress
         Me.Label5.AutoSize = True
         Me.Label5.Location = New System.Drawing.Point(936, 43)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(34, 24)
+        Me.Label5.Size = New System.Drawing.Size(17, 12)
         Me.Label5.TabIndex = 56
         Me.Label5.Text = "～"
         '
@@ -123,7 +126,7 @@ Partial Class OrderingProgress
         Me.TxtSales.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtSales.Location = New System.Drawing.Point(190, 148)
         Me.TxtSales.Name = "TxtSales"
-        Me.TxtSales.Size = New System.Drawing.Size(350, 37)
+        Me.TxtSales.Size = New System.Drawing.Size(350, 22)
         Me.TxtSales.TabIndex = 5
         '
         'Label7
@@ -143,7 +146,7 @@ Partial Class OrderingProgress
         Me.TxtOrderSince.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtOrderSince.Location = New System.Drawing.Point(760, 65)
         Me.TxtOrderSince.Name = "TxtOrderSince"
-        Me.TxtOrderSince.Size = New System.Drawing.Size(369, 37)
+        Me.TxtOrderSince.Size = New System.Drawing.Size(369, 22)
         Me.TxtOrderSince.TabIndex = 6
         '
         'Label8
@@ -175,7 +178,7 @@ Partial Class OrderingProgress
         Me.TxtCustomerCode.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtCustomerCode.Location = New System.Drawing.Point(190, 120)
         Me.TxtCustomerCode.Name = "TxtCustomerCode"
-        Me.TxtCustomerCode.Size = New System.Drawing.Size(350, 37)
+        Me.TxtCustomerCode.Size = New System.Drawing.Size(350, 22)
         Me.TxtCustomerCode.TabIndex = 4
         '
         'Label3
@@ -195,7 +198,7 @@ Partial Class OrderingProgress
         Me.TxtTel.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtTel.Location = New System.Drawing.Point(190, 92)
         Me.TxtTel.Name = "TxtTel"
-        Me.TxtTel.Size = New System.Drawing.Size(350, 37)
+        Me.TxtTel.Size = New System.Drawing.Size(350, 22)
         Me.TxtTel.TabIndex = 3
         '
         'Label2
@@ -215,7 +218,7 @@ Partial Class OrderingProgress
         Me.TxtAddress.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtAddress.Location = New System.Drawing.Point(190, 64)
         Me.TxtAddress.Name = "TxtAddress"
-        Me.TxtAddress.Size = New System.Drawing.Size(350, 37)
+        Me.TxtAddress.Size = New System.Drawing.Size(350, 22)
         Me.TxtAddress.TabIndex = 2
         '
         'Label1
@@ -236,7 +239,7 @@ Partial Class OrderingProgress
         Me.LblConditions.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.LblConditions.Location = New System.Drawing.Point(11, 13)
         Me.LblConditions.Name = "LblConditions"
-        Me.LblConditions.Size = New System.Drawing.Size(163, 30)
+        Me.LblConditions.Size = New System.Drawing.Size(87, 15)
         Me.LblConditions.TabIndex = 40
         Me.LblConditions.Text = "■抽出条件"
         '
@@ -245,7 +248,7 @@ Partial Class OrderingProgress
         Me.TxtCustomerName.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TxtCustomerName.Location = New System.Drawing.Point(190, 36)
         Me.TxtCustomerName.Name = "TxtCustomerName"
-        Me.TxtCustomerName.Size = New System.Drawing.Size(350, 37)
+        Me.TxtCustomerName.Size = New System.Drawing.Size(350, 22)
         Me.TxtCustomerName.TabIndex = 1
         '
         'BtnOrderSearch
@@ -273,15 +276,15 @@ Partial Class OrderingProgress
         Me.DgvCymnhd.AllowUserToAddRows = False
         Me.DgvCymnhd.AllowUserToDeleteRows = False
         Me.DgvCymnhd.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DgvCymnhd.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.発注日, Me.発注番号, Me.発注番号枝番, Me.行番号, Me.メーカー, Me.品名, Me.型式, Me.受注番号, Me.受注日, Me.仕入登録, Me.入庫登録, Me.買掛登録, Me.支払登録})
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("MS UI Gothic", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DgvCymnhd.DefaultCellStyle = DataGridViewCellStyle2
+        Me.DgvCymnhd.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.発注日, Me.発注番号, Me.発注番号枝番, Me.行番号, Me.メーカー, Me.品名, Me.型式, Me.受注番号, Me.受注日, Me.仕入登録, Me.入庫登録, Me.買掛登録, Me.支払登録, Me.発注メーカー, Me.発注品名, Me.発注型式})
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("MS UI Gothic", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DgvCymnhd.DefaultCellStyle = DataGridViewCellStyle1
         Me.DgvCymnhd.Location = New System.Drawing.Point(13, 238)
         Me.DgvCymnhd.Name = "DgvCymnhd"
         Me.DgvCymnhd.ReadOnly = True
@@ -290,6 +293,185 @@ Partial Class OrderingProgress
         Me.DgvCymnhd.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DgvCymnhd.Size = New System.Drawing.Size(1326, 265)
         Me.DgvCymnhd.TabIndex = 15
+        '
+        'LblMode
+        '
+        Me.LblMode.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblMode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblMode.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblMode.Location = New System.Drawing.Point(1106, 9)
+        Me.LblMode.Name = "LblMode"
+        Me.LblMode.Size = New System.Drawing.Size(233, 22)
+        Me.LblMode.TabIndex = 67
+        Me.LblMode.Text = "モード"
+        Me.LblMode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label11
+        '
+        Me.Label11.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.Label11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Label11.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.Label11.Location = New System.Drawing.Point(584, 93)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(170, 22)
+        Me.Label11.TabIndex = 97
+        Me.Label11.Text = "客先番号"
+        Me.Label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'TxtCustomerPO
+        '
+        Me.TxtCustomerPO.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtCustomerPO.Location = New System.Drawing.Point(760, 93)
+        Me.TxtCustomerPO.Name = "TxtCustomerPO"
+        Me.TxtCustomerPO.Size = New System.Drawing.Size(369, 22)
+        Me.TxtCustomerPO.TabIndex = 10
+        '
+        'dtOrderDateSince
+        '
+        Me.dtOrderDateSince.CalendarFont = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.dtOrderDateSince.CustomFormat = ""
+        Me.dtOrderDateSince.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.dtOrderDateSince.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.dtOrderDateSince.Location = New System.Drawing.Point(760, 36)
+        Me.dtOrderDateSince.MinDate = New Date(2000, 1, 1, 0, 0, 0, 0)
+        Me.dtOrderDateSince.Name = "dtOrderDateSince"
+        Me.dtOrderDateSince.Size = New System.Drawing.Size(170, 22)
+        Me.dtOrderDateSince.TabIndex = 331
+        Me.dtOrderDateSince.Value = New Date(2019, 1, 1, 0, 0, 0, 0)
+        '
+        'dtOrderDateUntil
+        '
+        Me.dtOrderDateUntil.CalendarFont = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.dtOrderDateUntil.CustomFormat = ""
+        Me.dtOrderDateUntil.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.dtOrderDateUntil.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.dtOrderDateUntil.Location = New System.Drawing.Point(959, 37)
+        Me.dtOrderDateUntil.MinDate = New Date(2000, 1, 1, 0, 0, 0, 0)
+        Me.dtOrderDateUntil.Name = "dtOrderDateUntil"
+        Me.dtOrderDateUntil.Size = New System.Drawing.Size(170, 22)
+        Me.dtOrderDateUntil.TabIndex = 332
+        Me.dtOrderDateUntil.Value = New Date(2019, 1, 1, 0, 0, 0, 0)
+        '
+        'TableLayoutPanel1
+        '
+        Me.TableLayoutPanel1.BackColor = System.Drawing.Color.Transparent
+        Me.TableLayoutPanel1.ColumnCount = 5
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 22.0!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TableLayoutPanel1.Controls.Add(Me.RbtnSlip, 0, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.RbtnDetails, 1, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.ChkCancelData, 4, 0)
+        Me.TableLayoutPanel1.Location = New System.Drawing.Point(13, 203)
+        Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
+        Me.TableLayoutPanel1.RowCount = 1
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(834, 29)
+        Me.TableLayoutPanel1.TabIndex = 333
+        '
+        'RbtnSlip
+        '
+        Me.RbtnSlip.Anchor = System.Windows.Forms.AnchorStyles.Left
+        Me.RbtnSlip.AutoSize = True
+        Me.RbtnSlip.Checked = True
+        Me.RbtnSlip.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.RbtnSlip.Location = New System.Drawing.Point(3, 5)
+        Me.RbtnSlip.Name = "RbtnSlip"
+        Me.RbtnSlip.Size = New System.Drawing.Size(89, 19)
+        Me.RbtnSlip.TabIndex = 11
+        Me.RbtnSlip.TabStop = True
+        Me.RbtnSlip.Text = "伝票単位"
+        Me.RbtnSlip.UseVisualStyleBackColor = True
+        Me.RbtnSlip.Visible = False
+        '
+        'RbtnDetails
+        '
+        Me.RbtnDetails.Anchor = System.Windows.Forms.AnchorStyles.Left
+        Me.RbtnDetails.AutoSize = True
+        Me.RbtnDetails.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.RbtnDetails.Location = New System.Drawing.Point(98, 5)
+        Me.RbtnDetails.Name = "RbtnDetails"
+        Me.RbtnDetails.Size = New System.Drawing.Size(89, 19)
+        Me.RbtnDetails.TabIndex = 12
+        Me.RbtnDetails.Text = "明細単位"
+        Me.RbtnDetails.UseVisualStyleBackColor = True
+        Me.RbtnDetails.Visible = False
+        '
+        'ChkCancelData
+        '
+        Me.ChkCancelData.Anchor = System.Windows.Forms.AnchorStyles.Left
+        Me.ChkCancelData.AutoSize = True
+        Me.ChkCancelData.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.ChkCancelData.Location = New System.Drawing.Point(215, 5)
+        Me.ChkCancelData.Name = "ChkCancelData"
+        Me.ChkCancelData.Size = New System.Drawing.Size(139, 19)
+        Me.ChkCancelData.TabIndex = 14
+        Me.ChkCancelData.Text = "取消データを含める"
+        Me.ChkCancelData.UseVisualStyleBackColor = True
+        Me.ChkCancelData.Visible = False
+        '
+        'TxtSpec
+        '
+        Me.TxtSpec.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtSpec.Location = New System.Drawing.Point(760, 178)
+        Me.TxtSpec.Name = "TxtSpec"
+        Me.TxtSpec.Size = New System.Drawing.Size(369, 22)
+        Me.TxtSpec.TabIndex = 13
+        '
+        'LblSpec
+        '
+        Me.LblSpec.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblSpec.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblSpec.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblSpec.Location = New System.Drawing.Point(584, 178)
+        Me.LblSpec.Name = "LblSpec"
+        Me.LblSpec.Size = New System.Drawing.Size(170, 22)
+        Me.LblSpec.TabIndex = 336
+        Me.LblSpec.Text = "型式"
+        Me.LblSpec.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'TxtItemName
+        '
+        Me.TxtItemName.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TxtItemName.Location = New System.Drawing.Point(760, 150)
+        Me.TxtItemName.Name = "TxtItemName"
+        Me.TxtItemName.Size = New System.Drawing.Size(369, 22)
+        Me.TxtItemName.TabIndex = 12
+        '
+        'LblItemName
+        '
+        Me.LblItemName.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblItemName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblItemName.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblItemName.Location = New System.Drawing.Point(584, 150)
+        Me.LblItemName.Name = "LblItemName"
+        Me.LblItemName.Size = New System.Drawing.Size(170, 22)
+        Me.LblItemName.TabIndex = 334
+        Me.LblItemName.Text = "品名"
+        Me.LblItemName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'txtMaker
+        '
+        Me.txtMaker.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.txtMaker.Location = New System.Drawing.Point(760, 121)
+        Me.txtMaker.Name = "txtMaker"
+        Me.txtMaker.Size = New System.Drawing.Size(369, 22)
+        Me.txtMaker.TabIndex = 11
+        '
+        'lblMaker
+        '
+        Me.lblMaker.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.lblMaker.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lblMaker.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.lblMaker.Location = New System.Drawing.Point(584, 121)
+        Me.lblMaker.Name = "lblMaker"
+        Me.lblMaker.Size = New System.Drawing.Size(170, 22)
+        Me.lblMaker.TabIndex = 348
+        Me.lblMaker.Text = "メーカー"
+        Me.lblMaker.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         '発注日
         '
@@ -369,184 +551,23 @@ Partial Class OrderingProgress
         Me.支払登録.Name = "支払登録"
         Me.支払登録.ReadOnly = True
         '
-        'LblMode
+        '発注メーカー
         '
-        Me.LblMode.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.LblMode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LblMode.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblMode.Location = New System.Drawing.Point(1106, 9)
-        Me.LblMode.Name = "LblMode"
-        Me.LblMode.Size = New System.Drawing.Size(233, 22)
-        Me.LblMode.TabIndex = 67
-        Me.LblMode.Text = "モード"
-        Me.LblMode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.発注メーカー.HeaderText = "発注メーカー"
+        Me.発注メーカー.Name = "発注メーカー"
+        Me.発注メーカー.ReadOnly = True
         '
-        'Label11
+        '発注品名
         '
-        Me.Label11.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.Label11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label11.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label11.Location = New System.Drawing.Point(584, 93)
-        Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(170, 22)
-        Me.Label11.TabIndex = 97
-        Me.Label11.Text = "客先番号"
-        Me.Label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.発注品名.HeaderText = "発注品名"
+        Me.発注品名.Name = "発注品名"
+        Me.発注品名.ReadOnly = True
         '
-        'TxtCustomerPO
+        '発注型式
         '
-        Me.TxtCustomerPO.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtCustomerPO.Location = New System.Drawing.Point(760, 93)
-        Me.TxtCustomerPO.Name = "TxtCustomerPO"
-        Me.TxtCustomerPO.Size = New System.Drawing.Size(369, 37)
-        Me.TxtCustomerPO.TabIndex = 10
-        '
-        'dtOrderDateSince
-        '
-        Me.dtOrderDateSince.CalendarFont = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.dtOrderDateSince.CustomFormat = ""
-        Me.dtOrderDateSince.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.dtOrderDateSince.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.dtOrderDateSince.Location = New System.Drawing.Point(760, 36)
-        Me.dtOrderDateSince.MinDate = New Date(2000, 1, 1, 0, 0, 0, 0)
-        Me.dtOrderDateSince.Name = "dtOrderDateSince"
-        Me.dtOrderDateSince.Size = New System.Drawing.Size(170, 37)
-        Me.dtOrderDateSince.TabIndex = 331
-        Me.dtOrderDateSince.Value = New Date(2019, 1, 1, 0, 0, 0, 0)
-        '
-        'dtOrderDateUntil
-        '
-        Me.dtOrderDateUntil.CalendarFont = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.dtOrderDateUntil.CustomFormat = ""
-        Me.dtOrderDateUntil.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.dtOrderDateUntil.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.dtOrderDateUntil.Location = New System.Drawing.Point(959, 37)
-        Me.dtOrderDateUntil.MinDate = New Date(2000, 1, 1, 0, 0, 0, 0)
-        Me.dtOrderDateUntil.Name = "dtOrderDateUntil"
-        Me.dtOrderDateUntil.Size = New System.Drawing.Size(170, 37)
-        Me.dtOrderDateUntil.TabIndex = 332
-        Me.dtOrderDateUntil.Value = New Date(2019, 1, 1, 0, 0, 0, 0)
-        '
-        'TableLayoutPanel1
-        '
-        Me.TableLayoutPanel1.BackColor = System.Drawing.Color.Transparent
-        Me.TableLayoutPanel1.ColumnCount = 5
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 22.0!))
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
-        Me.TableLayoutPanel1.Controls.Add(Me.RbtnSlip, 0, 0)
-        Me.TableLayoutPanel1.Controls.Add(Me.RbtnDetails, 1, 0)
-        Me.TableLayoutPanel1.Controls.Add(Me.ChkCancelData, 4, 0)
-        Me.TableLayoutPanel1.Location = New System.Drawing.Point(13, 203)
-        Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
-        Me.TableLayoutPanel1.RowCount = 1
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(834, 29)
-        Me.TableLayoutPanel1.TabIndex = 333
-        '
-        'RbtnSlip
-        '
-        Me.RbtnSlip.Anchor = System.Windows.Forms.AnchorStyles.Left
-        Me.RbtnSlip.AutoSize = True
-        Me.RbtnSlip.Checked = True
-        Me.RbtnSlip.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.RbtnSlip.Location = New System.Drawing.Point(3, 3)
-        Me.RbtnSlip.Name = "RbtnSlip"
-        Me.RbtnSlip.Size = New System.Drawing.Size(164, 23)
-        Me.RbtnSlip.TabIndex = 11
-        Me.RbtnSlip.TabStop = True
-        Me.RbtnSlip.Text = "伝票単位"
-        Me.RbtnSlip.UseVisualStyleBackColor = True
-        Me.RbtnSlip.Visible = False
-        '
-        'RbtnDetails
-        '
-        Me.RbtnDetails.Anchor = System.Windows.Forms.AnchorStyles.Left
-        Me.RbtnDetails.AutoSize = True
-        Me.RbtnDetails.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.RbtnDetails.Location = New System.Drawing.Point(173, 3)
-        Me.RbtnDetails.Name = "RbtnDetails"
-        Me.RbtnDetails.Size = New System.Drawing.Size(164, 23)
-        Me.RbtnDetails.TabIndex = 12
-        Me.RbtnDetails.Text = "明細単位"
-        Me.RbtnDetails.UseVisualStyleBackColor = True
-        Me.RbtnDetails.Visible = False
-        '
-        'ChkCancelData
-        '
-        Me.ChkCancelData.Anchor = System.Windows.Forms.AnchorStyles.Left
-        Me.ChkCancelData.AutoSize = True
-        Me.ChkCancelData.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.ChkCancelData.Location = New System.Drawing.Point(365, 3)
-        Me.ChkCancelData.Name = "ChkCancelData"
-        Me.ChkCancelData.Size = New System.Drawing.Size(274, 23)
-        Me.ChkCancelData.TabIndex = 14
-        Me.ChkCancelData.Text = "取消データを含める"
-        Me.ChkCancelData.UseVisualStyleBackColor = True
-        Me.ChkCancelData.Visible = False
-        '
-        'TxtSpec
-        '
-        Me.TxtSpec.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtSpec.Location = New System.Drawing.Point(760, 178)
-        Me.TxtSpec.Name = "TxtSpec"
-        Me.TxtSpec.Size = New System.Drawing.Size(369, 37)
-        Me.TxtSpec.TabIndex = 13
-        '
-        'LblSpec
-        '
-        Me.LblSpec.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.LblSpec.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LblSpec.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblSpec.Location = New System.Drawing.Point(584, 178)
-        Me.LblSpec.Name = "LblSpec"
-        Me.LblSpec.Size = New System.Drawing.Size(170, 22)
-        Me.LblSpec.TabIndex = 336
-        Me.LblSpec.Text = "型式"
-        Me.LblSpec.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'TxtItemName
-        '
-        Me.TxtItemName.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TxtItemName.Location = New System.Drawing.Point(760, 150)
-        Me.TxtItemName.Name = "TxtItemName"
-        Me.TxtItemName.Size = New System.Drawing.Size(369, 37)
-        Me.TxtItemName.TabIndex = 12
-        '
-        'LblItemName
-        '
-        Me.LblItemName.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.LblItemName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LblItemName.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LblItemName.Location = New System.Drawing.Point(584, 150)
-        Me.LblItemName.Name = "LblItemName"
-        Me.LblItemName.Size = New System.Drawing.Size(170, 22)
-        Me.LblItemName.TabIndex = 334
-        Me.LblItemName.Text = "品名"
-        Me.LblItemName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'txtMaker
-        '
-        Me.txtMaker.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.txtMaker.Location = New System.Drawing.Point(760, 121)
-        Me.txtMaker.Name = "txtMaker"
-        Me.txtMaker.Size = New System.Drawing.Size(369, 37)
-        Me.txtMaker.TabIndex = 11
-        '
-        'lblMaker
-        '
-        Me.lblMaker.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.lblMaker.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lblMaker.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.lblMaker.Location = New System.Drawing.Point(584, 121)
-        Me.lblMaker.Name = "lblMaker"
-        Me.lblMaker.Size = New System.Drawing.Size(170, 22)
-        Me.lblMaker.TabIndex = 348
-        Me.lblMaker.Text = "メーカー"
-        Me.lblMaker.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.発注型式.HeaderText = "発注型式"
+        Me.発注型式.Name = "発注型式"
+        Me.発注型式.ReadOnly = True
         '
         'OrderingProgress
         '
@@ -643,4 +664,7 @@ Partial Class OrderingProgress
     Friend WithEvents 入庫登録 As DataGridViewTextBoxColumn
     Friend WithEvents 買掛登録 As DataGridViewTextBoxColumn
     Friend WithEvents 支払登録 As DataGridViewTextBoxColumn
+    Friend WithEvents 発注メーカー As DataGridViewTextBoxColumn
+    Friend WithEvents 発注品名 As DataGridViewTextBoxColumn
+    Friend WithEvents 発注型式 As DataGridViewTextBoxColumn
 End Class

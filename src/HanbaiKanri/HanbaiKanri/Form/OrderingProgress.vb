@@ -91,6 +91,14 @@ Public Class OrderingProgress
         End If
 
 
+        '20200811
+        If frmC01F10_Login.loginValue.BumonCD <> "ZENBI" Then  'ゼンビさん以外の場合
+            DgvCymnhd.Columns("発注メーカー").Visible = False
+            DgvCymnhd.Columns("発注品名").Visible = False
+            DgvCymnhd.Columns("発注型式").Visible = False
+        End If
+
+
         '検索（Date）の初期値
         dtOrderDateSince.Value = DateAdd("d", CommonConst.SINCE_DEFAULT_DAY, DateTime.Today)
         dtOrderDateUntil.Value = DateTime.Today
@@ -346,6 +354,31 @@ Public Class OrderingProgress
                             DgvCymnhd.Rows(i).Cells("支払登録").Value = ""
                     End If
                 End If
+
+
+                '20200811
+                If frmC01F10_Login.loginValue.BumonCD = "ZENBI" Then  'ゼンビさんの場合
+
+                    '発注品名を取得する
+                    Sql = "SELECT t21_i.*"
+                    Sql += " FROM  public.t21_hattyu_item t21_i "
+
+                    Sql += " WHERE t21_i.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+                    Sql += " AND t21_i.発注番号 = '" & ds.Tables(RS).Rows(i)("発注番号") & "'"
+                    Sql += " AND t21_i.発注番号枝番 = '" & ds.Tables(RS).Rows(i)("発注番号枝番") & "'"
+                    Sql += " AND t21_i.行番号 = '" & ds.Tables(RS).Rows(i)("行番号") & "'"
+
+                    Dim dsItem As DataTable = _db.selectDB(Sql, RS, reccnt).Tables(0)
+
+                    If dsItem.Rows.Count > 0 Then
+                        'データが存在した場合は品名をセット
+                        DgvCymnhd.Rows(i).Cells("発注メーカー").Value = dsItem.Rows(0)("メーカー")
+                        DgvCymnhd.Rows(i).Cells("発注品名").Value = dsItem.Rows(0)("品名")
+                        DgvCymnhd.Rows(i).Cells("発注型式").Value = dsItem.Rows(0)("型式")
+                    End If
+
+                End If
+
 
                 ds_seikyu = Nothing
 
