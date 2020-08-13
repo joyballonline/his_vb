@@ -243,6 +243,11 @@ Public Class Ordering
         DgvItemList.Columns("仕入金額").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
         DgvItemList.Columns("仕入金額_外貨").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
 
+        '20200811
+        DgvItemList.Columns("発注メーカー").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvItemList.Columns("発注品名").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DgvItemList.Columns("発注型式").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+
 
         '翻訳
         If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
@@ -345,6 +350,11 @@ Public Class Ordering
             DgvItemList.Columns("リードタイム単位").HeaderText = "LeadTimeUnit"
             DgvItemList.Columns("貿易条件").HeaderText = "TradeTerms"
             DgvItemList.Columns("備考").HeaderText = "Remarks"
+
+            '20200811
+            DgvItemList.Columns("発注メーカー").HeaderText = "OrderManufacturer"
+            DgvItemList.Columns("発注品名").HeaderText = "OrderItemName"
+            DgvItemList.Columns("発注型式").HeaderText = "OrderSpec"
 
         Else
             '日本語用見出し
@@ -662,7 +672,7 @@ Public Class Ordering
 
             End If
 
-                tmp_cur += (dsHattyudt.Tables(RS).Rows(i)("発注数量") * dsHattyudt.Tables(RS).Rows(i)("仕入値"))
+            tmp_cur += (dsHattyudt.Tables(RS).Rows(i)("発注数量") * dsHattyudt.Tables(RS).Rows(i)("仕入値"))
             tmp_cur2 += (dsHattyudt.Tables(RS).Rows(i)("発注数量") * dsHattyudt.Tables(RS).Rows(i)("仕入値_外貨"))
 
         Next
