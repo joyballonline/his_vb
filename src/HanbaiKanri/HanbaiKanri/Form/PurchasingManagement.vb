@@ -97,6 +97,15 @@ Public Class PurchasingManagement
             DgvPurchase.Columns.Add("発注残数", "UnregisteredQuantity" & vbCrLf & "c=a-b")
             DgvPurchase.Columns.Add("仕入単価", "PurchaseUnitPrice")
             'DgvPurchase.Columns.Add("仕入金額", "PurchaseAmount")
+
+            '20200811
+            If frmC01F10_Login.loginValue.BumonCD = "ZENBI" Then  'ゼンビさんの場合
+
+                DgvPurchase.Columns.Add("仕入メーカー", "PurchaseManufacturer")
+                DgvPurchase.Columns.Add("仕入品名", "PurchaseItemName")
+                DgvPurchase.Columns.Add("仕入型式", "PurchaseSpec")
+            End If
+
         Else
             DgvPurchase.Columns.Add("明細", "行No")
             DgvPurchase.Columns.Add("メーカー", "メーカー")
@@ -163,6 +172,15 @@ Public Class PurchasingManagement
             DgvHistory.Columns.Add("備考", "Remarks")
             DgvHistory.Columns.Add("発注行番号", "POLINENO")
             DgvHistory.Columns.Add("取消", "DEL")
+
+            '20200811
+            If frmC01F10_Login.loginValue.BumonCD = "ZENBI" Then  'ゼンビさんの場合
+
+                DgvHistory.Columns.Add("仕入メーカー", "PurchaseManufacturer")
+                DgvHistory.Columns.Add("仕入品名", "PurchaseItemName")
+                DgvHistory.Columns.Add("仕入型式", "PurchaseSpec")
+            End If
+
         Else
             DgvHistory.Columns.Add("No", "No")
             DgvHistory.Columns.Add("仕入番号", "仕入番号")
@@ -494,7 +512,7 @@ Public Class PurchasingManagement
                 DgvHistory.Rows(i).Cells("取消").Value = dsSireDt.Tables(RS).Rows(i)("取消区分")
 
                 '20200809
-                Dim dsItem As DataTable = mSetHatyuItem(No, Suffix, dsHattyuDt.Tables(RS).Rows(i)("行番号"))
+                Dim dsItem As DataTable = mSetHatyuItem(No, Suffix, dsSireDt.Tables(RS).Rows(i)("行番号"))
 
                 If frmC01F10_Login.loginValue.BumonCD = "ZENBI" Then  'ゼンビさんの場合
 
