@@ -232,6 +232,13 @@ Public Class OrderingProgress
             DgvCymnhd.Columns("買掛登録").HeaderText = "AccountsPayableRegistration"
             DgvCymnhd.Columns("支払登録").HeaderText = "PaymentRegistration"
 
+            '20200811
+            If frmC01F10_Login.loginValue.BumonCD = "ZENBI" Then
+
+                DgvCymnhd.Columns("発注メーカー").HeaderText = "PurchaseMaker"
+                DgvCymnhd.Columns("発注品名").HeaderText = "PurchaseProductName"
+                DgvCymnhd.Columns("発注型式").HeaderText = "PurchaseModel"
+            End If
         End If
 
         mSet_Language = True
