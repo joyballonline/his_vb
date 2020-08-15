@@ -173,6 +173,13 @@ Public Class Receipt
             DgvPurchase.Columns.Add("仕入金額", "PurchaseAmount")
             DgvPurchase.Columns.Add("発注残数", "NumberOfOrderRemaining")
             DgvPurchase.Columns.Add("更新日", "UpdateDate")
+
+            '20200815
+            If frmC01F10_Login.loginValue.BumonCD = "ZENBI" Then  'ゼンビさんの場合
+                DgvPurchase.Columns.Add("仕入メーカー", "PurchaseManufacturer")
+                DgvPurchase.Columns.Add("仕入品名", "PurchaseItemName")
+                DgvPurchase.Columns.Add("仕入型式", "PurchaseSpec")
+            End If
         Else
             DgvPurchase.Columns.Add("明細", "行No")
             DgvPurchase.Columns.Add("行番号", "行番号") '未入庫数チェック用
@@ -195,7 +202,7 @@ Public Class Receipt
             '20200809
             If frmC01F10_Login.loginValue.BumonCD = "ZENBI" Then  'ゼンビさんの場合
 
-                DgvPurchase.Columns.Add("仕入メーカー", "発注メーカー")
+                DgvPurchase.Columns.Add("仕入メーカー", "仕入メーカー")
                 DgvPurchase.Columns.Add("仕入品名", "仕入品名")
                 DgvPurchase.Columns.Add("仕入型式", "仕入型式")
             End If
@@ -237,6 +244,13 @@ Public Class Receipt
         DgvPurchase.Columns("未入庫数").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
         DgvPurchase.Columns("仕入単価").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
 
+        '20200815
+        If frmC01F10_Login.loginValue.BumonCD = "ZENBI" Then  'ゼンビさんの場合
+            DgvPurchase.Columns("仕入メーカー").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+            DgvPurchase.Columns("仕入品名").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+            DgvPurchase.Columns("仕入型式").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        End If
+
 #End Region
 
 
@@ -261,6 +275,14 @@ Public Class Receipt
             'DgvHistory.Columns.Add("引当区分", "AssignClassification")
             DgvHistory.Columns.Add("入庫日", "GoodsReceiptDate")
             DgvHistory.Columns.Add("備考", "Remarks")
+
+            '20200815
+            If frmC01F10_Login.loginValue.BumonCD = "ZENBI" Then  'ゼンビさんの場合
+
+                DgvHistory.Columns.Add("仕入メーカー", "PurchaseManufacturer")
+                DgvHistory.Columns.Add("仕入品名", "PurchaseItemName")
+                DgvHistory.Columns.Add("仕入型式", "PurchaseSpec")
+            End If
 
         Else
             DgvHistory.Columns.Add("No", "No")
