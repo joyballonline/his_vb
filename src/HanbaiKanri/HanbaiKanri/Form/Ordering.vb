@@ -244,10 +244,11 @@ Public Class Ordering
         DgvItemList.Columns("仕入金額_外貨").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
 
         '20200811
-        DgvItemList.Columns("発注メーカー").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
-        DgvItemList.Columns("発注品名").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
-        DgvItemList.Columns("発注型式").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
-
+        If CompanyCode = "ZENBI" Then  'ゼンビさんの場合
+            DgvItemList.Columns("発注メーカー").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+            DgvItemList.Columns("発注品名").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+            DgvItemList.Columns("発注型式").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        End If
 
         '翻訳
         If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
@@ -352,13 +353,15 @@ Public Class Ordering
             DgvItemList.Columns("備考").HeaderText = "Remarks"
 
             '20200811
-            DgvItemList.Columns("発注メーカー").HeaderText = "OrderManufacturer"
-            DgvItemList.Columns("発注品名").HeaderText = "OrderItemName"
-            DgvItemList.Columns("発注型式").HeaderText = "OrderSpec"
+            If CompanyCode = "ZENBI" Then  'ゼンビさんの場合
+                DgvItemList.Columns("発注メーカー").HeaderText = "OrderManufacturer"
+                DgvItemList.Columns("発注品名").HeaderText = "OrderItemName"
+                DgvItemList.Columns("発注型式").HeaderText = "OrderSpec"
+            End If
 
         Else
-            '日本語用見出し
-            DgvItemList.Columns("数量").HeaderText = "数量" & vbCrLf & "a"
+                '日本語用見出し
+                DgvItemList.Columns("数量").HeaderText = "数量" & vbCrLf & "a"
             DgvItemList.Columns("仕入単価_外貨").HeaderText = "仕入単価" & vbCrLf & "（原通貨）"
             DgvItemList.Columns("仕入単価").HeaderText = "仕入単価(" & setBaseCurrency() & ")" & vbCrLf & "b"
             DgvItemList.Columns("仕入原価_外貨").HeaderText = "仕入原価" & vbCrLf & "(原通貨)"
