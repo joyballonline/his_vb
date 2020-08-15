@@ -101,6 +101,13 @@ Public Class PurchaseStockAmountList
             DgvList.Columns("間接費").HeaderText = "Overhead"
             DgvList.Columns("仕入計").HeaderText = "PurchaseAmount"
 
+            '20200815
+            If frmC01F10_Login.loginValue.BumonCD = "ZENBI" Then  'ゼンビさんの場合
+                DgvList.Columns("仕入メーカー").HeaderText = "PurchaseManufacturer"
+                DgvList.Columns("仕入品名").HeaderText = "PurchaseItemName"
+                DgvList.Columns("仕入型式").HeaderText = "PurchaseSpec"
+            End If
+
             Label8.Text = "SalesDate"
             BtnExcelOutput.Text = "ExcelOutput"
             BtnBack.Text = "Back"
