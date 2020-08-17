@@ -512,7 +512,7 @@ Public Class PurchasingManagement
                 DgvHistory.Rows(i).Cells("取消").Value = dsSireDt.Tables(RS).Rows(i)("取消区分")
 
                 '20200809
-                Dim dsItem As DataTable = mSetHatyuItem(No, Suffix, dsSireDt.Tables(RS).Rows(i)("行番号"))
+                Dim dsItem As DataTable = mSetHatyuItem(No, Suffix, dsSireDt.Tables(RS).Rows(i)("発注行番号"))
 
                 If frmC01F10_Login.loginValue.BumonCD = "ZENBI" Then  'ゼンビさんの場合
 
