@@ -248,6 +248,10 @@ Public Class Ordering
             DgvItemList.Columns("発注メーカー").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
             DgvItemList.Columns("発注品名").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
             DgvItemList.Columns("発注型式").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        Else
+            DgvItemList.Columns("発注メーカー").Visible = False
+            DgvItemList.Columns("発注品名").Visible = False
+            DgvItemList.Columns("発注型式").Visible = False
         End If
 
         '翻訳
