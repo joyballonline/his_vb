@@ -341,6 +341,12 @@ Public Class Cymn
             DgvItemList.Rows(index).Cells("備考").Value = ds3.Tables(RS).Rows(index)("備考")
             'DgvItemList.Rows(index).Cells(28).Value = "" 'ステータス？
 
+            '20200817
+            DgvItemList.Rows(index).Cells("発注メーカー").Value = ds3.Tables(RS).Rows(index)("メーカー")
+            DgvItemList.Rows(index).Cells("発注品名").Value = ds3.Tables(RS).Rows(index)("品名")
+            DgvItemList.Rows(index).Cells("発注型式").Value = ds3.Tables(RS).Rows(index)("型式")
+
+
             tmp2 = ds3.Tables(RS).Rows(index)("関税率")
             tmp2 = tmp2 / 100
             tmp3 = ds3.Tables(RS).Rows(index)("仕入原価")
