@@ -679,6 +679,10 @@ Public Class Ordering
 
             End If
 
+            '20200817
+            DgvItemList.Rows(i).Cells("行番号").Value = dsHattyudt.Tables(RS).Rows(i)("行番号")
+
+
             tmp_cur += (dsHattyudt.Tables(RS).Rows(i)("発注数量") * dsHattyudt.Tables(RS).Rows(i)("仕入値"))
             tmp_cur2 += (dsHattyudt.Tables(RS).Rows(i)("発注数量") * dsHattyudt.Tables(RS).Rows(i)("仕入値_外貨"))
 
@@ -1937,7 +1941,7 @@ Public Class Ordering
                     Sql += " WHERE t21_i.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
                     Sql += " AND t21_i.発注番号 = '" & TxtOrderingNo.Text & "'"
                     Sql += " AND t21_i.発注番号枝番 = '" & TxtOrderingSuffix.Text & "'"
-                    Sql += " AND t21_i.行番号 = '" & i + 1 & "'"
+                    Sql += " AND t21_i.行番号 = '" & DgvItemList.Rows(i).Cells("行番号").Value & "'"
 
                     Dim dsItem As DataTable = _db.selectDB(Sql, RS, reccnt).Tables(0)
 

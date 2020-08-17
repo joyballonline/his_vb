@@ -143,6 +143,7 @@ Partial Class Ordering
         Me.発注メーカー = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.発注品名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.発注型式 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.行番号 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.DgvItemList, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -370,7 +371,7 @@ Partial Class Ordering
         Me.DgvItemList.AllowUserToAddRows = False
         Me.DgvItemList.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.DgvItemList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DgvItemList.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.No, Me.仕入区分, Me.メーカー, Me.品名, Me.型式, Me.数量, Me.単位, Me.仕入先, Me.仕入単価_外貨, Me.仕入単価, Me.仕入原価_外貨, Me.仕入原価, Me.間接費, Me.関税率, Me.関税額, Me.前払法人税率, Me.前払法人税額, Me.輸送費率, Me.輸送費額, Me.仕入金額_外貨, Me.仕入金額, Me.リードタイム, Me.入庫数, Me.未入庫数, Me.備考, Me.発注メーカー, Me.発注品名, Me.発注型式})
+        Me.DgvItemList.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.No, Me.仕入区分, Me.メーカー, Me.品名, Me.型式, Me.数量, Me.単位, Me.仕入先, Me.仕入単価_外貨, Me.仕入単価, Me.仕入原価_外貨, Me.仕入原価, Me.間接費, Me.関税率, Me.関税額, Me.前払法人税率, Me.前払法人税額, Me.輸送費率, Me.輸送費額, Me.仕入金額_外貨, Me.仕入金額, Me.リードタイム, Me.入庫数, Me.未入庫数, Me.備考, Me.発注メーカー, Me.発注品名, Me.発注型式, Me.行番号})
         Me.DgvItemList.Location = New System.Drawing.Point(11, 274)
         Me.DgvItemList.Name = "DgvItemList"
         Me.DgvItemList.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
@@ -1288,6 +1289,12 @@ Partial Class Ordering
         Me.発注型式.HeaderText = "発注型式"
         Me.発注型式.Name = "発注型式"
         '
+        '行番号
+        '
+        Me.行番号.HeaderText = "行番号"
+        Me.行番号.Name = "行番号"
+        Me.行番号.Visible = False
+        '
         'Ordering
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
@@ -1476,4 +1483,5 @@ Partial Class Ordering
     Friend WithEvents 発注メーカー As DataGridViewTextBoxColumn
     Friend WithEvents 発注品名 As DataGridViewTextBoxColumn
     Friend WithEvents 発注型式 As DataGridViewTextBoxColumn
+    Friend WithEvents 行番号 As DataGridViewTextBoxColumn
 End Class
