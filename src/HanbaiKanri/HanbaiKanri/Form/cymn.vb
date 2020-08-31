@@ -548,6 +548,13 @@ Public Class Cymn
             DgvItemList.Columns("リードタイム単位").HeaderText = "LeadTimeUnit"
             DgvItemList.Columns("備考").HeaderText = "Remarks"
 
+            '20200811
+            If CompanyCode = "ZENBI" Then  'ゼンビさんの場合
+                DgvItemList.Columns("発注メーカー").HeaderText = "OrderManufacturer"
+                DgvItemList.Columns("発注品名").HeaderText = "OrderItemName"
+                DgvItemList.Columns("発注型式").HeaderText = "OrderSpec"
+            End If
+
         Else
             DgvItemList.Columns("数量").HeaderText = "数量" & vbCrLf & "a"
 
@@ -613,6 +620,10 @@ Public Class Cymn
 
         '20200807
         If CompanyCode = "ZENBI" Then  'ゼンビさんの場合
+            DgvItemList.Columns("発注メーカー").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+            DgvItemList.Columns("発注品名").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+            DgvItemList.Columns("発注型式").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+
             '発注品名についての入力設定
             Call mHatyuName()
         Else
