@@ -49,6 +49,9 @@ Public Class StartUp
         Public OutXlsPath As String             'EXCEl出力先フォルダパス
         Public key As String
         Public timeout As Decimal
+        Public DBtimeout As Integer
+        Public ssl As String
+        Public Default_lng As String
     End Structure
 
     '汎用マスタデータ格納用変数
@@ -270,7 +273,7 @@ Public Class StartUp
             m = New System.Threading.Mutex(False, "HanbaiKanri")
             '==>「システム終了時」にGC.KeepAlive(m)をCallすること
             If Not m.WaitOne(0, False) Then
-                MessageBox.Show("既に同一のアプリケーションが起動しています。",
+                MessageBox.Show("The same application is already running.",
                                     System.Reflection.Assembly.GetExecutingAssembly.GetName().Name,
                                     MessageBoxButtons.OK,
                                     MessageBoxIcon.Information)
@@ -311,11 +314,11 @@ Public Class StartUp
             'UtilPostgresDebuggerはインスタンスを生成すると、DBコネクションまで生成してくれる
             Dim _db As UtilDBIf
             Try
-                _db = New UtilPostgresDebugger(_iniVal.SVAddr, _iniVal.PortNo, _iniVal.DBName, _iniVal.UserId, _iniVal.Password, _iniVal.LogFilePath, _debugMode)
+                _db = New UtilPostgresDebugger(_iniVal.SVAddr, _iniVal.PortNo, _iniVal.DBName, _iniVal.UserId, _iniVal.Password, _iniVal.LogFilePath, _debugMode, True, _iniVal.DBtimeout, _iniVal.ssl)
             Catch ex As Exception
                 '確認メッセージを表示する
                 Dim piRtn As Integer
-                piRtn = _msgHd.dspMSG("NonPriDb", CommonConst.LANG_KBN_JPN)  'サーバに接続できません。バックアップサーバに接続しますか？
+                piRtn = _msgHd.dspMSG("NonPriDb", _iniVal.Default_lng)  'サーバに接続できません。バックアップサーバに接続しますか？
                 If piRtn = vbNo Then
                     '・[いいえ]選択の場合	
                     '	システムを終了します。
@@ -325,10 +328,10 @@ Public Class StartUp
 
                 'DB接続失敗　バックアップサーバへ接続
                 Try
-                    _db = New UtilPostgresDebugger(_iniVal.SVAddr_stby, _iniVal.PortNo_stby, _iniVal.DBName_stby, _iniVal.UserId_stby, _iniVal.Password_stby, _iniVal.LogFilePath, _debugMode)
+                    _db = New UtilPostgresDebugger(_iniVal.SVAddr_stby, _iniVal.PortNo_stby, _iniVal.DBName_stby, _iniVal.UserId_stby, _iniVal.Password_stby, _iniVal.LogFilePath, _debugMode, True, _iniVal.DBtimeout, _iniVal.ssl)
                     _BackUpServer = True
                 Catch eex As Exception
-                    piRtn = _msgHd.dspMSG("NonBackDb", CommonConst.LANG_KBN_JPN)  'サーバに接続できません。
+                    piRtn = _msgHd.dspMSG("NonBackDb", _iniVal.Default_lng)  'サーバに接続できません。
                     GC.KeepAlive(m)
                     Exit Sub
                 End Try
@@ -366,7 +369,7 @@ Public Class StartUp
 
         Catch ex As Exception                       'システム例外
             'システムエラーMSG出力
-            Dim tmp As UsrDefException = New UsrDefException(ex, _msgHd.getMSG("SystemErr", CommonConst.LANG_KBN_JPN, UtilClass.getErrDetail(ex)))
+            Dim tmp As UsrDefException = New UsrDefException(ex, _msgHd.getMSG("SystemErr", CommonConst.LANG_KBN_ENG, UtilClass.getErrDetail(ex)))
         Finally
             Try
                 '二重起動チェック用のインスタンス開放を許可する
@@ -489,7 +492,7 @@ Public Class StartUp
             'INIファイル存在チェック
             '-----------------------------------------------------------------------
             If Not UtilClass.isFileExists(iniFileName) Then
-                Throw New UsrDefException("INIファイル存在チェックエラー", _msgHd.getMSG("nonIniFile", CommonConst.LANG_KBN_JPN))
+                Throw New UsrDefException("INIファイル存在チェックエラー", _msgHd.getMSG("nonIniFile", CommonConst.LANG_KBN_ENG))
             End If
 
             '-----------------------------------------------------------------------
@@ -556,6 +559,12 @@ Public Class StartUp
                 _iniVal.key = ini.getIni(INIITEM1_DB, "Key", "NotImplemented")
                 errXMLstrkey = "NonDbIniKey"
                 _iniVal.timeout = ini.getIni(INIITEM1_DB, "Timeout", "1800000")
+                errXMLstrkey = "NonDbIniKey"
+                _iniVal.DBtimeout = ini.getIni(INIITEM1_DB, "DBTimeout", "300")
+                errXMLstrkey = "NonDbIniKey"
+                _iniVal.ssl = ini.getIni(INIITEM1_DB, "UseSSL", "0")
+                errXMLstrkey = "NonDbIniKey"
+                _iniVal.Default_lng = ini.getIni(INIITEM1_DB, "DefaultLNG", "ENG")
 
                 'システム規定情報
                 errXMLstrkey = "NonProductInfoIniKey"
@@ -591,13 +600,13 @@ Public Class StartUp
 
             Catch ex As Exception
                 '変数（errXMLstrkey）をメッセージＩＤとして、エラーを出力します。
-                Throw New UsrDefException("項目未設定エラー", _msgHd.getMSG(errXMLstrkey, CommonConst.LANG_KBN_JPN))
+                Throw New UsrDefException("項目未設定エラー", _msgHd.getMSG(errXMLstrkey, CommonConst.LANG_KBN_ENG))
             End Try
         Catch ue As UsrDefException 'ユーザー定義例外(記述しない場合、Exceptionでキャッチされるため)
             Call ue.dspMsg()
             Throw ue                'キャッチした例外をそのままスロー(呼び出し元でエラー処理)
         Catch ex As Exception       'システム例外
-            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", CommonConst.LANG_KBN_JPN, UtilClass.getErrDetail(ex))) 'キャッチした例外をユーザー定義例外に移し変えスロー
+            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", CommonConst.LANG_KBN_ENG, UtilClass.getErrDetail(ex))) 'キャッチした例外をユーザー定義例外に移し変えスロー
         End Try
     End Sub
     '-------------------------------------------------------------------------------
@@ -617,24 +626,24 @@ Public Class StartUp
             UtilClass.dividePathAndFile(fullPath, pathName, fileName)
             If Not UtilClass.isDirExists(pathName) Then
                 _iniVal.LogFilePath = "" 'ログファイルが間違っている場合にログ出力すると実行エラーが出る為、初期化しておく
-                Throw New UsrDefException("ログファイルの出力先が存在しないエラー", _msgHd.getMSG("NonLogDir", CommonConst.LANG_KBN_JPN))
+                Throw New UsrDefException("ログファイルの出力先が存在しないエラー", _msgHd.getMSG("NonLogDir", _iniVal.Default_lng))
             End If
 
             '雛形フォルダ存在チェック
             If Not UtilClass.isDirExists(_iniVal.BaseXlsPath) Then
-                Throw New UsrDefException("雛形ファイル格納フォルダがありません。", _msgHd.getMSG("noHinaDir", CommonConst.LANG_KBN_JPN))
+                Throw New UsrDefException("雛形ファイル格納フォルダがありません。", _msgHd.getMSG("noHinaDir", _iniVal.Default_lng))
             End If
 
             'EXCEL出力先フォルダ存在チェック
             If Not UtilClass.isDirExists(_iniVal.OutXlsPath) Then
-                Throw New UsrDefException("EXCELファイル出力先フォルダがありません。", _msgHd.getMSG("noOutExcelDir", CommonConst.LANG_KBN_JPN))
+                Throw New UsrDefException("EXCELファイル出力先フォルダがありません。", _msgHd.getMSG("noOutExcelDir", _iniVal.Default_lng))
             End If
 
         Catch ue As UsrDefException 'ユーザー定義例外
             Call ue.dspMsg()
             Throw ue                'キャッチした例外をそのままスロー
         Catch ex As Exception       'システム例外
-            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", CommonConst.LANG_KBN_JPN, UtilClass.getErrDetail(ex))) 'キャッチした例外をユーザー定義例外に移し変えスロー
+            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", _iniVal.Default_lng, UtilClass.getErrDetail(ex))) 'キャッチした例外をユーザー定義例外に移し変えスロー
         End Try
     End Sub
 
@@ -658,7 +667,7 @@ Public Class StartUp
             Dim ds As DataSet = _db.selectDB(SQL, RS, iRecCnt)
 
             If iRecCnt <= 0 Then             '抽出レコードが１件もない場合
-                Throw New UsrDefException("汎用マスタの値の取得に失敗しました。", _msgHd.getMSG("noHanyouMst", CommonConst.LANG_KBN_JPN))
+                Throw New UsrDefException("汎用マスタの値の取得に失敗しました。", _msgHd.getMSG("noHanyouMst", CommonConst.LANG_KBN_ENG))
             End If
 
             '検索結果を構造体に格納
@@ -683,7 +692,7 @@ Public Class StartUp
             Call ue.dspMsg()
             Throw ue                        'キャッチした例外をそのままスロー
         Catch ex As Exception               'システム例外
-            Throw New UsrDefException(ex, _msgHd.getMSG(SYSERR, CommonConst.LANG_KBN_JPN, UtilClass.getErrDetail(ex)))   'キャッチした例外をユーザー定義例外に移し変えスロー
+            Throw New UsrDefException(ex, _msgHd.getMSG(SYSERR, CommonConst.LANG_KBN_ENG, UtilClass.getErrDetail(ex)))   'キャッチした例外をユーザー定義例外に移し変えスロー
         End Try
 
     End Sub
@@ -704,7 +713,7 @@ Public Class StartUp
             Call ue.dspMsg()
             Throw ue                        'キャッチした例外をそのままスロー
         Catch ex As Exception               'システム例外
-            Throw New UsrDefException(ex, _msgHd.getMSG(SYSERR, CommonConst.LANG_KBN_JPN, UtilClass.getErrDetail(ex)))   'キャッチした例外をユーザー定義例外に移し変えスロー
+            Throw New UsrDefException(ex, _msgHd.getMSG(SYSERR, CommonConst.LANG_KBN_ENG, UtilClass.getErrDetail(ex)))   'キャッチした例外をユーザー定義例外に移し変えスロー
         End Try
 
     End Function

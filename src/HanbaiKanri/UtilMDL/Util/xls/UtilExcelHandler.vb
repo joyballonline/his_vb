@@ -332,6 +332,24 @@ Namespace xls
             End Try
         End Sub
 
+        Public Sub saveas(ByVal f As String)
+            Try
+                _book.SaveAs(f)
+
+            Catch ex As Exception
+            Finally
+                'Me.endUse()
+            End Try
+        End Sub
+
+        Public Sub visible(Optional ByVal b As Boolean = True)
+            _app.Visible = b
+        End Sub
+
+        Public Sub autofit()
+            _app.Cells.Rows.AutoFit()
+        End Sub
+
         '===============================================================================
         'Excel表示
         '===============================================================================

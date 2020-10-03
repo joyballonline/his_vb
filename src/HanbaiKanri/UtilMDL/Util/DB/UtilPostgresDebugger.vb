@@ -85,10 +85,15 @@ Namespace DB
                        ByVal prmFileNm As String,
                        ByVal prmDebugFlg As Boolean,
                        Optional ByVal prmConsoleWrite As Boolean = True,
-                       Optional ByVal prmTimeout As Short = -1)
+                       Optional ByVal prmTimeout As Short = -1,
+                       Optional ByVal prmSsl As String = "")
             _logger = New UtilLogDebugger(prmFileNm, prmDebugFlg, prmConsoleWrite)
+            Dim b As Boolean = False
+            If prmSsl = "1" Then
+                b = True
+            End If
             Try
-                _hd = New UtilPostgresHandler(prmSvAdr, prmPortNo, prmDbNm, prmUserId, prmPswd, prmTimeout)
+                _hd = New UtilPostgresHandler(prmSvAdr, prmPortNo, prmDbNm, prmUserId, prmPswd, prmTimeout, b)
                 _logger.writeLine(UtilLogDebugger.LOG_DEBUG, "データベース接続成功")
             Catch ex As Exception
                 _logger.writeLine(UtilLogDebugger.LOG_ERR, "データベース接続失敗", ex.Message & ControlChars.NewLine & ex.StackTrace)

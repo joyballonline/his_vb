@@ -946,4 +946,99 @@ Public Class UtilClass
         Return sql
     End Function
 
+    'DBNull2null
+    Public Shared Function rmDBNull2StrNull(ByVal prmField As Object) As String
+        If prmField Is Nothing Then
+            rmDBNull2StrNull = ""
+            Exit Function
+        End If
+        If prmField Is DBNull.Value Then
+            rmDBNull2StrNull = ""
+            Exit Function
+        End If
+
+        rmDBNull2StrNull = prmField
+
+    End Function
+
+    'NothingをDecimalに置換
+    Public Shared Function rmNullDecimal(ByVal prmField As Object) As Decimal
+        If prmField Is Nothing Then
+            rmNullDecimal = 0
+            Exit Function
+        End If
+        If prmField Is DBNull.Value Then
+            rmNullDecimal = 0
+            Exit Function
+        End If
+
+        If Not IsNumeric(prmField) Then
+            rmNullDecimal = 0
+            Exit Function
+        End If
+
+        rmNullDecimal = prmField
+
+    End Function
+
+    ''' <summary>
+    ''' 指定した文字列から指定した文字を全て削除する
+    ''' </summary>
+    ''' <param name="s">対象となる文字列。</param>
+    ''' <returns>sに含まれている全てのcharacters文字が削除された文字列。</returns>
+    Public Shared Function RevoveChars(s As String) As String
+        Dim buf As New System.Text.StringBuilder(s)
+        '削除する文字の配列
+        Dim removeChars As Char() = New Char() {vbCr, vbLf, Chr(39)}
+
+        For Each c As Char In removeChars
+            buf.Replace(c.ToString(), "")
+        Next
+        Return buf.ToString()
+    End Function
+
+    'DBNull2DateNull
+    Public Shared Function rmDBNull2DateNull(ByVal prmField As Object) As String
+        If prmField Is Nothing Then
+            rmDBNull2DateNull = ""
+            Exit Function
+        End If
+        If prmField Is DBNull.Value Then
+            rmDBNull2DateNull = ""
+            Exit Function
+        End If
+
+        rmDBNull2DateNull = CType(prmField, Date).ToShortDateString()
+
+    End Function
+
+    Public Shared Function VAT_round_AP(ByVal v_ As Decimal, ByVal dec_ As Decimal) As Decimal
+        'Return Math.Round(rmNullDecimal(dec_) * rmNullDecimal(v_) / 100, 2)
+        Return Math.Floor(rmNullDecimal(dec_) * rmNullDecimal(v_) / 100)
+    End Function
+
+    ''' ------------------------------------------------------------------------
+    ''' <summary>
+    '''     指定した精度の数値に切り捨てします。</summary>
+    ''' <param name="dValue">
+    '''     丸め対象の倍精度浮動小数点数。</param>
+    ''' <param name="iDigits">
+    '''     戻り値の有効桁数の精度。</param>
+    ''' <returns>
+    '''     iDigits に等しい精度の数値に切り捨てられた数値。</returns>
+    ''' ------------------------------------------------------------------------
+    Public Shared Function ToRoundDown(ByVal dValue As Double, ByVal iDigits As Integer) As Double
+        Dim dCoef As Double = System.Math.Pow(10, iDigits)
+
+        If dValue > 0 Then
+            Return System.Math.Floor(dValue * dCoef) / dCoef
+        Else
+            Return System.Math.Ceiling(dValue * dCoef) / dCoef
+        End If
+    End Function
+
+    Public Shared Function convertFC2IDR(ByVal dFC As Decimal, ByVal dRate As Decimal) As Decimal
+        Return Math.Ceiling(dFC / dRate)
+    End Function
+
 End Class

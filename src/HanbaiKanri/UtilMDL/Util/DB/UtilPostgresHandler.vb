@@ -70,9 +70,9 @@ Namespace DB
         ''' <param name="prmPswd">パスワード</param>
         ''' <param name="prmTimeout">発行SQLのタイムアウト設定(省略時は既定の30秒/0設定時は永久待機)</param>
         ''' <remarks></remarks>
-        Public Sub New(ByVal prmSvAdr As String, ByVal prmPortNo As String, ByVal prmDbNm As String, ByVal prmUserId As String, ByVal prmPswd As String, Optional ByVal prmTimeout As Short = -1)
+        Public Sub New(ByVal prmSvAdr As String, ByVal prmPortNo As String, ByVal prmDbNm As String, ByVal prmUserId As String, ByVal prmPswd As String, Optional ByVal prmTimeout As Short = -1, Optional ByVal prmSsl As Boolean = False)
             Try
-                Call initInstance(prmSvAdr, prmPortNo, prmDbNm, prmUserId, prmPswd, prmTimeout)
+                Call initInstance(prmSvAdr, prmPortNo, prmDbNm, prmUserId, prmPswd, prmTimeout, prmSsl)
             Catch ex As Exception
                 Throw ex
             End Try
@@ -111,14 +111,20 @@ Namespace DB
         ''' <param name="prmPswd">パスワード</param>
         ''' <param name="prmTimeout">発行SQLのタイムアウト設定(省略時は既定の30秒/0設定時は永久待機)</param>
         ''' <remarks></remarks>
-        Protected Sub initInstance(ByVal prmSvAdr As String, ByVal prmPortNo As String, ByVal prmDbNm As String, ByVal prmUserId As String, ByVal prmPswd As String, Optional ByVal prmTimeout As Short = -1)
+        Protected Sub initInstance(ByVal prmSvAdr As String, ByVal prmPortNo As String, ByVal prmDbNm As String, ByVal prmUserId As String, ByVal prmPswd As String, Optional ByVal prmTimeout As Short = -1, Optional ByVal prmSsl As Boolean = False)
             Try
+                Dim ext As String = ";"
+                If prmSsl Then
+                    ext = ";SSL=True;SSLMode=Require;"
+                Else
+
+                End If
                 _con = New NpgsqlConnection()
-                _con.ConnectionString = "Server=" & prmSvAdr & ";Port=" & prmPortNo & ";Database=" & prmDbNm & ";Encoding=UNICODE;User Id=" & prmUserId & ";Password=" & prmPswd & ";"
+                _con.ConnectionString = "Server=" & prmSvAdr & ";Port=" & prmPortNo & ";Database=" & prmDbNm & ";Encoding=UNICODE;User Id=" & prmUserId & ";Password=" & prmPswd & ext '";" 'SSL=True;SSLMode=Require;"
                 Try
                     _con.Open()
                 Catch lex As Exception
-                    Throw New Exception("データベースの接続に失敗しました。" & ControlChars.NewLine &
+                    Throw New Exception("Failed to connect to the database." & ControlChars.NewLine &
                                         ControlChars.Tab & "　 " & lex.Message, lex)
                 End Try
 
