@@ -95,8 +95,10 @@ Public Class InventoryList
         If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
             LblMode.Text = OrderStatus & " Mode"
 
-            rbAll.Text = "By product"
+            rbAll.Text = "By Product"
             rbWarehouse.Text = "By Warehouse"
+            rbSyubetsu.Text = "By StorageType"
+
 
             BtnExcelOutput.Text = "ExcelOutput"
             BtnBack.Text = "Back"
@@ -222,7 +224,7 @@ Public Class InventoryList
 
         SqlItem = "SELECT m21.メーカー, m21.品名, m21.型式,m20.名称 as 倉庫名,m21.入出庫種別 "
         ''SqlItem += " ,m21.ロケ番号, m21.製造番号, m21.伝票番号, sum(m21.現在庫数) As 現在庫数 "
-        SqlItem += " ,m21.ロケ番号, m21.製造番号, m21.伝票番号, m21.現在庫数 As 現在庫数 "
+        SqlItem += " ,m21.出庫開始サイン as ロケ番号, m21.製造番号, m21.伝票番号, m21.現在庫数 As 現在庫数 "
         SqlItem += " ,m21.入庫単価, m21.最終入庫日, m21.最終出庫日, m90.文字１, m90.文字２ "
         SqlItem += " ,t46.仕入先請求番号, t46.仕入先名"
 
@@ -273,15 +275,15 @@ Public Class InventoryList
         End If
         If rbLocation.Checked Then
             SqlSumm = " ORDER BY "
-            SqlSumm += " m21.ロケ番号, m21.メーカー, m21.品名, m21.型式, m21.倉庫コード,m21.入出庫種別, m21.伝票番号 "
+            SqlSumm += " m21.出庫開始サイン, m21.メーカー, m21.品名, m21.型式, m21.倉庫コード,m21.入出庫種別, m21.伝票番号 "
         End If
         If rbSerialNo.Checked Then
             SqlSumm = " ORDER BY "
-            SqlSumm += " m21.製造番号, m21.メーカー, m21.品名, m21.型式, m21.倉庫コード,m21.入出庫種別, m21.ロケ番号, m21.伝票番号 "
+            SqlSumm += " m21.製造番号, m21.メーカー, m21.品名, m21.型式, m21.倉庫コード,m21.入出庫種別, m21.出庫開始サイン, m21.伝票番号 "
         End If
         If rbOrderNo.Checked Then
             SqlSumm = " ORDER BY "
-            SqlSumm += " m21.伝票番号, m21.メーカー, m21.品名, m21.型式, m21.倉庫コード,m21.入出庫種別, m21.ロケ番号, m21.製造番号 "
+            SqlSumm += " m21.伝票番号, m21.メーカー, m21.品名, m21.型式, m21.倉庫コード,m21.入出庫種別, m21.出庫開始サイン, m21.製造番号 "
         End If
 
         Sql = SqlItem + SqlJoin + SqlWher + SqlSumm
@@ -298,7 +300,8 @@ Public Class InventoryList
                 DgvList.Rows(i).Cells("入出庫種別").Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG,
                                                                     dsList.Tables(RS).Rows(i)("文字２"),
                                                                     dsList.Tables(RS).Rows(i)("文字１"))
-                DgvList.Rows(i).Cells("ロケ番号").Value = dsList.Tables(RS).Rows(i)("ロケ番号").ToString
+                'DgvList.Rows(i).Cells("ロケ番号").Value = dsList.Tables(RS).Rows(i)("ロケ番号").ToString
+                DgvList.Rows(i).Cells("ロケ番号").Value = dsList.Tables(RS).Rows(i)("伝票番号").ToString
                 DgvList.Rows(i).Cells("製造番号").Value = dsList.Tables(RS).Rows(i)("製造番号").ToString
                 DgvList.Rows(i).Cells("伝票番号").Value = dsList.Tables(RS).Rows(i)("伝票番号").ToString
                 DgvList.Rows(i).Cells("在庫数").Value = dsList.Tables(RS).Rows(i)("現在庫数")
