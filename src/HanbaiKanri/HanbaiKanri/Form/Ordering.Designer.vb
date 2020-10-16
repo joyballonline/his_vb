@@ -406,7 +406,7 @@ Partial Class Ordering
         '
         Me.DtpPurchaseDate.CalendarFont = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.DtpPurchaseDate.CustomFormat = ""
-        Me.DtpPurchaseDate.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.DtpPurchaseDate.Font = New System.Drawing.Font("MS Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.DtpPurchaseDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.DtpPurchaseDate.Location = New System.Drawing.Point(660, 14)
         Me.DtpPurchaseDate.MinDate = New Date(2000, 1, 1, 0, 0, 0, 0)
@@ -473,7 +473,7 @@ Partial Class Ordering
         Me.Label2.AutoSize = True
         Me.Label2.Location = New System.Drawing.Point(280, 20)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(11, 12)
+        Me.Label2.Size = New System.Drawing.Size(10, 13)
         Me.Label2.TabIndex = 221
         Me.Label2.Text = "-"
         '
@@ -502,7 +502,7 @@ Partial Class Ordering
         Me.DtpRegistrationDate.CalendarFont = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.DtpRegistrationDate.CustomFormat = ""
         Me.DtpRegistrationDate.Enabled = False
-        Me.DtpRegistrationDate.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.DtpRegistrationDate.Font = New System.Drawing.Font("MS Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.DtpRegistrationDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.DtpRegistrationDate.Location = New System.Drawing.Point(958, 13)
         Me.DtpRegistrationDate.MinDate = New Date(2000, 1, 1, 0, 0, 0, 0)
@@ -690,7 +690,7 @@ Partial Class Ordering
         '
         Me.LblMode.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblMode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LblMode.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblMode.Font = New System.Drawing.Font("MS Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.LblMode.Location = New System.Drawing.Point(1127, 14)
         Me.LblMode.Name = "LblMode"
         Me.LblMode.Size = New System.Drawing.Size(213, 22)
@@ -756,7 +756,7 @@ Partial Class Ordering
         '
         Me.DtpShippedDate.CalendarFont = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.DtpShippedDate.CustomFormat = ""
-        Me.DtpShippedDate.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.DtpShippedDate.Font = New System.Drawing.Font("MS Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.DtpShippedDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.DtpShippedDate.Location = New System.Drawing.Point(766, 185)
         Me.DtpShippedDate.MinDate = New Date(2000, 1, 1, 0, 0, 0, 0)
@@ -804,7 +804,7 @@ Partial Class Ordering
         Me.LblHyphen.AutoSize = True
         Me.LblHyphen.Location = New System.Drawing.Point(280, 48)
         Me.LblHyphen.Name = "LblHyphen"
-        Me.LblHyphen.Size = New System.Drawing.Size(11, 12)
+        Me.LblHyphen.Size = New System.Drawing.Size(10, 13)
         Me.LblHyphen.TabIndex = 315
         Me.LblHyphen.Text = "-"
         '
@@ -1293,7 +1293,6 @@ Partial Class Ordering
         '
         Me.行番号.HeaderText = "行番号"
         Me.行番号.Name = "行番号"
-        Me.行番号.Visible = False
         '
         'Ordering
         '

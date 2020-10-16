@@ -45,6 +45,7 @@ Public Class GoodsIssue
     Private _status As String = ""
     Private _langHd As UtilLangHandler
     Private Input As String = frmC01F10_Login.loginValue.TantoNM
+    Private _com As CommonLogic
 
     '-------------------------------------------------------------------------------
     'デフォルトコンストラクタ（隠蔽）
@@ -76,6 +77,7 @@ Public Class GoodsIssue
         _status = prmRefStatus
         '_gh = New UtilDataGridViewHandler(dgvLIST)                          'DataGridViewユーティリティクラス
         StartPosition = FormStartPosition.CenterScreen                      '画面中央表示
+        _com = New CommonLogic(_db, _msgHd)
         Me.Text = Me.Text & "[" & frmC01F10_Login.loginValue.BumonNM & "][" & frmC01F10_Login.loginValue.TantoNM & "]" & StartUp.BackUpServerPrint                                  'フォームタイトル表示
         Me.ControlBox = Not Me.ControlBox
         _init = True
@@ -152,6 +154,9 @@ Public Class GoodsIssue
             BtnDeliveryNote.Visible = True
             BtnDeliveryNote.Location = New Point(1002, 509)
 
+            LblDepositDate.Visible = False
+            DtpDepositDate.Visible = False
+
         Else
 
             '入力モード
@@ -164,22 +169,20 @@ Public Class GoodsIssue
 
             DtpDepositDate.Value = Date.Now
 
+            'm90_hanyo  SimpleRegistrationの可変キーが1か判定
+            Dim Sql As String = "  AND 固定キー = 'SR'"
+            Sql += " AND 可変キー = '1'"
+
+            Dim dsHanyo As DataTable = getDsData("m90_hanyo", Sql).Tables(0)
+
+            If dsHanyo.Rows.Count = 0 Then  'データなしの場合は入金予定日を非表示にする
+                LblDepositDate.Visible = False
+                DtpDepositDate.Visible = False
+            Else
+                LblDepositDate.Visible = True
+                DtpDepositDate.Visible = True
+            End If
         End If
-
-        'm90_hanyo  SimpleRegistrationの可変キーが1か判定
-        Dim Sql As String = "  AND 固定キー = 'SR'"
-        Sql += " AND 可変キー = '1'"
-
-        Dim dsHanyo As DataTable = getDsData("m90_hanyo", Sql).Tables(0)
-
-        If dsHanyo.Rows.Count = 0 Then  'データなしの場合は入金予定日を非表示にする
-            LblDepositDate.Visible = False
-            DtpDepositDate.Visible = False
-        Else
-            LblDepositDate.Visible = True
-            DtpDepositDate.Visible = True
-        End If
-
 
         setDgvHd() '見出し行セット
         getlist() '内容表示
@@ -973,7 +976,7 @@ Public Class GoodsIssue
 
             '採番データを取得・更新
             '出庫登録データの伝票番号は基本的に LS で統一される（1商品で複数の在庫マスタをまたぐ場合を除く）
-            Dim MAIN_LS As String = getSaiban("70", dtToday.ToShortDateString())
+            Dim MAIN_LS As String = _com.getSaiban("70", dtToday.ToShortDateString())
 
             '出庫登録一覧をループし、出庫登録対象データがあれば登録処理を実行
             For i As Integer = 0 To DgvAdd.Rows.Count() - 1
@@ -1118,7 +1121,7 @@ Public Class GoodsIssue
                                 End If
 
                                 '作成データが複数以上の場合、出庫番号を新規取得
-                                currentLS = IIf(x = 0, MAIN_LS, getSaiban("70", dtToday.ToShortDateString()))
+                                currentLS = IIf(x = 0, MAIN_LS, _com.getSaiban("70", dtToday.ToShortDateString()))
 
                                 't45：出庫明細 新規作成
                                 '---------------------------------------
@@ -1143,11 +1146,11 @@ Public Class GoodsIssue
                                 Sql += "', '"
                                 Sql += DgvAdd.Rows(i).Cells("仕入区分値").Value.ToString '仕入区分
                                 Sql += "', '"
-                                Sql += DgvAdd.Rows(i).Cells("メーカー").Value.ToString 'メーカー
+                                Sql += UtilClass.escapeSql(DgvAdd.Rows(i).Cells("メーカー").Value.ToString) 'メーカー
                                 Sql += "', '"
-                                Sql += DgvAdd.Rows(i).Cells("品名").Value.ToString '品名
+                                Sql += UtilClass.escapeSql(DgvAdd.Rows(i).Cells("品名").Value.ToString) '品名
                                 Sql += "', '"
-                                Sql += DgvAdd.Rows(i).Cells("型式").Value.ToString '型式
+                                Sql += UtilClass.escapeSql(DgvAdd.Rows(i).Cells("型式").Value.ToString) '型式
                                 Sql += "', '"
                                 Sql += DgvAdd.Rows(i).Cells("仕入先").Value.ToString '仕入先名
                                 Sql += "', '"
@@ -1520,7 +1523,7 @@ Public Class GoodsIssue
 
         Try
 
-            Dim ER As String = getSaiban("40", dtToday)
+            Dim ER As String = _com.getSaiban("40", dtToday)
             'Dim LS As String = getSaiban("70", dtToday　  // 使用されていない
 
             Dim totalUriAmount As Decimal = 0
@@ -1565,11 +1568,11 @@ Public Class GoodsIssue
                         Sql4 += "', '"
                         Sql4 += DgvAdd.Rows(i).Cells("仕入区分値").Value.ToString '仕入区分値
                         Sql4 += "', '"
-                        Sql4 += DgvAdd.Rows(i).Cells("メーカー").Value.ToString 'メーカー
+                        Sql4 += UtilClass.escapeSql(DgvAdd.Rows(i).Cells("メーカー").Value.ToString) 'メーカー
                         Sql4 += "', '"
-                        Sql4 += DgvAdd.Rows(i).Cells("品名").Value.ToString '品名
+                        Sql4 += UtilClass.escapeSql(DgvAdd.Rows(i).Cells("品名").Value.ToString) '品名
                         Sql4 += "', '"
-                        Sql4 += DgvAdd.Rows(i).Cells("型式").Value.ToString '型式
+                        Sql4 += UtilClass.escapeSql(DgvAdd.Rows(i).Cells("型式").Value.ToString) '型式
                         Sql4 += "', '"
                         Sql4 += DgvAdd.Rows(i).Cells("仕入先").Value.ToString '仕入先名
                         Sql4 += "', '"
@@ -1808,11 +1811,11 @@ Public Class GoodsIssue
 
     Private Sub BtnDeliveryNote_Click(sender As Object, e As EventArgs) Handles BtnDeliveryNote.Click
 
-        If frmC01F10_Login.loginValue.BumonCD = "ZENBI" Then
-            DeliveryNote_Zenbi()
-        Else
-            DeliveryNote_StdCompany()
-        End If
+        'If frmC01F10_Login.loginValue.BumonCD = "ZENBI" Then
+        DeliveryNote_Zenbi()
+        'Else
+        'DeliveryNote_StdCompany()
+        'End If
 
     End Sub
 
@@ -1942,7 +1945,7 @@ Public Class GoodsIssue
 
             app.DisplayAlerts = False 'Microsoft Excelのアラート一旦無効化
 
-            Dim excelChk As Boolean = excelOutput(sOutFile)
+            Dim excelChk As Boolean = _com.excelOutput(sOutFile)
             If excelChk = False Then
                 Exit Sub
             End If
@@ -2045,7 +2048,7 @@ Public Class GoodsIssue
 
             app.DisplayAlerts = False 'Microsoft Excelのアラート一旦無効化
 
-            Dim excelChk As Boolean = excelOutput(sOutFile)
+            Dim excelChk As Boolean = _com.excelOutput(sOutFile)
             If excelChk = False Then
                 Exit Sub
             End If
@@ -2151,7 +2154,7 @@ Public Class GoodsIssue
 
             app.DisplayAlerts = False 'Microsoft Excelのアラート一旦無効化
 
-            Dim excelChk As Boolean = excelOutput(sOutFile)
+            Dim excelChk As Boolean = _com.excelOutput(sOutFile)
             If excelChk = False Then
                 Exit Sub
             End If
@@ -2185,133 +2188,23 @@ Public Class GoodsIssue
         End If
     End Sub
 
-    'param1：String 採番キー
-    'param2：DateTime 登録日
-    'Return: String 伝票番号
-    '伝票番号を取得
-    Private Function getSaiban(ByVal key As String, ByVal today As DateTime) As String
-        Dim Sql As String = ""
-        Dim saibanID As String = ""
-        Dim reccnt As Integer = 0 'DB用（デフォルト）
-
-        Try
-            Sql = "SELECT "
-            Sql += "* "
-            Sql += "FROM "
-            Sql += "public.m80_saiban"
-            Sql += " WHERE "
-            Sql += "会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-            Sql += " AND "
-            Sql += "採番キー = '" & key & "'"
-
-            Dim dsSaiban As DataSet = _db.selectDB(Sql, RS, reccnt)
-
-            saibanID = dsSaiban.Tables(RS).Rows(0)("接頭文字")
-            saibanID += today.ToString("MMdd")
-            saibanID += dsSaiban.Tables(RS).Rows(0)("最新値").ToString.PadLeft(dsSaiban.Tables(RS).Rows(0)("連番桁数"), "0")
-
-            Dim keyNo As Integer
-
-            If dsSaiban.Tables(RS).Rows(0)("最新値") = dsSaiban.Tables(RS).Rows(0)("最大値") Then
-                '最新値が最大と同じ場合、最小値にリセット
-                keyNo = dsSaiban.Tables(RS).Rows(0)("最小値")
-            Else
-                '最新値+1
-                keyNo = dsSaiban.Tables(RS).Rows(0)("最新値") + 1
-            End If
-
-            Sql = "UPDATE "
-            Sql += "Public.m80_saiban "
-            Sql += "SET "
-            Sql += " 最新値 "
-            Sql += " = '"
-            Sql += keyNo.ToString
-            Sql += "', "
-            Sql += "更新者"
-            Sql += " = '"
-            Sql += frmC01F10_Login.loginValue.TantoNM
-            Sql += "', "
-            Sql += "更新日"
-            Sql += " = '"
-            Sql += UtilClass.formatDatetime(today)
-            Sql += "' "
-            Sql += "WHERE"
-            Sql += " 会社コード"
-            Sql += "='"
-            Sql += frmC01F10_Login.loginValue.BumonCD
-            Sql += "'"
-            Sql += " AND"
-            Sql += " 採番キー = '" & key & "'"
-
-            _db.executeDB(Sql)
-
-            Return saibanID
-        Catch ex As Exception
-            'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
-            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
-        End Try
-
-    End Function
-
     '汎用マスタから固定キー、可変キーに応じた結果を返す
     'param1：String 固定キー
     'param2：String 可変キー
     'Return: DataSet
     Private Function getDsHanyoData(ByVal prmFixed As String, Optional ByVal prmVariable As String = "") As DataSet
-        Dim Sql As String = ""
-        Dim strViewText As String = ""
-        Dim strArrayData As String() = prmVariable.Split(","c)
-
-        Sql = " AND "
-        Sql += "固定キー ILIKE '" & prmFixed & "'"
-
-        If strArrayData.Length <> 0 Then
-            Sql += " AND ( "
-            For i As Integer = 0 To strArrayData.Length - 1
-                Sql += IIf(i > 0, " OR ", "")
-                Sql += "可変キー ILIKE '" & strArrayData(i) & "'"
-            Next
-            Sql += " ) "
-        End If
-
-        'リードタイムのリストを汎用マスタから取得
-        Return getDsData("m90_hanyo", Sql)
+        Return _com.getDsHanyoDataEx(prmFixed, prmVariable)
     End Function
 
     'param1：String テーブル名
     'param2：String 詳細条件
     'Return: DataSet
     Private Function getDsData(ByVal tableName As String, Optional ByRef txtParam As String = "") As DataSet
-        Dim reccnt As Integer = 0 'DB用（デフォルト）
-        Dim Sql As String = ""
-
-        Sql += "SELECT"
-        Sql += " *"
-        Sql += " FROM "
-
-        Sql += "public." & tableName
-        Sql += " WHERE "
-        Sql += "会社コード"
-        Sql += " ILIKE "
-        Sql += "'" & frmC01F10_Login.loginValue.BumonCD & "'"
-        Sql += txtParam
-
-        Return _db.selectDB(Sql, RS, reccnt)
+        Return _com.getDsData(tableName, txtParam)
     End Function
 
     Private Function getWarehouseName(ByVal prmString As String) As String
-        Dim val As String = ""
-
-        If val IsNot Nothing Then
-            Dim Sql As String = " AND 倉庫コード ILIKE '" & prmString & "'"
-            Dim dsWarehouse As DataSet = getDsData("m20_warehouse", Sql)
-
-            If dsWarehouse.Tables(RS).Rows.Count <> 0 Then
-                val = dsWarehouse.Tables(RS).Rows(0)("名称")
-            End If
-        End If
-
-        Return val
+        Return _com.getWarehouseName(prmString)
     End Function
 
     'Return: DataTable
@@ -2415,31 +2308,6 @@ Public Class GoodsIssue
         End If
 
     End Sub
-
-    'Excel出力する際のチェック
-    Private Function excelOutput(ByVal prmFilePath As String)
-        Dim fileChk As String = Dir(prmFilePath)
-        '同名ファイルがあるかどうかチェック
-        If fileChk <> "" Then
-            Dim result = _msgHd.dspMSG("confirmFileExist", frmC01F10_Login.loginValue.Language, prmFilePath)
-            If result = DialogResult.No Then
-                Return False
-            End If
-
-            Try
-                'ファイルが開けるかどうかチェック
-                Dim sr As StreamReader = New StreamReader(prmFilePath)
-                sr.Close() '処理が通ったら閉じる
-            Catch ex As Exception
-                '開けない場合はアラートを表示してリターンさせる
-                MessageBox.Show(ex.Message, CommonConst.AP_NAME, MessageBoxButtons.OK, MessageBoxIcon.Error)
-                Return False
-            End Try
-
-            Return True
-        End If
-        Return True
-    End Function
 
     Private Sub setCellValueChanged()
 
@@ -2655,6 +2523,7 @@ Public Class GoodsIssue
         Sql += " AND t43.仕入区分 = '" & DgvAdd.Rows(rowIndex).Cells("仕入区分値").Value.ToString & "'"
         Sql += " AND t42.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED.ToString
         Sql += " AND t43.行番号 = " & DgvAdd.Rows(rowIndex).Cells("行番号").Value.ToString
+        Sql += " AND t20.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED.ToString
 
         Sql += " order by t20.発注番号枝番 desc"
 
@@ -2874,33 +2743,35 @@ Public Class GoodsIssue
 
         Dim createFlg = False
 
+        Dim lsno_ As String = DgvHistory.Rows(SelectedRow).Cells("出庫番号").Value
+
         '2019.12.19 受注番号基準に変更し、受注番号、出庫日、出庫区分を抽出条件とする
         Dim Sql1 As String = ""
-        Sql1 += "SELECT HD.* FROM public.t44_shukohd HD"
-        Sql1 += " INNER JOIN public.t45_shukodt DT ON (HD.会社コード=DT.会社コード AND HD.出庫番号=DT.出庫番号)"
-        ''Sql1 += " WHERE 出庫番号 = '" & DgvHistory.Rows(SelectedRow).Cells("出庫番号").Value & "'"
-        Sql1 += " WHERE HD.受注番号 = '" & TxtOrderNo.Text & "'"
-        Sql1 += " AND HD.出庫日 = '" & CDate(DgvHistory.Rows(SelectedRow).Cells("出庫日").Value).ToString("yyyyMMdd") & "'"
-        Sql1 += " AND DT.出庫区分 = '1'"
+        Sql1 += "SELECT HD.* FROM public.t44_shukohd HD, public.t45_shukodt DT "
+        Sql1 += " WHERE HD.会社コード=DT.会社コード And HD.出庫番号=DT.出庫番号 "
+        Sql1 += " AND HD.出庫番号 = '" & lsno_ & "'"
+        'Sql1 += " WHERE HD.受注番号 = '" & TxtOrderNo.Text & "'"
+        'Sql1 += " AND HD.出庫日 = '" & CDate(DgvHistory.Rows(SelectedRow).Cells("出庫日").Value).ToString("yyyyMMdd") & "'"
+        'Sql1 += " AND DT.出庫区分 = '1'"
 
 
         '2019.12.19 受注番号基準に変更し、受注番号、出庫日、出庫区分を抽出条件とする
         Dim Sql2 As String = ""
-        Sql2 += "SELECT DT.* FROM public.t45_shukodt DT"
-        Sql2 += " INNER JOIN public.t44_shukohd HD ON (HD.会社コード=DT.会社コード AND HD.出庫番号=DT.出庫番号)"
-        'Sql2 += " WHERE 出庫番号 = '" & DgvHistory.Rows(SelectedRow).Cells("出庫番号").Value & "'"
+        Sql2 += "SELECT DT.* FROM public.t45_shukodt DT, public.t44_shukohd HD "
+        Sql2 += " WHERE HD.会社コード=DT.会社コード And HD.出庫番号=DT.出庫番号 "
+        Sql2 += " AND 出庫番号 = '" & lsno_ & "'"
         Sql2 += " WHERE DT.受注番号 = '" & TxtOrderNo.Text & "'"
         Sql2 += "   AND HD.出庫日 = '" & CDate(DgvHistory.Rows(SelectedRow).Cells("出庫日").Value).ToString("yyyyMMdd") & "'"
         Sql2 += " AND DT.出庫区分 = '1'"
 
         Dim reccnt As Integer = 0
         Dim ds1 As DataSet = _db.selectDB(Sql1, RS, reccnt)
-        Dim ds2 As DataSet = _db.selectDB(Sql2, RS, reccnt)
+        'Dim ds2 As DataSet = _db.selectDB(Sql2, RS, reccnt)
 
         '定義
-        Dim app As Excel.Application = Nothing
-        Dim book As Excel.Workbook = Nothing
-        Dim sheet As Excel.Worksheet = Nothing
+        'Dim app As Excel.Application = Nothing
+        'Dim book As Excel.Workbook = Nothing
+        'Dim sheet As Excel.Worksheet = Nothing
 
         'カーソルをビジー状態にする
         Cursor.Current = Cursors.WaitCursor
@@ -2914,8 +2785,8 @@ Public Class GoodsIssue
             Dim sHinaFileDeliv As String = ""
             sHinaFileDeliv = sHinaPath & "\" & "DeliveryNote.xlsx"
 
-            Dim sHinaFileReceipt As String = ""
-            sHinaFileReceipt = sHinaPath & "\" & "DeliveryNote.xlsx"
+            'Dim sHinaFileReceipt As String = ""
+            'sHinaFileReceipt = sHinaPath & "\" & "DeliveryNote.xlsx"
 
             '出力先パス
             Dim sOutPath As String = ""
@@ -2924,78 +2795,110 @@ Public Class GoodsIssue
             '出力ファイル名
             '2019.12.19 受注番号+1行目出庫番号基準に変更
             Dim sOutFile As String = ""
-            ''sOutFile = sOutPath & "\DeliveryNote_" & ds2.Tables(RS).Rows(0)("出庫番号") & ".xlsx"
-            sOutFile = sOutPath & "\DeliveryNote_" & TxtOrderNo.Text & ds2.Tables(RS).Rows(0)("出庫番号") & ".xlsx"
+            sOutFile = sOutPath & "\DeliveryNote_" & lsno_ & ".xlsx"
+            'sOutFile = sOutPath & "\DeliveryNote_" & TxtOrderNo.Text & ds2.Tables(RS).Rows(0)("出庫番号") & ".xlsx"
 
+            Dim xls As UtilExcelHandler = New UtilExcelHandler(sHinaFileDeliv)
+            xls.open()
+            xls.visible()
 
+            'app = New Excel.Application()
+            'book = app.Workbooks.Add(sHinaFileDeliv)  'テンプレート
+            'sheet = CType(book.Worksheets(1), Excel.Worksheet)
 
-            app = New Excel.Application()
-            book = app.Workbooks.Add(sHinaFileDeliv)  'テンプレート
-            sheet = CType(book.Worksheets(1), Excel.Worksheet)
-
-            sheet.Range("B8").Value = ":" & ds1.Tables(RS).Rows(0)("得意先名")
-            sheet.Range("B9").Value = ":" & ds1.Tables(RS).Rows(0)("得意先住所") & " " & ds1.Tables(RS).Rows(0)("得意先郵便番号")
-            sheet.Range("B11").Value = ":" & ds1.Tables(RS).Rows(0)("得意先電話番号")
+            xls.setValue(":" & ds1.Tables(RS).Rows(0)("得意先名"), 8, 2)
+            xls.setValue(":" & ds1.Tables(RS).Rows(0)("得意先住所") & " " & ds1.Tables(RS).Rows(0)("得意先郵便番号"), 9, 2)
+            xls.setValue(":" & ds1.Tables(RS).Rows(0)("得意先電話番号"), 11, 2)
+            xls.setValue(":" & lsno_, 8, 5)
+            xls.setValue(":" & ds1.Tables(RS).Rows(0)("出庫日"), 9, 5)
+            xls.setValue(":" & ds1.Tables(RS).Rows(0)("客先番号"), 10, 5)
+            'sheet.Range("B8").Value = ":" & ds1.Tables(RS).Rows(0)("得意先名")
+            'sheet.Range("B9").Value = ":" & ds1.Tables(RS).Rows(0)("得意先住所") & " " & ds1.Tables(RS).Rows(0)("得意先郵便番号")
+            'sheet.Range("B11").Value = ":" & ds1.Tables(RS).Rows(0)("得意先電話番号")
 
             '2019.12.19 出庫番号ー＞受注番号表示に改訂
-            ''sheet.Range("E8").Value = ":" & ds1.Tables(RS).Rows(0)("出庫番号")
-            sheet.Range("E8").Value = ":" & TxtOrderNo.Text
-            sheet.Range("E9").Value = ":" & ds1.Tables(RS).Rows(0)("出庫日")
-            sheet.Range("E10").Value = ":" & ds1.Tables(RS).Rows(0)("客先番号")
+            'sheet.Range("E8").Value = ":" & lsno_
+            'sheet.Range("E8").Value = ":" & TxtOrderNo.Text
+            'sheet.Range("E9").Value = ":" & ds1.Tables(RS).Rows(0)("出庫日")
+            'sheet.Range("E10").Value = ":" & ds1.Tables(RS).Rows(0)("客先番号")
 
 
             Dim rowCnt As Integer = 0
             Dim lstRow As Integer = 14
             Dim num As Integer = 1
+            Dim lstlstRow As Integer = 30
 
 
-            For j As Integer = 0 To ds2.Tables(RS).Rows.Count - 1
-                Dim cellPos As String = lstRow & ":" & lstRow
-                Dim R As Object
-                cellPos = lstRow & ":" & lstRow
-                R = sheet.Range(cellPos)
-                R.Copy()
-                R.Insert()
-                If Marshal.IsComObject(R) Then
-                    Marshal.ReleaseComObject(R)
+            For j As Integer = 0 To DgvHistory.RowCount - 1
+                'Dim cellPos As String = lstRow & ":" & lstRow
+                'Dim R As Object
+                'cellPos = lstRow & ":" & lstRow
+                'R = sheet.Range(cellPos)
+                'R.Copy()
+                'R.Insert()
+                'If Marshal.IsComObject(R) Then
+                'Marshal.ReleaseComObject(R)
+                'End If
+
+                If DgvHistory.Rows(j).Cells("出庫番号").Value = lsno_ Then
+
+                    '2019.12.19 Range("B")に出庫番号を出力する改訂
+                    xls.setValue(num, lstRow, 1)
+                    'sheet.Range("A" & lstRow).Value = num
+                    'sheet.Range("B" & lstRow).Value = ds2.Tables(RS).Rows(j)("メーカー") & Environment.NewLine & ds2.Tables(RS).Rows(j)("品名") &
+                    'Environment.NewLine & ds2.Tables(RS).Rows(j)("型式") & Environment.NewLine & ds2.Tables(RS).Rows(j)("備考") &
+                    'Environment.NewLine & "DeliveryNoteNo." & ds2.Tables(RS).Rows(j)("出庫番号") & "-" & ds2.Tables(RS).Rows(j)("行番号")
+                    Dim b_ As String = DgvHistory.Rows(j).Cells("メーカー").Value & Environment.NewLine & DgvHistory.Rows(j).Cells("品名").Value &
+                    Environment.NewLine & DgvHistory.Rows(j).Cells("型式").Value & Environment.NewLine & DgvHistory.Rows(j).Cells("備考").Value &
+                    Environment.NewLine & "JobOrderNo." & ds1.Tables(RS).Rows(0)("受注番号") & "-" & ds1.Tables(RS).Rows(0)("受注番号枝番")
+                    xls.setValue(b_, lstRow, 2)
+                    xls.setValue(DgvHistory.Rows(j).Cells("出庫数量").Value, lstRow, 3)
+                    'sheet.Range("C" & lstRow).Value = ds2.Tables(RS).Rows(j)("出庫数量")
+                    'sheet.Range("D" & lstRow).Value = ds2.Tables(RS).Rows(j)("単位")
+                    xls.setValue(DgvHistory.Rows(j).Cells("単位").Value, lstRow, 4)
+                    'sheet.Range("E" & lstRow).Value = ds2.Tables(RS).Rows(j)("備考")
+                    xls.setValue(DgvHistory.Rows(j).Cells("備考").Value, lstRow, 5)
+
+                    num += 1
+                    If lstlstRow - 1 <= lstRow Then
+                        'xls.copyRow(lstRow + 1)
+                        xls.insertRow(lstRow + 1)
+                        'xls.paste(lstRow + 1, 1)
+                    End If
+                    lstRow += 1
                 End If
-
-                '2019.12.19 Range("B")に出庫番号を出力する改訂
-                sheet.Range("A" & lstRow).Value = num
-                sheet.Range("B" & lstRow).Value = ds2.Tables(RS).Rows(j)("メーカー") & Environment.NewLine & ds2.Tables(RS).Rows(j)("品名") &
-                                                  Environment.NewLine & ds2.Tables(RS).Rows(j)("型式") & Environment.NewLine & ds2.Tables(RS).Rows(j)("備考") &
-                                                  Environment.NewLine & "DeliveryNoteNo." & ds2.Tables(RS).Rows(j)("出庫番号") & "-" & ds2.Tables(RS).Rows(j)("行番号")
-                sheet.Range("C" & lstRow).Value = ds2.Tables(RS).Rows(j)("出庫数量")
-                sheet.Range("D" & lstRow).Value = ds2.Tables(RS).Rows(j)("単位")
-                'sheet.Range("E" & lstRow).Value = ds2.Tables(RS).Rows(j)("備考")
-
-                num += 1
-                lstRow = lstRow + 1
             Next
 
-            sheet.Cells.Rows.AutoFit()
+            'sheet.Cells.Rows.AutoFit()
+            xls.autofit()
 
-            app.DisplayAlerts = False 'Microsoft Excelのアラート一旦無効化
+            'app.DisplayAlerts = False 'Microsoft Excelのアラート一旦無効化
 
-            Dim excelChk As Boolean = excelOutput(sOutFile)
+            Dim excelChk As Boolean = _com.excelOutput(sOutFile)
             If excelChk = False Then
                 Exit Sub
             End If
-            book.SaveAs(sOutFile) '書き込み実行
+            'book.SaveAs(sOutFile) '書き込み実行
+            xls.saveas(sOutFile)
+            'xls.close(False)
+            'xls = New UtilExcelHandler(sOutFile)
+            'xls.open()
+            'xls.close(False)
+            'xls.display()
 
-            app.DisplayAlerts = True 'アラート無効化を解除
+            'app.DisplayAlerts = True 'アラート無効化を解除
 
-            app.Visible = True
+            'app.Visible = True
 
             '_msgHd.dspMSG("CreateExcel")
             createFlg = True
             'カーソルをビジー状態から元に戻す
             Cursor.Current = Cursors.Default
 
+
         Catch ex As Exception
             'カーソルをビジー状態から元に戻す
             Cursor.Current = Cursors.Default
-
             Throw ex
         Finally
 

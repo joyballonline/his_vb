@@ -43,6 +43,7 @@ Public Class DepositManagement
     Private _status As String = ""
     Private BillingAmount As Long = 0
     Private Balance As Integer = 0
+    Private _com As CommonLogic
 
     '-------------------------------------------------------------------------------
     'デフォルトコンストラクタ（隠蔽）
@@ -79,6 +80,7 @@ Public Class DepositManagement
         CurCode = prmRefCurCode
         _status = prmRefStatus
         '_gh = New UtilDataGridViewHandler(dgvLIST)                          'DataGridViewユーティリティクラス
+        _com = New CommonLogic(_db, _msgHd)
         StartPosition = FormStartPosition.CenterScreen                      '画面中央表示
         Me.Text = Me.Text & "[" & frmC01F10_Login.loginValue.BumonNM & "][" & frmC01F10_Login.loginValue.TantoNM & "]" & StartUp.BackUpServerPrint                                  'フォームタイトル表示
         Me.ControlBox = Not Me.ControlBox
@@ -136,7 +138,7 @@ Public Class DepositManagement
             LblDepositDate.Location = New Point(137, 335)
             LblDepositDate.Size = New Size(140, 22)
             LblRemarks.Text = "Remarks"
-            TxtRemarks.Size = New Size(600, 22)
+            TxtRemarks.Size = New Size(405, 22)
             LblNo1.Text = "Record"
             LblNo1.Location = New Point(1272, 65)
             LblNo1.Size = New Size(66, 22)
@@ -187,7 +189,9 @@ Public Class DepositManagement
             DgvBillingInfo.Columns("請求金額").HeaderText = "AccountsReceivableAmount" & vbCrLf & "a"               '売掛残高
             DgvBillingInfo.Columns("請求情報入金額計").HeaderText = "DepositAmount" & vbCrLf & "b"                  '既入金額
             DgvBillingInfo.Columns("請求情報請求残高").HeaderText = "AccountsReceivableBalance" & vbCrLf & "c=a-b"  '未入金額
-            DgvBillingInfo.Columns("入金額").HeaderText = "AmountToRegisterForReceiving"
+            DgvBillingInfo.Columns("請求情報請求残高").HeaderCell.Style.WrapMode = DataGridViewTriState.True
+            DgvBillingInfo.Columns("入金額").HeaderText = "AmountToRegisterForReceiving" & vbCrLf
+            DgvBillingInfo.Columns("入金額").HeaderCell.Style.WrapMode = DataGridViewTriState.True
             DgvBillingInfo.Columns("入金予定日").HeaderText = "DueDate"
 
         Else  '日本語
@@ -199,6 +203,8 @@ Public Class DepositManagement
             DgvBillingInfo.Columns("請求情報請求残高").HeaderText = "売掛残高" & vbCrLf & "c=a-b"
 
         End If
+
+        'DgvBillingInfo.ColumnHeadersDefaultCellStyle.WrapMode = DataGridViewTriState.True
 
         '中央寄せ
         DgvBillingInfo.Columns("受注番号").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
@@ -224,6 +230,9 @@ Public Class DepositManagement
         DgvBillingInfo.Columns("請求情報請求残高").DefaultCellStyle.Format = "N2"
         DgvBillingInfo.Columns("請求情報請求残高固定").DefaultCellStyle.Format = "N2"
         DgvBillingInfo.Columns("入金額").DefaultCellStyle.Format = "N2"
+
+        DgvBillingInfo.Columns("請求日").DefaultCellStyle.Format = "d"
+        DgvBillingInfo.Columns("入金予定日").DefaultCellStyle.Format = "d"
 
         'DgvCustomer.SelectionForeColor = .ForeColor
         'DgvCustomer.SelectionBackColor = .BackColor
@@ -253,8 +262,8 @@ Public Class DepositManagement
     Private Sub setDgvCustomer()
         Dim Sql As String = ""
         Dim AccountsReceivable As Decimal 'Long
-        Dim curds As DataSet  'm25_currency
-        Dim cur As String
+        'Dim curds As DataSet  'm25_currency
+        'Dim cur As String
 
 
         Sql = " AND "
@@ -287,15 +296,16 @@ Public Class DepositManagement
         DgvCustomer.Rows(0).Cells("請求残高").Value = AccountsReceivable
 
         '通貨の表示
-        If IsDBNull(dsSkyuhd.Tables(RS).Rows(0)("通貨")) Then
-            cur = vbNullString
-        Else
-            Sql = " and 採番キー = " & dsSkyuhd.Tables(RS).Rows(0)("通貨")
-            curds = getDsData("m25_currency", Sql)
+        'If IsDBNull(dsSkyuhd.Tables(RS).Rows(0)("通貨")) Then
+        'cur = vbNullString
+        'Else
+        'Sql = " and 採番キー = " & dsSkyuhd.Tables(RS).Rows(0)("通貨")
+        'curds = getDsData("m25_currency", Sql)
+        '
+        'cur = curds.Tables(RS).Rows(0)("通貨コード")
+        'End If
+        TxtIDRCurrency.Text = _com.getCurrency(dsSkyuhd.Tables(RS).Rows(0)("通貨"))
 
-            cur = curds.Tables(RS).Rows(0)("通貨コード")
-        End If
-        TxtIDRCurrency.Text = cur
 
     End Sub
 
@@ -306,7 +316,7 @@ Public Class DepositManagement
 
         'joinするのでとりあえず直書き
         Sql = "SELECT"
-        Sql += " t26.請求先名, t26.入金番号, t26.更新日, t26.入金種別名, t26.入金額_外貨, t26.備考"
+        Sql += " t26.請求先名, t26.入金番号, t26.入金日, t26.入金種別名, t26.入金額_外貨, t26.備考"
         Sql += " FROM "
         Sql += " public.t26_nkindt t26 "
 
@@ -345,19 +355,19 @@ Public Class DepositManagement
         '入金済みデータの出力
         For index As Integer = 0 To dsNkindt.Tables(RS).Rows.Count - 1
 
-            Dim nyukinKbn As DataSet = getDsHanyoData(CommonConst.FIXED_KEY_RECEIPT_TYPE, dsNkindt.Tables(RS).Rows(index)("入金種別名").ToString)
+            Dim nyukinKbn As DataSet = _com.getDsHanyoData(CommonConst.FIXED_KEY_RECEIPT_TYPE, dsNkindt.Tables(RS).Rows(index)("入金種別名").ToString)
 
 
             DgvHistory.Rows.Add()
             DgvHistory.Rows(index).Cells("No").Value = index + 1
             DgvHistory.Rows(index).Cells("入金済請求先").Value = dsNkindt.Tables(RS).Rows(index)("請求先名")
             DgvHistory.Rows(index).Cells("入金番号").Value = dsNkindt.Tables(RS).Rows(index)("入金番号")
-            DgvHistory.Rows(index).Cells("入金日").Value = dsNkindt.Tables(RS).Rows(index)("更新日").ToShortDateString()
+            DgvHistory.Rows(index).Cells("入金日").Value = dsNkindt.Tables(RS).Rows(index)("入金日").ToShortDateString()
             DgvHistory.Rows(index).Cells("入金種目").Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG,
                                                                 nyukinKbn.Tables(RS).Rows(0)("文字２"),
                                                                 nyukinKbn.Tables(RS).Rows(0)("文字１"))
             DgvHistory.Rows(index).Cells("入金済入金額計").Value = dsNkindt.Tables(RS).Rows(index)("入金額_外貨")
-            DgvHistory.Rows(index).Cells("備考").Value = dsNkindt.Tables(RS).Rows(index)("備考")
+            DgvHistory.Rows(index).Cells("備考").Value = dsNkindt.Tables(RS).Rows(index)("備考") & _com.t27_get_invoice_no_by_pm(dsNkindt.Tables(RS).Rows(index)("入金番号"))
         Next
 
     End Sub
@@ -385,7 +395,7 @@ Public Class DepositManagement
             Sql += " AND 通貨 = " & CurCode
         End If
 
-        Sql += " ORDER BY 会社コード, 請求番号"
+        Sql += " ORDER BY 会社コード, 請求日"
 
         '得意先と一致する請求基本を取得
         Dim dsSkyuhd As DataSet = getDsData("t23_skyuhd", Sql)
@@ -407,8 +417,8 @@ Public Class DepositManagement
             DgvBillingInfo.Rows(i).Cells("InfoNo").Value = i + 1
             DgvBillingInfo.Rows(i).Cells("受注番号").Value = dsSkyuhd.Tables(RS).Rows(i)("受注番号")
             DgvBillingInfo.Rows(i).Cells("請求情報請求番号").Value = dsSkyuhd.Tables(RS).Rows(i)("請求番号")
-            DgvBillingInfo.Rows(i).Cells("請求日").Value = dsSkyuhd.Tables(RS).Rows(i)("請求日").ToShortDateString()
-            DgvBillingInfo.Rows(i).Cells("入金予定日").Value = dsSkyuhd.Tables(RS).Rows(i)("入金予定日").ToShortDateString()
+            DgvBillingInfo.Rows(i).Cells("請求日").Value = UtilClass.rmDBNull2DateNull(dsSkyuhd.Tables(RS).Rows(i)("請求日")) '.ToShortDateString()
+            DgvBillingInfo.Rows(i).Cells("入金予定日").Value = UtilClass.rmDBNull2DateNull(dsSkyuhd.Tables(RS).Rows(i)("入金予定日")) '.ToShortDateString()
 
             DgvBillingInfo.Rows(i).Cells("請求金額").Value = dsSkyuhd.Tables(RS).Rows(i)("請求金額計_外貨")
             If dsSkyuhd.Tables(RS).Rows(i)("入金額計_外貨") Is DBNull.Value Then
@@ -553,74 +563,6 @@ Public Class DepositManagement
 
     End Sub
 
-    'param1：String 採番キー
-    'param2：DateTime 登録日
-    'Return: String 伝票番号
-    '伝票番号を取得
-    Private Function getSaiban(ByVal key As String, ByVal today As DateTime) As String
-        Dim Sql As String = ""
-        Dim saibanID As String = ""
-        Dim reccnt As Integer = 0 'DB用（デフォルト）
-
-        Try
-            Sql = "SELECT "
-            Sql += "* "
-            Sql += "FROM "
-            Sql += "public.m80_saiban"
-            Sql += " WHERE "
-            Sql += "会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-            Sql += " AND "
-            Sql += "採番キー = '" & key & "'"
-
-            Dim dsSaiban As DataSet = _db.selectDB(Sql, RS, reccnt)
-
-            saibanID = dsSaiban.Tables(RS).Rows(0)("接頭文字")
-            saibanID += UtilClass.strFormatDate(today.ToString, "MMdd")
-            saibanID += dsSaiban.Tables(RS).Rows(0)("最新値").ToString.PadLeft(dsSaiban.Tables(RS).Rows(0)("連番桁数"), "0")
-
-            Dim keyNo As Integer
-
-            If dsSaiban.Tables(RS).Rows(0)("最新値") = dsSaiban.Tables(RS).Rows(0)("最大値") Then
-                '最新値が最大と同じ場合、最小値にリセット
-                keyNo = dsSaiban.Tables(RS).Rows(0)("最小値")
-            Else
-                '最新値+1
-                keyNo = dsSaiban.Tables(RS).Rows(0)("最新値") + 1
-            End If
-
-            Sql = "UPDATE "
-            Sql += "Public.m80_saiban "
-            Sql += "SET "
-            Sql += " 最新値 "
-            Sql += " = '"
-            Sql += keyNo.ToString
-            Sql += "', "
-            Sql += "更新者"
-            Sql += " = '"
-            Sql += frmC01F10_Login.loginValue.TantoNM
-            Sql += "', "
-            Sql += "更新日"
-            Sql += " = '"
-            Sql += UtilClass.formatDatetime(today)
-            Sql += "' "
-            Sql += "WHERE"
-            Sql += " 会社コード"
-            Sql += "='"
-            Sql += frmC01F10_Login.loginValue.BumonCD
-            Sql += "'"
-            Sql += " AND"
-            Sql += " 採番キー = '" & key & "'"
-            Console.WriteLine(Sql)
-            _db.executeDB(Sql)
-
-            Return saibanID
-        Catch ex As Exception
-            'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
-            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
-        End Try
-
-    End Function
-
     '登録処理
     Private Sub BtnRegist_Click(sender As Object, e As EventArgs) Handles BtnRegist.Click
         Dim dtToday As String = UtilClass.formatDatetime(DateTime.Now)
@@ -700,7 +642,7 @@ Public Class DepositManagement
 
 
         '採番テーブルから入金番号取得
-        Dim PMSaiban As String = getSaiban("90", dtToday)
+        Dim PMSaiban As String = _com.getSaiban("90", dtToday)
 
         Sql = " AND 得意先コード ILIKE '%" & CustomerCode & "%'"
         Sql += " AND 取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
@@ -747,7 +689,7 @@ Public Class DepositManagement
         Sql += " "
         Sql += dsCompany.Tables(RS).Rows(0)("口座名義")
         Sql += "', '"
-        Sql += formatStringToNumber(DepositAmount)  '入金額計
+        Sql += UtilClass.formatNumber(DepositAmount)  '入金額計
         Sql += "', '"
         Sql += TxtRemarks.Text
         Sql += "', '"
@@ -760,7 +702,7 @@ Public Class DepositManagement
         Sql += dtToday
 
         Sql += "', '"
-        Sql += formatStringToNumber(DepositAmount_cur)  '入金額計_外貨
+        Sql += UtilClass.formatNumber(DepositAmount_cur)  '入金額計_外貨
         Sql += "', '"
         Sql += dsSkyuhd.Tables(RS).Rows(0)("通貨").ToString()
         Sql += "', '"
@@ -805,7 +747,7 @@ Public Class DepositManagement
                 Sql += " "
                 Sql += dsCompany.Tables(RS).Rows(0)("口座名義").ToString
                 Sql += "', '"
-                Sql += formatStringToNumber(AmountEntered)  '入力入金額
+                Sql += UtilClass.formatNumber(AmountEntered)  '入力入金額
                 Sql += "', '"
                 Sql += frmC01F10_Login.loginValue.TantoNM
                 Sql += "', '"
@@ -820,7 +762,7 @@ Public Class DepositManagement
                 Sql += TxtRemarks.Text
 
                 Sql += "', '"
-                Sql += formatStringToNumber(AmountEntered_cur)  '入力入金額  入金額_外貨
+                Sql += UtilClass.formatNumber(AmountEntered_cur)  '入力入金額  入金額_外貨
                 Sql += "', '"
                 Sql += dsSkyuhd.Tables(RS).Rows(0)("通貨").ToString()
                 Sql += "', '"
@@ -861,7 +803,7 @@ Public Class DepositManagement
                 Sql += "', '"
                 Sql += CustomerName
                 Sql += "', '"
-                Sql += formatStringToNumber(DepositClearing)  '入金消込額計
+                Sql += UtilClass.formatNumber(DepositClearing)  '入金消込額計
                 Sql += "', '"
                 Sql += TxtRemarks.Text
                 Sql += "', '"
@@ -872,7 +814,7 @@ Public Class DepositManagement
                 Sql += dtToday
 
                 Sql += "', '"
-                Sql += formatStringToNumber(DepositClearing_cur)  '入金消込額計_外貨
+                Sql += UtilClass.formatNumber(DepositClearing_cur)  '入金消込額計_外貨
                 Sql += "', '"
                 Sql += dsSkyuhd.Tables(RS).Rows(0)("通貨").ToString()
                 Sql += "', '"
@@ -925,20 +867,20 @@ Public Class DepositManagement
                 Sql += "SET "
                 Sql += " 入金額計"
                 Sql += " = '"
-                Sql += formatStringToNumber(DsDeposit)
+                Sql += UtilClass.formatNumber(DsDeposit)
                 Sql += "', "
                 Sql += "売掛残高"
                 Sql += " = '"
-                Sql += formatStringToNumber(SellingBalance)
+                Sql += UtilClass.formatNumber(SellingBalance)
                 Sql += "', "
 
                 Sql += " 入金額計_外貨"
                 Sql += " = '"
-                Sql += formatStringToNumber(DsDeposit_cur)
+                Sql += UtilClass.formatNumber(DsDeposit_cur)
                 Sql += "', "
                 Sql += "売掛残高_外貨"
                 Sql += " = '"
-                Sql += formatStringToNumber(SellingBalance_cur)
+                Sql += UtilClass.formatNumber(SellingBalance_cur)
                 Sql += "', "
 
                 '請求額請求金額と入金額が一致したら入金完了日を設定する
@@ -1178,7 +1120,7 @@ Public Class DepositManagement
     '請求情報セルの値が変更されたら
     Private Sub DgvBillingInfoCellValueChanged(ByVal sender As Object, ByVal e As DataGridViewCellEventArgs) Handles DgvBillingInfo.CellValueChanged
 
-        Dim PurchaseTotal As Integer = 0
+        Dim Total As Decimal = 0
 
         'ヘッダー以外だったら
         If e.RowIndex > -1 Then
@@ -1189,6 +1131,12 @@ Public Class DepositManagement
                 DgvBillingInfo.Rows(e.RowIndex).Cells("入金額").Value = 0
                 Exit Sub
             End If
+
+            'For i As Integer = 0 To DgvBillingInfo.RowCount - 1
+            'Total += DgvBillingInfo.Rows(i).Cells("入金額").Value
+            'Next
+            'txtSum.Text = UtilClass.formatNumber(Total)
+
         End If
 
     End Sub
@@ -1197,22 +1145,7 @@ Public Class DepositManagement
     'param2：String 詳細条件
     'Return: DataSet
     Private Function getDsData(ByVal tableName As String, Optional ByRef txtParam As String = "") As DataSet
-        Dim reccnt As Integer = 0 'DB用（デフォルト）
-        Dim Sql As String = ""
-
-        Sql += "SELECT"
-        Sql += " *"
-        Sql += " FROM "
-
-        Sql += "public." & tableName
-        Sql += " WHERE "
-        Sql += "会社コード"
-        Sql += " ILIKE  "
-        Sql += "'" & frmC01F10_Login.loginValue.BumonCD & "'"
-        Sql += txtParam
-
-        Console.WriteLine(Sql)
-        Return _db.selectDB(Sql, RS, reccnt)
+        Return _com.getDsData(tableName, txtParam)
     End Function
 
     'DGV内で指定列名(プルダウン)は一度のクリックで開く
@@ -1225,30 +1158,9 @@ Public Class DepositManagement
         End If
     End Sub
 
-    '汎用マスタから固定キー、可変キーに応じた結果を返す
-    'param1：String 固定キー
-    'param2：String 可変キー
-    'Return: DataSet
-    Private Function getDsHanyoData(ByVal prmFixed As String, Optional ByVal prmVariable As String = "") As DataSet
-        Dim Sql As String = ""
-
-        Sql = " AND "
-        Sql += "固定キー ILIKE '" & prmFixed & "'"
-
-        If prmVariable IsNot "" Then
-            Sql += " AND "
-            Sql += "可変キー ILIKE '" & prmVariable & "'"
-        End If
-
-        Sql += " ORDER BY 表示順 ASC "
-
-        'リードタイムのリストを汎用マスタから取得
-        Return getDsData("m90_hanyo", Sql)
-    End Function
-
     '金額フォーマット（登録の際の小数点指定子）を日本の形式に合わせる
     '桁区切り記号は外す
-    Private Function formatStringToNumber(ByVal prmVal As String) As String
+    Private Function formatStringToNumber2(ByVal prmVal As String) As String
 
         Dim decVal As Decimal = Decimal.Parse(prmVal)
 
@@ -1258,4 +1170,13 @@ Public Class DepositManagement
         Return decVal.ToString("F3", nfi)
     End Function
 
+    Private Sub DgvBillingInfo_SelectionChanged(sender As Object, e As EventArgs) Handles DgvBillingInfo.SelectionChanged
+        Dim Total As Decimal = 0
+        For i As Integer = 0 To sender.SelectedCells.count - 1
+            If IsNumeric(sender.SelectedCells(i).Value) Then
+                Total += sender.SelectedCells(i).Value
+            End If
+        Next
+        txtSum.Text = UtilClass.formatNumber(Total)
+    End Sub
 End Class

@@ -46,6 +46,7 @@ Public Class Ordering
     Private PurchaseCount As String = ""
 
     Private OrderCount As String = ""
+    Private _com As CommonLogic
 
     '-------------------------------------------------------------------------------
     'デフォルトコンストラクタ（隠蔽）
@@ -81,6 +82,7 @@ Public Class Ordering
 
         '_gh = New UtilDataGridViewHandler(dgvLIST)                          'DataGridViewユーティリティクラス
         StartPosition = FormStartPosition.CenterScreen                      '画面中央表示
+        _com = New CommonLogic(_db, _msgHd)
         Me.Text = Me.Text & "[" & frmC01F10_Login.loginValue.BumonNM & "][" & frmC01F10_Login.loginValue.TantoNM & "]" & StartUp.BackUpServerPrint                                  'フォームタイトル表示
         Me.ControlBox = Not Me.ControlBox
         _init = True
@@ -355,6 +357,7 @@ Public Class Ordering
             DgvItemList.Columns("リードタイム単位").HeaderText = "LeadTimeUnit"
             DgvItemList.Columns("貿易条件").HeaderText = "TradeTerms"
             DgvItemList.Columns("備考").HeaderText = "Remarks"
+            DgvItemList.Columns("行番号").HeaderText = "LineNo"
 
             '20200811
             If CompanyCode = "ZENBI" Then  'ゼンビさんの場合
@@ -428,6 +431,7 @@ Public Class Ordering
             DgvItemList.Rows(DgvItemList.Rows.Count() - 1).Cells("リードタイム単位").Value = 1
             setSireTax(DgvItemList.Rows.Count() - 1)  '間接費率をセット
             DgvItemList.Rows(DgvItemList.Rows.Count() - 1).Cells("No").Value = "1"
+            DgvItemList.Rows(DgvItemList.Rows.Count() - 1).Cells("行番号").Value = "1"
             'リストの行数をセット
             TxtItemCount.Text = DgvItemList.Rows.Count()
 
@@ -595,9 +599,12 @@ Public Class Ordering
         '通貨・レート情報設定
         If PurchaseStatus <> CommonConst.STATUS_ADD Then
             '通貨・レート情報設定
-            createCurrencyCombobox(dsHattyudt.Tables(RS).Rows(0)("仕入通貨").ToString)
+            If dsHattyudt.Tables(RS).Rows.Count > 0 Then
+                createCurrencyCombobox(dsHattyudt.Tables(RS).Rows(0)("仕入通貨").ToString)
+            Else
+                createCurrencyCombobox("1")
+            End If
         End If
-
         setRate()
         '通貨表示：ベースの設定
         TxtIDRCurrency.Text = setBaseCurrency()
@@ -740,7 +747,7 @@ Public Class Ordering
             TxtPaymentTerms.Enabled = True
 
             '発注番号を新規発行
-            Dim PO As String = getSaiban("30", dtNow)
+            Dim PO As String = _com.getSaiban("30", dtNow)
             TxtOrderingNo.Text = PO
 
             '枝番は1
@@ -1122,6 +1129,7 @@ Public Class Ordering
             For i As Integer = 0 To DgvItemList.ColumnCount - 1
                 rowClone.Cells(i).Value = DgvItemList.Rows(RowIdx).Cells(i).Value
             Next
+            rowClone.Cells(30).Value = Nothing
 
             '1行下に新規行作成及びclone内容を反映
             DgvItemList.Rows.Insert(RowIdx + 1, rowClone)
@@ -1585,7 +1593,10 @@ Public Class Ordering
                     Sql += "', '"
                     Sql += TxtOrderingSuffix.Text '発注番号枝番
                     Sql += "', '"
-                    Sql += DgvItemList.Rows(i).Cells("No").Value.ToString '行番号
+                    If IsNothing(DgvItemList.Rows(i).Cells("行番号").Value) Then
+                        DgvItemList.Rows(i).Cells("行番号").Value = DgvItemList.Rows(i).Cells("No").Value
+                    End If
+                    Sql += DgvItemList.Rows(i).Cells("行番号").Value.ToString '行番号
                     Sql += "', "
 
                     If DgvItemList.Rows(i).Cells("仕入区分").Value <> Nothing Then
@@ -1597,11 +1608,11 @@ Public Class Ordering
                     Sql += ", '"
                     Sql += TxtSupplierName.Text '仕入先名
                     Sql += "', '"
-                    Sql += DgvItemList.Rows(i).Cells("メーカー").Value.ToString 'メーカー
+                    Sql += UtilClass.escapeSql(DgvItemList.Rows(i).Cells("メーカー").Value.ToString) 'メーカー
                     Sql += "', '"
-                    Sql += DgvItemList.Rows(i).Cells("品名").Value.ToString '品名
+                    Sql += UtilClass.escapeSql(DgvItemList.Rows(i).Cells("品名").Value.ToString) '品名
                     Sql += "', '"
-                    Sql += DgvItemList.Rows(i).Cells("型式").Value.ToString '型式
+                    Sql += UtilClass.escapeSql(DgvItemList.Rows(i).Cells("型式").Value.ToString) '型式
                     Sql += "', '"
                     Sql += UtilClass.escapeSql(DgvItemList.Rows(i).Cells("単位").Value) '単位
                     Sql += "', '"
@@ -1697,7 +1708,7 @@ Public Class Ordering
                         Sql += "'" & CompanyCode & "'"              '会社コード
                         Sql += ",'" & TxtOrderingNo.Text & "'"      '発注番号
                         Sql += ",'" & TxtOrderingSuffix.Text & "'"  '発注番号枝番
-                        Sql += "," & DgvItemList.Rows(i).Cells("No").Value.ToString '行番号
+                        Sql += "," & DgvItemList.Rows(i).Cells("行番号").Value.ToString '行番号
                         Sql += ",'" & DgvItemList.Rows(i).Cells("発注メーカー").Value & "'"  '発注メーカー
                         Sql += ",'" & DgvItemList.Rows(i).Cells("発注品名").Value & "'"      '発注品名
                         Sql += ",'" & DgvItemList.Rows(i).Cells("発注型式").Value & "'"      '発注型式
@@ -1894,7 +1905,7 @@ Public Class Ordering
             sheet.Range("H27").Value = dsHattyuhd.Tables(RS).Rows(0)("備考")
 
             sheet.Range("R30").Value = dsHattyuhd.Tables(RS).Rows(0)("仕入先名")
-            sheet.Range("R18").Value = "(" & getCurrency(dsHattyudt.Tables(RS).Rows(0)("仕入通貨")) & ")"
+            sheet.Range("R18").Value = "(" & _com.getCurrencyEx(dsHattyudt.Tables(RS).Rows(0)("仕入通貨")) & ")"
 
 
             Dim rowCnt As Integer = 0
@@ -1996,7 +2007,7 @@ Public Class Ordering
 
             app.DisplayAlerts = False 'Microsoft Excelのアラート一旦無効化
 
-            Dim excelChk As Boolean = excelOutput(sOutFile)
+            Dim excelChk As Boolean = _com.excelOutput(sOutFile)
             If excelChk = False Then
                 Exit Sub
             End If
@@ -2039,28 +2050,11 @@ Public Class Ordering
         End If
     End Sub
 
-    'sqlで実行する文字列からシングルクォーテーションを文字コードにする
-    'Private Function escapeSql123(ByVal prmSql As String) As String
-    'Dim sql As String = prmSql
-    '
-    '    sql = sql.Replace("'"c, "''") 'シングルクォーテーションを置換
-    '
-    'Return Regex.Escape(sql)
-    'Return sql
-    'End Function
-
     'param1：String テーブル名
     'param2：String 詳細条件
     'Return: DataSet
     Private Function getDsData(ByVal tableName As String, Optional ByRef txtParam As String = "") As DataSet
-        Dim reccnt As Integer = 0 'DB用（デフォルト）
-        Dim Sql As String = ""
-
-        Sql += "SELECT * FROM public." & tableName
-        Sql += " WHERE 会社コード =  '" & frmC01F10_Login.loginValue.BumonCD & "'"
-        Sql += txtParam
-
-        Return _db.selectDB(Sql, RS, reccnt)
+        Return _com.getDsData(tableName, txtParam)
     End Function
 
     '汎用マスタから固定キー、可変キーに応じた結果を返す
@@ -2068,67 +2062,8 @@ Public Class Ordering
     'param2：String 可変キー
     'Return: DataSet
     Private Function getDsHanyoData(ByVal prmFixed As String, Optional ByRef prmVariable As String = "") As DataSet
-        Dim Sql As String = ""
-
-        Sql = " AND 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-        Sql += " AND 固定キー = '" & prmFixed & "'"
-
-        If prmVariable IsNot "" Then
-            Sql += " AND 可変キー = '" & prmVariable & "'"
-        End If
-
-        'リードタイムのリストを汎用マスタから取得
-        Return getDsData("m90_hanyo", Sql)
-
+        Return _com.getDsHanyoData(prmFixed, prmVariable)
     End Function
-
-    'param1：String 採番キー
-    'param2：DateTime 登録日
-    'Return: String 伝票番号
-    '伝票番号を取得
-    Private Function getSaiban(ByVal key As String, ByVal today As DateTime) As String
-        Dim Sql As String = ""
-        Dim saibanID As String = ""
-        Dim reccnt As Integer = 0 'DB用（デフォルト）
-
-        Try
-            Sql = "SELECT * FROM public.m80_saiban"
-            Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-            Sql += " AND 採番キー = '" & key & "'"
-
-            Dim dsSaiban As DataSet = _db.selectDB(Sql, RS, reccnt)
-
-            saibanID = dsSaiban.Tables(RS).Rows(0)("接頭文字")
-            saibanID += today.ToString("MMdd")
-            saibanID += dsSaiban.Tables(RS).Rows(0)("最新値").ToString.PadLeft(dsSaiban.Tables(RS).Rows(0)("連番桁数"), "0")
-
-            Dim keyNo As Integer
-
-            If dsSaiban.Tables(RS).Rows(0)("最新値") = dsSaiban.Tables(RS).Rows(0)("最大値") Then
-                '最新値が最大と同じ場合、最小値にリセット
-                keyNo = dsSaiban.Tables(RS).Rows(0)("最小値")
-            Else
-                '最新値+1
-                keyNo = dsSaiban.Tables(RS).Rows(0)("最新値") + 1
-            End If
-
-            Sql = "UPDATE Public.m80_saiban "
-            Sql += "SET  最新値  = '" & keyNo.ToString & "'"
-            Sql += " , 更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
-            Sql += " , 更新日 = '" & UtilClass.formatDatetime(today) & "'"
-            Sql += "WHERE 会社コード ='" & frmC01F10_Login.loginValue.BumonCD & "'"
-            Sql += " AND 採番キー = '" & key & "'"
-            Console.WriteLine(Sql)
-            _db.executeDB(Sql)
-
-            Return saibanID
-        Catch ex As Exception
-            'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
-            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
-        End Try
-
-    End Function
-
 
     '発注日変更時、出荷日のMinDate及びValueを変更
     Private Sub DtpPurchaseDate_ValueChanged(sender As Object, e As EventArgs) Handles DtpPurchaseDate.ValueChanged
@@ -2168,31 +2103,6 @@ Public Class Ordering
         End If
 
     End Sub
-
-    'Excel出力する際のチェック
-    Private Function excelOutput(ByVal prmFilePath As String)
-        Dim fileChk As String = Dir(prmFilePath)
-        '同名ファイルがあるかどうかチェック
-        If fileChk <> "" Then
-            Dim result = _msgHd.dspMSG("confirmFileExist", frmC01F10_Login.loginValue.Language, prmFilePath)
-            If result = DialogResult.No Then
-                Return False
-            End If
-
-            Try
-                'ファイルが開けるかどうかチェック
-                Dim sr As StreamReader = New StreamReader(prmFilePath)
-                sr.Close() '処理が通ったら閉じる
-            Catch ex As Exception
-                '開けない場合はアラートを表示してリターンさせる
-                MessageBox.Show(ex.Message, CommonConst.AP_NAME, MessageBoxButtons.OK, MessageBoxIcon.Error)
-                Return False
-            End Try
-
-            Return True
-        End If
-        Return True
-    End Function
 
     '通貨のコンボボックスを作成
     '編集モードの時は値を渡してセットさせる
@@ -2398,18 +2308,6 @@ Public Class Ordering
         Next
 
     End Sub
-
-    Private Function getCurrency(ByVal prmVal As Integer) As String
-        Dim Sql As String = " AND 取消区分 = '" & CommonConst.FLAG_ENABLED & "'"
-        Sql += " AND 採番キー =" & prmVal.ToString
-
-        Dim ds As DataSet = getDsData("m25_currency", Sql)
-
-        'リードタイム単位の多言語対応
-
-        Return ds.Tables(RS).Rows(0)("通貨コード")
-
-    End Function
 
     '行移動実行
     Private Sub setRowClone(ByVal rowIndex As Integer, ByVal status As String)
