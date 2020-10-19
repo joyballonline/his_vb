@@ -107,6 +107,7 @@ Public Class ClosingAdmin
 
             BtnRegistration.Text = "Closing"
             BtnBack.Text = "Back"
+            BtnOutput.Text = "JournalOutput"
 
         End If
 
@@ -134,89 +135,20 @@ Public Class ClosingAdmin
         Me.Dispose()
     End Sub
 
-    'param1：String 採番キー
-    'param2：DateTime 登録日
-    'Return: String 伝票番号
-    '伝票番号を取得
-    Private Function getSaiban(ByVal key As String, ByVal today As DateTime) As String
-        Dim Sql As String = ""
-        Dim saibanID As String = ""
-        Dim reccnt As Integer = 0 'DB用（デフォルト）
+    Private Sub BtnOutput_Click(sender As Object, e As EventArgs) Handles BtnOutput.Click
 
-        Try
-            Sql = "SELECT "
-            Sql += "* "
-            Sql += "FROM "
-            Sql += "public.m80_saiban"
-            Sql += " WHERE "
-            Sql += "会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-            Sql += " AND "
-            Sql += "採番キー = '" & key & "'"
+        Dim frmNew As New ClosingLog(_msgHd, _db, _langHd, Me)
+        Cursor.Current = Cursors.WaitCursor
+        _db.executeDB("truncate table t67_swkhd")
+        frmNew.getShiwakeData(dtmSime.Value.ToString("yyyyMM"))
+        '(1, dtmSime.Value)
+        frmNew.SiwakeConvertDataTableToCsv()
+        'frmNew.Refresh()
+        Cursor.Current = Cursors.Default
 
-            Dim dsSaiban As DataSet = _db.selectDB(Sql, RS, reccnt)
+        _parentForm.Enabled = True
+        _parentForm.Show()
+        Me.Dispose()
 
-            saibanID = dsSaiban.Tables(RS).Rows(0)("接頭文字")
-            saibanID += today.ToString("MMdd")
-            saibanID += dsSaiban.Tables(RS).Rows(0)("最新値").ToString.PadLeft(dsSaiban.Tables(RS).Rows(0)("連番桁数"), "0")
-
-            Dim keyNo As Integer
-
-            If dsSaiban.Tables(RS).Rows(0)("最新値") = dsSaiban.Tables(RS).Rows(0)("最大値") Then
-                '最新値が最大と同じ場合、最小値にリセット
-                keyNo = dsSaiban.Tables(RS).Rows(0)("最小値")
-            Else
-                '最新値+1
-                keyNo = dsSaiban.Tables(RS).Rows(0)("最新値") + 1
-            End If
-
-            Sql = "UPDATE "
-            Sql += "Public.m80_saiban "
-            Sql += "SET "
-            Sql += " 最新値 "
-            Sql += " = '"
-            Sql += keyNo.ToString
-            Sql += "', "
-            Sql += "更新者"
-            Sql += " = '"
-            Sql += frmC01F10_Login.loginValue.TantoNM
-            Sql += "', "
-            Sql += "更新日"
-            Sql += " = '"
-            Sql += UtilClass.formatDatetime(today)
-            Sql += "' "
-            Sql += "WHERE"
-            Sql += " 会社コード"
-            Sql += "='"
-            Sql += frmC01F10_Login.loginValue.BumonCD
-            Sql += "'"
-            Sql += " AND"
-            Sql += " 採番キー = '" & key & "'"
-            Console.WriteLine(Sql)
-            _db.executeDB(Sql)
-
-            Return saibanID
-        Catch ex As Exception
-            'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
-            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
-        End Try
-
-    End Function
-
-
-
-    'param1：String テーブル名
-    'param2：String 詳細条件
-    'Return: DataSet
-    Private Function getDsData(ByVal tableName As String, Optional ByRef txtParam As String = "") As DataSet
-        Dim reccnt As Integer = 0 'DB用（デフォルト）
-        Dim Sql As String = ""
-
-        Sql += "SELECT * FROM public." & tableName
-        Sql += " WHERE "
-        Sql += "会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-        Sql += txtParam
-        Return _db.selectDB(Sql, RS, reccnt)
-    End Function
-
-
+    End Sub
 End Class

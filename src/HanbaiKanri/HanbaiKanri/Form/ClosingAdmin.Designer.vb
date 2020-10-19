@@ -27,6 +27,7 @@ Partial Class ClosingAdmin
         Me.BtnRegistration = New System.Windows.Forms.Button()
         Me.LblShime = New System.Windows.Forms.Label()
         Me.dtmSime = New System.Windows.Forms.DateTimePicker()
+        Me.BtnOutput = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'BtnBack
@@ -43,7 +44,7 @@ Partial Class ClosingAdmin
         '
         Me.LblMode.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblMode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LblMode.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblMode.Font = New System.Drawing.Font("MS Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.LblMode.Location = New System.Drawing.Point(254, 9)
         Me.LblMode.Name = "LblMode"
         Me.LblMode.Size = New System.Drawing.Size(165, 22)
@@ -77,7 +78,7 @@ Partial Class ClosingAdmin
         '
         Me.dtmSime.CalendarFont = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.dtmSime.CustomFormat = ""
-        Me.dtmSime.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.dtmSime.Font = New System.Drawing.Font("MS Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.dtmSime.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.dtmSime.Location = New System.Drawing.Point(211, 93)
         Me.dtmSime.MinDate = New Date(2000, 1, 1, 0, 0, 0, 0)
@@ -86,10 +87,21 @@ Partial Class ClosingAdmin
         Me.dtmSime.TabIndex = 0
         Me.dtmSime.Value = New Date(2019, 1, 1, 0, 0, 0, 0)
         '
+        'BtnOutput
+        '
+        Me.BtnOutput.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.BtnOutput.Location = New System.Drawing.Point(40, 155)
+        Me.BtnOutput.Name = "BtnOutput"
+        Me.BtnOutput.Size = New System.Drawing.Size(165, 40)
+        Me.BtnOutput.TabIndex = 330
+        Me.BtnOutput.Text = "仕訳出力"
+        Me.BtnOutput.UseVisualStyleBackColor = True
+        '
         'ClosingAdmin
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.ClientSize = New System.Drawing.Size(431, 256)
+        Me.Controls.Add(Me.BtnOutput)
         Me.Controls.Add(Me.dtmSime)
         Me.Controls.Add(Me.LblShime)
         Me.Controls.Add(Me.BtnRegistration)
@@ -107,4 +119,5 @@ Partial Class ClosingAdmin
     Friend WithEvents BtnRegistration As Button
     Friend WithEvents LblShime As Label
     Friend WithEvents dtmSime As DateTimePicker
+    Friend WithEvents BtnOutput As Button
 End Class
