@@ -1041,4 +1041,17 @@ Public Class UtilClass
         Return Math.Ceiling(dFC / dRate)
     End Function
 
+    Public Shared Function rmDBNull2DateNullEx(ByVal prmField As Object) As Date
+        If prmField Is Nothing Then
+            rmDBNull2DateNullEx = Nothing
+            Exit Function
+        End If
+        If prmField Is DBNull.Value Then
+            rmDBNull2DateNullEx = Nothing
+            Exit Function
+        End If
+
+        rmDBNull2DateNullEx = CType(prmField, Date)
+    End Function
+
 End Class

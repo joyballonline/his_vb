@@ -128,6 +128,9 @@ Public Class APScheduledCollectionDateList
         DgvCymndt.Columns("支払金額計").DefaultCellStyle.Format = "N2"
         DgvCymndt.Columns("買掛金残高").DefaultCellStyle.Format = "N2"
 
+        DgvCymndt.Columns("支払期日").DefaultCellStyle.Format = "d"
+        DgvCymndt.Columns("買掛日").DefaultCellStyle.Format = "d"
+
 
         Sql = " AND "
         Sql += "買掛残高 > 0 "
@@ -164,10 +167,10 @@ Public Class APScheduledCollectionDateList
 
                 DgvCymndt.Rows.Add()
 
-                DgvCymndt.Rows(i).Cells("支払期日").Value = dsKikehd.Tables(RS).Rows(i)("支払予定日").ToShortDateString()
+                DgvCymndt.Rows(i).Cells("支払期日").Value = UtilClass.rmDBNull2DateNullEx(dsKikehd.Tables(RS).Rows(i)("支払予定日"))
                 DgvCymndt.Rows(i).Cells("仕入先名").Value = dsKikehd.Tables(RS).Rows(i)("仕入先名")
                 DgvCymndt.Rows(i).Cells("発注番号").Value = dsKikehd.Tables(RS).Rows(i)("発注番号")
-                DgvCymndt.Rows(i).Cells("買掛日").Value = dsKikehd.Tables(RS).Rows(i)("買掛日").ToShortDateString()
+                DgvCymndt.Rows(i).Cells("買掛日").Value = UtilClass.rmDBNull2DateNullEx(dsKikehd.Tables(RS).Rows(i)("買掛日"))
 
                 DgvCymndt.Rows(i).Cells("通貨_外貨").Value = cur
                 DgvCymndt.Rows(i).Cells("買掛金額計_外貨").Value = dsKikehd.Tables(RS).Rows(i)("買掛金額計_外貨")

@@ -228,6 +228,8 @@ Public Class PaidList
                 '数字形式
                 DgvHtyhd.Columns("支払金額計_外貨").DefaultCellStyle.Format = "N2"
                 DgvHtyhd.Columns("支払金額計").DefaultCellStyle.Format = "N2"
+                DgvHtyhd.Columns("支払日").DefaultCellStyle.Format = "d"
+                DgvHtyhd.Columns("支払予定日").DefaultCellStyle.Format = "d"
 
 
                 For index As Integer = 0 To ds.Tables(RS).Rows.Count - 1
@@ -247,15 +249,19 @@ Public Class PaidList
                         dcName = vbNullString
                     Else
                         Dim dsHanyo As DataSet = getDsHanyoData(CommonConst.DC_CODE, ds.Tables(RS).Rows(index)("預金種目"))
-                        dcName = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG,
+                        If dsHanyo.Tables(RS).Rows.Count = 0 Then
+                            dcName = vbNullString
+                        Else
+                            dcName = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG,
                                                                     dsHanyo.Tables(RS).Rows(0)("文字２"),
                                                                     dsHanyo.Tables(RS).Rows(0)("文字１"))
+                        End If
                     End If
 
                     DgvHtyhd.Rows.Add()
                     DgvHtyhd.Rows(index).Cells("取消").Value = getDelKbnTxt(ds.Tables(RS).Rows(index)("取消区分"))
                     DgvHtyhd.Rows(index).Cells("支払番号").Value = ds.Tables(RS).Rows(index)("支払番号")
-                    DgvHtyhd.Rows(index).Cells("支払日").Value = ds.Tables(RS).Rows(index)("支払日").ToShortDateString
+                    DgvHtyhd.Rows(index).Cells("支払日").Value = UtilClass.rmDBNull2DateNullEx(ds.Tables(RS).Rows(index)("支払日"))
                     DgvHtyhd.Rows(index).Cells("支払先名").Value = ds.Tables(RS).Rows(index)("支払先名")
                     DgvHtyhd.Rows(index).Cells("支払先").Value = ds.Tables(RS).Rows(index)("銀行名") & " " &
                                                                     ds.Tables(RS).Rows(index)("支店名") & " " &
@@ -269,7 +275,7 @@ Public Class PaidList
                     DgvHtyhd.Rows(index).Cells("支払金額計").Value = ds.Tables(RS).Rows(index)("支払金額計")
                     DgvHtyhd.Rows(index).Cells("更新日").Value = ds.Tables(RS).Rows(index)("更新日")
                     DgvHtyhd.Rows(index).Cells("備考").Value = ds.Tables(RS).Rows(index)("備考")
-                    DgvHtyhd.Rows(index).Cells("支払予定日").Value = ds.Tables(RS).Rows(index)("支払予定日").ToShortDateString
+                    DgvHtyhd.Rows(index).Cells("支払予定日").Value = UtilClass.rmDBNull2DateNullEx(ds.Tables(RS).Rows(index)("支払予定日"))
 
                 Next
 

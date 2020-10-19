@@ -198,8 +198,8 @@ Public Class AccountsPayableList
             'Label8.Text = "AccountsPayableDate"
             Label7.Text = "AccountsPayableNumber"
             Label11.Text = "CustomerNumber"
-            LblItemName.Text = "ItemName"
-            LblSpec.Text = "Spec"
+            LblItemName.Text = "PO Number"
+            LblSpec.Text = ""
             Label10.Text = "DisplayFormat"
 
             ChkCancelData.Text = "IncludeCancelData"
@@ -231,15 +231,13 @@ Public Class AccountsPayableList
 
         Try
             Sql = "SELECT t46.*, t20.ＶＡＴ"
-            Sql += " FROM public.t46_kikehd t46 "
-
-            Sql += " INNER JOIN t20_hattyu t20"
-            Sql += " ON t46.会社コード = t20.会社コード "
+            Sql += " FROM public.t46_kikehd t46, public.t20_hattyu t20 "
+            Sql += " WHERE t46.会社コード = t20.会社コード "
             Sql += " AND t46.発注番号 = t20.発注番号"
             Sql += " AND t46.発注番号枝番 = t20.発注番号枝番"
-            Sql += " AND t20.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED '発注取消されていないデータ
+            'Sql += " AND t20.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED '発注取消されていないデータ
 
-            Sql += " WHERE t46.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+            Sql += " AND t46.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
 
             Sql += viewSearchConditions() '抽出条件取得
 
@@ -538,12 +536,12 @@ Public Class AccountsPayableList
         Dim Sql As String = ""
 
         '抽出条件
-        Dim supplierName As String = escapeSql(TxtSupplierName.Text)
-        Dim supplierCode As String = escapeSql(TxtSupplierCode.Text)
+        Dim supplierName As String = UtilClass.escapeSql(TxtSupplierName.Text)
+        Dim supplierCode As String = UtilClass.escapeSql(TxtSupplierCode.Text)
         Dim sinceDate As String = UtilClass.strFormatDate(dtAPDateSince.Text)
         Dim untilDate As String = UtilClass.strFormatDate(dtAPDateUntil.Text)
-        Dim sinceNum As String = escapeSql(TxtAPSince.Text)
-        Dim poNum As String = escapeSql(TxtCustomerPO.Text)
+        Dim sinceNum As String = UtilClass.escapeSql(TxtAPSince.Text)
+        Dim poNum As String = UtilClass.escapeSql(TxtCustomerPO.Text)
         Dim itemName As String = UtilClass.escapeSql(TxtItemName.Text)
         Dim spec As String = UtilClass.escapeSql(TxtSpec.Text)
 
@@ -578,12 +576,12 @@ Public Class AccountsPayableList
 
         If itemName <> Nothing Then
             Sql += " AND "
-            Sql += " t21.品名 ILIKE '%" & itemName & "%' "
+            Sql += " t46.発注番号 ILIKE '%" & itemName & "%' "
         End If
 
         If spec <> Nothing Then
-            Sql += " AND "
-            Sql += " t21.型式 ILIKE '%" & spec & "%' "
+            'Sql += " AND "
+            'Sql += " t21.型式 ILIKE '%" & spec & "%' "
         End If
 
         '取消データを含めない場合
