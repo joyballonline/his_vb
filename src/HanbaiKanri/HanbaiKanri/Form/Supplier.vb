@@ -258,7 +258,13 @@ Public Class Supplier
 
             If ds.Tables(RS).Rows(0)("預金種目") Is DBNull.Value Then
             Else
-                createCombobox(ds.Tables(RS).Rows(0)("預金種目"))
+                Dim a As String
+                If Trim(ds.Tables(RS).Rows(0)("預金種目")) = "" Then
+                    a = "1"
+                Else
+                    a = ds.Tables(RS).Rows(0)("預金種目")
+                End If
+                createCombobox(a)
             End If
 
             If ds.Tables(RS).Rows(0)("口座番号") Is DBNull.Value Then
