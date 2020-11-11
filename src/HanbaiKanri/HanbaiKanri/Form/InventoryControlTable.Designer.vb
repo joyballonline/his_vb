@@ -22,6 +22,7 @@ Partial Class InventoryControlTable
     'コード エディターを使って変更しないでください。
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.BtnBack = New System.Windows.Forms.Button()
         Me.DgvList = New System.Windows.Forms.DataGridView()
         Me.LblMode = New System.Windows.Forms.Label()
@@ -48,7 +49,10 @@ Partial Class InventoryControlTable
         Me.cmLocationFrom = New System.Windows.Forms.ComboBox()
         Me.cmSerialNoFrom = New System.Windows.Forms.ComboBox()
         Me.cmOrderNoFrom = New System.Windows.Forms.ComboBox()
+        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.DgvList, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.ContextMenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'BtnBack
@@ -66,20 +70,20 @@ Partial Class InventoryControlTable
         Me.DgvList.AllowUserToAddRows = False
         Me.DgvList.AllowUserToDeleteRows = False
         Me.DgvList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DgvList.Location = New System.Drawing.Point(13, 159)
+        Me.DgvList.Location = New System.Drawing.Point(13, 115)
         Me.DgvList.Name = "DgvList"
         Me.DgvList.ReadOnly = True
         Me.DgvList.RowHeadersVisible = False
         Me.DgvList.RowTemplate.Height = 21
         Me.DgvList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DgvList.Size = New System.Drawing.Size(1326, 336)
+        Me.DgvList.Size = New System.Drawing.Size(1326, 380)
         Me.DgvList.TabIndex = 0
         '
         'LblMode
         '
         Me.LblMode.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblMode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LblMode.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblMode.Font = New System.Drawing.Font("MS Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.LblMode.Location = New System.Drawing.Point(1106, 9)
         Me.LblMode.Name = "LblMode"
         Me.LblMode.Size = New System.Drawing.Size(233, 22)
@@ -122,7 +126,7 @@ Partial Class InventoryControlTable
         '
         Me.LblItemName.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblItemName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LblItemName.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblItemName.Font = New System.Drawing.Font("MS Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.LblItemName.Location = New System.Drawing.Point(13, 59)
         Me.LblItemName.Name = "LblItemName"
         Me.LblItemName.Size = New System.Drawing.Size(170, 22)
@@ -172,7 +176,7 @@ Partial Class InventoryControlTable
         '
         Me.lblMaker.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.lblMaker.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lblMaker.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.lblMaker.Font = New System.Drawing.Font("MS Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.lblMaker.Location = New System.Drawing.Point(13, 33)
         Me.lblMaker.Name = "lblMaker"
         Me.lblMaker.Size = New System.Drawing.Size(170, 22)
@@ -202,7 +206,7 @@ Partial Class InventoryControlTable
         '
         Me.LblSpec.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblSpec.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LblSpec.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblSpec.Font = New System.Drawing.Font("MS Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.LblSpec.Location = New System.Drawing.Point(13, 85)
         Me.LblSpec.Name = "LblSpec"
         Me.LblSpec.Size = New System.Drawing.Size(170, 22)
@@ -301,7 +305,7 @@ Partial Class InventoryControlTable
         Me.lblOrderNo.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.lblOrderNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lblOrderNo.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.lblOrderNo.Location = New System.Drawing.Point(430, 111)
+        Me.lblOrderNo.Location = New System.Drawing.Point(860, 86)
         Me.lblOrderNo.Name = "lblOrderNo"
         Me.lblOrderNo.Size = New System.Drawing.Size(170, 22)
         Me.lblOrderNo.TabIndex = 20
@@ -351,10 +355,23 @@ Partial Class InventoryControlTable
         Me.cmOrderNoFrom.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.cmOrderNoFrom.FormattingEnabled = True
         Me.cmOrderNoFrom.Items.AddRange(New Object() {"RegularShip", "DHL", "Air", "Ship"})
-        Me.cmOrderNoFrom.Location = New System.Drawing.Point(606, 111)
+        Me.cmOrderNoFrom.Location = New System.Drawing.Point(1036, 86)
         Me.cmOrderNoFrom.Name = "cmOrderNoFrom"
         Me.cmOrderNoFrom.Size = New System.Drawing.Size(239, 23)
         Me.cmOrderNoFrom.TabIndex = 21
+        '
+        'ContextMenuStrip1
+        '
+        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem1})
+        Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(150, 26)
+        '
+        'ToolStripMenuItem1
+        '
+        Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
+        Me.ToolStripMenuItem1.ShortcutKeyDisplayString = ""
+        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(149, 22)
+        Me.ToolStripMenuItem1.Text = "Order Detail ..."
         '
         'InventoryControlTable
         '
@@ -390,6 +407,7 @@ Partial Class InventoryControlTable
         Me.Name = "InventoryControlTable"
         Me.Text = "InventoryControlTable"
         CType(Me.DgvList, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.ContextMenuStrip1.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -421,4 +439,6 @@ Partial Class InventoryControlTable
     Friend WithEvents cmLocationFrom As ComboBox
     Friend WithEvents cmSerialNoFrom As ComboBox
     Friend WithEvents cmOrderNoFrom As ComboBox
+    Friend WithEvents ContextMenuStrip1 As ContextMenuStrip
+    Friend WithEvents ToolStripMenuItem1 As ToolStripMenuItem
 End Class

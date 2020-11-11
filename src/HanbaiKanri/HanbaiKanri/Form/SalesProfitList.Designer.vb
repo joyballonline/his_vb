@@ -62,8 +62,6 @@ Partial Class SalesProfitList
         Me.利益 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.利益率 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.LblMode = New System.Windows.Forms.Label()
-        Me.cmbYear = New System.Windows.Forms.ComboBox()
-        Me.cmbMonth = New System.Windows.Forms.ComboBox()
         Me.TxtSalesCostAmount = New System.Windows.Forms.TextBox()
         Me.LblSalesCostAmount = New System.Windows.Forms.Label()
         Me.TxtSalesAmount = New System.Windows.Forms.TextBox()
@@ -77,6 +75,8 @@ Partial Class SalesProfitList
         Me.LblMonth = New System.Windows.Forms.Label()
         Me.LblYear = New System.Windows.Forms.Label()
         Me.BtnSearch = New System.Windows.Forms.Button()
+        Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
+        Me.DateTimePicker2 = New System.Windows.Forms.DateTimePicker()
         CType(Me.DgvList, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -400,26 +400,6 @@ Partial Class SalesProfitList
         Me.LblMode.Text = "参照モード"
         Me.LblMode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'cmbYear
-        '
-        Me.cmbYear.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cmbYear.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.cmbYear.FormattingEnabled = True
-        Me.cmbYear.Location = New System.Drawing.Point(85, 70)
-        Me.cmbYear.Name = "cmbYear"
-        Me.cmbYear.Size = New System.Drawing.Size(111, 23)
-        Me.cmbYear.TabIndex = 335
-        '
-        'cmbMonth
-        '
-        Me.cmbMonth.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cmbMonth.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.cmbMonth.FormattingEnabled = True
-        Me.cmbMonth.Location = New System.Drawing.Point(85, 40)
-        Me.cmbMonth.Name = "cmbMonth"
-        Me.cmbMonth.Size = New System.Drawing.Size(111, 23)
-        Me.cmbMonth.TabIndex = 336
-        '
         'TxtSalesCostAmount
         '
         Me.TxtSalesCostAmount.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
@@ -558,9 +538,9 @@ Partial Class SalesProfitList
         Me.LblMonth.Font = New System.Drawing.Font("MS Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.LblMonth.Location = New System.Drawing.Point(34, 43)
         Me.LblMonth.Name = "LblMonth"
-        Me.LblMonth.Size = New System.Drawing.Size(23, 15)
+        Me.LblMonth.Size = New System.Drawing.Size(39, 15)
         Me.LblMonth.TabIndex = 343
-        Me.LblMonth.Text = "月"
+        Me.LblMonth.Text = "From"
         '
         'LblYear
         '
@@ -570,22 +550,40 @@ Partial Class SalesProfitList
         Me.LblYear.Name = "LblYear"
         Me.LblYear.Size = New System.Drawing.Size(23, 15)
         Me.LblYear.TabIndex = 344
-        Me.LblYear.Text = "年"
+        Me.LblYear.Text = "To"
         '
         'BtnSearch
         '
         Me.BtnSearch.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.BtnSearch.Location = New System.Drawing.Point(218, 40)
+        Me.BtnSearch.Location = New System.Drawing.Point(354, 41)
         Me.BtnSearch.Name = "BtnSearch"
         Me.BtnSearch.Size = New System.Drawing.Size(165, 40)
         Me.BtnSearch.TabIndex = 345
         Me.BtnSearch.Text = "Search"
         Me.BtnSearch.UseVisualStyleBackColor = True
         '
+        'DateTimePicker1
+        '
+        Me.DateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.DateTimePicker1.Location = New System.Drawing.Point(79, 41)
+        Me.DateTimePicker1.Name = "DateTimePicker1"
+        Me.DateTimePicker1.Size = New System.Drawing.Size(139, 20)
+        Me.DateTimePicker1.TabIndex = 346
+        '
+        'DateTimePicker2
+        '
+        Me.DateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.DateTimePicker2.Location = New System.Drawing.Point(79, 73)
+        Me.DateTimePicker2.Name = "DateTimePicker2"
+        Me.DateTimePicker2.Size = New System.Drawing.Size(139, 20)
+        Me.DateTimePicker2.TabIndex = 347
+        '
         'SalesProfitList
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.ClientSize = New System.Drawing.Size(1350, 561)
+        Me.Controls.Add(Me.DateTimePicker2)
+        Me.Controls.Add(Me.DateTimePicker1)
         Me.Controls.Add(Me.BtnSearch)
         Me.Controls.Add(Me.LblYear)
         Me.Controls.Add(Me.LblMonth)
@@ -599,8 +597,6 @@ Partial Class SalesProfitList
         Me.Controls.Add(Me.LblGrossMarginRate)
         Me.Controls.Add(Me.TxtTotalSalesAmount)
         Me.Controls.Add(Me.LblTotalSalesAmount)
-        Me.Controls.Add(Me.cmbMonth)
-        Me.Controls.Add(Me.cmbYear)
         Me.Controls.Add(Me.LblMode)
         Me.Controls.Add(Me.BtnExcelOutput)
         Me.Controls.Add(Me.Label8)
@@ -619,8 +615,6 @@ Partial Class SalesProfitList
     Friend WithEvents BtnBack As Button
     Friend WithEvents DgvList As DataGridView
     Friend WithEvents LblMode As Label
-    Friend WithEvents cmbYear As ComboBox
-    Friend WithEvents cmbMonth As ComboBox
     Friend WithEvents TxtSalesCostAmount As TextBox
     Friend WithEvents LblSalesCostAmount As Label
     Friend WithEvents TxtSalesAmount As TextBox
@@ -666,4 +660,6 @@ Partial Class SalesProfitList
     Friend WithEvents 利益 As DataGridViewTextBoxColumn
     Friend WithEvents 利益率 As DataGridViewTextBoxColumn
     Friend WithEvents BtnSearch As Button
+    Friend WithEvents DateTimePicker1 As DateTimePicker
+    Friend WithEvents DateTimePicker2 As DateTimePicker
 End Class

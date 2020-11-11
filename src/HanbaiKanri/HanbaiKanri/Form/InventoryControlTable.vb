@@ -171,7 +171,7 @@ Public Class InventoryControlTable
             DgvList.Columns.Add("メーカー", "Manufacturer")
             DgvList.Columns.Add("品名", "ItemName")
             DgvList.Columns.Add("型式", "Spec")
-            DgvList.Columns.Add("倉庫", "Manufacturer")
+            DgvList.Columns.Add("倉庫", "Warehouse")
             DgvList.Columns.Add("入出庫種別", "StorageType")
             DgvList.Columns.Add("ロケ番号", "Location")
             DgvList.Columns.Add("製造番号", "SerialNo")
@@ -185,6 +185,7 @@ Public Class InventoryControlTable
             DgvList.Columns.Add("出庫単価", "DeliveryUnitPrice")
             DgvList.Columns.Add("在庫数", "StocksQuantity")
             DgvList.Columns.Add("備考", "Remarks")
+            DgvList.Columns.Add("行番号", "LineNo")
         Else
             DgvList.Columns.Add("メーカー", "メーカー")
             DgvList.Columns.Add("品名", "品名")
@@ -203,6 +204,7 @@ Public Class InventoryControlTable
             DgvList.Columns.Add("出庫単価", "出庫単価")
             DgvList.Columns.Add("在庫数", "在庫数")
             DgvList.Columns.Add("備考", "備考")
+            DgvList.Columns.Add("行番号", "LineNo")
         End If
 
         DgvList.Columns("月末在庫数").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
@@ -243,8 +245,10 @@ Public Class InventoryControlTable
         End If
         If "GHIJKLMNOPQRSTUV".Contains(InventoryViewer) Then
             DgvList.Columns("伝票番号").Visible = True
+            DgvList.Columns("行番号").Visible = True
         Else
             DgvList.Columns("伝票番号").Visible = False
+            DgvList.Columns("行番号").Visible = False
         End If
 
         If InventoryControl = "0" Then
@@ -341,128 +345,66 @@ Public Class InventoryControlTable
             Dim sOutFile As String = sOutPath & "\InventoryControlTable_" & DateTime.Now.ToString("yyyyMMddHHmm") & ".xlsx"
 
             app = New Microsoft.Office.Interop.Excel.Application()
+            app.ScreenUpdating = False
+            app.EnableEvents = False
+            app.Visible = False
+
             book = app.Workbooks.Add(sHinaFile)  'テンプレート
             sheet = CType(book.Worksheets(1), Microsoft.Office.Interop.Excel.Worksheet)
 
             sheet.PageSetup.RightHeader = "出力日：" & DateTime.Now.ToShortDateString
-
+            app.Calculation = Microsoft.Office.Interop.Excel.XlCalculation.xlCalculationManual
             app.DisplayAlerts = False 'セル結合のアラートが出るので一旦無効化
 
             If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 sheet.PageSetup.LeftHeader = "Inventory control table"
                 sheet.PageSetup.RightHeader = "OutputDate：" & DateTime.Now.ToShortDateString
 
-                sheet.Range("A1").Value = "Manufacturer"
+                sheet.Range("B1").Value = "Manufacturer"
                 sheet.Range("C1").Value = "ItemName"
-                sheet.Range("F1").Value = "Spec"
-
+                sheet.Range("D1").Value = "Spec"
+                sheet.Range("G1").Value = "InOutDate"
+                sheet.Range("H1").Value = "Suppliers"
+                sheet.Range("I1").Value = "Quantity+"
+                sheet.Range("M1").Value = "StocksQuantity"
+                sheet.Range("J1").Value = "ReceiptUnitPrice"
+                sheet.Range("K1").Value = "Quantity-"
+                sheet.Range("L1").Value = "DeliveryUnitPrice"
+                sheet.Range("F1").Value = "StorageType"
+                sheet.Range("A1").Value = "Warehouse"
+                sheet.Range("N1").Value = "Remarks"
+                sheet.Range("E1").Value = "SlipNumber"
+            Else
+                sheet.PageSetup.RightHeader = "出力日：" & DateTime.Now.ToShortDateString
             End If
 
-            Dim strSoko As String = DgvList.Rows(0).Cells("倉庫").Value
-            Dim strMaker As String = DgvList.Rows(0).Cells("メーカー").Value
-            Dim strItem As String = DgvList.Rows(0).Cells("品名").Value
-            Dim strSpec As String = DgvList.Rows(0).Cells("型式").Value
+            Dim array2(DgvList.RowCount - 1, 13) As String
 
-            Dim cellRowIndex As Integer = 1
+            'Dim strSoko As String = DgvList.Rows(0).Cells("倉庫").Value
+            'Dim strMaker As String = DgvList.Rows(0).Cells("メーカー").Value
+            'Dim strItem As String = DgvList.Rows(0).Cells("品名").Value
+            'Dim strSpec As String = DgvList.Rows(0).Cells("型式").Value
+            'Dim cellRowIndex As Integer = 1
             For i As Integer = 0 To DgvList.RowCount - 1
 
-                cellRowIndex += 1
+                array2(i, 0) = DgvList.Rows(i).Cells("倉庫").Value
+                array2(i, 1) = UtilClass.rmDBNull2StrNull(DgvList.Rows(i).Cells("メーカー").Value)
+                array2(i, 2) = UtilClass.rmDBNull2StrNull(DgvList.Rows(i).Cells("品名").Value)
+                array2(i, 3) = UtilClass.rmDBNull2StrNull(DgvList.Rows(i).Cells("型式").Value)
+                array2(i, 4) = DgvList.Rows(i).Cells("伝票番号").Value
+                array2(i, 5) = DgvList.Rows(i).Cells("入出庫種別").Value
+                array2(i, 6) = DgvList.Rows(i).Cells("入出庫日").Value
+                array2(i, 7) = DgvList.Rows(i).Cells("取引先").Value
+                array2(i, 8) = UtilClass.rmDBNull2StrNull(DgvList.Rows(i).Cells("入庫数量").Value)
+                array2(i, 9) = UtilClass.rmDBNull2StrNull(DgvList.Rows(i).Cells("入庫単価").Value)
+                array2(i, 10) = UtilClass.rmDBNull2StrNull(DgvList.Rows(i).Cells("出庫数量").Value)
+                array2(i, 11) = UtilClass.rmDBNull2StrNull(DgvList.Rows(i).Cells("出庫単価").Value)
+                array2(i, 12) = DgvList.Rows(i).Cells("在庫数").Value
+                array2(i, 13) = UtilClass.rmDBNull2StrNull(DgvList.Rows(i).Cells("備考").Value)
 
-                Dim strSoko2 As String = DgvList.Rows(i).Cells("倉庫").Value
-                Dim strMaker2 As String = DgvList.Rows(i).Cells("メーカー").Value
-                Dim strItem2 As String = DgvList.Rows(i).Cells("品名").Value
-                Dim strSpec2 As String = DgvList.Rows(i).Cells("型式").Value
-
-                If strSoko <> strSoko2 Or strMaker <> strMaker2 Or strItem <> strItem2 Or strSpec <> strSpec2 Or i = 0 Then
-                    'If DgvList.Rows(i).Cells("メーカー").Value <> "" Then
-
-                    sheet.Range("A" & cellRowIndex.ToString, "J" & cellRowIndex.ToString).Borders(Microsoft.Office.Interop.Excel.XlBordersIndex.xlEdgeTop).LineStyle = Microsoft.Office.Interop.Excel.XlLineStyle.xlDouble
-
-                    'メーカー、品名、型式 の列結合
-                    sheet.Range("A" & cellRowIndex.ToString, "B" & cellRowIndex.ToString).Merge() 'メーカー
-                    sheet.Range("C" & cellRowIndex.ToString, "D" & cellRowIndex.ToString).Merge() '品名
-                    sheet.Range("F" & cellRowIndex.ToString, "H" & cellRowIndex.ToString).Merge() '型式
-
-                    sheet.Range("A" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("メーカー").Value
-                    sheet.Range("C" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("品名").Value
-                    sheet.Range("F" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("型式").Value
-
-                    sheet.Range("A" & cellRowIndex.ToString).HorizontalAlignment = Microsoft.Office.Interop.Excel.Constants.xlLeft
-                    sheet.Range("C" & cellRowIndex.ToString).HorizontalAlignment = Microsoft.Office.Interop.Excel.Constants.xlLeft
-                    sheet.Range("F" & cellRowIndex.ToString).HorizontalAlignment = Microsoft.Office.Interop.Excel.Constants.xlLeft
-
-                    sheet.Range("A" & cellRowIndex.ToString, "J" & cellRowIndex.ToString).Borders(Microsoft.Office.Interop.Excel.XlBordersIndex.xlEdgeBottom).LineStyle = Microsoft.Office.Interop.Excel.XlLineStyle.xlDouble
-
-                    cellRowIndex += 1 '次の行
-
-                    sheet.Range("D" & cellRowIndex.ToString, "E" & cellRowIndex.ToString).Merge() '入庫見出し
-                    sheet.Range("F" & cellRowIndex.ToString, "G" & cellRowIndex.ToString).Merge() '出庫見出し
-                    sheet.Range("D" & cellRowIndex.ToString).Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG, "GoodsReceipt", "入庫")
-                    sheet.Range("F" & cellRowIndex.ToString).Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG, "GoodsDelivery", "出庫")
-                    sheet.Range("D" & cellRowIndex.ToString).HorizontalAlignment = Microsoft.Office.Interop.Excel.Constants.xlCenter
-                    sheet.Range("F" & cellRowIndex.ToString).HorizontalAlignment = Microsoft.Office.Interop.Excel.Constants.xlCenter
-
-                    cellRowIndex += 1 '次の行
-
-                    sheet.Range("C" & cellRowIndex.ToString).HorizontalAlignment = Microsoft.Office.Interop.Excel.Constants.xlLeft
-                    sheet.Range("D" & cellRowIndex.ToString).HorizontalAlignment = Microsoft.Office.Interop.Excel.Constants.xlLeft
-                    sheet.Range("E" & cellRowIndex.ToString).HorizontalAlignment = Microsoft.Office.Interop.Excel.Constants.xlLeft
-                    sheet.Range("F" & cellRowIndex.ToString).HorizontalAlignment = Microsoft.Office.Interop.Excel.Constants.xlLeft
-                    sheet.Range("G" & cellRowIndex.ToString).HorizontalAlignment = Microsoft.Office.Interop.Excel.Constants.xlLeft
-
-                    '年月日、取引先、入庫（数量、単価）、出庫（数量、単価）、在庫数、備考
-
-                    sheet.Range("A" & cellRowIndex.ToString).Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG, "Date", "入出庫日")
-                    sheet.Range("B" & cellRowIndex.ToString).Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG, "Suppliers", "取引先")
-                    sheet.Range("C" & cellRowIndex.ToString).Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG, "MonthEndInventory", "月末在庫数")
-                    sheet.Range("D" & cellRowIndex.ToString).Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG, "Quantity", "数量")
-                    sheet.Range("E" & cellRowIndex.ToString).Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG, "UnitPrice", "単価")
-                    sheet.Range("F" & cellRowIndex.ToString).Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG, "Quantity", "数量")
-                    sheet.Range("G" & cellRowIndex.ToString).Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG, "UnitPrice", "単価")
-                    sheet.Range("H" & cellRowIndex.ToString).Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG, "StockQuantity", "在庫数")
-                    'sheet.Range("H" & cellRowIndex.ToString).Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG, "InOutClassification", "入出庫種別")
-                    'sheet.Range("I" & cellRowIndex.ToString).Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG, "Remarks", "備考")
-                    sheet.Range("I" & cellRowIndex.ToString).Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG, "Warehouse", "倉庫")
-                    sheet.Range("J" & cellRowIndex.ToString).Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG, "SlipNumber", "伝票番号")
-
-                    sheet.Range("A" & cellRowIndex.ToString, "J" & cellRowIndex.ToString).Borders(Microsoft.Office.Interop.Excel.XlBordersIndex.xlEdgeBottom).LineStyle = Microsoft.Office.Interop.Excel.XlLineStyle.xlContinuous　　　　　'底の罫線
-
-                    cellRowIndex += 1 '次の行
-
-                    strSoko = DgvList.Rows(i).Cells("倉庫").Value
-                    strMaker = DgvList.Rows(i).Cells("メーカー").Value
-                    strItem = DgvList.Rows(i).Cells("品名").Value
-                    strSpec = DgvList.Rows(i).Cells("型式").Value
-
-                End If
-
-                '年月日、取引先、入庫（数量、単価）、出庫（数量、単価）、在庫数、備考
-                sheet.Range("A" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("入出庫日").Value
-                sheet.Range("B" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("取引先").Value
-                sheet.Range("C" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("月末在庫数").Value
-                sheet.Range("D" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("入庫数量").Value
-                sheet.Range("E" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("入庫単価").Value
-                sheet.Range("F" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("出庫数量").Value
-                sheet.Range("G" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("出庫単価").Value
-                sheet.Range("H" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("在庫数").Value
-                'sheet.Range("H" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("入出庫種別").Value
-                'sheet.Range("I" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("備考").Value
-                sheet.Range("I" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("倉庫").Value
-                sheet.Range("J" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("伝票番号").Value
-
-                sheet.Range("C" & cellRowIndex.ToString).HorizontalAlignment = Microsoft.Office.Interop.Excel.Constants.xlRight
-                sheet.Range("D" & cellRowIndex.ToString).HorizontalAlignment = Microsoft.Office.Interop.Excel.Constants.xlRight
-                sheet.Range("E" & cellRowIndex.ToString).HorizontalAlignment = Microsoft.Office.Interop.Excel.Constants.xlRight
-                sheet.Range("F" & cellRowIndex.ToString).HorizontalAlignment = Microsoft.Office.Interop.Excel.Constants.xlRight
-                sheet.Range("G" & cellRowIndex.ToString).HorizontalAlignment = Microsoft.Office.Interop.Excel.Constants.xlRight
-                sheet.Range("H" & cellRowIndex.ToString).HorizontalAlignment = Microsoft.Office.Interop.Excel.Constants.xlRight
-
-                sheet.Range("A" & cellRowIndex.ToString, "J" & cellRowIndex.ToString).Borders(Microsoft.Office.Interop.Excel.XlBordersIndex.xlEdgeBottom).LineStyle = Microsoft.Office.Interop.Excel.XlLineStyle.xlContinuous     '底の罫線
             Next
 
-            app.DisplayAlerts = True 'アラート無効化を解除
-
-            app.DisplayAlerts = False 'Microsoft Excelのアラート一旦無効化
+            sheet.Range("A2:N" & (DgvList.RowCount + 1).ToString).Value = array2
 
             Dim excelChk As Boolean = excelOutput(sOutFile)
             If excelChk = False Then
@@ -472,6 +414,9 @@ Public Class InventoryControlTable
 
             app.DisplayAlerts = True 'アラート無効化を解除
             app.Visible = True
+            app.Calculation = Microsoft.Office.Interop.Excel.XlCalculation.xlCalculationAutomatic
+            app.EnableEvents = True
+            app.ScreenUpdating = True
 
             'カーソルを砂時計から元に戻す
             Cursor.Current = Cursors.Default
@@ -853,7 +798,7 @@ Public Class InventoryControlTable
 #Region "nyuko"
 
             Dim strNen As String = Mid(strSyoriNentuki, 1, 4)
-            Dim strTuki As String = Mid(strSyoriNentuki, 5, 2) + 1
+            Dim strTuki As String = Mid(strSyoriNentuki, 5, 2) '+ 1
 
             Dim dtmSyoriNentuki As Date = DateSerial(strNen, strTuki, 1)     '処理年月日
             Dim dtmSyoriNentukiE As Date = DateAdd("m", 1, dtmSyoriNentuki)  '処理年月日 end
@@ -931,6 +876,8 @@ Public Class InventoryControlTable
                 DgvList.Rows(intList).Cells("型式").Value = dsList.Rows(i)("型式").ToString
 
                 DgvList.Rows(intList).Cells("伝票番号").Value = dsList.Rows(i)("伝票番号").ToString
+                DgvList.Rows(intList).Cells("行番号").Value = dsList.Rows(i)("行番号").ToString
+                'DgvList.Rows(intList).Cells("ロケ番号").Value = dsList.Rows(i)("ロケ番号").ToString
 
                 'DgvList.Rows(i).Cells("入出庫種別").Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG,
                 '                                                    dsList.Rows(i)("文字２"),
@@ -962,13 +909,13 @@ Public Class InventoryControlTable
                 End If
 
                 '入庫単価
-                Dim decTemp As Decimal = rmNullDecimal(dsList.Rows(i)("入庫単価").ToString)
+                Dim decTemp As Decimal = UtilClass.rmNullDecimal(dsList.Rows(i)("入庫単価").ToString)
                 DgvList.Rows(intList).Cells("入庫単価").Value = decTemp.ToString("N2")
 
                 DgvList.Rows(intList).Cells("出庫数量").Value = dsList.Rows(i)("出庫数量")
 
                 '出庫単価
-                decTemp = rmNullDecimal(dsList.Rows(i)("出庫単価").ToString)
+                decTemp = UtilClass.rmNullDecimal(dsList.Rows(i)("出庫単価").ToString)
                 If decTemp = 0 Then
                 Else
                     DgvList.Rows(intList).Cells("出庫単価").Value = decTemp.ToString("N2")
@@ -1017,6 +964,9 @@ Public Class InventoryControlTable
                     DgvList.Rows(intList).Cells("型式").Value = dsinout.Rows(j)("型式").ToString
 
                     DgvList.Rows(intList).Cells("伝票番号").Value = dsinout.Rows(j)("伝票番号").ToString
+                    DgvList.Rows(intList).Cells("行番号").Value = dsinout.Rows(j)("行番号").ToString
+                    DgvList.Rows(intList).Cells("ロケ番号").Value = dsinout.Rows(j)("ロケ番号").ToString
+
 
                     '入出庫日
                     Dim dtmSyuko As Date = dsinout.Rows(j)("入出庫日").ToString
@@ -1027,7 +977,7 @@ Public Class InventoryControlTable
                     DgvList.Rows(intList).Cells("出庫数量").Value = dsinout.Rows(j)("数量")
 
                     '出庫単価
-                    decTemp = rmNullDecimal(dsinout.Rows(j)("売単価").ToString)
+                    decTemp = UtilClass.rmNullDecimal(dsinout.Rows(j)("売単価").ToString)
                     If decTemp = 0 Then
                     Else
                         DgvList.Rows(intList).Cells("出庫単価").Value = decTemp.ToString("N2")
@@ -1109,24 +1059,17 @@ Public Class InventoryControlTable
 
     End Function
 
-    'NothingをDecimalに置換
-    Private Function rmNullDecimal(ByVal prmField As Object) As Decimal
-
-        If prmField Is Nothing Then
-            rmNullDecimal = 0
-            Exit Function
+    Private Sub DgvList_CellMouseDown(sender As Object, e As DataGridViewCellMouseEventArgs) Handles DgvList.CellMouseDown
+        If e.RowIndex > -1 Then
+            DgvList.Rows(e.RowIndex).ContextMenuStrip = Me.ContextMenuStrip1
         End If
+    End Sub
 
-        If prmField Is DBNull.Value Then
-            rmNullDecimal = 0
-            Exit Function
-        End If
+    Private Sub ToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem1.Click
+        Dim x As DataGridViewRow = DgvList.SelectedRows(0)
 
-        If Not IsNumeric(prmField) Then
-            rmNullDecimal = 0
-            Exit Function
-        End If
+        MessageBox.Show(x.Cells("伝票番号").Value & vbCrLf & x.Cells("行番号").Value)
 
-        rmNullDecimal = prmField
-    End Function
+
+    End Sub
 End Class

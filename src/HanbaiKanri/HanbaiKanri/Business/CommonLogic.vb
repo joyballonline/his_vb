@@ -689,7 +689,7 @@ Public Class CommonLogic
                                        ByVal sMaker As String,
                                        ByVal sItem As String,
                                        ByVal sSpec As String,
-                                       ByVal currentVal As Long,
+                                       ByVal currentVal As Decimal,
                                        ByVal sUnit_ As String,
                                        ByVal sRemark_ As String,
                                        ByVal sLotno_ As String,
@@ -707,7 +707,7 @@ Public Class CommonLogic
                                        ByVal sMaker As String,
                                        ByVal sItem As String,
                                        ByVal sSpec As String,
-                                       ByVal currentVal As Long,
+                                       ByVal currentVal As Decimal,
                                        ByVal sUnit_ As String,
                                        ByVal sRemark_ As String,
                                        ByVal sLotno_ As String,
@@ -755,7 +755,7 @@ Public Class CommonLogic
         sql += "', '"
         sql += UtilClass.escapeSql(sSpec) '型式
         sql += "', '"
-        sql += currentVal.ToString '数量
+        sql += UtilClass.formatNumber(currentVal) '数量
         sql += "', '"
         sql += sUnit_ '単位
         sql += "', '"
@@ -881,7 +881,7 @@ Public Class CommonLogic
                                          ByVal sMaker As String,
                                        ByVal sItem As String,
                                        ByVal sSpec As String, ByVal sSupplierName As String,
-                                       ByVal dPurUnitPrice As Decimal, ByVal sUnit_ As String, ByVal currentVal As Long,
+                                       ByVal dPurUnitPrice As Decimal, ByVal sUnit_ As String, ByVal currentVal As Decimal,
                                         ByVal sPO As String, ByVal sPOB As String,
                                         ByVal sRemark_ As String) As Boolean
         Dim Sql As String = vbNullString
@@ -911,7 +911,7 @@ Public Class CommonLogic
         Sql += ", '"
         Sql += sUnit_ '単位10
         Sql += "',"
-        Sql += currentVal.ToString '入庫数量
+        Sql += UtilClass.formatNumber(currentVal) '入庫数量
         Sql += ", '"
         Sql += UtilClass.escapeSql(sRemark_)  '備考
         Sql += "', '"
@@ -978,8 +978,9 @@ Public Class CommonLogic
                                          ByVal sCO As String, ByVal sCOB As String, ByVal sMaker As String,
                                        ByVal sItem As String,
                                        ByVal sSpec As String, ByVal sSupplierName As String,
-                                         ByVal dSellUnitPrice As Decimal, ByVal sUnit_ As String, ByVal currentVal As Long,
-                                     ByVal sWarehouse_ As String, ByVal syukokbn_ As String) As Boolean
+                                         ByVal dSellUnitPrice As Decimal, ByVal sUnit_ As String, ByVal currentVal As Decimal,
+                                     ByVal sWarehouse_ As String, ByVal syukokbn_ As String,
+                                         Optional ByVal remark_ As String = "") As Boolean
         Dim Sql As String = vbNullString
         '出庫明細
         Sql = "INSERT INTO "
@@ -987,7 +988,7 @@ Public Class CommonLogic
         Sql += "t45_shukodt("
         Sql += "会社コード, 出庫番号, 受注番号, 受注番号枝番, 行番号, "
         Sql += "仕入区分 , メーカー, 品名, 型式, 仕入先名, "
-        Sql += "売単価, 単位, 出庫数量, 更新者, 更新日, 倉庫コード, 出庫区分)"
+        Sql += "売単価, 単位, 出庫数量, 更新者, 更新日, 倉庫コード, 出庫区分, 備考)"
         Sql += " VALUES('"
         Sql += frmC01F10_Login.loginValue.BumonCD '会社コード1
         Sql += "', '"
@@ -1013,7 +1014,7 @@ Public Class CommonLogic
         Sql += ", '"
         Sql += sUnit_ '単位
         Sql += "', "
-        Sql += currentVal.ToString '出庫数量
+        Sql += UtilClass.formatNumber(currentVal) '出庫数量
         Sql += ", '"
         Sql += frmC01F10_Login.loginValue.TantoNM '更新者
         Sql += "', '"
@@ -1022,6 +1023,8 @@ Public Class CommonLogic
         Sql += sWarehouse_ '倉庫コード
         Sql += "', '"
         Sql += syukokbn_ 'CommonConst.SHUKO_KBN_NORMAL '出庫区分 （1:通常出庫）
+        Sql += "', '"
+        Sql += remark_ '備考
         Sql += "')"
 
         _db.executeDB(Sql)
@@ -1085,7 +1088,7 @@ Public Class CommonLogic
         Sql += "', '"
         Sql += UtilClass.escapeSql(s_)
         Sql += "', '"
-        Sql += q_.ToString
+        Sql += UtilClass.formatNumber(q_)
         Sql += "', '"
         Sql += d_
         Sql += "', '"
@@ -1127,7 +1130,8 @@ Public Class CommonLogic
         Return cur
     End Function
 
-    Public Function m21_get_qty_(m_ As String, i_ As String, s_ As String, wh_ As String) As Decimal
+    Public Function m21_get_qty_(m_ As String, i_ As String, s_ As String, wh_ As String,
+                                 Optional inout_ As String = CommonConst.INOUT_KBN_NORMAL) As Decimal
         Dim Sql As String = vbNullString
         Dim reccnt As Integer = 0
         Sql = "SELECT sum(適正在庫数) as 数量 from m21_zaiko where 会社コード='" & frmC01F10_Login.loginValue.BumonCD & "'"
@@ -1135,7 +1139,7 @@ Public Class CommonLogic
         Sql += " AND 品名 = '" & UtilClass.escapeSql(i_) & "'"
         Sql += " AND 型式 = '" & UtilClass.escapeSql(s_) & "'"
         Sql += " AND 倉庫コード = '" & wh_ & "'"
-        Sql += " And 入出庫種別 = '0'"
+        Sql += " And 入出庫種別 = '" & inout_ & "'"
         Sql += " AND 無効フラグ = " & CommonConst.CANCEL_KBN_ENABLED
         Sql += ""
         Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
@@ -1154,8 +1158,13 @@ Public Class CommonLogic
         Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
         Sql += " AND 受注番号 = '" & o_ & "'"
         Sql += " AND 受注番号枝番 = '" & v_ & "'"
-        'Sql += " AND 出庫区分 ='" & CommonConst.SHUKO_KBN_NORMAL & "'"
+        Sql += " AND 出庫区分 ='" & CommonConst.SHUKO_KBN_TMP & "'"
         Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
+
+        If ds.Tables(RS).Rows.Count = 0 Then
+            Return False
+        End If
+
         For i As Integer = 0 To ds.Tables(RS).Rows.Count - 1
 
             Sql = "UPDATE "
@@ -1178,25 +1187,253 @@ Public Class CommonLogic
             Sql += "'"
             Sql += " AND 伝票番号 ='" & ds.Tables(RS).Rows(i)("出庫番号") & "' "
             Sql += " AND 行番号 ='" & ds.Tables(RS).Rows(i)("行番号") & "' "
+            Sql += " AND 引当区分 ='1'"
             _db.executeDB(Sql)
 
         Next
 
         Sql = "UPDATE "
-        Sql += " t44_shukohd "
-        Sql += " SET "
-        Sql += " 取消区分 = '" & CommonConst.CANCEL_KBN_DISABLED.ToString & "'"
-        Sql += " ,取消日 = '" & UtilClass.formatDatetime(Now) & "'"
-        Sql += " ,更新日 = '" & UtilClass.formatDatetime(Now) & "'"
-        Sql += " ,更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
-        Sql += " WHERE "
-        Sql += " 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+            Sql += " t44_shukohd "
+            Sql += " SET "
+            Sql += " 取消区分 = '" & CommonConst.CANCEL_KBN_DISABLED.ToString & "'"
+            Sql += " ,取消日 = '" & UtilClass.formatDatetime(Now) & "'"
+            Sql += " ,更新日 = '" & UtilClass.formatDatetime(Now) & "'"
+            Sql += " ,更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
+            Sql += " WHERE "
+            Sql += " 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
         Sql += " AND 受注番号 = '" & o_ & "'"
         Sql += " AND 受注番号枝番 = '" & v_ & "'"
         'Sql += " AND 出庫番号 = '" & ds.Tables(RS).Rows(i)("出庫番号") & "'"
         _db.executeDB(Sql)
 
         Return True
+    End Function
+
+    '在庫マスタから現在庫数を取得
+    ' getAvaQty_genzaiko_normal, m21_get_ava_qty_
+    Public Function cymn_setZaikoQuantity(m_ As String, i_ As String, s_ As String, wh_ As String) As Decimal
+        Dim Sql As String = ""
+        Dim reccnt As Integer = 0 'DB用（デフォルト）
+
+        Sql = "SELECT sum(現在庫数) as 数量 from m21_zaiko"
+
+        Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+
+        Sql += " AND メーカー = '" & UtilClass.escapeSql(m_) & "'"
+        Sql += " AND 品名 = '" & UtilClass.escapeSql(i_) & "'"
+        Sql += " AND 型式 = '" & UtilClass.escapeSql(s_) & "'"
+        Sql += " AND 倉庫コード = '" & wh_ & "'"
+        Sql += " AND 入出庫種別 = '" & CommonConst.INOUT_KBN_NORMAL & "'"
+        'Sql += " AND 現在庫数 <> 0"
+        Sql += " AND 無効フラグ = " & CommonConst.CANCEL_KBN_ENABLED
+
+        '在庫マスタから現在庫数を取得
+        Dim dsZaiko As DataSet = _db.selectDB(Sql, RS, reccnt)
+
+        If dsZaiko.Tables(RS).Rows.Count > 0 And dsZaiko.Tables(RS).Rows(0)("数量") IsNot DBNull.Value Then
+            Return dsZaiko.Tables(RS).Rows(0)("数量")
+        Else
+            Return 0
+        End If
+
+    End Function
+
+    '在庫マスタから現在庫数一覧を取得
+    '仕入区分 2 の時 
+    ' getAvaQty_genzaiko_normal
+    Public Function cymn_getZaikoList(m_ As String, i_ As String, s_ As String, wh_ As String, ByVal intZaikoHiki As Integer) As DataSet
+        Dim Sql As String = ""
+        Dim reccnt As Integer = 0 'DB用（デフォルト）
+
+        Sql = "SELECT sum(現在庫数) as 現在庫数,入出庫種別,伝票番号,行番号 from m21_zaiko"
+
+        Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+
+        Sql += " AND  メーカー = '" & UtilClass.escapeSql(m_) & "'"
+        Sql += " AND  品名 = '" & UtilClass.escapeSql(i_) & "'"
+        Sql += " AND  型式 = '" & UtilClass.escapeSql(s_) & "'"
+        Sql += " AND  倉庫コード = '" & wh_ & "'"
+        Sql += " AND  入出庫種別 = '" & CommonConst.INOUT_KBN_NORMAL & "'"
+        Sql += " AND  無効フラグ = " & CommonConst.CANCEL_KBN_ENABLED
+
+        '在庫引当区分の場合は条件に含めない
+        If intZaikoHiki = 2 Then
+        Else
+            Sql += " AND 現在庫数 <> 0"
+        End If
+        'Sql += " AND  現在庫数 <> 0"
+
+        Sql += " GROUP BY 倉庫コード, 入出庫種別, 最終入庫日, 伝票番号, 行番号 "
+        Sql += " ORDER BY 最終入庫日 "
+
+        '在庫マスタから現在庫数を取得
+        Dim dsZaiko As DataSet = _db.selectDB(Sql, RS, reccnt)
+
+        Return dsZaiko
+
+    End Function
+
+    '入庫マスタから現在庫数一覧を取得
+    '仕入区分 2 の時
+    ' getavaqty_genzaiko_normal
+    Public Function cymn_getNukoList3(ByVal rowIndex As Integer, ByVal intZaikoHiki As Integer) As DataSet
+        Dim Sql As String = ""
+        Dim reccnt As Integer = 0 'DB用（デフォルト）
+
+        Sql = " SELECT t42.入庫番号 "
+        Sql += " FROM t10_cymnhd t10  "
+
+        Sql += " LEFT JOIN t20_hattyu t20 "
+        Sql += " ON "
+        Sql += " t10.会社コード = t20.会社コード "
+        Sql += " AND "
+        Sql += " t10.受注番号 = t20.受注番号 "
+        Sql += " AND "
+        Sql += " t10.受注番号枝番 = t20.受注番号枝番 "
+        Sql += " AND "
+        Sql += " t20.発注番号枝番 = (SELECT MAX(発注番号枝番) AS 発注番号枝番 FROM t20_hattyu) "
+
+        Sql += " LEFT JOIN t42_nyukohd t42 "
+        Sql += " ON "
+        Sql += " t20.会社コード = t42.会社コード "
+        Sql += " AND "
+        Sql += " t20.発注番号 = t42.発注番号 "
+        Sql += " AND "
+        Sql += " t20.発注番号枝番 = t42.発注番号枝番 "
+        Sql += " AND "
+        Sql += " t20.仕入先コード = t42.仕入先コード "
+
+        Sql += " LEFT JOIN t43_nyukodt t43 "
+        Sql += " ON "
+        Sql += " t42.会社コード = t43.会社コード "
+        Sql += " AND "
+        Sql += " t42.入庫番号 = t43.入庫番号 "
+
+        Sql += " WHERE "
+        Sql += " t10.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        Sql += " AND "
+        'Sql += " t10.受注番号 = '" & TxtOrderNo.Text & "'"
+        Sql += " AND "
+        'Sql += " t10.受注番号枝番 = '" & TxtOrderSuffix.Text & "'"
+
+        'Sql += " AND t43.メーカー ILIKE '" & DgvItemList.Rows(rowIndex).Cells("メーカー").Value.ToString & "'"
+        'Sql += " AND t43.品名 ILIKE '" & DgvItemList.Rows(rowIndex).Cells("品名").Value.ToString & "'"
+        'Sql += " AND t43.型式 ILIKE '" & DgvItemList.Rows(rowIndex).Cells("型式").Value.ToString & "'"
+
+        'Sql += " AND t42.倉庫コード ILIKE '" & CmWarehouse.SelectedValue.ToString & "'"
+
+        'Sql += " AND t43.仕入区分 = '" & DgvItemList.Rows(rowIndex).Cells("仕入区分").Value.ToString & "'"
+
+        Dim dsNyukoList As DataSet = _db.selectDB(Sql, RS, reccnt)
+
+        '取得した入庫番号一覧から現在庫数を取得
+        Sql = "SELECT sum(現在庫数) as 現在庫数, 入出庫種別, 伝票番号, 行番号 from m21_zaiko"
+
+        Sql += " WHERE 会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonCD & "'"
+
+        'Sql += " AND メーカー ILIKE '" & DgvItemList.Rows(rowIndex).Cells("メーカー").Value.ToString & "'"
+        'Sql += " AND 品名 ILIKE '" & UtilClass.escapeSql(DgvItemList.Rows(rowIndex).Cells("品名").Value.ToString) & "'"
+        'Sql += " AND 型式 ILIKE '" & UtilClass.escapeSql(DgvItemList.Rows(rowIndex).Cells("型式").Value.ToString) & "'"
+        'Sql += " AND 倉庫コード ILIKE '" & CmWarehouse.SelectedValue.ToString & "'"
+        Sql += " AND 入出庫種別 ILIKE '" & CommonConst.INOUT_KBN_NORMAL & "'"
+        Sql += " AND 無効フラグ = " & CommonConst.CANCEL_KBN_ENABLED
+
+        '在庫引当区分の場合は条件に含めない
+        If intZaikoHiki = 2 Then
+        Else
+            Sql += " AND 現在庫数 <> 0"
+        End If
+
+        If dsNyukoList.Tables(RS).Rows.Count > 0 Then
+            Sql += " AND ( "
+            For i As Integer = 0 To dsNyukoList.Tables(RS).Rows.Count - 1
+                Sql += IIf(i > 0, " OR ", "")
+                Sql += " 伝票番号 ILIKE '" & dsNyukoList.Tables(RS).Rows(i)("入庫番号") & "'"
+            Next
+            Sql += " ) "
+        End If
+
+        Sql += " GROUP BY 倉庫コード, 入出庫種別, 最終入庫日, 伝票番号, 行番号 "
+        Sql += " ORDER BY 最終入庫日 "
+
+        '在庫マスタから現在庫数を取得
+        Dim dsZaiko As DataSet = _db.selectDB(Sql, RS, reccnt)
+
+        Return dsZaiko
+
+    End Function
+
+    Public Function t11_modify_issued_qty(ByVal o_ As String, ByVal v_ As String, ByVal i_ As String, issuedqty_ As Decimal) As Boolean
+        Dim Sql As String = vbNullString
+
+#Region "t11_cymndt"
+
+        Sql = "update t11_cymndt set "
+        Sql += "出庫数 = 出庫数 + (" & UtilClass.formatNumber(issuedqty_) & ")"
+        Sql += ",未出庫数 = 未出庫数 - (" & UtilClass.formatNumber(issuedqty_) & ")"
+        Sql += ",更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
+        Sql += " where 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        Sql += " AND "
+        Sql += "受注番号 = '" & o_ & "'"
+        Sql += " AND "
+        Sql += "受注番号枝番 = '" & v_ & "'"
+        Sql += " AND "
+        Sql += "行番号 = " & i_ & ""
+
+        _db.executeDB(Sql)
+
+#End Region
+
+#Region "t10_cymnhd"
+
+        Sql = "update t10_cymnhd set "
+        Sql += "更新日 = '" & UtilClass.formatDatetime(DateTime.Now) & "'"
+        Sql += ",更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
+        Sql += " where 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        Sql += " AND "
+        Sql += "受注番号 = '" & o_ & "'"
+        Sql += " AND "
+        Sql += "受注番号枝番 = '" & v_ & "'"
+        Sql += " AND "
+        Sql += "取消区分 = " & CommonConst.CANCEL_KBN_ENABLED '取消区分=0
+
+        _db.executeDB(Sql)
+
+#End Region
+
+        Return True
+    End Function
+
+    Public Function t43_exist(o_ As String, v_ As String) As Boolean
+        Dim Sql As String = vbNullString
+        Dim reccnt As Integer = 0 'DB用（デフォルト）
+        Sql += "select 1 from t42_nyukohd where 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        Sql += " AND 発注番号='" & o_ & "' and 発注番号枝番='" & v_ & "' and 取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
+        Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
+        If ds.Tables(RS).Rows.Count > 0 Then
+            Return True
+        Else
+            Return False
+        End If
+    End Function
+
+    Public Function t44_get_ls_byao(o_ As String, Optional v_ As String = "") As String
+        Dim Sql As String = vbNullString
+        Dim reccnt As Integer = 0 'DB用（デフォルト）
+        If v_ = "" Then
+            Sql += "select t44.出庫番号 from t44_shukohd t44 where t44.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+            Sql += " AND t44.受注番号='" & o_ & "' and t44.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
+            Sql += " order by 受注番号枝番 desc LIMIT 1"
+        Else
+            Sql += "select t44.出庫番号 from t44_shukohd t44 where t44.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+            Sql += " AND t44.受注番号='" & o_ & "' and 受注番号枝番='" & v_ & "' and 取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
+        End If
+        Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
+        If ds.Tables(RS).Rows.Count > 0 Then
+            Return UtilClass.rmDBNull2StrNull(ds.Tables(RS).Rows(0)("出庫番号"))
+        Else
+            Return ""
+        End If
     End Function
 
     Public Function t27_get_invoice_no_by_pm(ByVal pm_ As String) As String

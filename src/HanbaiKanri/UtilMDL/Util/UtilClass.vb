@@ -1,6 +1,7 @@
 ﻿Imports System.Globalization
 Imports System.Text.RegularExpressions
 Imports System.Windows.Forms
+Imports UtilMDL.DB
 '===============================================================================
 '
 '  ユーティリティクラス
@@ -1039,6 +1040,140 @@ Public Class UtilClass
 
     Public Shared Function convertFC2IDR(ByVal dFC As Decimal, ByVal dRate As Decimal) As Decimal
         Return Math.Ceiling(dFC / dRate)
+    End Function
+
+    '権限の設定 20200331
+    Public Shared Function get_authority_matrix(ByVal strMenu As String, ByVal intFunc As Integer _
+                                                , ByVal strTnato As String _
+                                                , ByRef _db As UtilDBIf) As Boolean
+
+        Dim RS As String = "RecSet"  'レコードセットテーブル
+        Dim reccnt As Integer = 0    'DB用（デフォルト）
+        Dim Sql As String
+
+
+        Dim blnFlg As Boolean = True
+        'テーブルの有無を確認
+        Sql = "SELECT * FROM information_schema.tables WHERE table_name = 'm30_authority_matrix';"
+        Dim dsTable As DataTable = _db.selectDB(Sql, RS, reccnt).Tables(0)
+        If reccnt <= 0 Then
+            get_authority_matrix = blnFlg  '判定を返す
+            Exit Function
+        End If
+
+
+        Sql = "select * from m30_authority_matrix"
+        Sql += " where 処理ＩＤ = '" & strMenu & "'"
+        Sql += "   and 機能ＩＤ = " & intFunc
+
+        Dim dsMatrix As DataTable = _db.selectDB(Sql, RS, reccnt).Tables(0)
+
+        '権限データがある場合
+        If dsMatrix.Rows.Count > 0 Then
+
+            'ロールがあるかチェック
+            Dim strRoll As String = vbNullString
+
+#Region "Roll_if"
+
+            If dsMatrix.Rows(0)("A1") = 1 Then
+                strRoll = " 'A1' "
+            End If
+
+            If dsMatrix.Rows(0)("A2") = 1 Then
+                If strRoll = vbNullString Then
+                    strRoll += " 'A2' "
+                Else
+                    strRoll += " ,'A2' "
+                End If
+            End If
+
+            If dsMatrix.Rows(0)("A3") = 1 Then
+                If strRoll = vbNullString Then
+                    strRoll += " 'A3' "
+                Else
+                    strRoll += " ,'A3' "
+                End If
+            End If
+
+            If dsMatrix.Rows(0)("A4") = 1 Then
+                If strRoll = vbNullString Then
+                    strRoll += " 'A4' "
+                Else
+                    strRoll += " ,'A4' "
+                End If
+            End If
+
+            If dsMatrix.Rows(0)("B1") = 1 Then
+                If strRoll = vbNullString Then
+                    strRoll += " 'B1' "
+                Else
+                    strRoll += " ,'B1' "
+                End If
+            End If
+
+            If dsMatrix.Rows(0)("B2") = 1 Then
+                If strRoll = vbNullString Then
+                    strRoll += " 'B2' "
+                Else
+                    strRoll += " ,'B2' "
+                End If
+            End If
+
+            If dsMatrix.Rows(0)("B3") = 1 Then
+                If strRoll = vbNullString Then
+                    strRoll += " 'B3' "
+                Else
+                    strRoll += " ,'B3' "
+                End If
+            End If
+
+            If dsMatrix.Rows(0)("B4") = 1 Then
+                If strRoll = vbNullString Then
+                    strRoll += " 'B4' "
+                Else
+                    strRoll += " ,'B4' "
+                End If
+            End If
+
+            If dsMatrix.Rows(0)("C1") = 1 Then
+                If strRoll = vbNullString Then
+                    strRoll += " 'C1' "
+                Else
+                    strRoll += " ,'C1' "
+                End If
+            End If
+
+            If dsMatrix.Rows(0)("C2") = 1 Then
+                If strRoll = vbNullString Then
+                    strRoll += " 'C2' "
+                Else
+                    strRoll += " ,'C2' "
+                End If
+            End If
+
+#End Region
+
+            'マトリックスに対応するロールの機能にフラグが立っている場合
+            If strRoll = vbNullString Then
+            Else
+                'ユーザーにロールがあるか検索
+                Sql = "select * from m31_user_roll"
+                Sql += " where ユーザＩＤ = '" & strTnato & "'"
+                Sql += " and (ロール in(" & strRoll & "))"
+
+                Dim dsRoll As DataTable = _db.selectDB(Sql, RS, reccnt).Tables(0)
+
+                'ユーザーにロールがあった場合
+                If dsRoll.Rows.Count > 0 Then
+                    blnFlg = True
+                End If
+            End If
+
+        End If
+
+        get_authority_matrix = blnFlg  '判定を返す
+
     End Function
 
     Public Shared Function rmDBNull2DateNullEx(ByVal prmField As Object) As Date

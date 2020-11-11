@@ -366,6 +366,15 @@ Namespace MSG
             End Try
 
         End Function
+        Public Shared Sub VbMessageboxShow(sMsg1 As String, sMsg2 As String, sName As String, Optional hr_ As Integer = 0)
+
+            If hr_ = Convert.ToInt32("80040154", 16) Then
+                MessageBox.Show("Cannot find Excel. Please install MS Excel.", sName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Else
+                MessageBox.Show(sMsg1 & vbCrLf & vbCrLf & sMsg2, sName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            End If
+        End Sub
+
     End Class
 
     '===============================================================================
