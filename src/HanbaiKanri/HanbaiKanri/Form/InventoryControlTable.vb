@@ -426,8 +426,8 @@ Public Class InventoryControlTable
         Catch ex As Exception
             'カーソルを砂時計から元に戻す
             Cursor.Current = Cursors.Default
-
-            Throw ex
+            UtilMsgHandler.VbMessageboxShow(ex.Message, ex.StackTrace.ToString, CommonConst.AP_NAME, ex.HResult)
+            'Throw ex
         Finally
             'app.Quit()
             'Marshal.ReleaseComObject(sheet)
