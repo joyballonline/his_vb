@@ -1263,6 +1263,8 @@ Public Class PurchasingManagement
             Sql += " AND t21_i.行番号 = '" & Gyo & "'"
 
             mSetHatyuItem = _db.selectDB(Sql, RS, 0).Tables(0)
+        Else
+            mSetHatyuItem = Nothing
         End If
 
     End Function

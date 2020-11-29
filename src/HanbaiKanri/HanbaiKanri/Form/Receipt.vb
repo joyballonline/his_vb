@@ -92,7 +92,7 @@ Public Class Receipt
             LblAdd.Text = "GoodsReceiptThisTime"
             LblReceiptDate.Text = "GoodsReceiptDate"
             LblWarehouse.Text = "Warehouse"
-            '''LblLocation.Text = "Location"               '2020.01.07 ADD
+            'LblLocation.Text = "Location"               '2020.01.07 ADD
             LblIDRCurrency.Text = "Currency"
 
 
@@ -1765,6 +1765,8 @@ Public Class Receipt
             Sql += " AND t21_i.行番号 = '" & Gyo & "'"
 
             mSetHatyuItem = _db.selectDB(Sql, RS, 0).Tables(0)
+        Else
+            mSetHatyuItem = Nothing
         End If
 
     End Function

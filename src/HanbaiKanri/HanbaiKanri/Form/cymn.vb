@@ -1113,7 +1113,7 @@ Public Class Cymn
             Dim PurchaseNo As String
             Dim CurrentPurchaseNo As String = ""
 
-            Dim dsSipper As DataSet '仕入先
+            Dim dsSipper As DataSet = Nothing '仕入先
             Dim strRate As Decimal 'レートの取得
 
             Dim lngCnt As Long = 0

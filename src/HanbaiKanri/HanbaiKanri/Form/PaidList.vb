@@ -566,7 +566,7 @@ Public Class PaidList
 #Region "t46_kikehd"
 
                 Dim strSiharaiGaku As Decimal = dsShrikshihd.Tables(RS).Rows(i)("支払消込額計")
-                Dim strSiharaiGaku_g As Decimal = dsShrikshihd.Tables(RS).Rows(i)("支払消込額計_外貨")
+                Dim strSiharaiGaku_g As Decimal = UtilClass.rmNullDecimal(dsShrikshihd.Tables(RS).Rows(i)("支払消込額計_外貨"))
 
 
                 '買掛基本から金額を取得

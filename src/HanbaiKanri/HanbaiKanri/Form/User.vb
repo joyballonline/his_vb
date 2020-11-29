@@ -305,10 +305,10 @@ Public Class User
 
                         '以前使用したものかどうかはチェックしない
                         '
-                        ''2)パスワードチェック
-                        ''画面入力値をもとに、パスワードマスタとの整合性チェックを行う。
-                        ''・検索キー：　IF)会社コード、IF)ユーザID、画面)パスワード
-                        '''   IF)世代番号 - 10 よりも大（過去10世代と重複しない）
+                        '2)パスワードチェック
+                        '画面入力値をもとに、パスワードマスタとの整合性チェックを行う。
+                        '・検索キー：　IF)会社コード、IF)ユーザID、画面)パスワード
+                        '   IF)世代番号 - 10 よりも大（過去10世代と重複しない）
                         'Sql = "SELECT count(*) as 件数"
                         'Sql += " FROM m03_pswd "
                         'Sql += " WHERE "
@@ -319,9 +319,9 @@ Public Class User
                         'Dim reccnt As Integer = 0
                         'Dim ds As DataSet = _db.selectDB(Sql, RS, reccnt)
 
-                        ''①　該当するレコードが存在する場合
-                        ''以前に使用されたパスワードです。
-                        ''→　入力状態に戻る
+                        '①　該当するレコードが存在する場合
+                        '以前に使用されたパスワードです。
+                        '→　入力状態に戻る
                         'If _db.rmNullInt(ds.Tables(RS).Rows(0)("件数")) > 0 Then
                         '    _msgHd.dspMSG("ReusePasswd", CommonConst.LANG_KBN_JPN)
                         '    TxtPassword.Focus()
