@@ -231,6 +231,8 @@ Public Class OrderingProgress
 
             DgvCymnhd.Columns("買掛登録").HeaderText = "AccountsPayableRegistration"
             DgvCymnhd.Columns("支払登録").HeaderText = "PaymentRegistration"
+            DgvCymnhd.Columns("客先番号").HeaderText = "CustomerNumber"
+            DgvCymnhd.Columns("仕入先名").HeaderText = "SupplierName"
 
             '20200811
             If frmC01F10_Login.loginValue.BumonCD = "ZENBI" Then
@@ -294,6 +296,8 @@ Public Class OrderingProgress
 
                 DgvCymnhd.Rows(i).Cells("受注番号").Value = ds.Tables(RS).Rows(i)("受注番号")
                 DgvCymnhd.Rows(i).Cells("受注日").Value = ds.Tables(RS).Rows(i)("受注日")
+                DgvCymnhd.Rows(i).Cells("客先番号").Value = ds.Tables(RS).Rows(i)("客先番号")
+                DgvCymnhd.Rows(i).Cells("仕入先名").Value = ds.Tables(RS).Rows(i)("仕入先名")
 
 
                 '仕入登録

@@ -222,6 +222,8 @@ Public Class OrderProgress
             DgvCymnhd.Columns("出庫登録").HeaderText = "GoodsIssueTegistration"
             DgvCymnhd.Columns("売掛請求登録").HeaderText = "AccountsReceivableRegistration"
             DgvCymnhd.Columns("入金登録").HeaderText = "DepositRegistration"
+            DgvCymnhd.Columns("客先番号").HeaderText = "CustomerNumber"
+            DgvCymnhd.Columns("請求番号").HeaderText = "InvoiceNo"
 
         End If
 
@@ -278,7 +280,7 @@ Public Class OrderProgress
 
                 DgvCymnhd.Rows(i).Cells("見積番号").Value = ds.Tables(RS).Rows(i)("見積番号")
                 DgvCymnhd.Rows(i).Cells("見積日").Value = ds.Tables(RS).Rows(i)("見積日")
-
+                DgvCymnhd.Rows(i).Cells("客先番号").Value = ds.Tables(RS).Rows(i)("客先番号")
 
                 '売上登録
                 If IsDBNull(ds.Tables(RS).Rows(i)("受注残数")) Then
@@ -317,37 +319,49 @@ Public Class OrderProgress
 
                 Dim ds_seikyu As DataSet = _db.selectDB(Sql, RS, reccnt)
 
+                Sql = " SELECT t23.請求番号"
+                Sql += " from t23_skyuhd as t23"
+                Sql += " WHERE t23.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+                Sql += " and 受注番号 = '" & ds.Tables(RS).Rows(i)("受注番号") & "'"
+                Sql += " and 受注番号枝番 = '" & ds.Tables(RS).Rows(i)("受注番号枝番") & "'"
+                Sql += " and 取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
+                Dim ds2 As DataSet = _db.selectDB(Sql, RS, reccnt)
+                Dim s2 As String = ""
+                For x As Integer = 0 To ds2.Tables(RS).Rows.Count - 1
+                    s2 += ds2.Tables(RS).Rows(x)("請求番号")
+                Next
+                DgvCymnhd.Rows(i).Cells("請求番号").Value = s2
 
                 If IsDBNull(ds_seikyu.Tables(RS).Rows(0)("売掛残高")) Then
-                    '請求なし
-                    DgvCymnhd.Rows(i).Cells("売掛請求登録").Value = ""
-                    DgvCymnhd.Rows(i).Cells("入金登録").Value = ""
-                Else
-                    If ds.Tables(RS).Rows(i)("見積金額") > ds_seikyu.Tables(RS).Rows(0)("請求金額計") Then
-                        DgvCymnhd.Rows(i).Cells("売掛請求登録").Value = "△"
-                    Else
-                        DgvCymnhd.Rows(i).Cells("売掛請求登録").Value = "〇"
-                    End If
-
-
-                    If ds_seikyu.Tables(RS).Rows(0)("売掛残高") = 0 Then
-                        '入金済み
-                        DgvCymnhd.Rows(i).Cells("入金登録").Value = "〇"
-                    ElseIf ds_seikyu.Tables(RS).Rows(0)("入金額計") > 0 AndAlso ds_seikyu.Tables(RS).Rows(0)("売掛残高") > 0 Then
-                        '一部
-                        DgvCymnhd.Rows(i).Cells("入金登録").Value = "△"
-                    Else
-                        '請求だけ
+                        '請求なし
+                        DgvCymnhd.Rows(i).Cells("売掛請求登録").Value = ""
                         DgvCymnhd.Rows(i).Cells("入金登録").Value = ""
+                    Else
+                        If ds.Tables(RS).Rows(i)("見積金額") > ds_seikyu.Tables(RS).Rows(0)("請求金額計") Then
+                            DgvCymnhd.Rows(i).Cells("売掛請求登録").Value = "△"
+                        Else
+                            DgvCymnhd.Rows(i).Cells("売掛請求登録").Value = "〇"
+                        End If
+
+
+                        If ds_seikyu.Tables(RS).Rows(0)("売掛残高") = 0 Then
+                            '入金済み
+                            DgvCymnhd.Rows(i).Cells("入金登録").Value = "〇"
+                        ElseIf ds_seikyu.Tables(RS).Rows(0)("入金額計") > 0 AndAlso ds_seikyu.Tables(RS).Rows(0)("売掛残高") > 0 Then
+                            '一部
+                            DgvCymnhd.Rows(i).Cells("入金登録").Value = "△"
+                        Else
+                            '請求だけ
+                            DgvCymnhd.Rows(i).Cells("入金登録").Value = ""
+                        End If
+
                     End If
 
-                End If
+                    ds_seikyu = Nothing
 
-                ds_seikyu = Nothing
+                Next
 
-            Next
-
-            DgvCymnhd.Columns("受注日").DefaultCellStyle.Format = "d"
+                DgvCymnhd.Columns("受注日").DefaultCellStyle.Format = "d"
             DgvCymnhd.Columns("見積日").DefaultCellStyle.Format = "d"
 
             '中央寄せ
