@@ -169,12 +169,10 @@ Public Class Payment
             DgvPayment.Columns("行番号").HeaderText = "LineNumber"
             DgvPayment.Columns("支払種目").HeaderText = "PaymentType"
             DgvPayment.Columns("入力支払金額").HeaderText = "PaymentAmount"
-
-
+            DgvPayment.Columns("REMARK1").HeaderText = "Remarks"
 
             DgvKikeInfo.Columns("発注番号").HeaderText = "PurchaseNumber"
-
-            DgvKikeInfo.Columns("買掛情報買掛番号").HeaderText = "AccountsPayableNumber"
+            DgvKikeInfo.Columns("買掛情報買掛番号").HeaderText = "AccountsPayable" & vbCrLf & "Number"
             DgvKikeInfo.Columns("買掛日").HeaderText = "AccountsPayableDate"
             DgvKikeInfo.Columns("買掛金額").HeaderText = "AccountsPayableAmount" & vbCrLf & "a"        '買掛金額
             DgvKikeInfo.Columns("買掛情報支払金額計").HeaderText = "AlreadyPaid" & vbCrLf & "b"        '既支払額
@@ -296,7 +294,7 @@ Public Class Payment
 
         'joinするのでとりあえず直書き
         Sql = "SELECT"
-        Sql += " t48.支払先名, t48.支払番号, t48.支払日, t48.支払種別名, t48.支払金額_外貨, t47.備考"
+        Sql += " t48.支払先名, t48.支払番号, t48.支払日, t48.支払種別名, t48.支払金額_外貨, t48.備考"
         Sql += " FROM "
         Sql += " public.t48_shridt t48 "
 
@@ -974,7 +972,7 @@ Public Class Payment
             Sql += "', '"
             Sql += dtShiharaiday
             Sql += "', '"
-            Sql += TxtRemarks.Text
+            Sql += DgvPayment.Rows(i).Cells("REMARK1").Value 'TxtRemarks.Text
 
             Sql += "', '"
             Sql += formatStringToNumber(AmountInputPaymentFC)        '支払金額_外貨
