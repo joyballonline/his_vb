@@ -39,6 +39,7 @@ Public Class BillingManagement
     Private Suffix As String = ""
     Private _parentForm As Form
     Private _status As String = ""
+    Private _com As CommonLogic
 
     '-------------------------------------------------------------------------------
     'デフォルトコンストラクタ（隠蔽）
@@ -71,6 +72,7 @@ Public Class BillingManagement
         Suffix = prmRefSuffix
         _status = prmRefStatus
         '_gh = New UtilDataGridViewHandler(dgvLIST)                          'DataGridViewユーティリティクラス
+        _com = New CommonLogic(_db, _msgHd)
         StartPosition = FormStartPosition.CenterScreen                      '画面中央表示
         Me.Text = Me.Text & "[" & frmC01F10_Login.loginValue.BumonNM & "][" & frmC01F10_Login.loginValue.TantoNM & "]" & StartUp.BackUpServerPrint                                  'フォームタイトル表示
         Me.ControlBox = Not Me.ControlBox
@@ -145,7 +147,7 @@ Public Class BillingManagement
             DgvCymn.Columns("請求金額計").HeaderText = "TotalBillingAmount"
             DgvCymn.Columns("請求残高").HeaderText = "BillingBalance"
 
-            DgvCymndt.Columns("明細").HeaderText = "DetailData"
+            DgvCymndt.Columns("明細").HeaderText = "LineNo"
             DgvCymndt.Columns("メーカー").HeaderText = "Manufacturer"
             DgvCymndt.Columns("品名").HeaderText = "ItemName"
             DgvCymndt.Columns("型式").HeaderText = "Spec"
@@ -156,7 +158,8 @@ Public Class BillingManagement
             DgvCymndt.Columns("売上金額").HeaderText = "SalesAmount"
             DgvCymndt.Columns("VAT").HeaderText = "VAT-OUT"
             DgvCymndt.Columns("売上金額計").HeaderText = "SalesAmountSum"
-
+            DgvCymndt.Columns("売上番号").HeaderText = "SalesNumber"
+            DgvCymndt.Columns("売上番号枝番").HeaderText = "SalesVer"
             DgvCymndt.Columns("請求").HeaderText = "Billing"
 
             'DgvHistory.Columns("請求番号").HeaderText = "InvoiceNumber"
@@ -174,6 +177,7 @@ Public Class BillingManagement
             DgvAdd.Columns("今回請求金額計").HeaderText = "TotalBillingAmount"
             DgvAdd.Columns("今回備考1").HeaderText = "Remarks1"
             DgvAdd.Columns("今回備考2").HeaderText = "Remarks2"
+            DgvAdd.Columns("SALESAMT").HeaderText = "SalesAmount"
 
         End If
         If _status = CommonConst.STATUS_VIEW Then
@@ -222,8 +226,6 @@ Public Class BillingManagement
     Private Sub BillLoad()
         Dim reccnt As Integer = 0 'DB用（デフォルト）
         Dim Sql As String = ""
-        Dim curds As DataSet  'm25_currency
-        Dim cur As String
 
         Sql = " AND "
         Sql += "受注番号 ILIKE '" & CymnNo & "'"
@@ -233,26 +235,21 @@ Public Class BillingManagement
         Sql += "取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
 
         '受注基本取得
-        Dim dsCymnhd As DataSet = getDsData("t10_cymnhd", Sql)
+        Dim dsCymnhd As DataSet = _com.getDsData("t10_cymnhd", Sql)
 
         'joinするのでとりあえず直書き
         Sql = "SELECT"
         Sql += " t11.行番号, t11.メーカー, t11.品名, t11.型式, t11.受注数量, t11.単位"
         Sql += " , t11.売上数量, t11.売単価, t11.売上金額, t11.見積単価_外貨, t11.見積金額_外貨 ,t10.ＶＡＴ ,t11.通貨"
-        Sql += " FROM "
-        Sql += " public.t11_cymndt t11 "
-
-        Sql += " INNER JOIN "
-        Sql += " t10_cymnhd t10"
-        Sql += " ON "
-
+        Sql += " FROM"
+        Sql += " t11_cymndt t11, t10_cymnhd t10"
+        Sql += " WHERE"
         Sql += " t11.会社コード = t10.会社コード"
         Sql += " AND "
         Sql += " t11.受注番号 = t10.受注番号"
         Sql += " AND "
-        Sql += " t11.受注番号 = t10.受注番号"
-
-        Sql += " WHERE "
+        Sql += " t11.受注番号枝番 = t10.受注番号枝番"
+        Sql += " AND "
         Sql += " t11.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
         Sql += " AND "
         Sql += " t11.受注番号 = '" & CymnNo & "'"
@@ -264,15 +261,7 @@ Public Class BillingManagement
         '受注明細取得
         Dim dsCymndt As DataSet = _db.selectDB(Sql, RS, reccnt)
 
-        If IsDBNull(dsCymndt.Tables(RS).Rows(0)("通貨")) Then
-            cur = vbNullString
-        Else
-            Sql = " and 採番キー = " & dsCymndt.Tables(RS).Rows(0)("通貨")
-            curds = getDsData("m25_currency", Sql)
-
-            cur = curds.Tables(RS).Rows(0)("通貨コード")
-        End If
-        TxtIDRCurrency.Text = cur
+        TxtIDRCurrency.Text = _com.getCurrencyEx(dsCymndt.Tables(RS).Rows(0)("通貨"))
 
         Sql = " AND "
         Sql += "受注番号 = '" & CymnNo & "'"
@@ -282,7 +271,8 @@ Public Class BillingManagement
         Sql += "取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
 
         '請求基本取得
-        Dim dsSkyuhd As DataSet = getDsData("t23_skyuhd", Sql)
+        Dim dsSkyuhd As DataSet = _com.getDsData("t23_skyuhd", Sql)
+        Dim dsUri As DataSet = _com.getDsData("t30_urighd", Sql)
 
         Dim BillingAmount As Decimal = 0
 
@@ -331,9 +321,14 @@ Public Class BillingManagement
             DgvCymndt.Rows(i).Cells("売上数量").Value = dsCymndt.Tables(RS).Rows(i)("売上数量")
             DgvCymndt.Rows(i).Cells("売上単価").Value = dsCymndt.Tables(RS).Rows(i)("見積単価_外貨")
 
-            DgvCymndt.Rows(i).Cells("売上金額").Value = dsCymndt.Tables(RS).Rows(i)("見積金額_外貨")
-            DgvCymndt.Rows(i).Cells("VAT").Value = (dsCymndt.Tables(RS).Rows(i)("見積金額_外貨") * dsCymnhd.Tables(RS).Rows(0)("ＶＡＴ") / 100)
+            DgvCymndt.Rows(i).Cells("売上金額").Value = dsCymndt.Tables(RS).Rows(i)("売上数量") * dsCymndt.Tables(RS).Rows(i)("見積単価_外貨") 'dsCymndt.Tables(RS).Rows(i)("見積金額_外貨")
+            DgvCymndt.Rows(i).Cells("VAT").Value = UtilClass.VAT_round_AP(dsCymnhd.Tables(RS).Rows(0)("ＶＡＴ"), DgvCymndt.Rows(i).Cells("売上金額").Value)
             DgvCymndt.Rows(i).Cells("売上金額計").Value = DgvCymndt.Rows(i).Cells("売上金額").Value + DgvCymndt.Rows(i).Cells("VAT").Value
+
+            If dsUri.Tables(RS).Rows.Count > 0 Then
+                DgvCymndt.Rows(i).Cells("売上番号").Value = dsUri.Tables(RS).Rows(0)("売上番号")
+                DgvCymndt.Rows(i).Cells("売上番号枝番").Value = dsUri.Tables(RS).Rows(0)("売上番号枝番")
+            End If
 
             'チェックボックス
             DgvCymndt.Rows(i).Cells("請求").Value = False
@@ -404,6 +399,8 @@ Public Class BillingManagement
 
         '数字形式
         DgvAdd.Columns("今回請求金額計").DefaultCellStyle.Format = "N2"
+        DgvAdd.Columns("VATAMT").DefaultCellStyle.Format = "N2"
+        DgvAdd.Columns("SALESAMT").DefaultCellStyle.Format = "N2"
 
     End Sub
 
@@ -506,13 +503,13 @@ Public Class BillingManagement
         Sql += " AND 受注番号枝番 = '" & Suffix & "'"
         Sql += " AND 取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
 
-        Dim dsCymnhd As DataSet = getDsData("t10_cymnhd", Sql)
+        Dim dsCymnhd As DataSet = _com.getDsData("t10_cymnhd", Sql)
 
         Sql = " AND 受注番号 = '" & CymnNo & "'"
         Sql += " AND 受注番号枝番 = '" & Suffix & "'"
         Sql += " AND 取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
 
-        Dim dsSkyuhd As DataSet = getDsData("t23_skyuhd", Sql)
+        Dim dsSkyuhd As DataSet = _com.getDsData("t23_skyuhd", Sql)
 
         BillingAmount = IIf(
             dsSkyuhd.Tables(RS).Compute("SUM(請求金額計_外貨)", Nothing) IsNot DBNull.Value,
@@ -557,14 +554,14 @@ Public Class BillingManagement
 
 
         '採番データを取得・更新
-        Dim DM As String = getSaiban("80", dtToday)
+        Dim DM As String = _com.getSaiban("80", dtToday)
 
         Sql = "INSERT INTO "
         Sql += "Public."
         Sql += "t23_skyuhd("
         Sql += "会社コード, 請求番号, 請求区分, 請求日, 受注番号, 受注番号枝番, 客先番号, 得意先コード, 得意先名"
         Sql += ", 請求金額計, 入金額計, 売掛残高, 備考1, 備考2, 取消区分, 入金予定日, 登録日, 更新者, 更新日"
-        Sql += ", 請求金額計_外貨, 入金額計_外貨, 売掛残高_外貨, 通貨, レート)"
+        Sql += ", 請求金額計_外貨, 入金額計_外貨, 売掛残高_外貨, 通貨, レート, 請求消費税計)"
         Sql += " VALUES("
         Sql += "'" & dsCymnhd.Tables(RS).Rows(0)("会社コード").ToString & "'"   '会社コード
         Sql += ", '" & DM & "'"     '請求番号
@@ -591,10 +588,20 @@ Public Class BillingManagement
         Sql += ", " & UtilClass.formatNumber(AccountsReceivableFC)  '売掛残高_外貨
         Sql += ", '" & dsCymnhd.Tables(RS).Rows(0)("通貨").ToString() & "'"       '通貨
         Sql += ", " & UtilClass.formatNumberF10(strRate)        'レート
+        Sql += ", " & UtilClass.formatNumber(DgvAdd.Rows(0).Cells("VATAMT").Value)
 
         Sql += ")"
 
         _db.executeDB(Sql)
+
+        For k As Integer = 0 To DgvCymndt.Rows.Count - 1
+            If DgvCymndt.Rows(k).Cells("請求").Value = True Then
+                Sql = "update t31_urigdt set 入金番号 = '" & DM & "' where 売上番号 = '" & DgvCymndt.Rows(k).Cells("売上番号").Value
+                Sql += "' and 会社コード='" & frmC01F10_Login.loginValue.BumonCD & "' and 売上番号枝番 = '" & DgvCymndt.Rows(k).Cells("売上番号枝番").Value
+                Sql += "' and 行番号 = '" & DgvCymndt.Rows(k).Cells("明細").Value & "'"
+                _db.executeDB(Sql)
+            End If
+        Next
 
         '登録完了メッセージ
         _msgHd.dspMSG("completeInsert", frmC01F10_Login.loginValue.Language)
@@ -613,7 +620,7 @@ Public Class BillingManagement
         Sql += " AND 基準日 < '" & UtilClass.strFormatDate(DtpBillingDate.Text) & "'"  '請求日
         Sql += " ORDER BY 基準日 DESC "
 
-        Dim ds As DataSet = getDsData("t71_exchangerate", Sql)
+        Dim ds As DataSet = _com.getDsData("t71_exchangerate", Sql)
 
         If ds.Tables(RS).Rows.Count > 0 Then
             setRate = ds.Tables(RS).Rows(0)("レート")
@@ -625,70 +632,6 @@ Public Class BillingManagement
             'End If
             setRate = 1.ToString("F10")
         End If
-
-    End Function
-
-    'param1：String テーブル名
-    'param2：String 詳細条件
-    'Return: DataSet
-    Private Function getDsData(ByVal tableName As String, Optional ByRef txtParam As String = "") As DataSet
-        Dim reccnt As Integer = 0 'DB用（デフォルト）
-        Dim Sql As String = ""
-
-        Sql += "SELECT * FROM public." & tableName
-        Sql += " WHERE "
-        Sql += "会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-        Sql += txtParam
-        Return _db.selectDB(Sql, RS, reccnt)
-    End Function
-
-    'param1：String 採番キー
-    'param2：DateTime 登録日
-    'Return: String 伝票番号
-    '伝票番号を取得
-    Private Function getSaiban(ByVal key As String, ByVal today As DateTime) As String
-        Dim Sql As String = ""
-        Dim saibanID As String = ""
-        Dim reccnt As Integer = 0 'DB用（デフォルト）
-
-        Try
-            Sql = "SELECT * FROM public.m80_saiban"
-            Sql += " WHERE "
-            Sql += "会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-            Sql += " AND 採番キー = '" & key & "'"
-
-            Dim dsSaiban As DataSet = _db.selectDB(Sql, RS, reccnt)
-
-            saibanID = dsSaiban.Tables(RS).Rows(0)("接頭文字")
-            saibanID += today.ToString("MMdd")
-            saibanID += dsSaiban.Tables(RS).Rows(0)("最新値").ToString.PadLeft(dsSaiban.Tables(RS).Rows(0)("連番桁数"), "0")
-
-            Dim keyNo As Integer
-
-            If dsSaiban.Tables(RS).Rows(0)("最新値") = dsSaiban.Tables(RS).Rows(0)("最大値") Then
-                '最新値が最大と同じ場合、最小値にリセット
-                keyNo = dsSaiban.Tables(RS).Rows(0)("最小値")
-            Else
-                '最新値+1
-                keyNo = dsSaiban.Tables(RS).Rows(0)("最新値") + 1
-            End If
-
-            Sql = "UPDATE Public.m80_saiban "
-            Sql += "SET "
-            Sql += " 最新値  = '" & keyNo.ToString & "'"
-            Sql += ", 更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
-            Sql += ", 更新日 = current_timestamp"
-            Sql += " WHERE"
-            Sql += " 会社コード ='" & frmC01F10_Login.loginValue.BumonCD & "'"
-            Sql += " AND 採番キー = '" & key & "'"
-
-            _db.executeDB(Sql)
-
-            Return saibanID
-        Catch ex As Exception
-            'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
-            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
-        End Try
 
     End Function
 
@@ -711,17 +654,17 @@ Public Class BillingManagement
             Dim currentColumn As String = DgvAdd.Columns(e.ColumnIndex).Name
 
             If currentColumn = "今回請求金額計" Then  'Cellが今回請求金額計の場合
-
                 '各項目の属性チェック
                 If Not IsNumeric(DgvAdd.Rows(e.RowIndex).Cells("今回請求金額計").Value) And (DgvAdd.Rows(e.RowIndex).Cells("今回請求金額計").Value IsNot Nothing) Then
                     _msgHd.dspMSG("IsNotNumeric", frmC01F10_Login.loginValue.Language)
                     DgvAdd.Rows(e.RowIndex).Cells("今回請求金額計").Value = 0
                     Exit Sub
                 End If
-
-                Dim decTmp As Decimal = DgvAdd.Rows(e.RowIndex).Cells("今回請求金額計").Value
-                DgvAdd.Rows(e.RowIndex).Cells("今回請求金額計").Value = decTmp.ToString("N2")
+                'Dim decTmp As Decimal = DgvAdd.Rows(e.RowIndex).Cells("今回請求金額計").Value
+                'DgvAdd.Rows(e.RowIndex).Cells("今回請求金額計").Value = decTmp.ToString("N2")
             End If
+            DgvAdd.Rows(e.RowIndex).Cells("今回請求金額計").Value = DgvAdd.Rows(e.RowIndex).Cells("VATAMT").Value + DgvAdd.Rows(e.RowIndex).Cells("SALESAMT").Value
+
         End If
     End Sub
 
@@ -756,17 +699,24 @@ Public Class BillingManagement
             If currentColumn = "請求" Then  '請求フラグの更新の場合
 
                 Dim decUriSum As Decimal = 0
+                Dim vatamt As Decimal = 0
+                Dim decSales As Decimal = 0
 
                 For i As Integer = 0 To DgvCymndt.Rows.Count - 1  '受注明細をループ
 
                     'チェックがあるデータの売上金額を合計
                     If DgvCymndt.Rows(i).Cells("請求").Value = True Then
                         decUriSum += DgvCymndt.Rows(i).Cells("売上金額計").Value
+                        vatamt += DgvCymndt.Rows(i).Cells("VAT").Value
+                        decSales += DgvCymndt.Rows(i).Cells("売上金額").Value
                     Else
                     End If
                 Next
 
-                DgvAdd.Rows(0).Cells("今回請求金額計").Value = decUriSum  '今回請求額
+                DgvAdd.Rows(0).Cells("今回請求金額計").Value = vatamt + decSales 'decUriSum  '今回請求額
+                DgvAdd.Rows(0).Cells("VATAMT").Value = vatamt
+                DgvAdd.Rows(0).Cells("SALESAMT").Value = decSales
+
 
             End If
         End If

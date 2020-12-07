@@ -43,6 +43,7 @@ Public Class CustomerOrderList
     Private CustomerCode As String = ""
     Private CurCode As String = ""  '通貨
     Private _parentForm As Form
+    Private _com As CommonLogic
 
     '-------------------------------------------------------------------------------
     'デフォルトコンストラクタ（隠蔽）
@@ -75,6 +76,7 @@ Public Class CustomerOrderList
         CurCode = prmCurCode
         _parentForm = prmRefForm
         '_gh = New UtilDataGridViewHandler(dgvLIST)                          'DataGridViewユーティリティクラス
+        _com = New CommonLogic(_db, _msgHd)
         StartPosition = FormStartPosition.CenterScreen                      '画面中央表示
         Me.Text = Me.Text & "[" & frmC01F10_Login.loginValue.BumonNM & "][" & frmC01F10_Login.loginValue.TantoNM & "]" & StartUp.BackUpServerPrint                                  'フォームタイトル表示
         Me.ControlBox = Not Me.ControlBox
@@ -96,8 +98,8 @@ Public Class CustomerOrderList
             DgvBilling.Columns.Add("得意先コード", "CustomerCode")
             DgvBilling.Columns.Add("得意先名", "CustomerName")
 
-            DgvBilling.Columns.Add("受注番号", "JobOrderNumber")
-            DgvBilling.Columns.Add("受注番号枝番", "JobOrderNo")
+            DgvBilling.Columns.Add("受注番号", "JobOrderNo")
+            DgvBilling.Columns.Add("受注番号枝番", "JobOrderVer")
 
             DgvBilling.Columns.Add("請求番号", "SalesInvoiceNo")
             DgvBilling.Columns.Add("請求日", "SalesInvoiceDate")
@@ -165,7 +167,7 @@ Public Class CustomerOrderList
     '一覧表示処理
     Private Sub PurchaseListLoad()
 
-        Dim curds As DataSet  'm25_currency
+        'Dim curds As DataSet  'm25_currency
         Dim cur As String
 
 
@@ -184,7 +186,7 @@ Public Class CustomerOrderList
             Sql += " ORDER BY 更新日 DESC "
 
             '請求基本取得
-            Dim dsSkyuhd As DataSet = getDsData("t23_skyuhd", Sql)
+            Dim dsSkyuhd As DataSet = _com.getDsData("t23_skyuhd", Sql)
 
             Dim reccnt As Integer = 0
 
@@ -192,15 +194,7 @@ Public Class CustomerOrderList
 
             For i As Integer = 0 To dsSkyuhd.Tables(RS).Rows.Count - 1
 
-                If IsDBNull(dsSkyuhd.Tables(RS).Rows(0)("通貨")) Then
-                    cur = vbNullString
-                Else
-                    Sql = " and 採番キー = " & dsSkyuhd.Tables(RS).Rows(0)("通貨")
-                    curds = getDsData("m25_currency", Sql)
-
-                    cur = curds.Tables(RS).Rows(0)("通貨コード")
-                End If
-
+                cur = _com.getCurrencyEx(dsSkyuhd.Tables(RS).Rows(0)("通貨"))
 
                 DgvBilling.Rows.Add()
 
@@ -256,7 +250,7 @@ Public Class CustomerOrderList
         Dim BillingNo As String = ""
         Dim OrderNo As String = ""
         Dim OrderSuffix As String = ""
-        Dim BillingSubTotal As Integer = 0
+        Dim BillingSubTotal As Decimal = 0
         Dim Sql As String = ""
         Dim Sql2 As String = ""
         Dim Sql3 As String = ""
@@ -264,6 +258,7 @@ Public Class CustomerOrderList
         Dim flg1 As Boolean = False
         Dim flg2 As Boolean = False
         Dim flg3 As Boolean = False
+        Dim blnFlg As Boolean = False
 
         If DgvBilling.Rows.Count() = 0 Then
             '対象データがないメッセージを表示
@@ -317,6 +312,7 @@ Public Class CustomerOrderList
             Dim lastRow As Integer = 20
             Dim addRow As Integer = 0
             Dim currentNum As Integer = 1
+			Dim VAT As Decimal = 0
 
             '選択したものだけ請求書を発行する
             For Each r As DataGridViewRow In DgvBilling.SelectedRows
@@ -328,18 +324,20 @@ Public Class CustomerOrderList
                 Sql += " AND 受注番号枝番 = '" & OrderSuffix & "'"
 
                 '受注基本（請求債情報）
-                Dim dsCymnhd As DataSet = getDsData("t10_cymnhd", Sql)
+                Dim dsCymnhd As DataSet = _com.getDsData("t10_cymnhd", Sql)
+                Dim dsSeikyu1 As DataSet = Nothing
 
                 '入金予定日の取得
                 If flg2 = False Then
-                    Sql = "Select 入金予定日 From t23_skyuhd t23 "
+                    Sql = "Select 入金予定日,請求消費税計 From t23_skyuhd t23 "
                     Sql += " where t23.会社コード =  '" & frmC01F10_Login.loginValue.BumonCD & "'"
                     Sql += " and t23.請求番号 =  '" & BillingNo & "'"
-                    Sql += " AND t23.取消区分 = '" & CommonConst.CANCEL_KBN_ENABLED & "'"
+                    Sql += " AND t23.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED & ""
                     '請求データ取得
-                    Dim dsSeikyu As DataSet = _db.selectDB(Sql, RS, reccnt)
+                    dsSeikyu1 = _db.selectDB(Sql, RS, reccnt)
                     If reccnt > 0 Then
-                        sheet.Range("E10").Value = dsSeikyu.Tables(RS).Rows(0)("入金予定日")
+                        sheet.Range("E10").Value = dsSeikyu1.Tables(RS).Rows(0)("入金予定日")
+                        VAT = UtilClass.ToRoundDown(UtilClass.rmNullDecimal(dsSeikyu1.Tables(RS).Rows(0)("請求消費税計")), 0)
                     Else
                         sheet.Range("E10").Value = ""
                     End If
@@ -378,18 +376,9 @@ Public Class CustomerOrderList
                     End If
 
                     sheet.Range("E13").Value = dsCymnhd.Tables(RS).Rows(0)("支払条件")
+                    'sheet.Range("D14").Value = ": " & dsCymnhd.Tables(RS).Rows(0)("支払条件")
 
-
-                    Dim curds As DataSet  'm25_currency
-                    Dim cur As String
-                    If IsDBNull(dsCymnhd.Tables(RS).Rows(0)("通貨")) Then
-                        cur = vbNullString
-                    Else
-                        Sql = " and 採番キー = " & dsCymnhd.Tables(RS).Rows(0)("通貨")
-                        curds = getDsData("m25_currency", Sql)
-
-                        cur = curds.Tables(RS).Rows(0)("通貨コード")
-                    End If
+                    Dim cur As String = _com.getCurrencyEx(dsCymnhd.Tables(RS).Rows(0)("通貨"))
 
                     sheet.Range("E18").Value = "(" & cur & ")"
                     sheet.Range("F18").Value = "(" & cur & ")"
@@ -402,23 +391,22 @@ Public Class CustomerOrderList
                 End If
 
 
-                'joinするのでとりあえず直書き
+                'kafu
                 Sql = "SELECT"
-                Sql += " t11.メーカー, t11.品名, t11.型式, t11.受注数量, t11.見積単価_外貨, t11.見積金額_外貨,t11.単位"
-                Sql += " FROM public.t11_cymndt t11 "
-
-                Sql += " INNER JOIN t10_cymnhd t10"
-                Sql += " ON t11.会社コード = t10.会社コード"
-                Sql += " AND t11.受注番号 = t10.受注番号"
-                Sql += " AND t11.受注番号枝番 = t10.受注番号枝番"
-
-                Sql += " WHERE t11.会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonCD & "'"
-                Sql += " AND t11.受注番号 ILIKE '%" & OrderNo & "%'"
-                Sql += " AND t11.受注番号枝番 ILIKE '%" & OrderSuffix & "%'"
+                Sql += " t11.*"
+                Sql += " FROM public.t31_urigdt t11"
+                Sql += " ,t30_urighd t10"
+                Sql += " WHERE t11.会社コード = t10.会社コード"
+                Sql += " AND t11.売上番号 = t10.売上番号"
+                Sql += " AND t11.売上番号枝番 = t10.売上番号枝番"
+                Sql += " AND t11.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+                Sql += " AND t11.受注番号 = '" & OrderNo & "'"
+                Sql += " AND t11.受注番号枝番 = '" & OrderSuffix & "'"
                 Sql += " AND t10.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
-                If CurCode <> 0 Then
-                    Sql += "AND t11.通貨 = " & CurCode
-                End If
+                'If CurCode <> 0 Then
+                '    Sql += "AND t11.通貨 = " & CurCode
+                'End If
+                SQL += " order by t11.行番号"
 
                 '受注明細（商品情報）
                 Dim dsCymndt As DataSet = _db.selectDB(Sql, RS, reccnt)
@@ -437,26 +425,24 @@ Public Class CustomerOrderList
                     End If
                     sheet.Range("A" & currentRow).Value = currentNum
                     sheet.Range("B" & currentRow).Value = dsCymndt.Tables(RS).Rows(i)("メーカー") & Environment.NewLine & dsCymndt.Tables(RS).Rows(i)("品名") & Environment.NewLine & dsCymndt.Tables(RS).Rows(i)("型式")
-                    sheet.Range("C" & currentRow).Value = dsCymndt.Tables(RS).Rows(i)("受注数量")
+                    sheet.Range("C" & currentRow).Value = dsCymndt.Tables(RS).Rows(i)("売上数量")
                     sheet.Range("D" & currentRow).Value = dsCymndt.Tables(RS).Rows(i)("単位")
-                    sheet.Range("E" & currentRow).Value = dsCymndt.Tables(RS).Rows(i)("見積単価_外貨")
-                    sheet.Range("F" & currentRow).Value = dsCymndt.Tables(RS).Rows(i)("見積金額_外貨")
-                    BillingSubTotal += dsCymndt.Tables(RS).Rows(i)("見積金額_外貨")
+                    sheet.Range("E" & currentRow).Value = dsCymndt.Tables(RS).Rows(i)("売単価") '("売上単価_外貨")
+                    sheet.Range("F" & currentRow).Value = dsCymndt.Tables(RS).Rows(i)("売上金額") '("売上金額_外貨")
+                    BillingSubTotal += dsCymndt.Tables(RS).Rows(i)("売上金額")
                     currentNum += 1
                     currentRow += 1
                 Next i
 
             Next r
 
-            Sql = " AND 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-
-            Dim dsCompany As DataSet = getDsData("m01_company", Sql)
-
-            Dim getHanyo As DataSet = getDsHanyoData(CommonConst.DC_CODE, dsCompany.Tables(RS).Rows(0)("預金種目"))
+            'Sql = " AND 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+            'Dim dsCompany As DataSet = _com.getDsData("m01_company", Sql)
+            'Dim getHanyo As DataSet = _com.getDsHanyoData(CommonConst.DC_CODE, dsCompany.Tables(RS).Rows(0)("預金種目"))
             lastRow += 1
             sheet.Range("F" & lastRow + 1).Value = BillingSubTotal
-            sheet.Range("F" & lastRow + 2).Value = BillingSubTotal * 0.1
-            sheet.Range("F" & lastRow + 3).Value = BillingSubTotal * 1.1
+            sheet.Range("F" & lastRow + 2).Value = VAT 'BillingSubTotal * 0.1
+            sheet.Range("F" & lastRow + 3).Value = BillingSubTotal + VAT ' * 1.1
 
             sheet.Range("C" & lastRow + 5).Value = sheet.Range("E" & lastRow + 3).Value
             'sheet.Range("C" & lastRow + 8).Value = dsCompany.Tables(RS).Rows(0)("銀行名") & " " & dsCompany.Tables(RS).Rows(0)("支店名") & " " & getHanyo.Tables(RS).Rows(0)("文字2")
@@ -468,7 +454,7 @@ Public Class CustomerOrderList
 
             app.DisplayAlerts = False 'Microsoft Excelのアラート一旦無効化
 
-            Dim excelChk As Boolean = excelOutput(sOutFile)
+            Dim excelChk As Boolean = _com.excelOutput(sOutFile)
             If excelChk = False Then
                 Exit Sub
             End If
@@ -501,71 +487,4 @@ Public Class CustomerOrderList
         PurchaseListLoad()
     End Sub
 
-    'sqlで実行する文字列からシングルクォーテーションを文字コードにする
-    Private Function escapeSql(ByVal prmSql As String) As String
-        Dim sql As String = prmSql
-
-        sql = sql.Replace("'"c, "''") 'シングルクォーテーションを置換
-
-        Return Regex.Escape(sql)
-        Return sql
-    End Function
-
-    'param1：String テーブル名
-    'param2：String 詳細条件
-    'Return: DataSet
-    Private Function getDsData(ByVal tableName As String, Optional ByRef txtParam As String = "") As DataSet
-        Dim reccnt As Integer = 0 'DB用（デフォルト）
-        Dim Sql As String = ""
-
-        Sql += "SELECT * FROM "
-
-        Sql += "public." & tableName
-        Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-        Sql += txtParam
-        Return _db.selectDB(Sql, RS, reccnt)
-    End Function
-
-    'Excel出力する際のチェック
-    Private Function excelOutput(ByVal prmFilePath As String)
-        Dim fileChk As String = Dir(prmFilePath)
-        '同名ファイルがあるかどうかチェック
-        If fileChk <> "" Then
-            Dim result = _msgHd.dspMSG("confirmFileExist", frmC01F10_Login.loginValue.Language, prmFilePath)
-            If result = DialogResult.No Then
-                Return False
-            End If
-
-            Try
-                'ファイルが開けるかどうかチェック
-                Dim sr As StreamReader = New StreamReader(prmFilePath)
-                sr.Close() '処理が通ったら閉じる
-            Catch ex As Exception
-                '開けない場合はアラートを表示してリターンさせる
-                MessageBox.Show(ex.Message, CommonConst.AP_NAME, MessageBoxButtons.OK, MessageBoxIcon.Error)
-                Return False
-            End Try
-
-            Return True
-        End If
-        Return True
-    End Function
-
-    '汎用マスタから固定キー、可変キーに応じた結果を返す
-    'param1：String 固定キー
-    'param2：String 可変キー
-    'Return: DataSet
-    Private Function getDsHanyoData(ByVal prmFixed As String, Optional ByVal prmVariable As String = "") As DataSet
-        Dim Sql As String = ""
-
-        Sql = " AND "
-        Sql += "固定キー ILIKE '" & prmFixed & "'"
-
-        If prmVariable IsNot "" Then
-            Sql += " AND "
-            Sql += "可変キー ILIKE '" & prmVariable & "'"
-        End If
-        'リードタイムのリストを汎用マスタから取得
-        Return getDsData("m90_hanyo", Sql)
-    End Function
 End Class
