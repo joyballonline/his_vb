@@ -108,7 +108,7 @@ Public Class frmC01F10_Login
     Private Sub btnEnd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEnd.Click
 
         Dim intRet As Integer
-        intRet = _msgHd.dspMSG("SystemExit", CommonConst.LANG_KBN_JPN)
+        intRet = _msgHd.dspMSG("SystemExit", StartUp._iniVal.Default_lng)
         If intRet = vbOK Then
             Application.Exit()
         End If
@@ -138,14 +138,14 @@ Public Class frmC01F10_Login
         If netChk Then
             '20190502　いったんコメントアウト
             'accountCheck()
-            'useLimitCheck()
+            useLimitCheck()
         Else
-            _msgHd.dspMSG("chkNetworkError", CommonConst.LANG_KBN_JPN)
+            _msgHd.dspMSG("chkNetworkError", StartUp._iniVal.Default_lng)
             Application.Exit()
         End If
 
         '初期化
-        Call initForm()
+        'Call initForm()
 
     End Sub
 
@@ -180,7 +180,7 @@ Public Class frmC01F10_Login
                 Dim ds As DataSet = _db.selectDB(sql, RS, reccnt)
 
                 If reccnt <= 0 Then
-                    _msgHd.dspMSG("NonImputUserID", CommonConst.LANG_KBN_JPN)
+                    _msgHd.dspMSG("NonImputUserID", StartUp._iniVal.Default_lng)
                     'MsgBox("入力された「ユーザID」は存在しないか、無効になっています。", vbOK)
                     'Throw New UsrDefException("入力された「ユーザID」は存在しないか、無効になっています。", _msgHd.getMSG("NoTantoCD", ""), txtTanto)
                     Exit Sub
@@ -209,7 +209,7 @@ Public Class frmC01F10_Login
                 '入力された「ユーザID」のパスワード情報が存在しません。
                 '→　入力状態に戻す（通常はありえない）
                 If reccnt2 <= 0 Then
-                    _msgHd.dspMSG("NonImputNoDataUserID", CommonConst.LANG_KBN_JPN)
+                    _msgHd.dspMSG("NonImputNoDataUserID", StartUp._iniVal.Default_lng)
                     'MsgBox("入力された「ユーザID」のパスワード情報が存在しません。", vbOK)
                     'Throw New UsrDefException("入力された「ユーザID」は存在しないか、無効になっています。", _msgHd.getMSG("NoTantoCD", ""), txtTanto)
                     Exit Sub
@@ -223,7 +223,7 @@ Public Class frmC01F10_Login
                 '画面)パスワードとDB)パスワードを比較
                 If Not _db.rmNullStr(ds2.Tables(RS).Rows(0)("パスワード")).Equals(txtPasswd.Text) Then
                     'Throw New UsrDefException("パスワードが違います。", _msgHd.getMSG("Unmatch", ""), txtPasswd)
-                    _msgHd.dspMSG("NonImputPassword", CommonConst.LANG_KBN_JPN)
+                    _msgHd.dspMSG("NonImputPassword", StartUp._iniVal.Default_lng)
                     'MsgBox("パスワードが違います。", vbOK)
                     Exit Sub
                 End If
@@ -258,24 +258,10 @@ Public Class frmC01F10_Login
                 openForm = New frmC01F20_ChangePasswd(_msgHd, _db, Me)
                 openForm.ShowDialog()
                 openForm.Dispose()
-
-                '「パスワード変更」画面起動
-                'Dim openForm12 As frmKR12_ChangePasswd = New frmKR12_ChangePasswd(_msgHd, _db, Me, txtTanto.Text)   'パラメタを起動画面へ渡す
-                'StartUp.loginForm = Me
-                'openForm12.ShowDialog()                                                 '画面表示
-                'openForm12.Dispose()
                 Exit Sub
 
             Else
                 'パスワード変更チェックなし
-
-                ''「連携処理一覧」画面起動
-                'Dim openForm13 As frmKR13_ProcList = New frmKR13_ProcList(_msgHd, _db, Me, _loginVal.TantoCD, _loginVal.TantoNM)      'パラメタを起動画面へ渡す
-                'StartUp.loginForm = Me
-                'openForm13.Show()                                                   '画面表示
-                'Me.Hide()                                                           '自分は隠れる
-
-
                 '前月末にレートの登録があるかチェック
                 Dim Month As Integer = Now.Month
                 Dim BaseDate As Date = DateSerial(Year(Now), Month, 1)
@@ -287,7 +273,8 @@ Public Class frmC01F10_Login
                 sql = sql & " where 基準日 ='" & UtilClass.strFormatDate(BaseDate) & "'"
                 sql = sql & "   and 会社コード = '" & _db.rmSQ(cmbCampany.SelectedValue) & "'"
 
-                Dim dsRate = _db.selectDB(sql, RS, 0)
+                Dim reccnt3 As Integer = 0
+                Dim dsRate = _db.selectDB(sql, RS, reccnt3)
 
                 If dsRate.Tables(RS).Rows(0)("件数") = 0 Then
                     _msgHd.dspMSG("LoginRate", frmC01F10_Login.loginValue.Language)
@@ -348,7 +335,7 @@ Public Class frmC01F10_Login
             Throw ue
         Catch ex As Exception
             'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
-            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
+            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", StartUp._iniVal.Default_lng, UtilClass.getErrDetail(ex)))
         End Try
 
     End Sub
@@ -466,7 +453,7 @@ Public Class frmC01F10_Login
 
             If name = "" Then
                 '情報が存在しないのでエラー
-                _msgHd.dspMSG("chkAppUseSettingError", CommonConst.LANG_KBN_JPN, "No Setting")
+                _msgHd.dspMSG("chkAppUseSettingError", StartUp._iniVal.Default_lng, "No Setting")
                 Application.Exit()
 
             End If
@@ -475,7 +462,7 @@ Public Class frmC01F10_Login
         Else
 
             'ファイルが存在しないのでエラー
-            _msgHd.dspMSG("chkAppUseSettingError", CommonConst.LANG_KBN_JPN, "No File")
+            _msgHd.dspMSG("chkAppUseSettingError", StartUp._iniVal.Default_lng, "No File")
             Application.Exit()
 
             Return ""
@@ -521,7 +508,7 @@ Public Class frmC01F10_Login
 
                     If resText <> "success" Then
                         '有効なユーザでない場合、終了する
-                        _msgHd.dspMSG("chkAppActiveUserError", CommonConst.LANG_KBN_JPN)
+                        _msgHd.dspMSG("chkAppActiveUserError", StartUp._iniVal.Default_lng)
                         Application.Exit()
 
                     End If
@@ -531,7 +518,7 @@ Public Class frmC01F10_Login
             Else
 
                 '設定がなかったら終了する
-                _msgHd.dspMSG("chkAppUseSettingError", CommonConst.LANG_KBN_JPN)
+                _msgHd.dspMSG("chkAppUseSettingError", StartUp._iniVal.Default_lng)
                 Application.Exit()
 
             End If
@@ -568,7 +555,7 @@ Public Class frmC01F10_Login
             Dim Sql = ""
 
             Sql = "SELECT "
-            Sql += " マシン名, 初回アクセス日時 "
+            Sql += " * "
             Sql += " FROM l11_aclog "
             Sql += " WHERE "
             Sql += " マシン名 = '" & System.Environment.MachineName & "'"
@@ -577,6 +564,15 @@ Public Class frmC01F10_Login
 
             '該当マシンがあったら
             If dsACLog.Tables(RS).Rows.Count > 0 Then
+
+                Sql = "UPDATE l11_aclog set access_timestamp = current_timestamp "
+                Sql += ""
+                Sql += " WHERE "
+                Sql += " マシン名 = '" & System.Environment.MachineName & "'"
+                Sql += ""
+                Sql += ""
+
+                _db.executeDB(Sql) 'l11_aclogテーブル更新
 
                 '初期化
                 Call initForm()
@@ -617,14 +613,14 @@ Public Class frmC01F10_Login
                     Else
 
                         '上限を超えていたらアラートを表示後に終了
-                        _msgHd.dspMSG("chkAppUseError", CommonConst.LANG_KBN_JPN)
+                        _msgHd.dspMSG("chkAppUseError", StartUp._iniVal.Default_lng)
                         Application.Exit()
 
                     End If
                 Else
 
                     '設定がなかったら終了する
-                    _msgHd.dspMSG("chkAppUseSettingError", CommonConst.LANG_KBN_JPN)
+                    _msgHd.dspMSG("chkAppUseSettingError", StartUp._iniVal.Default_lng)
                     Application.Exit()
 
                 End If
