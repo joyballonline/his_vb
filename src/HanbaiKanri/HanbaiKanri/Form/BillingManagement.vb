@@ -127,7 +127,7 @@ Public Class BillingManagement
             LblNo3.Size = New Size(66, 22)
             LblRemarks1.Text = "Remarks1"
             LblRemarks2.Text = "Remarks2"
-            LblCymndt.Text = "JobOrderDetails"
+            LblCymndt.Text = "SalesDetails"
             LblHistory.Text = "BillingHistoryData"
             LblAdd.Text = "InvoicingThisTime"
             LblIDRCurrency.Text = "Currency"  '通貨ラベル
@@ -239,29 +239,21 @@ Public Class BillingManagement
 
         'joinするのでとりあえず直書き
         Sql = "SELECT"
-        Sql += " t11.行番号, t11.メーカー, t11.品名, t11.型式, t11.受注数量, t11.単位"
-        Sql += " , t11.売上数量, t11.売単価, t11.売上金額, t11.見積単価_外貨, t11.見積金額_外貨 ,t10.ＶＡＴ ,t11.通貨"
+        Sql += " t31.* "
         Sql += " FROM"
-        Sql += " t11_cymndt t11, t10_cymnhd t10"
+        Sql += " v_t31_urigdt_1 t31 "
         Sql += " WHERE"
-        Sql += " t11.会社コード = t10.会社コード"
+        Sql += " t31.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
         Sql += " AND "
-        Sql += " t11.受注番号 = t10.受注番号"
+        Sql += " t31.受注番号 = '" & CymnNo & "'"
         Sql += " AND "
-        Sql += " t11.受注番号枝番 = t10.受注番号枝番"
-        Sql += " AND "
-        Sql += " t11.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-        Sql += " AND "
-        Sql += " t11.受注番号 = '" & CymnNo & "'"
-        Sql += " AND "
-        Sql += " t11.受注番号枝番 = '" & Suffix & "'"
-        Sql += " AND "
-        Sql += "t10.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
+        Sql += " t31.受注番号枝番 = '" & Suffix & "'"
+        Sql += " order by t31.売上番号,t31.行番号 "
 
         '受注明細取得
         Dim dsCymndt As DataSet = _db.selectDB(Sql, RS, reccnt)
 
-        TxtIDRCurrency.Text = _com.getCurrencyEx(dsCymndt.Tables(RS).Rows(0)("通貨"))
+        TxtIDRCurrency.Text = _com.getCurrencyEx(dsCymnhd.Tables(RS).Rows(0)("通貨"))
 
         Sql = " AND "
         Sql += "受注番号 = '" & CymnNo & "'"
@@ -272,7 +264,7 @@ Public Class BillingManagement
 
         '請求基本取得
         Dim dsSkyuhd As DataSet = _com.getDsData("t23_skyuhd", Sql)
-        Dim dsUri As DataSet = _com.getDsData("t30_urighd", Sql)
+        'Dim dsUri As DataSet = _com.getDsData("t30_urighd", Sql)
 
         Dim BillingAmount As Decimal = 0
 
@@ -322,13 +314,17 @@ Public Class BillingManagement
             DgvCymndt.Rows(i).Cells("売上単価").Value = dsCymndt.Tables(RS).Rows(i)("見積単価_外貨")
 
             DgvCymndt.Rows(i).Cells("売上金額").Value = dsCymndt.Tables(RS).Rows(i)("売上数量") * dsCymndt.Tables(RS).Rows(i)("見積単価_外貨") 'dsCymndt.Tables(RS).Rows(i)("見積金額_外貨")
-            DgvCymndt.Rows(i).Cells("VAT").Value = UtilClass.VAT_round_AP(dsCymnhd.Tables(RS).Rows(0)("ＶＡＴ"), DgvCymndt.Rows(i).Cells("売上金額").Value)
+            If dsCymndt.Tables(RS).Rows(i)("仕入区分") = CommonConst.Sire_KBN_DELIVERY Then
+                DgvCymndt.Rows(i).Cells("VAT").Value = 0
+            Else
+                DgvCymndt.Rows(i).Cells("VAT").Value = UtilClass.VAT_round_AP(dsCymnhd.Tables(RS).Rows(0)("ＶＡＴ"), DgvCymndt.Rows(i).Cells("売上金額").Value)
+            End If
             DgvCymndt.Rows(i).Cells("売上金額計").Value = DgvCymndt.Rows(i).Cells("売上金額").Value + DgvCymndt.Rows(i).Cells("VAT").Value
 
-            If dsUri.Tables(RS).Rows.Count > 0 Then
-                DgvCymndt.Rows(i).Cells("売上番号").Value = dsUri.Tables(RS).Rows(0)("売上番号")
-                DgvCymndt.Rows(i).Cells("売上番号枝番").Value = dsUri.Tables(RS).Rows(0)("売上番号枝番")
-            End If
+            'If dsUri.Tables(RS).Rows.Count > 0 Then
+            DgvCymndt.Rows(i).Cells("売上番号").Value = dsCymndt.Tables(RS).Rows(i)("売上番号")
+            DgvCymndt.Rows(i).Cells("売上番号枝番").Value = dsCymndt.Tables(RS).Rows(i)("売上番号枝番")
+            'End If
 
             'チェックボックス
             DgvCymndt.Rows(i).Cells("請求").Value = False
@@ -663,7 +659,7 @@ Public Class BillingManagement
                 'Dim decTmp As Decimal = DgvAdd.Rows(e.RowIndex).Cells("今回請求金額計").Value
                 'DgvAdd.Rows(e.RowIndex).Cells("今回請求金額計").Value = decTmp.ToString("N2")
             End If
-            DgvAdd.Rows(e.RowIndex).Cells("今回請求金額計").Value = DgvAdd.Rows(e.RowIndex).Cells("VATAMT").Value + DgvAdd.Rows(e.RowIndex).Cells("SALESAMT").Value
+            DgvAdd.Rows(e.RowIndex).Cells("今回請求金額計").Value = UtilClass.rmNullDecimal(DgvAdd.Rows(e.RowIndex).Cells("VATAMT").Value) + UtilClass.rmNullDecimal(DgvAdd.Rows(e.RowIndex).Cells("SALESAMT").Value)
 
         End If
     End Sub

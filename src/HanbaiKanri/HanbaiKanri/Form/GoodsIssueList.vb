@@ -581,6 +581,7 @@ Public Class GoodsIssueList
                 Dim strJyutyuNo As String = dtSyukodt.Rows(index1)("受注番号")
                 Dim strEda As String = dtSyukodt.Rows(index1)("受注番号枝番")
                 Dim intSyukosu As Integer = dtSyukodt.Rows(index1)("出庫数量")
+                Dim intLineNo As Integer = dtSyukodt.Rows(index1)("行番号")
 
 
 #Region "select_t31_urigdt"
@@ -592,14 +593,14 @@ Public Class GoodsIssueList
                 Sql2 += " on t31.売上番号 = t30.売上番号 and t31.売上番号枝番 = t30.売上番号枝番"
 
                 Sql2 += " where t31.会社コード ='" & frmC01F10_Login.loginValue.BumonCD & "'"
-                Sql2 += "   and t31.行番号 = '" & dtSyukodt.Rows(index1)("行番号") & "'"
+                Sql2 += "   and t31.行番号 = " & intLineNo & ""
                 Sql2 += "   and t31.受注番号 = '" & strJyutyuNo & "'"
                 Sql2 += "   and t31.受注番号枝番 ='" & strEda & "'"
                 Sql2 += "   and t30.売上日 ='" & UtilClass.strFormatDate(dtSyukodt.Rows(index1)("出庫日")） & "'"
                 Sql2 += "   and t31.売上数量 ='" & intSyukosu & "'"
 
 
-                Dim dtUrigDt As DataTable = _db.selectDB(Sql2, RS, reccnt).Tables(0)
+                'Dim dtUrigDt As DataTable = _db.selectDB(Sql2, RS, reccnt).Tables(0)
 
 #End Region
 
@@ -616,9 +617,9 @@ Public Class GoodsIssueList
 
 
                 Sql4 += " where 会社コード ='" & frmC01F10_Login.loginValue.BumonCD & "'"
-                Sql4 += "   and 受注番号 ='" & dtUrigDt.Rows(0)("受注番号") & "'"
-                Sql4 += "   and 受注番号枝番 ='" & dtUrigDt.Rows(0)("受注番号枝番") & "'"
-                Sql4 += "   and 行番号 = '" & dtUrigDt.Rows(0)("行番号") & "'"
+                Sql4 += "   and 受注番号 ='" & strJyutyuNo & "'" 'dtUrigDt.Rows(0)("受注番号") & "'"
+                Sql4 += "   and 受注番号枝番 ='" & strEda & "'" 'dtUrigDt.Rows(0)("受注番号枝番") & "'"
+                Sql4 += "   and 行番号 = " & intLineNo & "" 'dtUrigDt.Rows(0)("行番号") & "'"
 
                 _db.executeDB(Sql4)
 
@@ -638,8 +639,8 @@ Public Class GoodsIssueList
                     Sql5 += ",更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
 
                     Sql5 += " where 会社コード ='" & frmC01F10_Login.loginValue.BumonCD & "'"
-                    Sql5 += "   and 受注番号 ='" & dtUrigDt.Rows(0)("受注番号") & "'"
-                    Sql5 += "   and 受注番号枝番 ='" & dtUrigDt.Rows(0)("受注番号枝番") & "'"
+                    Sql5 += "   and 受注番号 ='" & strJyutyuNo & "'" 'dtUrigDt.Rows(0)("受注番号") & "'"
+                    Sql5 += "   and 受注番号枝番 ='" & strEda & "'" 'dtUrigDt.Rows(0)("受注番号枝番") & "'"
 
                     _db.executeDB(Sql5)
 
@@ -656,8 +657,8 @@ Public Class GoodsIssueList
                     Sql6 += ",更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
 
                     Sql6 += " where 会社コード ='" & frmC01F10_Login.loginValue.BumonCD & "'"
-                    Sql6 += "   and 売上番号 ='" & dtUrigDt.Rows(0)("売上番号") & "'"
-                    Sql6 += "   and 売上番号枝番 ='" & dtUrigDt.Rows(0)("売上番号枝番") & "'"
+                    Sql6 += "   and 受注番号 ='" & strJyutyuNo & "'" '売上番号 ='" & dtUrigDt.Rows(0)("売上番号") & "'"
+                    Sql6 += "   and 受注番号枝番 ='" & strEda & "'" '売上番号枝番 ='" & dtUrigDt.Rows(0)("売上番号枝番") & "'"
 
                     _db.executeDB(Sql6)
 

@@ -286,7 +286,11 @@ Public Class Hanyo
                 Sql += "更新日"
                 Sql += " = '"
                 Sql += dtToday
-                Sql += "' "
+                Sql += "', "
+                Sql += "表示順"
+                Sql += " = "
+                Sql += TxtDisplayOrder.Text
+                Sql += " "
                 Sql += "WHERE"
                 Sql += " 会社コード"
                 Sql += "='"

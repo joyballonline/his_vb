@@ -1045,21 +1045,15 @@ Public Class Cymn
             Dim SupplierList As New List(Of String)(New String() {})
 
             For i As Integer = 0 To DgvItemList.Rows.Count - 1
-                If SupplierList.Contains(DgvItemList.Rows(i).Cells("仕入先").Value) = False And DgvItemList.Rows(i).Cells("仕入区分").Value = 1 Then
+                If SupplierList.Contains(DgvItemList.Rows(i).Cells("仕入先").Value) = False And
+                    (DgvItemList.Rows(i).Cells("仕入区分").Value = CommonConst.Sire_KBN_Sire Or
+                    DgvItemList.Rows(i).Cells("仕入区分").Value = CommonConst.Sire_KBN_DELIVERY) Then
+
                     SupplierList.Add(DgvItemList.Rows(i).Cells("仕入先").Value)
                 Else
 
                 End If
             Next
-
-            'Dim currencyList As New List(Of Integer)(New Integer() {})
-            'For i As Integer = 0 To DgvItemList.Rows.Count - 1
-            '    If currencyList.Contains(DgvItemList.Rows(i).Cells("仕入通貨").Value) = False And DgvItemList.Rows(i).Cells("仕入区分").Value = 1 Then
-            '        currencyList.Add(DgvItemList.Rows(i).Cells("仕入通貨").Value)
-            '    Else
-
-            '    End If
-            'Next
 
             Dim tbl As DataTable = New DataTable("table1")
             Dim row As DataRow
@@ -1079,7 +1073,7 @@ Public Class Cymn
 
                         '仕入区分を判定
                         If DgvItemList.Columns(x).Name = "仕入区分" Then
-                            If DgvItemList.Rows(i).Cells(DgvItemList.Columns(x).Name).Value = 1 Then
+                            If DgvItemList.Rows(i).Cells(DgvItemList.Columns(x).Name).Value = 1 Or DgvItemList.Rows(i).Cells(DgvItemList.Columns(x).Name).Value = 8 Then
                                 SupFlg = True
                             Else
                                 SupFlg = False  '在庫引当の場合は読み飛ばす
@@ -1124,7 +1118,7 @@ Public Class Cymn
             For i As Integer = 0 To tbl.Rows.Count - 1
 
                 '仕入区分 = 1（受発注）のみ発注登録を行う
-                If tbl.Rows(i)("仕入区分") = CommonConst.Sire_KBN_Sire Then
+                If tbl.Rows(i)("仕入区分") = CommonConst.Sire_KBN_Sire Or tbl.Rows(i)("仕入区分") = CommonConst.Sire_KBN_DELIVERY Then
 
                     '最初はそのまま
                     If CurrentPurchaseNo = "" Then

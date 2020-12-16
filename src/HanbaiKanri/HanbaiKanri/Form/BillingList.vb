@@ -457,6 +457,17 @@ Public Class BillingList
             '請求基本を更新
             _db.executeDB(Sql)
 
+            Sql = "UPDATE Public.t31_urigdt "
+            Sql += "SET "
+
+            Sql += "入金番号 = null"
+            Sql += ", 更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
+            Sql += ", 更新日 = current_timestamp"
+
+            Sql += " WHERE 会社コード ='" & frmC01F10_Login.loginValue.BumonCD & "'"
+            Sql += " AND 入金番号 = '" & DgvBilling.Rows(DgvBilling.CurrentCell.RowIndex).Cells("請求番号").Value & "'"
+            _db.executeDB(Sql)
+
             '表示データを更新
             PurchaseListLoad()
 

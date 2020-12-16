@@ -394,19 +394,16 @@ Public Class CustomerOrderList
                 'kafu
                 Sql = "SELECT"
                 Sql += " t11.*"
-                Sql += " FROM public.t31_urigdt t11"
-                Sql += " ,t30_urighd t10"
-                Sql += " WHERE t11.会社コード = t10.会社コード"
-                Sql += " AND t11.売上番号 = t10.売上番号"
-                Sql += " AND t11.売上番号枝番 = t10.売上番号枝番"
-                Sql += " AND t11.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-                Sql += " AND t11.受注番号 = '" & OrderNo & "'"
-                Sql += " AND t11.受注番号枝番 = '" & OrderSuffix & "'"
-                Sql += " AND t10.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
-                'If CurCode <> 0 Then
-                '    Sql += "AND t11.通貨 = " & CurCode
-                'End If
-                SQL += " order by t11.行番号"
+                Sql += " FROM public.v_t31_urigdt_1 t11 "
+                'Sql += " ,t30_urighd t10"
+                'Sql += " WHERE t11.会社コード = t10.会社コード"
+                'Sql += " AND t11.売上番号 = t10.売上番号"
+                'Sql += " AND t11.売上番号枝番 = t10.売上番号枝番"
+                Sql += " WHERE t11.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+                Sql += " AND t11.入金番号 = '" & BillingNo & "'"
+                'Sql += " AND t11.受注番号枝番 = '" & OrderSuffix & "'"
+                'Sql += " AND t10.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
+                Sql += " order by t11.行番号"
 
                 '受注明細（商品情報）
                 Dim dsCymndt As DataSet = _db.selectDB(Sql, RS, reccnt)
@@ -425,11 +422,15 @@ Public Class CustomerOrderList
                     End If
                     sheet.Range("A" & currentRow).Value = currentNum
                     sheet.Range("B" & currentRow).Value = dsCymndt.Tables(RS).Rows(i)("メーカー") & Environment.NewLine & dsCymndt.Tables(RS).Rows(i)("品名") & Environment.NewLine & dsCymndt.Tables(RS).Rows(i)("型式")
-                    sheet.Range("C" & currentRow).Value = dsCymndt.Tables(RS).Rows(i)("売上数量")
+                    Dim x As Decimal = dsCymndt.Tables(RS).Rows(i)("見積単価_外貨")
+                    Dim y As Decimal = dsCymndt.Tables(RS).Rows(i)("売上数量")
+
+                    sheet.Range("C" & currentRow).Value = y
                     sheet.Range("D" & currentRow).Value = dsCymndt.Tables(RS).Rows(i)("単位")
-                    sheet.Range("E" & currentRow).Value = dsCymndt.Tables(RS).Rows(i)("売単価") '("売上単価_外貨")
-                    sheet.Range("F" & currentRow).Value = dsCymndt.Tables(RS).Rows(i)("売上金額") '("売上金額_外貨")
-                    BillingSubTotal += dsCymndt.Tables(RS).Rows(i)("売上金額")
+
+                    sheet.Range("E" & currentRow).Value = x 'dsCymndt.Tables(RS).Rows(i)("見積単価_外貨")
+                    sheet.Range("F" & currentRow).Value = x * y 'dsCymndt.Tables(RS).Rows(i)("見積金額") '("売上金額_外貨")
+                    BillingSubTotal += (x * y) 'dsCymndt.Tables(RS).Rows(i)("見積金額")
                     currentNum += 1
                     currentRow += 1
                 Next i
