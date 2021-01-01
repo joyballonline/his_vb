@@ -2747,26 +2747,21 @@ Public Class GoodsIssue
 
         '2019.12.19 受注番号基準に変更し、受注番号、出庫日、出庫区分を抽出条件とする
         Dim Sql1 As String = ""
-        Sql1 += "SELECT HD.* FROM public.t44_shukohd HD, public.t45_shukodt DT "
-        Sql1 += " WHERE HD.会社コード=DT.会社コード And HD.出庫番号=DT.出庫番号 "
+        Sql1 += "SELECT HD.* FROM public.t44_shukohd HD "
+        Sql1 += " WHERE HD.会社コード='" & frmC01F10_Login.loginValue.BumonCD & "'"
         Sql1 += " AND HD.出庫番号 = '" & lsno_ & "'"
         'Sql1 += " WHERE HD.受注番号 = '" & TxtOrderNo.Text & "'"
         'Sql1 += " AND HD.出庫日 = '" & CDate(DgvHistory.Rows(SelectedRow).Cells("出庫日").Value).ToString("yyyyMMdd") & "'"
         'Sql1 += " AND DT.出庫区分 = '1'"
 
-
-        '2019.12.19 受注番号基準に変更し、受注番号、出庫日、出庫区分を抽出条件とする
-        Dim Sql2 As String = ""
-        Sql2 += "SELECT DT.* FROM public.t45_shukodt DT, public.t44_shukohd HD "
-        Sql2 += " WHERE HD.会社コード=DT.会社コード And HD.出庫番号=DT.出庫番号 "
-        Sql2 += " AND 出庫番号 = '" & lsno_ & "'"
-        Sql2 += " WHERE DT.受注番号 = '" & TxtOrderNo.Text & "'"
-        Sql2 += "   AND HD.出庫日 = '" & CDate(DgvHistory.Rows(SelectedRow).Cells("出庫日").Value).ToString("yyyyMMdd") & "'"
-        Sql2 += " AND DT.出庫区分 = '1'"
-
         Dim reccnt As Integer = 0
         Dim ds1 As DataSet = _db.selectDB(Sql1, RS, reccnt)
-        'Dim ds2 As DataSet = _db.selectDB(Sql2, RS, reccnt)
+
+        Dim Sql2 As String = ""
+        Sql2 += "SELECT * FROM public.m10_customer HD "
+        Sql2 += " WHERE HD.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        Sql2 += " AND HD.得意先コード = '" & ds1.Tables(RS).Rows(0)("得意先コード") & "'"
+        Dim ds2 As DataSet = _db.selectDB(Sql2, RS, reccnt)
 
         '定義
         'Dim app As Excel.Application = Nothing
@@ -2806,12 +2801,13 @@ Public Class GoodsIssue
             'book = app.Workbooks.Add(sHinaFileDeliv)  'テンプレート
             'sheet = CType(book.Worksheets(1), Excel.Worksheet)
 
-            xls.setValue(":" & ds1.Tables(RS).Rows(0)("得意先名"), 8, 2)
-            xls.setValue(":" & ds1.Tables(RS).Rows(0)("得意先住所") & " " & ds1.Tables(RS).Rows(0)("得意先郵便番号"), 9, 2)
-            xls.setValue(":" & ds1.Tables(RS).Rows(0)("得意先電話番号"), 11, 2)
-            xls.setValue(":" & lsno_, 8, 5)
-            xls.setValue(":" & ds1.Tables(RS).Rows(0)("出庫日"), 9, 5)
-            xls.setValue(":" & ds1.Tables(RS).Rows(0)("客先番号"), 10, 5)
+            xls.setValue(": " & ds2.Tables(RS).Rows(0)("得意先名"), 8, 2)
+            xls.setValue(": " & ds2.Tables(RS).Rows(0)("住所１"), 9, 2)
+            xls.setValue("" & ds2.Tables(RS).Rows(0)("住所２") & " " & ds2.Tables(RS).Rows(0)("住所３") & " " & ds2.Tables(RS).Rows(0)("郵便番号"), 10, 2)
+            xls.setValue(": " & ds2.Tables(RS).Rows(0)("電話番号"), 11, 2)
+            xls.setValue(": " & lsno_, 8, 5)
+            xls.setValue(": " & ds1.Tables(RS).Rows(0)("出庫日"), 9, 5)
+            xls.setValue(": " & ds1.Tables(RS).Rows(0)("客先番号"), 10, 5)
             'sheet.Range("B8").Value = ":" & ds1.Tables(RS).Rows(0)("得意先名")
             'sheet.Range("B9").Value = ":" & ds1.Tables(RS).Rows(0)("得意先住所") & " " & ds1.Tables(RS).Rows(0)("得意先郵便番号")
             'sheet.Range("B11").Value = ":" & ds1.Tables(RS).Rows(0)("得意先電話番号")
@@ -2830,42 +2826,34 @@ Public Class GoodsIssue
 
 
             For j As Integer = 0 To DgvHistory.RowCount - 1
-                'Dim cellPos As String = lstRow & ":" & lstRow
-                'Dim R As Object
-                'cellPos = lstRow & ":" & lstRow
-                'R = sheet.Range(cellPos)
-                'R.Copy()
-                'R.Insert()
-                'If Marshal.IsComObject(R) Then
-                'Marshal.ReleaseComObject(R)
-                'End If
-
                 If DgvHistory.Rows(j).Cells("出庫番号").Value = lsno_ Then
-
-                    '2019.12.19 Range("B")に出庫番号を出力する改訂
                     xls.setValue(num, lstRow, 1)
-                    'sheet.Range("A" & lstRow).Value = num
-                    'sheet.Range("B" & lstRow).Value = ds2.Tables(RS).Rows(j)("メーカー") & Environment.NewLine & ds2.Tables(RS).Rows(j)("品名") &
-                    'Environment.NewLine & ds2.Tables(RS).Rows(j)("型式") & Environment.NewLine & ds2.Tables(RS).Rows(j)("備考") &
-                    'Environment.NewLine & "DeliveryNoteNo." & ds2.Tables(RS).Rows(j)("出庫番号") & "-" & ds2.Tables(RS).Rows(j)("行番号")
-                    Dim b_ As String = DgvHistory.Rows(j).Cells("メーカー").Value & Environment.NewLine & DgvHistory.Rows(j).Cells("品名").Value &
-                    Environment.NewLine & DgvHistory.Rows(j).Cells("型式").Value & Environment.NewLine & DgvHistory.Rows(j).Cells("備考").Value &
-                    Environment.NewLine & "JobOrderNo." & ds1.Tables(RS).Rows(0)("受注番号") & "-" & ds1.Tables(RS).Rows(0)("受注番号枝番")
-                    xls.setValue(b_, lstRow, 2)
+                    xls.setValue(DgvHistory.Rows(j).Cells("メーカー").Value, lstRow, 2)
                     xls.setValue(DgvHistory.Rows(j).Cells("出庫数量").Value, lstRow, 3)
+                    xls.setValue(DgvHistory.Rows(j).Cells("単位").Value, lstRow, 4)
+                    insert_row(xls, lstlstRow, lstRow)
+                    'lstRow += 1
+                    xls.setValue(DgvHistory.Rows(j).Cells("品名").Value, lstRow, 2)
+                    insert_row(xls, lstlstRow, lstRow)
+                    'lstRow += 1
+                    xls.setValue(DgvHistory.Rows(j).Cells("型式").Value, lstRow, 2) 'Environment.NewLine & DgvHistory.Rows(j).Cells("備考").Value &
+                    insert_row(xls, lstlstRow, lstRow)
+                    'lstRow += 1
+                    xls.setValue("JobOrderNo." & ds1.Tables(RS).Rows(0)("受注番号") & "-" & ds1.Tables(RS).Rows(0)("受注番号枝番"), lstRow, 2)
                     'sheet.Range("C" & lstRow).Value = ds2.Tables(RS).Rows(j)("出庫数量")
                     'sheet.Range("D" & lstRow).Value = ds2.Tables(RS).Rows(j)("単位")
-                    xls.setValue(DgvHistory.Rows(j).Cells("単位").Value, lstRow, 4)
                     'sheet.Range("E" & lstRow).Value = ds2.Tables(RS).Rows(j)("備考")
-                    xls.setValue(DgvHistory.Rows(j).Cells("備考").Value, lstRow, 5)
+                    'xls.setValue(DgvHistory.Rows(j).Cells("備考").Value, lstRow, 5)
 
                     num += 1
-                    If lstlstRow - 1 <= lstRow Then
-                        'xls.copyRow(lstRow + 1)
-                        xls.insertRow(lstRow + 1)
-                        'xls.paste(lstRow + 1, 1)
-                    End If
-                    lstRow += 1
+                    insert_row(xls, lstlstRow, lstRow)
+
+                    'If lstlstRow - 1 <= lstRow Then
+                    'xls.copyRow(lstRow + 1)
+                    'xls.insertRow(lstRow + 1)
+                    'xls.paste(lstRow + 1, 1)
+                    'End If
+                    'lstRow += 1
                 End If
             Next
 
@@ -2909,6 +2897,10 @@ Public Class GoodsIssue
         End If
     End Sub
 
-
-
+    Private Sub insert_row(ByRef xls As UtilExcelHandler, ByVal lstlstrow As Integer, ByRef lstrow As Integer)
+        If lstlstrow - 1 <= lstrow Then
+            xls.insertRow(lstrow + 1)
+        End If
+        lstrow += 1
+    End Sub
 End Class
