@@ -34,9 +34,11 @@ Partial Class DataOutput
         Me.TableLayoutPanel3 = New System.Windows.Forms.TableLayoutPanel()
         Me.RbtnSales = New System.Windows.Forms.RadioButton()
         Me.RbtnJobOrder = New System.Windows.Forms.RadioButton()
+        Me.RbtnDelivered = New System.Windows.Forms.RadioButton()
         Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
         Me.BtnCSVOutput = New System.Windows.Forms.Button()
         Me.DgvList = New System.Windows.Forms.DataGridView()
+        Me.BtnSearch = New System.Windows.Forms.Button()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.TableLayoutPanel3.SuspendLayout()
         Me.TableLayoutPanel2.SuspendLayout()
@@ -48,10 +50,10 @@ Partial Class DataOutput
         Me.LblPeriod.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.LblPeriod.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblPeriod.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LblPeriod.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblPeriod.Font = New System.Drawing.Font("MS Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.LblPeriod.Location = New System.Drawing.Point(3, 31)
         Me.LblPeriod.Name = "LblPeriod"
-        Me.LblPeriod.Size = New System.Drawing.Size(193, 22)
+        Me.LblPeriod.Size = New System.Drawing.Size(235, 22)
         Me.LblPeriod.TabIndex = 80
         Me.LblPeriod.Text = "期間"
         Me.LblPeriod.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -70,7 +72,7 @@ Partial Class DataOutput
         '
         Me.LblMode.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblMode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LblMode.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblMode.Font = New System.Drawing.Font("MS Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.LblMode.Location = New System.Drawing.Point(1173, 9)
         Me.LblMode.Name = "LblMode"
         Me.LblMode.Size = New System.Drawing.Size(165, 22)
@@ -83,13 +85,13 @@ Partial Class DataOutput
         Me.DtpDateSince.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.DtpDateSince.CalendarFont = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.DtpDateSince.CustomFormat = ""
-        Me.DtpDateSince.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.DtpDateSince.Font = New System.Drawing.Font("MS Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.DtpDateSince.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.DtpDateSince.Location = New System.Drawing.Point(0, 0)
+        Me.DtpDateSince.Location = New System.Drawing.Point(0, 2)
         Me.DtpDateSince.Margin = New System.Windows.Forms.Padding(0)
         Me.DtpDateSince.MinDate = New Date(2000, 1, 1, 0, 0, 0, 0)
         Me.DtpDateSince.Name = "DtpDateSince"
-        Me.DtpDateSince.Size = New System.Drawing.Size(148, 37)
+        Me.DtpDateSince.Size = New System.Drawing.Size(148, 22)
         Me.DtpDateSince.TabIndex = 97
         Me.DtpDateSince.TabStop = False
         Me.DtpDateSince.Value = New Date(2019, 1, 1, 0, 0, 0, 0)
@@ -98,9 +100,9 @@ Partial Class DataOutput
         '
         Me.Label5.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(151, 1)
+        Me.Label5.Location = New System.Drawing.Point(151, 6)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(34, 24)
+        Me.Label5.Size = New System.Drawing.Size(19, 13)
         Me.Label5.TabIndex = 99
         Me.Label5.Text = "～"
         '
@@ -109,13 +111,13 @@ Partial Class DataOutput
         Me.DtpDateUntil.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.DtpDateUntil.CalendarFont = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.DtpDateUntil.CustomFormat = ""
-        Me.DtpDateUntil.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.DtpDateUntil.Font = New System.Drawing.Font("MS Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.DtpDateUntil.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.DtpDateUntil.Location = New System.Drawing.Point(188, 0)
+        Me.DtpDateUntil.Location = New System.Drawing.Point(173, 2)
         Me.DtpDateUntil.Margin = New System.Windows.Forms.Padding(0)
         Me.DtpDateUntil.MinDate = New Date(2000, 1, 1, 0, 0, 0, 0)
         Me.DtpDateUntil.Name = "DtpDateUntil"
-        Me.DtpDateUntil.Size = New System.Drawing.Size(148, 37)
+        Me.DtpDateUntil.Size = New System.Drawing.Size(148, 22)
         Me.DtpDateUntil.TabIndex = 100
         Me.DtpDateUntil.TabStop = False
         Me.DtpDateUntil.Value = New Date(2019, 1, 1, 0, 0, 0, 0)
@@ -125,10 +127,10 @@ Partial Class DataOutput
         Me.LblTarget.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.LblTarget.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblTarget.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LblTarget.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblTarget.Font = New System.Drawing.Font("MS Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.LblTarget.Location = New System.Drawing.Point(3, 2)
         Me.LblTarget.Name = "LblTarget"
-        Me.LblTarget.Size = New System.Drawing.Size(193, 22)
+        Me.LblTarget.Size = New System.Drawing.Size(235, 22)
         Me.LblTarget.TabIndex = 101
         Me.LblTarget.Text = "対象"
         Me.LblTarget.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -138,10 +140,10 @@ Partial Class DataOutput
         Me.RbtnQuotation.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.RbtnQuotation.AutoSize = True
         Me.RbtnQuotation.Checked = True
-        Me.RbtnQuotation.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.RbtnQuotation.Location = New System.Drawing.Point(3, 3)
+        Me.RbtnQuotation.Font = New System.Drawing.Font("MS Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.RbtnQuotation.Location = New System.Drawing.Point(3, 4)
         Me.RbtnQuotation.Name = "RbtnQuotation"
-        Me.RbtnQuotation.Size = New System.Drawing.Size(104, 21)
+        Me.RbtnQuotation.Size = New System.Drawing.Size(57, 19)
         Me.RbtnQuotation.TabIndex = 102
         Me.RbtnQuotation.TabStop = True
         Me.RbtnQuotation.Text = "見積"
@@ -163,35 +165,37 @@ Partial Class DataOutput
         Me.TableLayoutPanel1.RowCount = 2
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 49.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 51.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(562, 57)
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(683, 57)
         Me.TableLayoutPanel1.TabIndex = 103
         '
         'TableLayoutPanel3
         '
         Me.TableLayoutPanel3.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TableLayoutPanel3.ColumnCount = 3
+        Me.TableLayoutPanel3.ColumnCount = 4
         Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
         Me.TableLayoutPanel3.Controls.Add(Me.RbtnSales, 2, 0)
         Me.TableLayoutPanel3.Controls.Add(Me.RbtnJobOrder, 1, 0)
         Me.TableLayoutPanel3.Controls.Add(Me.RbtnQuotation, 0, 0)
-        Me.TableLayoutPanel3.Location = New System.Drawing.Point(199, 0)
+        Me.TableLayoutPanel3.Controls.Add(Me.RbtnDelivered, 3, 0)
+        Me.TableLayoutPanel3.Location = New System.Drawing.Point(241, 0)
         Me.TableLayoutPanel3.Margin = New System.Windows.Forms.Padding(0)
         Me.TableLayoutPanel3.Name = "TableLayoutPanel3"
         Me.TableLayoutPanel3.RowCount = 1
         Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel3.Size = New System.Drawing.Size(363, 27)
+        Me.TableLayoutPanel3.Size = New System.Drawing.Size(442, 27)
         Me.TableLayoutPanel3.TabIndex = 103
         '
         'RbtnSales
         '
         Me.RbtnSales.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.RbtnSales.AutoSize = True
-        Me.RbtnSales.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.RbtnSales.Location = New System.Drawing.Point(223, 3)
+        Me.RbtnSales.Font = New System.Drawing.Font("MS Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.RbtnSales.Location = New System.Drawing.Point(129, 4)
         Me.RbtnSales.Name = "RbtnSales"
-        Me.RbtnSales.Size = New System.Drawing.Size(104, 21)
+        Me.RbtnSales.Size = New System.Drawing.Size(57, 19)
         Me.RbtnSales.TabIndex = 104
         Me.RbtnSales.Text = "売上"
         Me.RbtnSales.UseVisualStyleBackColor = True
@@ -200,13 +204,26 @@ Partial Class DataOutput
         '
         Me.RbtnJobOrder.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.RbtnJobOrder.AutoSize = True
-        Me.RbtnJobOrder.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.RbtnJobOrder.Location = New System.Drawing.Point(113, 3)
+        Me.RbtnJobOrder.Font = New System.Drawing.Font("MS Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.RbtnJobOrder.Location = New System.Drawing.Point(66, 4)
         Me.RbtnJobOrder.Name = "RbtnJobOrder"
-        Me.RbtnJobOrder.Size = New System.Drawing.Size(104, 21)
+        Me.RbtnJobOrder.Size = New System.Drawing.Size(57, 19)
         Me.RbtnJobOrder.TabIndex = 103
         Me.RbtnJobOrder.Text = "受注"
         Me.RbtnJobOrder.UseVisualStyleBackColor = True
+        '
+        'RbtnDelivered
+        '
+        Me.RbtnDelivered.Anchor = System.Windows.Forms.AnchorStyles.Left
+        Me.RbtnDelivered.AutoSize = True
+        Me.RbtnDelivered.Font = New System.Drawing.Font("MS Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.RbtnDelivered.Location = New System.Drawing.Point(192, 4)
+        Me.RbtnDelivered.Name = "RbtnDelivered"
+        Me.RbtnDelivered.Size = New System.Drawing.Size(97, 19)
+        Me.RbtnDelivered.TabIndex = 105
+        Me.RbtnDelivered.TabStop = True
+        Me.RbtnDelivered.Text = "Delivered"
+        Me.RbtnDelivered.UseVisualStyleBackColor = True
         '
         'TableLayoutPanel2
         '
@@ -218,12 +235,12 @@ Partial Class DataOutput
         Me.TableLayoutPanel2.Controls.Add(Me.DtpDateSince, 0, 0)
         Me.TableLayoutPanel2.Controls.Add(Me.Label5, 1, 0)
         Me.TableLayoutPanel2.Controls.Add(Me.DtpDateUntil, 2, 0)
-        Me.TableLayoutPanel2.Location = New System.Drawing.Point(199, 29)
+        Me.TableLayoutPanel2.Location = New System.Drawing.Point(241, 29)
         Me.TableLayoutPanel2.Margin = New System.Windows.Forms.Padding(0)
         Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
         Me.TableLayoutPanel2.RowCount = 1
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel2.Size = New System.Drawing.Size(363, 26)
+        Me.TableLayoutPanel2.Size = New System.Drawing.Size(442, 26)
         Me.TableLayoutPanel2.TabIndex = 102
         '
         'BtnCSVOutput
@@ -250,10 +267,21 @@ Partial Class DataOutput
         Me.DgvList.Size = New System.Drawing.Size(1326, 430)
         Me.DgvList.TabIndex = 105
         '
+        'BtnSearch
+        '
+        Me.BtnSearch.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.BtnSearch.Location = New System.Drawing.Point(701, 9)
+        Me.BtnSearch.Name = "BtnSearch"
+        Me.BtnSearch.Size = New System.Drawing.Size(165, 40)
+        Me.BtnSearch.TabIndex = 106
+        Me.BtnSearch.Text = "Search"
+        Me.BtnSearch.UseVisualStyleBackColor = True
+        '
         'DataOutput
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.ClientSize = New System.Drawing.Size(1350, 561)
+        Me.Controls.Add(Me.BtnSearch)
         Me.Controls.Add(Me.DgvList)
         Me.Controls.Add(Me.BtnCSVOutput)
         Me.Controls.Add(Me.TableLayoutPanel1)
@@ -286,4 +314,6 @@ Partial Class DataOutput
     Friend WithEvents TableLayoutPanel2 As TableLayoutPanel
     Friend WithEvents BtnCSVOutput As Button
     Friend WithEvents DgvList As DataGridView
+    Friend WithEvents RbtnDelivered As RadioButton
+    Friend WithEvents BtnSearch As Button
 End Class
