@@ -81,38 +81,13 @@ Public Class AccountsPayableBulk
 
     '画面表示時
     Private Sub MstHanyoue_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'If _status = CommonConst.STATUS_VIEW Then
-
-        '    LblMode.Text = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG,
-        '                    "ViewMode",
-        '                    "参照モード")
-
-        'ElseIf _status = CommonConst.STATUS_CANCEL Then
-
-        '    LblMode.Text = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG,
-        '                    "CancelMode",
-        '                    "取消モード")
-
-        '    BtnAPCancel.Visible = True
-        '    BtnAPCancel.Location = New Point(997, 509)
-        'End If
-
-        ''検索（Date）の初期値
-        'dtAPDateSince.Value = DateAdd("d", CommonConst.SINCE_DEFAULT_DAY, DateTime.Today)
-        'dtAPDateUntil.Value = DateTime.Today
 
         If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then  '英語
             BtnExcelOutput.Text = "Excel output"
             BtnRegist.Text = "Bulk registration"
             BtnBack.Text = "Back"
-
         Else  '日本語
-
         End If
-
-
-        'PurchaseListLoad() '一覧表示
-
 
     End Sub
 
@@ -129,9 +104,12 @@ Public Class AccountsPayableBulk
         '有効、対象会社データ、枝番が最新(MAX)
         Sql = "SELECT "
         Sql += "t20.発注番号"
-        Sql += ",max(t20.発注番号枝番) as 枝番"
+        Sql += ",t20.発注番号枝番 as 枝番"
+        Sql += ",t20.仕入先コード"
+        Sql += ",t20.ＶＡＴ"
         Sql += ",sum(t21.発注数量) as 発注数量"
         Sql += ",sum(t21.仕入数量) as 仕入数量"
+        Sql += ",sum(t21.仕入値_外貨 * t21.仕入数量) as 仕入値"
         Sql += " FROM t20_hattyu t20"
         Sql += " LEFT JOIN t21_hattyu t21"
         Sql += " ON t20.発注番号 = t21.発注番号"
@@ -145,7 +123,7 @@ Public Class AccountsPayableBulk
         Sql += " t20.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED.ToString
         'Sql += " AND "
         'Sql += " ((t46.買掛番号 IS NULL) OR (t46.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED.ToString & ")) "
-        Sql += " GROUP BY t20.発注番号"
+        Sql += " GROUP BY t20.発注番号,t20.発注番号枝番,t20.仕入先コード,t20.ＶＡＴ"
         Sql += " ORDER BY t20.発注番号,枝番"
 
         Try
@@ -154,6 +132,9 @@ Public Class AccountsPayableBulk
             Dim row As DataRow
             dt.Columns.Add("発注番号")
             dt.Columns.Add("発注番号枝番")
+            dt.Columns.Add("COMPANY")
+            dt.Columns.Add("AMOUNT")
+            dt.Columns.Add("BANK")
 
             For i As Integer = 0 To hachuList.Tables(RS).Rows.Count - 1
                 If hachuList.Tables(RS).Rows(i)("発注数量").ToString = hachuList.Tables(RS).Rows(i)("仕入数量").ToString Then
@@ -168,10 +149,23 @@ Public Class AccountsPayableBulk
 
                     Dim dsKikehd As DataSet = getDsData("t46_kikehd", Sql)
 
+                    Sql = " AND "
+                    Sql += "仕入先コード='" & hachuList.Tables(RS).Rows(i)("仕入先コード").ToString & "'"
+                    Dim dsS As DataSet = getDsData("m11_supplier", Sql)
+                    Dim supnm As String = ""
+                    Dim bnk As String = ""
+                    If dsS.Tables(RS).Rows.Count = 0 Then
+                    Else
+                        supnm = dsS.Tables(RS).Rows(0)("仕入先名")
+                        bnk = dsS.Tables(RS).Rows(0)("銀行名")
+                    End If
                     If dsKikehd.Tables(RS).Rows.Count = 0 Then
                         row = dt.NewRow '行作成
                         row("発注番号") = hachuList.Tables(RS).Rows(i)("発注番号").ToString
                         row("発注番号枝番") = hachuList.Tables(RS).Rows(i)("枝番").ToString
+                        row("COMPANY") = supnm
+                        row("AMOUNT") = UtilClass.formatNumber(UtilClass.rmNullDecimal(hachuList.Tables(RS).Rows(i)("仕入値")) + Math.Round((UtilClass.rmNullDecimal(hachuList.Tables(RS).Rows(i)("仕入値")) * UtilClass.rmNullDecimal(hachuList.Tables(RS).Rows(i)("ＶＡＴ"))) / 100, 2))
+                        row("BANK") = bnk
                         dt.Rows.Add(row) '行追加
 
                     End If
@@ -260,16 +254,19 @@ Public Class AccountsPayableBulk
 
                 '見出し 英語表示対応
                 If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
-                    sheet.PageSetup.LeftHeader = "Inventory control table"
-                    sheet.PageSetup.RightHeader = "OutputDate：" & DateTime.Now.ToShortDateString
+                    'sheet.PageSetup.LeftHeader = "Inventory control table"
+                    'sheet.PageSetup.RightHeader = "OutputDate：" & DateTime.Now.ToShortDateString
 
                     sheet.Range("A1").Value = "PurchaseOrderNumber" '発注番号
-                    sheet.Range("B1").Value = "PurchaseOrderSubNumber" '発注番号枝番
-                    sheet.Range("C1").Value = "BillingDate" '請求日
-                    sheet.Range("D1").Value = "SupplierInvoiceNumber" '仕入先請求番号
-                    sheet.Range("E1").Value = "PaymentDueDate" '支払予定日
-                    sheet.Range("F1").Value = "Remark1" '備考1
-                    sheet.Range("G1").Value = "Remark2" '備考2
+                    sheet.Range("B1").Value = "PurchaseOrderVer" '発注番号枝番
+                    sheet.Range("C1").Value = "COMPANY"
+                    sheet.Range("E1").Value = "DATE" '請求日
+                    sheet.Range("D1").Value = "INVOICE NO." '仕入先請求番号
+                    sheet.Range("F1").Value = "AMOUNT"
+                    sheet.Range("G1").Value = "PAYMENT SCHEDULE" '支払予定日
+                    sheet.Range("H1").Value = "PAYMENT DATE"
+                    sheet.Range("I1").Value = "BANK"
+                    sheet.Range("J1").Value = "REMARKS" '備考2
                 End If
 
                 Dim cellRowIndex As Integer = 1
@@ -280,6 +277,9 @@ Public Class AccountsPayableBulk
 
                     sheet.Range("A" & cellRowIndex.ToString).Value = setRow("発注番号").ToString '発注番号
                     sheet.Range("B" & cellRowIndex.ToString).Value = setRow("発注番号枝番").ToString '発注番号枝番
+                    sheet.Range("C" & cellRowIndex.ToString).Value = setRow("COMPANY").ToString '
+                    sheet.Range("F" & cellRowIndex.ToString).Value = setRow("AMOUNT").ToString '
+                    sheet.Range("I" & cellRowIndex.ToString).Value = setRow("BANK").ToString '
 
                 Next
 
@@ -448,7 +448,7 @@ Public Class AccountsPayableBulk
                         addRow("請求日") = row("請求日").ToString
                         addRow("仕入先請求番号") = row("仕入先請求番号").ToString
                         addRow("支払予定日") = row("支払予定日").ToString
-                        addRow("備考1") = row("備考1").ToString
+                        addRow("備考1") = row("仕入先請求番号").ToString 'row("備考1").ToString
                         addRow("備考2") = row("備考2").ToString
                         addDt.Rows.Add(addRow) '行追加
 
@@ -556,11 +556,17 @@ Public Class AccountsPayableBulk
             PurchaseCostFC = PurchaseCostFC + (dsHattyudt.Tables(RS).Rows(i)("仕入値_外貨") * dsHattyudt.Tables(RS).Rows(i)("仕入数量"))
         Next
 
-        VAT_FC = PurchaseCostFC * dsHattyu.Tables(RS).Rows(0)("ＶＡＴ").ToString / 100 '買掛金額（VAT)
+        VAT_FC = Math.Round(PurchaseCostFC * dsHattyu.Tables(RS).Rows(0)("ＶＡＴ").ToString / 100, 2) '買掛金額（VAT)
         PurchaseAmountFC = PurchaseCostFC + VAT_FC '買掛金額
 
         'レートの取得
-        Dim strRate As Decimal = setRate(dsHattyu.Tables(RS).Rows(0)("通貨").ToString(), prmRow("請求日").ToString)
+        Dim curkey As Integer = 1
+        If dsHattyu.Tables(RS).Rows(0)("通貨").ToString() = "" Then
+            curkey = 1
+        Else
+            curkey = Integer.Parse(dsHattyu.Tables(RS).Rows(0)("通貨").ToString())
+        End If
+        Dim strRate As Decimal = setRate(curkey, prmRow("請求日").ToString)
 
         '今回買掛金額計
         BuyToHangAmountFC = PurchaseAmountFC
@@ -616,17 +622,17 @@ Public Class AccountsPayableBulk
         Sql += "', '"
         Sql += UtilClass.strFormatDate(prmRow("支払予定日").ToString) '支払予定日
 
-        Sql += "','"
-        Sql += UtilClass.formatNumber(BuyToHangAmountFC) '買掛金額計_外貨
         Sql += "',"
+        Sql += UtilClass.formatNumber(BuyToHangAmountFC) '買掛金額計_外貨
+        Sql += ","
         Sql += UtilClass.formatNumber(AccountsPayableFC) '買掛残高_外貨
 
         Sql += ","
-        Sql += dsHattyu.Tables(RS).Rows(0)("通貨").ToString() '通貨
-        Sql += ",'"
+        Sql += curkey.ToString 'dsHattyu.Tables(RS).Rows(0)("通貨").ToString() '通貨
+        Sql += ","
         Sql += UtilClass.formatNumberF10(strRate) 'レート
 
-        Sql += "','"
+        Sql += ",'"
         Sql += prmRow("仕入先請求番号").ToString  '仕入先請求番号
 
         Sql += "')"
@@ -672,11 +678,11 @@ Public Class AccountsPayableBulk
 
                 row("発注番号") = sheet.Cells(i, 1).Value
                 row("発注番号枝番") = sheet.Cells(i, 2).Value
-                row("請求日") = sheet.Cells(i, 3).Value
+                row("請求日") = sheet.Cells(i, 5).Value
                 row("仕入先請求番号") = sheet.Cells(i, 4).Value
-                row("支払予定日") = sheet.Cells(i, 5).Value
-                row("備考1") = sheet.Cells(i, 6).Value
-                row("備考2") = sheet.Cells(i, 7).Value
+                row("支払予定日") = sheet.Cells(i, 7).Value
+                row("備考1") = "" 'sheet.Cells(i, 10).Value
+                row("備考2") = sheet.Cells(i, 10).Value
 
                 dt.Rows.Add(row) '行追加
 
