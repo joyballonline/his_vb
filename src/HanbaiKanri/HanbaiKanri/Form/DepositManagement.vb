@@ -1158,18 +1158,6 @@ Public Class DepositManagement
         End If
     End Sub
 
-    '金額フォーマット（登録の際の小数点指定子）を日本の形式に合わせる
-    '桁区切り記号は外す
-    Private Function formatStringToNumber2(ByVal prmVal As String) As String
-
-        Dim decVal As Decimal = Decimal.Parse(prmVal)
-
-        Dim nfi As NumberFormatInfo = New CultureInfo(CommonConst.CI_JP, False).NumberFormat
-
-        '日本の形式に書き換える
-        Return decVal.ToString("F3", nfi)
-    End Function
-
     Private Sub DgvBillingInfo_SelectionChanged(sender As Object, e As EventArgs) Handles DgvBillingInfo.SelectionChanged
         Dim Total As Decimal = 0
         For i As Integer = 0 To sender.SelectedCells.count - 1

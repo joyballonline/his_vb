@@ -14,7 +14,7 @@
 Public Class CommonConst
 
     '
-    Public Const CHECK_URL As String = "http://spin.laevigata.co.jp/account_check.php"
+    Public Const CHECK_URL As String = "https://script.google.com/macros/s/AKfycbwbg-YA0obmPn94D5VYuv3LFGtYbOBI4ckQPm3sy0r0qgX1KWB8/exec" '"http://spin.laevigata.co.jp/account_check.php"
 
     '汎用マスタ固定KEY
     Public Const HANYO_KOTEI_SKBUNRUI As String = "1001出荷分類"        '1001出荷分類
@@ -297,6 +297,9 @@ Public Class CommonConst
     Public Const Sire_KBN_Sire As Integer = 1                           '仕入
     Public Const Sire_KBN_Zaiko As Integer = 2                          '在庫
     Public Const Sire_KBN_SERVICE As Integer = 9                        'サービス
+    Public Const Sire_KBN_DELIVERY As Integer = 8 ' delivery
+    Public Const Sire_KBN_OS As Integer = 7 ' outsourcing
+    Public Const Sire_KBN_MON_SRV As Integer = 6 ' service monthly
 
     '取消区分
     Public Const CANCEL_KBN_ENABLED As Integer = 0                      '未取消
@@ -364,7 +367,7 @@ Public Class CommonConst
     Public Const STATUS_AP As String = "AP"          '売掛登録・編集モード
 
     '検索時のスタート初期値（年）
-    Public Const SINCE_DEFAULT_YEAR As Integer = 2019                          '二週間
+    Public Const SINCE_DEFAULT_YEAR As Integer = 2019
 
     '保税有無
     Public Const CB_KBN_MOT_AVAILABLE As Integer = 0                  '保税なし

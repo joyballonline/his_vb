@@ -1045,9 +1045,10 @@ Public Class Cymn
             Dim SupplierList As New List(Of String)(New String() {})
 
             For i As Integer = 0 To DgvItemList.Rows.Count - 1
-                If SupplierList.Contains(DgvItemList.Rows(i).Cells("仕入先").Value) = False And
-                    (DgvItemList.Rows(i).Cells("仕入区分").Value = CommonConst.Sire_KBN_Sire Or
-                    DgvItemList.Rows(i).Cells("仕入区分").Value = CommonConst.Sire_KBN_DELIVERY) Then
+                If SupplierList.Contains(DgvItemList.Rows(i).Cells("仕入先").Value) = False And hatyu_hantei(DgvItemList.Rows(i).Cells("仕入区分").Value) = True Then
+
+                    'DgvItemList.Rows(i).Cells("仕入区分").Value = CommonConst.Sire_KBN_Sire Or
+                    'DgvItemList.Rows(i).Cells("仕入区分").Value = CommonConst.Sire_KBN_DELIVERY) Then
 
                     SupplierList.Add(DgvItemList.Rows(i).Cells("仕入先").Value)
                 Else
@@ -1073,10 +1074,11 @@ Public Class Cymn
 
                         '仕入区分を判定
                         If DgvItemList.Columns(x).Name = "仕入区分" Then
-                            If DgvItemList.Rows(i).Cells(DgvItemList.Columns(x).Name).Value = 1 Or DgvItemList.Rows(i).Cells(DgvItemList.Columns(x).Name).Value = 8 Then
-                                SupFlg = True
-                            Else
-                                SupFlg = False  '在庫引当の場合は読み飛ばす
+                            'If DgvItemList.Rows(i).Cells(DgvItemList.Columns(x).Name).Value = 1 Or DgvItemList.Rows(i).Cells(DgvItemList.Columns(x).Name).Value = 8 Then
+                            If hatyu_hantei(DgvItemList.Rows(i).Cells(DgvItemList.Columns(x).Name).Value) = True Then
+                                    SupFlg = True
+                                Else
+                                    SupFlg = False  '在庫引当の場合は読み飛ばす
                             End If
                         End If
 
@@ -1117,198 +1119,199 @@ Public Class Cymn
             'DataTableをループしながらデータ登録
             For i As Integer = 0 To tbl.Rows.Count - 1
 
-                '仕入区分 = 1（受発注）のみ発注登録を行う
-                If tbl.Rows(i)("仕入区分") = CommonConst.Sire_KBN_Sire Or tbl.Rows(i)("仕入区分") = CommonConst.Sire_KBN_DELIVERY Then
+                '仕入区分 = 1（受発注）,8,7のみ発注登録を行う
+                'If tbl.Rows(i)("仕入区分") = CommonConst.Sire_KBN_Sire Or tbl.Rows(i)("仕入区分") = CommonConst.Sire_KBN_DELIVERY Then
+                If hatyu_hantei(tbl.Rows(i)("仕入区分")) = True Then
 
-                    '最初はそのまま
-                    If CurrentPurchaseNo = "" Then
-                        CurrentPurchaseNo = PurchaseNo
-                        '新しい値をセットし、発注基本を登録する
-                        sireCd = tbl.Rows(i)("仕入先コード")
-                        currencyCd = tbl.Rows(i)("仕入通貨")
-
-                    Else
-                        '前回の明細データの仕入コード、仕入通貨と一致するかチェック
-                        If (sireCd <> tbl.Rows(i)("仕入先コード") Or currencyCd <> tbl.Rows(i)("仕入通貨")) Then
-                            CurrentPurchaseNo = getSaiban("30", dtNow)
-
-                            hattyuHdInsert(PurchaseNo, dsSipper, cost, tmpCuote, dtNow, strRate)
-                            'reset
-                            PurchaseNo = CurrentPurchaseNo
+                        '最初はそのまま
+                        If CurrentPurchaseNo = "" Then
+                            CurrentPurchaseNo = PurchaseNo
+                            '新しい値をセットし、発注基本を登録する
                             sireCd = tbl.Rows(i)("仕入先コード")
                             currencyCd = tbl.Rows(i)("仕入通貨")
-                            cost = 0
-                            tmpCuote = 0
 
+                        Else
+                            '前回の明細データの仕入コード、仕入通貨と一致するかチェック
+                            If (sireCd <> tbl.Rows(i)("仕入先コード") Or currencyCd <> tbl.Rows(i)("仕入通貨")) Then
+                                CurrentPurchaseNo = getSaiban("30", dtNow)
+
+                                hattyuHdInsert(PurchaseNo, dsSipper, cost, tmpCuote, dtNow, strRate)
+                                'reset
+                                PurchaseNo = CurrentPurchaseNo
+                                sireCd = tbl.Rows(i)("仕入先コード")
+                                currencyCd = tbl.Rows(i)("仕入通貨")
+                                cost = 0
+                                tmpCuote = 0
+
+                            End If
                         End If
-                    End If
 
-                    Sql = " AND 仕入先コード ILIKE '" & tbl.Rows(i)("仕入先コード") & "'"
-                    dsSipper = getDsData("m11_supplier", Sql)
+                        Sql = " AND 仕入先コード ILIKE '" & tbl.Rows(i)("仕入先コード") & "'"
+                        dsSipper = getDsData("m11_supplier", Sql)
 
-                    'レートの取得
-                    strRate = setRate(tbl.Rows(i)("仕入通貨"))
+                        'レートの取得
+                        strRate = setRate(tbl.Rows(i)("仕入通貨"))
 
 #Region "insert t21_hattyu"
 
-                    '明細データ更新
-                    Sql = ""
-                    Sql += "INSERT INTO "
-                    Sql += "Public."
-                    Sql += "t21_hattyu("
-                    Sql += "会社コード, 発注番号, 発注番号枝番, 行番号, 仕入区分, メーカー, 品名, 型式"
-                    Sql += ", 単位, 仕入先名, 仕入値, 発注数量, 仕入数量, 発注残数, 仕入金額"
-                    Sql += ", 間接費, リードタイム, リードタイム単位, 入庫数, 未入庫数, 備考, 更新者"
-                    Sql += ", 登録日, 更新日, 見積単価_外貨, 見積金額_外貨, 通貨, レート, 仕入単価_外貨"
-                    Sql += ", 仕入通貨, 仕入レート, 関税率, 関税額, 前払法人税率, 前払法人税額, 輸送費率, 輸送費額"
-                    Sql += ",仕入値_外貨,仕入金額_外貨)"
-                    Sql += " VALUES('"
-                    Sql += CompanyCode '会社コード
-                    Sql += "', '"
-                    Sql += CurrentPurchaseNo '発注番号
-                    Sql += "', '"
-                    Sql += "1" '発注番号枝番
-                    Sql += "', '"
-                    Sql += tbl.Rows(i)("No") '行番号
-                    Sql += "', '"
-                    Sql += tbl.Rows(i)("仕入区分") '仕入区分
-                    Sql += "', '"
-                    Sql += tbl.Rows(i)("メーカー") 'メーカー
-                    Sql += "', '"
-                    Sql += tbl.Rows(i)("品名") '品名
-                    Sql += "', '"
-                    Sql += tbl.Rows(i)("型式") '型式
-                    Sql += "', '"
-                    Sql += tbl.Rows(i)("単位") '単位
-                    Sql += "', '"
-                    Sql += tbl.Rows(i)("仕入先") '仕入先名
-                    Sql += "', '"
-                    Sql += formatStringToNumber(tbl.Rows(i)("仕入単価")) '仕入値
-                    Sql += "', '"
-                    Sql += tbl.Rows(i)("数量") '発注数量
-                    Sql += "', '"
-                    Sql += "0" '仕入数量
-                    Sql += "', '"
-                    Sql += tbl.Rows(i)("数量") '発注残数
-                    Sql += "', '"
-                    Sql += formatStringToNumber(tbl.Rows(i)("仕入原価")) '仕入金額  ここでは原価を入れる
-                    Sql += "', '"
-                    Dim overhead As Double = 0
-                    overhead = tbl.Rows(i)("仕入金額") - tbl.Rows(i)("仕入原価")
-                    Sql += formatStringToNumber(overhead.ToString) '間接費
-                    Sql += "', '"
-                    Sql += tbl.Rows(i)("リードタイム") 'リードタイム
-                    Sql += "', '"
-                    Sql += tbl.Rows(i)("リードタイム単位") 'リードタイム単位
-                    Sql += "', '"
-                    Sql += "0" '入庫数
-                    Sql += "', '"
-                    Sql += tbl.Rows(i)("数量") '未入庫数
-                    Sql += "', '"
-                    Sql += tbl.Rows(i)("備考") '備考
-                    Sql += "', '"
-                    Sql += frmC01F10_Login.loginValue.TantoNM '更新者
-                    Sql += "', '"
-                    Sql += UtilClass.formatDatetime(dtNow) '登録日
-                    Sql += "', '"
-                    Sql += UtilClass.formatDatetime(dtNow) '更新日
-                    Sql += "', '"
-                    Sql += formatStringToNumber(tbl.Rows(i)("見積単価_外貨")) '見積単価_外貨
-                    Sql += "', '"
-                    Sql += formatStringToNumber(tbl.Rows(i)("見積金額_外貨")) '見積金額_外貨
-                    Sql += "', "
-                    Sql += CmCurrency.SelectedValue.ToString '通貨
-                    Sql += ", '"
-                    Sql += UtilClass.formatNumberF10(TxtRate.Text) 'レート
-                    Sql += "', '"
-                    Sql += formatStringToNumber(tbl.Rows(i)("仕入単価_外貨")) '仕入単価_外貨
-                    Sql += "', '"
-                    Sql += formatStringToNumber(tbl.Rows(i)("仕入通貨")) '仕入通貨
-                    Sql += "', '"
-                    Sql += UtilClass.formatNumberF10(strRate)  '仕入レート 受注日で計算し直したデータを入れる
-                    Sql += "', " & formatStringToNumber(tbl.Rows(i)("関税率") / 100)             '関税率
-                    Sql += ", " & formatStringToNumber(tbl.Rows(i)("関税額"))             '関税額
-                    Sql += ", " & formatStringToNumber(tbl.Rows(i)("前払法人税率") / 100)       '前払法人税率
-                    Sql += ", " & formatStringToNumber(tbl.Rows(i)("前払法人税額"))       '前払法人税額
-                    Sql += ", " & formatStringToNumber(tbl.Rows(i)("輸送費率") / 100)         '輸送費率
-                    Sql += ", " & formatStringToNumber(tbl.Rows(i)("輸送費額"))         '輸送費額
+                        '明細データ更新
+                        Sql = ""
+                        Sql += "INSERT INTO "
+                        Sql += "Public."
+                        Sql += "t21_hattyu("
+                        Sql += "会社コード, 発注番号, 発注番号枝番, 行番号, 仕入区分, メーカー, 品名, 型式"
+                        Sql += ", 単位, 仕入先名, 仕入値, 発注数量, 仕入数量, 発注残数, 仕入金額"
+                        Sql += ", 間接費, リードタイム, リードタイム単位, 入庫数, 未入庫数, 備考, 更新者"
+                        Sql += ", 登録日, 更新日, 見積単価_外貨, 見積金額_外貨, 通貨, レート, 仕入単価_外貨"
+                        Sql += ", 仕入通貨, 仕入レート, 関税率, 関税額, 前払法人税率, 前払法人税額, 輸送費率, 輸送費額"
+                        Sql += ",仕入値_外貨,仕入金額_外貨)"
+                        Sql += " VALUES('"
+                        Sql += CompanyCode '会社コード
+                        Sql += "', '"
+                        Sql += CurrentPurchaseNo '発注番号
+                        Sql += "', '"
+                        Sql += "1" '発注番号枝番
+                        Sql += "', '"
+                        Sql += tbl.Rows(i)("No") '行番号
+                        Sql += "', '"
+                        Sql += tbl.Rows(i)("仕入区分") '仕入区分
+                        Sql += "', '"
+                        Sql += tbl.Rows(i)("メーカー") 'メーカー
+                        Sql += "', '"
+                        Sql += tbl.Rows(i)("品名") '品名
+                        Sql += "', '"
+                        Sql += tbl.Rows(i)("型式") '型式
+                        Sql += "', '"
+                        Sql += tbl.Rows(i)("単位") '単位
+                        Sql += "', '"
+                        Sql += tbl.Rows(i)("仕入先") '仕入先名
+                        Sql += "', '"
+                        Sql += formatStringToNumber(tbl.Rows(i)("仕入単価")) '仕入値
+                        Sql += "', '"
+                        Sql += tbl.Rows(i)("数量") '発注数量
+                        Sql += "', '"
+                        Sql += "0" '仕入数量
+                        Sql += "', '"
+                        Sql += tbl.Rows(i)("数量") '発注残数
+                        Sql += "', '"
+                        Sql += formatStringToNumber(tbl.Rows(i)("仕入原価")) '仕入金額  ここでは原価を入れる
+                        Sql += "', '"
+                        Dim overhead As Double = 0
+                        overhead = tbl.Rows(i)("仕入金額") - tbl.Rows(i)("仕入原価")
+                        Sql += formatStringToNumber(overhead.ToString) '間接費
+                        Sql += "', '"
+                        Sql += tbl.Rows(i)("リードタイム") 'リードタイム
+                        Sql += "', '"
+                        Sql += tbl.Rows(i)("リードタイム単位") 'リードタイム単位
+                        Sql += "', '"
+                        Sql += "0" '入庫数
+                        Sql += "', '"
+                        Sql += tbl.Rows(i)("数量") '未入庫数
+                        Sql += "', '"
+                        Sql += tbl.Rows(i)("備考") '備考
+                        Sql += "', '"
+                        Sql += frmC01F10_Login.loginValue.TantoNM '更新者
+                        Sql += "', '"
+                        Sql += UtilClass.formatDatetime(dtNow) '登録日
+                        Sql += "', '"
+                        Sql += UtilClass.formatDatetime(dtNow) '更新日
+                        Sql += "', '"
+                        Sql += formatStringToNumber(tbl.Rows(i)("見積単価_外貨")) '見積単価_外貨
+                        Sql += "', '"
+                        Sql += formatStringToNumber(tbl.Rows(i)("見積金額_外貨")) '見積金額_外貨
+                        Sql += "', "
+                        Sql += CmCurrency.SelectedValue.ToString '通貨
+                        Sql += ", '"
+                        Sql += UtilClass.formatNumberF10(TxtRate.Text) 'レート
+                        Sql += "', '"
+                        Sql += formatStringToNumber(tbl.Rows(i)("仕入単価_外貨")) '仕入単価_外貨
+                        Sql += "', '"
+                        Sql += formatStringToNumber(tbl.Rows(i)("仕入通貨")) '仕入通貨
+                        Sql += "', '"
+                        Sql += UtilClass.formatNumberF10(strRate)  '仕入レート 受注日で計算し直したデータを入れる
+                        Sql += "', " & formatStringToNumber(tbl.Rows(i)("関税率") / 100)             '関税率
+                        Sql += ", " & formatStringToNumber(tbl.Rows(i)("関税額"))             '関税額
+                        Sql += ", " & formatStringToNumber(tbl.Rows(i)("前払法人税率") / 100)       '前払法人税率
+                        Sql += ", " & formatStringToNumber(tbl.Rows(i)("前払法人税額"))       '前払法人税額
+                        Sql += ", " & formatStringToNumber(tbl.Rows(i)("輸送費率") / 100)         '輸送費率
+                        Sql += ", " & formatStringToNumber(tbl.Rows(i)("輸送費額"))         '輸送費額
 
 
-                    Sql += ", "
-                    Sql += formatNumber(tbl.Rows(i)("仕入単価_外貨")) '仕入値_外貨
+                        Sql += ", "
+                        Sql += formatNumber(tbl.Rows(i)("仕入単価_外貨")) '仕入値_外貨
 
-                    Sql += ", "
-                    Sql += formatNumber(Math.Ceiling(tbl.Rows(i)("仕入金額") * strRate)) '仕入金額_外貨
+                        Sql += ", "
+                        Sql += formatNumber(Math.Ceiling(tbl.Rows(i)("仕入金額") * strRate)) '仕入金額_外貨
 
-                    Sql += ")"
-                    _db.executeDB(Sql)
+                        Sql += ")"
+                        _db.executeDB(Sql)
 
 #End Region
 
 
-                    '20200807
-                    If CompanyCode = "ZENBI" Then  'ゼンビさんの場合
+                        '20200807
+                        If CompanyCode = "ZENBI" Then  'ゼンビさんの場合
 
 #Region "insert t21_hattyu_item"
 
-                        '発注品名をinsertする
-                        Sql = ""
-                        Sql += "INSERT INTO Public.t21_hattyu_item"
-                        Sql += " (会社コード, 発注番号, 発注番号枝番, 行番号, メーカー, 品名, 型式) VALUES("
-                        Sql += "'" & CompanyCode & "'"        '会社コード
-                        Sql += ",'" & CurrentPurchaseNo & "'"  '発注番号
-                        Sql += ",'1'"                          '発注番号枝番
-                        Sql += "," & tbl.Rows(i)("No")         '行番号
-                        Sql += ",'" & tbl.Rows(i)("発注メーカー") & "'"  '発注メーカー
-                        Sql += ",'" & tbl.Rows(i)("発注品名") & "'"      '発注品名
-                        Sql += ",'" & tbl.Rows(i)("発注型式") & "'"      '発注型式
-                        Sql += ")"
-                        _db.executeDB(Sql)
+                            '発注品名をinsertする
+                            Sql = ""
+                            Sql += "INSERT INTO Public.t21_hattyu_item"
+                            Sql += " (会社コード, 発注番号, 発注番号枝番, 行番号, メーカー, 品名, 型式) VALUES("
+                            Sql += "'" & CompanyCode & "'"        '会社コード
+                            Sql += ",'" & CurrentPurchaseNo & "'"  '発注番号
+                            Sql += ",'1'"                          '発注番号枝番
+                            Sql += "," & tbl.Rows(i)("No")         '行番号
+                            Sql += ",'" & tbl.Rows(i)("発注メーカー") & "'"  '発注メーカー
+                            Sql += ",'" & tbl.Rows(i)("発注品名") & "'"      '発注品名
+                            Sql += ",'" & tbl.Rows(i)("発注型式") & "'"      '発注型式
+                            Sql += ")"
+                            _db.executeDB(Sql)
 #End Region
 
-                    End If
-
-
-                    cost += tbl.Rows(i)("仕入原価")
-                    tmpCuote += tbl.Rows(i)("見積金額_外貨")
-
-                    lngCnt = i
-
-                    '前回の明細データの仕入コード、仕入通貨と一致するかチェック
-                    'If (sireCd <> tbl.Rows(i)("仕入先コード") Or currencyCd <> tbl.Rows(i)("仕入通貨")) Then
-                    If PurchaseNo <> CurrentPurchaseNo Then
-
-                        'If i = tbl.Rows.Count - 1 Then
-                        If i < tbl.Rows.Count - 1 Then
-                            If (tbl.Rows(i)("仕入先コード") <> tbl.Rows(i + 1)("仕入先コード") Or tbl.Rows(i)("仕入通貨") <> tbl.Rows(i + 1)("仕入通貨")) Then
-
-                                '新しい値をセットし、発注基本を登録する
-                                sireCd = tbl.Rows(i)("仕入先コード")
-                                currencyCd = tbl.Rows(i)("仕入通貨")
-
-                                'レートの取得
-                                strRate = setRate(currencyCd)
-
-                                hattyuHdInsert(CurrentPurchaseNo, dsSipper, cost, tmpCuote, dtNow, strRate) '発注基本更新
-
-                                cost = 0 '伝票単位でリセット
-                                tmpCuote = 0
-                            Else
-                                sireCd = tbl.Rows(i)("仕入先コード")
-                                currencyCd = tbl.Rows(i)("仕入通貨")
-                            End If
-                        Else
-                            hattyuHdInsert(CurrentPurchaseNo, dsSipper, cost, tmpCuote, dtNow, strRate) '発注基本更新
                         End If
 
-                    Else
 
-                        '新しい値をセットし、発注基本を登録する
-                        costMain += tbl.Rows(i)("仕入原価")
-                        tmpCuoteMain += tbl.Rows(i)("見積金額_外貨")
+                        cost += tbl.Rows(i)("仕入原価")
+                        tmpCuote += tbl.Rows(i)("見積金額_外貨")
 
+                        lngCnt = i
+
+                        '前回の明細データの仕入コード、仕入通貨と一致するかチェック
+                        'If (sireCd <> tbl.Rows(i)("仕入先コード") Or currencyCd <> tbl.Rows(i)("仕入通貨")) Then
+                        If PurchaseNo <> CurrentPurchaseNo Then
+
+                            'If i = tbl.Rows.Count - 1 Then
+                            If i < tbl.Rows.Count - 1 Then
+                                If (tbl.Rows(i)("仕入先コード") <> tbl.Rows(i + 1)("仕入先コード") Or tbl.Rows(i)("仕入通貨") <> tbl.Rows(i + 1)("仕入通貨")) Then
+
+                                    '新しい値をセットし、発注基本を登録する
+                                    sireCd = tbl.Rows(i)("仕入先コード")
+                                    currencyCd = tbl.Rows(i)("仕入通貨")
+
+                                    'レートの取得
+                                    strRate = setRate(currencyCd)
+
+                                    hattyuHdInsert(CurrentPurchaseNo, dsSipper, cost, tmpCuote, dtNow, strRate) '発注基本更新
+
+                                    cost = 0 '伝票単位でリセット
+                                    tmpCuote = 0
+                                Else
+                                    sireCd = tbl.Rows(i)("仕入先コード")
+                                    currencyCd = tbl.Rows(i)("仕入通貨")
+                                End If
+                            Else
+                                hattyuHdInsert(CurrentPurchaseNo, dsSipper, cost, tmpCuote, dtNow, strRate) '発注基本更新
+                            End If
+
+                        Else
+
+                            '新しい値をセットし、発注基本を登録する
+                            costMain += tbl.Rows(i)("仕入原価")
+                            tmpCuoteMain += tbl.Rows(i)("見積金額_外貨")
+
+                        End If
                     End If
-                End If
 
             Next
 
@@ -2074,4 +2077,20 @@ Public Class Cymn
             End If
         Next
     End Sub
+
+    Public Shared Function hatyu_hantei(ByVal x As Integer) As Boolean
+
+        If x = CommonConst.Sire_KBN_Sire Then
+            Return True
+        End If
+        If x = CommonConst.Sire_KBN_DELIVERY Then
+            Return True
+        End If
+        If x = CommonConst.Sire_KBN_OS Then
+            Return True
+        End If
+        Return False
+
+    End Function
+
 End Class
