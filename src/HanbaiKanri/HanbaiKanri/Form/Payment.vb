@@ -891,11 +891,11 @@ Public Class Payment
         Sql += " "
         Sql += dsSupplier.Tables(RS).Rows(0)("口座名義")
         Sql += "', '"
-        Sql += formatStringToNumber(KikeAmount)     '買掛金額
+        Sql += UtilClass.formatNumber(KikeAmount)     '買掛金額
         Sql += "', '"
-        Sql += formatStringToNumber(PaymentAmount)  '支払金額計
+        Sql += UtilClass.formatNumber(PaymentAmount)  '支払金額計
         Sql += "', '"
-        Sql += formatStringToNumber(Balance)        '買掛残高
+        Sql += UtilClass.formatNumber(Balance)        '買掛残高
         Sql += "', '"
         Sql += TxtRemarks.Text
         Sql += "', '"
@@ -907,11 +907,11 @@ Public Class Payment
         Sql += "', '"
         Sql += dtToday
         Sql += "', '"
-        Sql += formatStringToNumber(KikeAmountFC)     '買掛金額_外貨
+        Sql += UtilClass.formatNumber(KikeAmountFC)     '買掛金額_外貨
         Sql += "', '"
-        Sql += formatStringToNumber(PaymentAmountFC)  '支払金額計_外貨
+        Sql += UtilClass.formatNumber(PaymentAmountFC)  '支払金額計_外貨
         Sql += "', '"
-        Sql += formatStringToNumber(BalanceFC)        '買掛残高_外貨
+        Sql += UtilClass.formatNumber(BalanceFC)        '買掛残高_外貨
         Sql += "', '"
         Sql += dsKikehd.Tables(RS).Rows(0)("通貨").ToString()
         Sql += "', '"
@@ -960,7 +960,7 @@ Public Class Payment
             Sql += " "
             Sql += dsSupplier.Tables(RS).Rows(0)("口座名義").ToString
             Sql += "', '"
-            Sql += formatStringToNumber(AmountInputPayment)  '支払金額
+            Sql += UtilClass.formatNumber(AmountInputPayment)  '支払金額
             Sql += "', '"
             Sql += frmC01F10_Login.loginValue.TantoNM
             Sql += "', '"
@@ -975,7 +975,7 @@ Public Class Payment
             Sql += DgvPayment.Rows(i).Cells("REMARK1").Value 'TxtRemarks.Text
 
             Sql += "', '"
-            Sql += formatStringToNumber(AmountInputPaymentFC)        '支払金額_外貨
+            Sql += UtilClass.formatNumber(AmountInputPaymentFC)        '支払金額_外貨
             Sql += "', '"
             Sql += dsKikehd.Tables(RS).Rows(0)("通貨").ToString()
             Sql += "', '"
@@ -1020,7 +1020,7 @@ Public Class Payment
                 Sql += "', '"
                 Sql += SupplierName
                 Sql += "', '"
-                Sql += formatStringToNumber(TotalPaymentClearingAmount)  '支払消込額計
+                Sql += UtilClass.formatNumber(TotalPaymentClearingAmount)  '支払消込額計
                 Sql += "', '"
                 Sql += TxtRemarks.Text
                 Sql += "', '"
@@ -1031,7 +1031,7 @@ Public Class Payment
                 Sql += dtToday
 
                 Sql += "', '"
-                Sql += formatStringToNumber(TotalPaymentClearingAmountFC)        '支払消込額計_外貨
+                Sql += UtilClass.formatNumber(TotalPaymentClearingAmountFC)        '支払消込額計_外貨
                 Sql += "', '"
                 Sql += dsKikehd.Tables(RS).Rows(0)("通貨").ToString()
                 Sql += "', '"
@@ -1085,20 +1085,20 @@ Public Class Payment
                 Sql += "SET "
                 Sql += " 支払金額計"
                 Sql += " = '"
-                Sql += formatStringToNumber(DsPayment)
+                Sql += UtilClass.formatNumber(DsPayment)
                 Sql += "', "
                 Sql += "買掛残高"
                 Sql += " = '"
-                Sql += formatStringToNumber(APBalance)
+                Sql += UtilClass.formatNumber(APBalance)
                 Sql += "', "
 
                 Sql += " 支払金額計_外貨"
                 Sql += " = '"
-                Sql += formatStringToNumber(DsPaymentFC)
+                Sql += UtilClass.formatNumber(DsPaymentFC)
                 Sql += "', "
                 Sql += "買掛残高_外貨"
                 Sql += " = '"
-                Sql += formatStringToNumber(APBalanceFC)
+                Sql += UtilClass.formatNumber(APBalanceFC)
                 Sql += "', "
 
                 '買掛金額計と支払金額計が一致したら支払完了日を設定する
@@ -1274,7 +1274,7 @@ Public Class Payment
 
     '金額フォーマット（登録の際の小数点指定子）を日本の形式に合わせる
     '桁区切り記号は外す
-    Private Function formatStringToNumber(ByVal prmVal As String) As String
+    Private Function formatStringToNumber2(ByVal prmVal As String) As String
 
         Dim decVal As Decimal = Decimal.Parse(prmVal)
 
@@ -1284,4 +1284,13 @@ Public Class Payment
         Return decVal.ToString("F3", nfi)
     End Function
 
+    Private Sub DgvKikeInfo_SelectionChanged(sender As Object, e As EventArgs) Handles DgvKikeInfo.SelectionChanged
+        Dim Total As Decimal = 0
+        For i As Integer = 0 To sender.SelectedCells.count - 1
+            If IsNumeric(sender.SelectedCells(i).Value) Then
+                Total += sender.SelectedCells(i).Value
+            End If
+        Next
+        txtSum.Text = UtilClass.formatNumber(Total)
+    End Sub
 End Class
