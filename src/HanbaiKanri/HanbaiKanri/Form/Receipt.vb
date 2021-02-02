@@ -600,7 +600,7 @@ Public Class Receipt
                 DgvHistory.Rows(i).Cells("備考").Value = dsNyukodt.Tables(RS).Rows(i)("備考")
 
                 '20200809
-                Dim dsItem As DataTable = mSetHatyuItem(No, Suffix, dsHattyudt.Tables(RS).Rows(i)("行番号"))
+                Dim dsItem As DataTable = mSetHatyuItem(No, Suffix, dsNyukodt.Tables(RS).Rows(i)("行番号"))
 
                 If dsItem.Rows.Count > 0 Then
                     'データが存在した場合は品名をセット

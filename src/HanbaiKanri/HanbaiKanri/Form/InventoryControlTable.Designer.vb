@@ -51,6 +51,8 @@ Partial Class InventoryControlTable
         Me.cmOrderNoFrom = New System.Windows.Forms.ComboBox()
         Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DtpFrom = New System.Windows.Forms.DateTimePicker()
+        Me.DtpTo = New System.Windows.Forms.DateTimePicker()
         CType(Me.DgvList, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ContextMenuStrip1.SuspendLayout()
         Me.SuspendLayout()
@@ -218,11 +220,12 @@ Partial Class InventoryControlTable
         '
         Me.txtYear.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.txtYear.ImeMode = System.Windows.Forms.ImeMode.Off
-        Me.txtYear.Location = New System.Drawing.Point(253, 7)
+        Me.txtYear.Location = New System.Drawing.Point(924, 60)
         Me.txtYear.Name = "txtYear"
         Me.txtYear.Size = New System.Drawing.Size(52, 22)
         Me.txtYear.TabIndex = 3
         Me.txtYear.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.txtYear.Visible = False
         '
         'lblYear
         '
@@ -230,12 +233,13 @@ Partial Class InventoryControlTable
         Me.lblYear.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.lblYear.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lblYear.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.lblYear.Location = New System.Drawing.Point(189, 7)
+        Me.lblYear.Location = New System.Drawing.Point(860, 60)
         Me.lblYear.Name = "lblYear"
         Me.lblYear.Size = New System.Drawing.Size(58, 22)
         Me.lblYear.TabIndex = 2
         Me.lblYear.Text = "年"
         Me.lblYear.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.lblYear.Visible = False
         '
         'lblMonth
         '
@@ -243,22 +247,24 @@ Partial Class InventoryControlTable
         Me.lblMonth.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.lblMonth.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lblMonth.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.lblMonth.Location = New System.Drawing.Point(311, 7)
+        Me.lblMonth.Location = New System.Drawing.Point(982, 60)
         Me.lblMonth.Name = "lblMonth"
         Me.lblMonth.Size = New System.Drawing.Size(58, 22)
         Me.lblMonth.TabIndex = 4
         Me.lblMonth.Text = "月"
         Me.lblMonth.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.lblMonth.Visible = False
         '
         'txtMonth
         '
         Me.txtMonth.Font = New System.Drawing.Font("MS UI Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.txtMonth.ImeMode = System.Windows.Forms.ImeMode.Off
-        Me.txtMonth.Location = New System.Drawing.Point(375, 7)
+        Me.txtMonth.Location = New System.Drawing.Point(1046, 60)
         Me.txtMonth.Name = "txtMonth"
         Me.txtMonth.Size = New System.Drawing.Size(32, 22)
         Me.txtMonth.TabIndex = 5
         Me.txtMonth.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.txtMonth.Visible = False
         '
         'lblSyubetsu
         '
@@ -373,10 +379,28 @@ Partial Class InventoryControlTable
         Me.ToolStripMenuItem1.Size = New System.Drawing.Size(149, 22)
         Me.ToolStripMenuItem1.Text = "Order Detail ..."
         '
+        'DtpFrom
+        '
+        Me.DtpFrom.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.DtpFrom.Location = New System.Drawing.Point(191, 9)
+        Me.DtpFrom.Name = "DtpFrom"
+        Me.DtpFrom.Size = New System.Drawing.Size(99, 20)
+        Me.DtpFrom.TabIndex = 68
+        '
+        'DtpTo
+        '
+        Me.DtpTo.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.DtpTo.Location = New System.Drawing.Point(296, 9)
+        Me.DtpTo.Name = "DtpTo"
+        Me.DtpTo.Size = New System.Drawing.Size(111, 20)
+        Me.DtpTo.TabIndex = 69
+        '
         'InventoryControlTable
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.ClientSize = New System.Drawing.Size(1350, 561)
+        Me.Controls.Add(Me.DtpTo)
+        Me.Controls.Add(Me.DtpFrom)
         Me.Controls.Add(Me.cmOrderNoFrom)
         Me.Controls.Add(Me.cmSerialNoFrom)
         Me.Controls.Add(Me.cmLocationFrom)
@@ -441,4 +465,6 @@ Partial Class InventoryControlTable
     Friend WithEvents cmOrderNoFrom As ComboBox
     Friend WithEvents ContextMenuStrip1 As ContextMenuStrip
     Friend WithEvents ToolStripMenuItem1 As ToolStripMenuItem
+    Friend WithEvents DtpFrom As DateTimePicker
+    Friend WithEvents DtpTo As DateTimePicker
 End Class

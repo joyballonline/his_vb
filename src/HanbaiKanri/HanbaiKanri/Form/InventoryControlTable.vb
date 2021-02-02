@@ -186,6 +186,10 @@ Public Class InventoryControlTable
             DgvList.Columns.Add("在庫数", "StocksQuantity")
             DgvList.Columns.Add("備考", "Remarks")
             DgvList.Columns.Add("行番号", "LineNo")
+            DgvList.Columns.Add("月初数量", "BeginningBalance")
+            DgvList.Columns.Add("月初単価", "BeginningUnitPrice")
+            DgvList.Columns.Add("在庫金額", "Amount")
+            DgvList.Columns.Add("X", "X")
         Else
             DgvList.Columns.Add("メーカー", "メーカー")
             DgvList.Columns.Add("品名", "品名")
@@ -205,6 +209,10 @@ Public Class InventoryControlTable
             DgvList.Columns.Add("在庫数", "在庫数")
             DgvList.Columns.Add("備考", "備考")
             DgvList.Columns.Add("行番号", "LineNo")
+            DgvList.Columns.Add("月初数量", "月初数量")
+            DgvList.Columns.Add("月初単価", "月初単価")
+            DgvList.Columns.Add("在庫金額", "在庫金額")
+            DgvList.Columns.Add("X", "X")
         End If
 
         DgvList.Columns("月末在庫数").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
@@ -221,6 +229,10 @@ Public Class InventoryControlTable
         DgvList.Columns("出庫数量").DefaultCellStyle.Format = "N2"
         DgvList.Columns("出庫単価").DefaultCellStyle.Format = "N2"
         DgvList.Columns("在庫数").DefaultCellStyle.Format = "N2"
+        DgvList.Columns("月初数量").DefaultCellStyle.Format = "N2"
+        DgvList.Columns("月初単価").DefaultCellStyle.Format = "N2"
+        DgvList.Columns("在庫金額").DefaultCellStyle.Format = "N2"
+        DgvList.Columns("入出庫日").DefaultCellStyle.Format = "d"
 
         '在庫表示区分から表示する在庫管理対象列を選定する
         If "13579BDFHJLNPRTV".Contains(InventoryViewer) Then
@@ -231,7 +243,7 @@ Public Class InventoryControlTable
         If "2367ABEFIJMNQRUV".Contains(InventoryViewer) Then
             DgvList.Columns("入出庫種別").Visible = True
         Else
-            DgvList.Columns("入出庫種別").Visible = False
+            DgvList.Columns("入出庫種別").Visible = True 'False
         End If
         If "4567CDEFKLMNSTUV".Contains(InventoryViewer) Then
             DgvList.Columns("ロケ番号").Visible = True
@@ -247,9 +259,11 @@ Public Class InventoryControlTable
             DgvList.Columns("伝票番号").Visible = True
             DgvList.Columns("行番号").Visible = True
         Else
-            DgvList.Columns("伝票番号").Visible = False
-            DgvList.Columns("行番号").Visible = False
+            DgvList.Columns("伝票番号").Visible = True 'False
+            DgvList.Columns("行番号").Visible = True 'False
         End If
+
+        DgvList.Columns("月末在庫数").Visible = False
 
         If InventoryControl = "0" Then
             DgvList.Columns("メーカー").DisplayIndex = 0
@@ -311,15 +325,19 @@ Public Class InventoryControlTable
             DgvList.Columns("品名").DisplayIndex = 6
             DgvList.Columns("型式").DisplayIndex = 7
         End If
-        DgvList.Columns("入出庫日").DisplayIndex = 8
-        DgvList.Columns("取引先").DisplayIndex = 9
-        DgvList.Columns("月末在庫数").DisplayIndex = 10
-        DgvList.Columns("入庫数量").DisplayIndex = 11
-        DgvList.Columns("入庫単価").DisplayIndex = 12
-        DgvList.Columns("出庫数量").DisplayIndex = 13
-        DgvList.Columns("出庫単価").DisplayIndex = 14
-        DgvList.Columns("在庫数").DisplayIndex = 15
-        DgvList.Columns("備考").DisplayIndex = 16
+        DgvList.Columns("行番号").DisplayIndex = 8
+        DgvList.Columns("入出庫日").DisplayIndex = 9
+        DgvList.Columns("取引先").DisplayIndex = 10
+        DgvList.Columns("月末在庫数").DisplayIndex = 11
+        DgvList.Columns("月初数量").DisplayIndex = 12
+        DgvList.Columns("月初単価").DisplayIndex = 13
+        DgvList.Columns("入庫数量").DisplayIndex = 14
+        DgvList.Columns("入庫単価").DisplayIndex = 15
+        DgvList.Columns("出庫数量").DisplayIndex = 16
+        DgvList.Columns("出庫単価").DisplayIndex = 17
+        DgvList.Columns("在庫数").DisplayIndex = 18
+        DgvList.Columns("在庫金額").DisplayIndex = 19
+        DgvList.Columns("備考").DisplayIndex = 20
 
     End Sub
 
@@ -365,20 +383,23 @@ Public Class InventoryControlTable
                 sheet.Range("D1").Value = "Spec"
                 sheet.Range("G1").Value = "InOutDate"
                 sheet.Range("H1").Value = "Suppliers"
-                sheet.Range("I1").Value = "Quantity+"
-                sheet.Range("M1").Value = "StocksQuantity"
-                sheet.Range("J1").Value = "ReceiptUnitPrice"
-                sheet.Range("K1").Value = "Quantity-"
-                sheet.Range("L1").Value = "DeliveryUnitPrice"
+                sheet.Range("K1").Value = "Quantity+"
+                sheet.Range("O1").Value = "StocksQuantity"
+                sheet.Range("L1").Value = "ReceiptUnitPrice"
+                sheet.Range("M1").Value = "Quantity-"
+                sheet.Range("N1").Value = "DeliveryUnitPrice"
                 sheet.Range("F1").Value = "StorageType"
                 sheet.Range("A1").Value = "Warehouse"
-                sheet.Range("N1").Value = "Remarks"
+                sheet.Range("Q1").Value = "Remarks"
                 sheet.Range("E1").Value = "SlipNumber"
+                sheet.Range("I1").Value = "BeginningBalance"
+                sheet.Range("J1").Value = "BeginningUnitPrice"
+                sheet.Range("P1").Value = "Amount"
             Else
                 sheet.PageSetup.RightHeader = "出力日：" & DateTime.Now.ToShortDateString
             End If
 
-            Dim array2(DgvList.RowCount - 1, 13) As String
+            Dim array2(DgvList.RowCount - 1, 16) As String
 
             'Dim strSoko As String = DgvList.Rows(0).Cells("倉庫").Value
             'Dim strMaker As String = DgvList.Rows(0).Cells("メーカー").Value
@@ -395,16 +416,19 @@ Public Class InventoryControlTable
                 array2(i, 5) = DgvList.Rows(i).Cells("入出庫種別").Value
                 array2(i, 6) = DgvList.Rows(i).Cells("入出庫日").Value
                 array2(i, 7) = DgvList.Rows(i).Cells("取引先").Value
-                array2(i, 8) = UtilClass.rmDBNull2StrNull(DgvList.Rows(i).Cells("入庫数量").Value)
-                array2(i, 9) = UtilClass.rmDBNull2StrNull(DgvList.Rows(i).Cells("入庫単価").Value)
-                array2(i, 10) = UtilClass.rmDBNull2StrNull(DgvList.Rows(i).Cells("出庫数量").Value)
-                array2(i, 11) = UtilClass.rmDBNull2StrNull(DgvList.Rows(i).Cells("出庫単価").Value)
-                array2(i, 12) = DgvList.Rows(i).Cells("在庫数").Value
-                array2(i, 13) = UtilClass.rmDBNull2StrNull(DgvList.Rows(i).Cells("備考").Value)
+                array2(i, 8) = UtilClass.rmDBNull2StrNull(DgvList.Rows(i).Cells("月初数量").Value)
+                array2(i, 9) = UtilClass.rmDBNull2StrNull(DgvList.Rows(i).Cells("月初単価").Value)
+                array2(i, 10) = UtilClass.rmDBNull2StrNull(DgvList.Rows(i).Cells("入庫数量").Value)
+                array2(i, 11) = UtilClass.rmDBNull2StrNull(DgvList.Rows(i).Cells("入庫単価").Value)
+                array2(i, 12) = UtilClass.rmDBNull2StrNull(DgvList.Rows(i).Cells("出庫数量").Value)
+                array2(i, 13) = UtilClass.rmDBNull2StrNull(DgvList.Rows(i).Cells("出庫単価").Value)
+                array2(i, 14) = DgvList.Rows(i).Cells("在庫数").Value
+                array2(i, 15) = DgvList.Rows(i).Cells("在庫金額").Value
+                array2(i, 16) = UtilClass.rmDBNull2StrNull(DgvList.Rows(i).Cells("備考").Value)
 
             Next
 
-            sheet.Range("A2:N" & (DgvList.RowCount + 1).ToString).Value = array2
+            sheet.Range("A2:Q" & (DgvList.RowCount + 1).ToString).Value = array2
 
             Dim excelChk As Boolean = excelOutput(sOutFile)
             If excelChk = False Then
@@ -1014,7 +1038,7 @@ Public Class InventoryControlTable
             Exit Sub
         End If
 
-        Call setList()  '描画
+        Call setList2()  '描画
     End Sub
 
     Private Function mCheck() As Boolean
@@ -1072,4 +1096,261 @@ Public Class InventoryControlTable
 
 
     End Sub
+
+    Private Sub setList2()
+        Dim reccnt As Integer = 0 'DB用（デフォルト）
+        Dim Sql As String = ""
+
+        ' 行や列を追加したり、セルに値を設定するときは、自動サイズ設定しない。
+        DgvList.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None
+        DgvList.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None
+        DgvList.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing
+
+        DgvList.Columns.Clear() '見出しクリア
+        DgvList.Rows.Clear() '一覧クリア
+        setListHd() '見出し行セット
+
+        Try
+            Sql = "SELECT * FROM v_t70_inout t70 "
+            Sql += " WHERE "
+            'Sql += " t70.入出庫日 >= '" & UtilClass.formatDatetime(DtpMovingDayFrom.Text) & "'"
+            'Sql += " AND "
+            Sql += " t70.入出庫日 < '" & UtilClass.formatDatetime(DateAdd(DateInterval.Day, 1, DtpTo.Value)) & "'"
+            Sql += " AND t70.会社コード='" & frmC01F10_Login.loginValue.BumonCD & "'"
+
+            If cmWarehouseFrom.SelectedValue.ToString <> "all" Then
+                Sql += " AND "
+                Sql += " t70.倉庫コード = '" & cmWarehouseFrom.SelectedValue.ToString & "'"
+            End If
+
+            'Sql += " AND "
+            'Sql += " t70.品名 ILIKE '%" & UtilClass.escapeSql(txtItem.Text) & "%'"
+
+            If UtilClass.IsExistString(txtMaker.Text) Then
+                Sql += "   and t70.メーカー ilike '%" & UtilClass.escapeSql(txtMaker.Text) & "%'"
+            End If
+            If UtilClass.IsExistString(TxtItemName.Text) Then
+                Sql += "   and t70.品名 ilike '%" & UtilClass.escapeSql(TxtItemName.Text) & "%'"
+            End If
+            If UtilClass.IsExistString(TxtSpec.Text) Then
+                Sql += "   and t70.型式 ilike '%" & UtilClass.escapeSql(TxtSpec.Text) & "%'"
+            End If
+
+            Sql += " ORDER BY t70.メーカー,t70.品名,t70.型式,date_trunc('day',t70.入出庫日) ASC,t70.入出庫区分 ASC "
+
+            Dim dsList = _db.selectDB(Sql, RS, reccnt)
+            'Dim currentCul1 As Decimal = 0
+            Dim currentWarehouse As String = ""
+            Dim currentManufacturer As String = ""
+            Dim currentItemName As String = ""
+            Dim currentSpec As String = ""
+            'Dim productFlg As Boolean = False
+            'Dim warehouseFlg As Boolean = False
+            Dim bf As Boolean = True
+            Dim intList As Integer = 0 'dgv
+            Dim i As Integer = 0 'rows
+            Dim bhf As Boolean = False
+            Dim qtybypri As New Dictionary(Of Decimal, Decimal)()
+
+            While True
+                'For i As Integer = 0 To dsList.Tables(RS).Rows.Count - 1
+
+                '商品&Warehouseが一致するかチェック
+                If currentManufacturer <> dsList.Tables(RS).Rows(i)("メーカー").ToString Or
+                    currentItemName <> dsList.Tables(RS).Rows(i)("品名").ToString Or
+                    currentSpec <> dsList.Tables(RS).Rows(i)("型式").ToString Then 'Or
+                    'currentWarehouse <> dsList.Tables(RS).Rows(i)("倉庫コード").ToString Then
+
+                    If bhf Then
+                        setbeginingbalance2(intList, currentManufacturer, currentItemName, currentSpec, qtybypri, bf) 'currentCul1)
+                        'intList += 1
+                    End If
+
+                    currentManufacturer = dsList.Tables(RS).Rows(i)("メーカー").ToString
+                    currentItemName = dsList.Tables(RS).Rows(i)("品名").ToString
+                    currentSpec = dsList.Tables(RS).Rows(i)("型式").ToString
+                    'currentWarehouse = dsList.Tables(RS).Rows(i)("倉庫コード").ToString
+                    'currentCul1 = 0
+                    qtybypri.Clear()
+
+                    bf = True
+                    bhf = True
+                Else
+                    bf = False
+                End If
+
+                'If bf Then
+
+                If CType(dsList.Tables(RS).Rows(i)("入出庫日"), Date) < DtpFrom.Value Then
+                    If dsList.Tables(RS).Rows(i)("入出庫区分").ToString = "1" Then
+                        'currentCul1 += (dsList.Tables(RS).Rows(i)("数量"))
+                        addqty(qtybypri, UtilClass.rmNullDecimal(dsList.Tables(RS).Rows(i)("recpr")), dsList.Tables(RS).Rows(i)("数量"))
+                    Else
+                        'currentCul1 -= (dsList.Tables(RS).Rows(i)("数量"))
+                        deductqty(qtybypri, UtilClass.rmNullDecimal(dsList.Tables(RS).Rows(i)("isspr")), dsList.Tables(RS).Rows(i)("数量"))
+                    End If
+                Else
+                    If bhf Then
+                        setbeginingbalance2(intList, currentManufacturer, currentItemName, currentSpec, qtybypri, bf) 'currentCul1)
+                        'intList += 1
+                        bhf = False
+                    End If
+
+                    DgvList.Rows.Add()
+
+                    DgvList.Rows(intList).Cells("倉庫").Value = dsList.Tables(RS).Rows(i)("倉庫").ToString
+
+                    DgvList.Rows(intList).Cells("メーカー").Value = dsList.Tables(RS).Rows(i)("メーカー").ToString
+                    DgvList.Rows(intList).Cells("品名").Value = dsList.Tables(RS).Rows(i)("品名").ToString
+                    DgvList.Rows(intList).Cells("型式").Value = dsList.Tables(RS).Rows(i)("型式").ToString
+
+                    DgvList.Rows(intList).Cells("伝票番号").Value = dsList.Tables(RS).Rows(i)("伝票番号").ToString
+                    DgvList.Rows(intList).Cells("行番号").Value = dsList.Tables(RS).Rows(i)("行番号").ToString
+                    DgvList.Rows(intList).Cells("入出庫種別").Value = dsList.Tables(RS).Rows(i)("入出庫種別EN")
+                    DgvList.Rows(intList).Cells("備考").Value = dsList.Tables(RS).Rows(i)("出庫開始サイン")
+                    DgvList.Rows(intList).Cells("X").Value = bf
+
+                    DgvList.Rows(intList).Cells("入出庫日").Value = dsList.Tables(RS).Rows(i)("入出庫日") 't70 入出庫日
+                    If dsList.Tables(RS).Rows(i)("入出庫区分").ToString = "1" Then
+                        DgvList.Rows(intList).Cells("取引先").Value = dsList.Tables(RS).Rows(i)("sup").ToString
+                        DgvList.Rows(intList).Cells("入庫数量").Value = dsList.Tables(RS).Rows(i)("数量")
+                        DgvList.Rows(intList).Cells("入庫単価").Value = dsList.Tables(RS).Rows(i)("recpr")
+                        DgvList.Rows(intList).Cells("出庫数量").Value = ""
+                        DgvList.Rows(intList).Cells("出庫単価").Value = ""
+                        addqty(qtybypri, UtilClass.rmNullDecimal(dsList.Tables(RS).Rows(i)("recpr")), dsList.Tables(RS).Rows(i)("数量"))
+                        'currentCul1 = currentCul1 + dsList.Tables(RS).Rows(i)("数量")
+                        DgvList.Rows(intList).Cells("在庫数").Value = qtybypri(dsList.Tables(RS).Rows(i)("recpr")) 'currentCul1
+                        DgvList.Rows(intList).Cells("在庫金額”).Value = UtilClass.Round_2(DgvList.Rows(intList).Cells("在庫数").Value * UtilClass.rmNullDecimal(dsList.Tables(RS).Rows(i)("recpr")))
+                    Else
+                        DgvList.Rows(intList).Cells("取引先").Value = dsList.Tables(RS).Rows(i)("cust").ToString
+                        DgvList.Rows(intList).Cells("入庫数量").Value = ""
+                        DgvList.Rows(intList).Cells("入庫単価").Value = ""
+                        DgvList.Rows(intList).Cells("出庫数量").Value = dsList.Tables(RS).Rows(i)("数量")
+                        DgvList.Rows(intList).Cells("出庫単価").Value = dsList.Tables(RS).Rows(i)("isspr")
+                        deductqty(qtybypri, UtilClass.rmNullDecimal(dsList.Tables(RS).Rows(i)("isspr")), dsList.Tables(RS).Rows(i)("数量"))
+                        'currentCul1 = currentCul1 - dsList.Tables(RS).Rows(i)("数量")
+                        DgvList.Rows(intList).Cells("在庫数").Value = qtybypri(dsList.Tables(RS).Rows(i)("isspr")) 'currentCul1
+                        DgvList.Rows(intList).Cells("在庫金額”).Value = UtilClass.Round_2(DgvList.Rows(intList).Cells("在庫数").Value * UtilClass.rmNullDecimal(dsList.Tables(RS).Rows(i)("isspr")))
+                    End If
+
+                    intList += 1
+                End If
+                'Next
+
+                If i = (dsList.Tables(RS).Rows.count - 1) Then
+                    If bhf Then
+                        setbeginingbalance2(intList, currentManufacturer, currentItemName, currentSpec, qtybypri, bf) 'currentCul1)
+                    End If
+                    Exit While
+                End If
+                i += 1
+                'intList += 1
+            End While
+
+        Catch ex As Exception
+
+        End Try
+
+    End Sub
+
+    Private Sub addqty(ByRef dic_ As Dictionary(Of Decimal, Decimal), ByVal k_ As Decimal, ByVal q_ As Decimal)
+        If IsDBNull(k_) Then
+            k_ = 0
+        End If
+        If dic_.ContainsKey(k_) Then
+            dic_(k_) += (q_)
+        Else
+            dic_.Add(k_, q_)
+        End If
+    End Sub
+    Private Sub deductqty(ByRef dic_ As Dictionary(Of Decimal, Decimal), ByVal k_ As Decimal, ByVal q_ As Decimal)
+        If IsDBNull(k_) Then
+            k_ = 0
+        End If
+        If dic_.ContainsKey(k_) Then
+            dic_(k_) -= (q_)
+        Else
+            dic_.Add(k_, (0 - q_))
+        End If
+    End Sub
+    Private Sub setbeginingbalance2(ByRef intlist As Integer, m_ As String, i_ As String, s_ As String, dic_ As Dictionary(Of Decimal, Decimal), b_ As Boolean)
+        Dim c_ As Boolean = True
+        For Each t As KeyValuePair(Of Decimal, Decimal) In dic_
+            DgvList.Rows.Add()
+            DgvList.Rows(intlist).Cells("倉庫").Value = "" 'dsList.Tables(RS).Rows(i)("名称").ToString
+
+            DgvList.Rows(intlist).Cells("メーカー").Value = m_
+            DgvList.Rows(intlist).Cells("品名").Value = i_
+            DgvList.Rows(intlist).Cells("型式").Value = s_
+
+            DgvList.Rows(intlist).Cells("伝票番号").Value = "" 'dsList.Tables(RS).Rows(i)("伝票番号").ToString
+            DgvList.Rows(intlist).Cells("入出庫種別").Value = "Begining balance"
+
+            DgvList.Rows(intlist).Cells("入出庫日").Value = DateAdd(DateInterval.Day, -1, DtpFrom.Value) 'dsList.Tables(RS).Rows(i)("入出庫日") 't70 入出庫日
+            DgvList.Rows(intlist).Cells("取引先").Value = "" 'dsList.Tables(RS).Rows(i)("仕入先名").ToString
+
+            DgvList.Rows(intlist).Cells("月初数量").Value = t.Value 'dsList.Tables(RS).Rows(i)("数量")
+            DgvList.Rows(intlist).Cells("月初単価").Value = t.Key 'dsList.Tables(RS).Rows(i)("仕入値")
+            DgvList.Rows(intlist).Cells("在庫数").Value = t.Value
+            DgvList.Rows(intlist).Cells("在庫金額”).Value = UtilClass.Round_2(t.Value * t.Key)
+            If c_ Then
+                DgvList.Rows(intlist).Cells("X").Value = True
+                c_ = False
+            Else
+                DgvList.Rows(intlist).Cells("X").Value = False
+            End If
+            intlist += 1
+        Next
+
+    End Sub
+
+    Private Sub DgvList_RowPostPaint(sender As Object, e As DataGridViewRowPostPaintEventArgs) Handles DgvList.RowPostPaint
+
+        Dim dgv As System.Windows.Forms.DataGridView = CType(sender, System.Windows.Forms.DataGridView)
+
+        If DgvList.Rows(e.RowIndex).Cells("X").Value = True Then
+            'Or DgvList.Rows(e.RowIndex).Cells("入出庫種別").Value = "Begining balance" Then
+
+            '太さ2の黒い線
+            Dim linePen As New Pen(Color.Black, 2)
+
+            '座標計算
+
+            '開始X 行ヘッダ表示の場合、行ヘッダ分右にずらす
+            Dim startX As Integer = IIf(dgv.RowHeadersVisible,
+                                                dgv.RowHeadersWidth,
+                                                0)
+
+            '開始Y 行のTOPより1ピクセル下
+            '（1ピクセル下にしておかないと選択行を移動したとき
+            '　前に選択していた行の線の描画がきれいに消えない）
+            Dim startY As Integer = e.RowBounds.Top + 1
+
+            '終了X
+            '開始X+表示される全列の幅-スクロールしないと見えない列の幅
+            Dim endX As Integer = startX +
+        dgv.Columns.GetColumnsWidth(DataGridViewElementStates.Visible) -
+          dgv.HorizontalScrollingOffset
+
+            '線を引く 上
+            e.Graphics.DrawLine(linePen,
+                                      startX,
+                                      startY,
+                                      endX,
+                                      startY)
+
+            '下罫線を引くため開始Yを再計算
+            '（1ピクセル上にしておかないと選択行を移動したとき
+            '  前に選択していた行の線の描画がきれいに消えない）
+            'startY = e.RowBounds.Top + e.RowBounds.Height - 1
+
+            '線を引く 下
+            'e.Graphics.DrawLine(linePen,                                      startX,                                      startY,                                      endX,                                      startY)
+
+        End If
+
+    End Sub
+
+
+
 End Class

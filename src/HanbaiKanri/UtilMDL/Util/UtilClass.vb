@@ -1189,4 +1189,8 @@ Public Class UtilClass
         rmDBNull2DateNullEx = CType(prmField, Date)
     End Function
 
+    Public Shared Function Round_2(ByVal dFC As Decimal) As Decimal
+        Return Math.Round(dFC, 2)
+    End Function
+
 End Class

@@ -835,16 +835,6 @@ Public Class ReceiptList
         openForm.Show(Me)
     End Sub
 
-    'sqlで実行する文字列からシングルクォーテーションを文字コードにする
-    Private Function escapeSql(ByVal prmSql As String) As String
-        Dim sql As String = prmSql
-
-        sql = sql.Replace("'"c, "''") 'シングルクォーテーションを置換
-
-        Return Regex.Escape(sql)
-        Return sql
-    End Function
-
     Private Function actionChk() As Boolean
         '対象データがない場合は取消操作不可能
         If DgvNyuko.Rows.Count = 0 Then
@@ -866,15 +856,15 @@ Public Class ReceiptList
         Dim Sql As String = ""
 
         '抽出条件
-        Dim supplierName As String = escapeSql(TxtSupplierName.Text)
-        Dim supplierAddress As String = escapeSql(TxtAddress.Text)
-        Dim supplierTel As String = escapeSql(TxtTel.Text)
-        Dim supplierCode As String = escapeSql(TxtSupplierCode.Text)
+        Dim supplierName As String = UtilClass.escapeSql(TxtSupplierName.Text)
+        Dim supplierAddress As String = UtilClass.escapeSql(TxtAddress.Text)
+        Dim supplierTel As String = UtilClass.escapeSql(TxtTel.Text)
+        Dim supplierCode As String = UtilClass.escapeSql(TxtSupplierCode.Text)
         Dim sinceDate As String = UtilClass.strFormatDate(dtReceiptDateSince.Text)
         Dim untilDate As String = UtilClass.strFormatDate(dtReceiptDateUntil.Text)
-        Dim sinceNum As String = escapeSql(TxtReceiptSince.Text)
-        Dim salesName As String = escapeSql(TxtSales.Text)
-        Dim poNum As String = escapeSql(TxtCustomerPO.Text)
+        Dim sinceNum As String = UtilClass.escapeSql(TxtReceiptSince.Text)
+        Dim salesName As String = UtilClass.escapeSql(TxtSales.Text)
+        Dim poNum As String = UtilClass.escapeSql(TxtCustomerPO.Text)
         Dim itemName As String = UtilClass.escapeSql(TxtItemName.Text)
         Dim spec As String = UtilClass.escapeSql(TxtSpec.Text)
 
@@ -912,14 +902,14 @@ Public Class ReceiptList
             Sql += " t42.入庫番号 ILIKE '%" & sinceNum & "%' "
         End If
 
-        If poNum <> Nothing Then
+        If salesName <> Nothing Then
             Sql += " AND "
             Sql += " t42.営業担当者 ILIKE '%" & salesName & "%' "
         End If
 
         If poNum <> Nothing Then
             Sql += " AND "
-            Sql += " t42.客先番号 ILIKE '%" & salesName & "%' "
+            Sql += " t42.客先番号 ILIKE '%" & poNum & "%' "
         End If
 
         If itemName <> Nothing Then
