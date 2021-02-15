@@ -576,7 +576,12 @@ Public Class CommonLogic
             Dim dsSaiban As DataSet = _db.selectDB(Sql, RS, reccnt)
 
             saibanID = dsSaiban.Tables(RS).Rows(0)("接頭文字")
-            saibanID += today.ToString("MMdd")
+            If key = "70" Or key = "80" Then
+                saibanID += today.ToString("yyMM")
+            Else
+                saibanID += today.ToString("MMdd")
+            End If
+            'saibanID += today.ToString("MMdd")
             saibanID += dsSaiban.Tables(RS).Rows(0)("最新値").ToString.PadLeft(dsSaiban.Tables(RS).Rows(0)("連番桁数"), "0")
 
             Dim keyNo As Integer
@@ -1450,6 +1455,50 @@ Public Class CommonLogic
 
         Return retval
 
+    End Function
+
+    '基準通貨の通貨コードを取得する
+    Public Function setBaseCurrency() As String
+        Dim Sql As String
+        '通貨表示：ベースの設定
+        Sql = " AND 採番キー = " & CommonConst.CURRENCY_CD_IDR.ToString
+        Sql += " AND 取消区分 = " & CommonConst.CANCEL_KBN_ENABLED.ToString
+
+        Dim ds As DataSet = getDsData("m25_currency", Sql)
+        setBaseCurrency = ds.Tables(RS).Rows(0)("通貨コード")
+
+    End Function
+
+    '通貨の採番キーからレートを取得・設定
+    '基準日が請求日「以前」の最新のもの
+    Public Function setRate(ByVal strKey As Integer, dt As String) As Decimal
+        Dim Sql As String
+
+        Sql = " And 採番キー = " & strKey & ""
+        Sql += " And 基準日 < '" & UtilClass.strFormatDate(dt) & "'"  '請求日
+        Sql += " ORDER BY 基準日 DESC "
+
+        Dim ds As DataSet = getDsData("t71_exchangerate", Sql)
+
+        If ds.Tables(RS).Rows.Count > 0 Then
+            setRate = ds.Tables(RS).Rows(0)("レート")
+        Else
+            setRate = 1.ToString("F10")
+        End If
+    End Function
+    Public Function getCurkeyByISO(ByVal strISO As String) As Integer
+        Dim Sql As String
+
+        Sql = " And 通貨コード = '" & strISO & "'"
+        Sql += " And 取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
+
+        Dim ds As DataSet = getDsData("m25_currency", Sql)
+
+        If ds.Tables(RS).Rows.Count > 0 Then
+            getCurkeyByISO = ds.Tables(RS).Rows(0)("採番キー")
+        Else
+            getCurkeyByISO = -1
+        End If
     End Function
 
 End Class
