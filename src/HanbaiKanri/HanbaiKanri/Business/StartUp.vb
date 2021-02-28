@@ -75,6 +75,7 @@ Public Class StartUp
         Public Generation As Integer        '世代番号
         Public Language As String           '言語
         Public Auth As String               '権限
+        Public Ver As String
     End Structure
 
     '-------------------------------------------------------------------------------

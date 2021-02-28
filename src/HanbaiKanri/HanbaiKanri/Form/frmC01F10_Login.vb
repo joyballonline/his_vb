@@ -137,7 +137,8 @@ Public Class frmC01F10_Login
         Dim netChk As Boolean = networkCheck()
         If netChk Then
             '20190502　いったんコメントアウト
-            'accountCheck()
+            'KAFU
+            accountCheck()
             useLimitCheck()
         Else
             _msgHd.dspMSG("chkNetworkError", StartUp._iniVal.Default_lng)
@@ -472,70 +473,35 @@ Public Class frmC01F10_Login
 
     Private Sub accountCheck()
         Try
+            _loginVal.Ver = UtilClass.getAppVersion(assembly)
+            Dim companyname As String '= fileCheck()
+            companyname = CommonConst.CHECK_COM
+            Dim url As String = CommonConst.CHECK_URL
 
-            Dim reccnt As Integer = 0
-            Dim Sql = ""
+            Dim wc As New System.Net.WebClient
+            'NameValueCollectionの作成
+            Dim ps As New System.Collections.Specialized.NameValueCollection
+            '送信するデータ（フィールド名と値の組み合わせ）を追加
+            ps.Add("name", companyname)
+            'データを送信し、また受信する
+            Dim resData As Byte() = wc.UploadValues(url, ps)
+            wc.Dispose()
 
-            Sql = " SELECT "
-            Sql += " テキスト "
-            Sql += " FROM "
-            Sql += " s01_config "
-            Sql += " WHERE "
-            Sql += " 項目 = '会社名'"
-            Sql += " AND "
-            Sql += " テキスト = '" & fileCheck() & "'"
+            '受信したデータを表示する
+            Dim resText As String = System.Text.Encoding.UTF8.GetString(resData)
+            'Console.WriteLine(resText)
 
-            Dim companyName As DataSet = _db.selectDB(Sql, RS, reccnt)
-
-            If companyName.Tables(RS).Rows.Count > 0 Then
-
-                If companyName.Tables(RS).Rows(0)("テキスト").ToString IsNot Nothing Then
-
-                    Dim url As String = CommonConst.CHECK_URL
-
-                    Dim wc As New System.Net.WebClient
-                    'NameValueCollectionの作成
-                    Dim ps As New System.Collections.Specialized.NameValueCollection
-                    '送信するデータ（フィールド名と値の組み合わせ）を追加
-                    ps.Add("name", companyName.Tables(RS).Rows(0)("テキスト").ToString)
-                    'データを送信し、また受信する
-                    Dim resData As Byte() = wc.UploadValues(url, ps)
-                    wc.Dispose()
-
-                    '受信したデータを表示する
-                    Dim resText As String = System.Text.Encoding.UTF8.GetString(resData)
-                    'Console.WriteLine(resText)
-
-                    If resText <> "success" Then
-                        '有効なユーザでない場合、終了する
-                        _msgHd.dspMSG("chkAppActiveUserError", StartUp._iniVal.Default_lng)
-                        Application.Exit()
-
-                    End If
-
-                End If
-
-            Else
-
-                '設定がなかったら終了する
-                _msgHd.dspMSG("chkAppUseSettingError", StartUp._iniVal.Default_lng)
+            If resText = "" Then
+                '有効なユーザでない場合、終了する
+                _msgHd.dspMSG("chkAppActiveUserError", CommonConst.LANG_KBN_ENG)
                 Application.Exit()
-
+            Else
+                _loginVal.Ver = resText
             End If
 
-            'Catch ex As WebException
-
-            '    'HTTPプロトコルエラーかどうか調べる
-            '    If ex.Status = System.Net.WebExceptionStatus.ProtocolError Then
-            '        'HttpWebResponseを取得
-            '        Dim errors As System.Net.HttpWebResponse = CType(ex.Response, System.Net.HttpWebResponse)
-            '        '応答したURIを表示する
-            '        Console.WriteLine(errors.ResponseUri)
-            '        '応答ステータスコードを表示する
-            '        Console.WriteLine("{0}:{1}", errors.StatusCode, errors.StatusDescription)
-            '    Else
-            '        Console.WriteLine(ex.Message)
-            '    End If
+            '設定がなかったら終了する
+            '_msgHd.dspMSG("chkAppUseSettingError", CommonConst.LANG_KBN_ENG)
+            'Application.Exit()
 
         Catch ue As UsrDefException
             ue.dspMsg()                                                                                                     '握りつぶす

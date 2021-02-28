@@ -130,6 +130,14 @@ Public Class Information
                                     "未払金が " & APCnt.ToString & " 件あります")
         End If
 
+        LbMessage.Text += N & N & N & N & N & N & N & N & N & N & N & N & N & N
+        If frmC01F10_Login.loginValue.Ver <> UtilClass.getAppVersion(frmC01F10_Login.assembly) Then
+            LbMessage.Text += "You have a new version of SPIN! please do update.bat! " & frmC01F10_Login.loginValue.Ver
+        End If
+        'LbMessage.Text += N
+        LinkLabel1.Text = "SPIN'S HELP PAGE | https://spin-phoenix.com/help/"
+        LinkLabel2.Text = "FAQ PAGE | https://spin-phoenix.com/qa"
+
         '出力するメッセージがない かつ ログインから来た場合はそのままメニューを開く
         If LbMessage.Text = "" And _parentForm.Name = "frmC01F10_Login" Then
 
@@ -216,4 +224,17 @@ Public Class Information
 
     End Function
 
+    Private Sub LinkLabel1_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel1.LinkClicked
+        'リンク先に移動したことにする
+        LinkLabel1.LinkVisited = True
+        'ブラウザで開く
+        System.Diagnostics.Process.Start("https://spin-phoenix.com/help/")
+    End Sub
+
+    Private Sub LinkLabel2_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel2.LinkClicked
+        'リンク先に移動したことにする
+        LinkLabel1.LinkVisited = True
+        'ブラウザで開く
+        System.Diagnostics.Process.Start("https://spin-phoenix.com/qa")
+    End Sub
 End Class

@@ -22,12 +22,14 @@ Partial Class Information
     'コード エディターを使って変更しないでください。
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.BtnBack = New System.Windows.Forms.Button()
         Me.DgvList = New System.Windows.Forms.DataGridView()
         Me.項目 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.件数 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.LbMessage = New System.Windows.Forms.Label()
+        Me.LinkLabel1 = New System.Windows.Forms.LinkLabel()
+        Me.LinkLabel2 = New System.Windows.Forms.LinkLabel()
         CType(Me.DgvList, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -64,8 +66,8 @@ Partial Class Information
         '
         '件数
         '
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.件数.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.件数.DefaultCellStyle = DataGridViewCellStyle2
         Me.件数.HeaderText = "件数"
         Me.件数.Name = "件数"
         Me.件数.ReadOnly = True
@@ -79,10 +81,32 @@ Partial Class Information
         Me.LbMessage.Size = New System.Drawing.Size(0, 15)
         Me.LbMessage.TabIndex = 21
         '
+        'LinkLabel1
+        '
+        Me.LinkLabel1.AutoSize = True
+        Me.LinkLabel1.Location = New System.Drawing.Point(22, 316)
+        Me.LinkLabel1.Name = "LinkLabel1"
+        Me.LinkLabel1.Size = New System.Drawing.Size(59, 13)
+        Me.LinkLabel1.TabIndex = 22
+        Me.LinkLabel1.TabStop = True
+        Me.LinkLabel1.Text = "LinkLabel1"
+        '
+        'LinkLabel2
+        '
+        Me.LinkLabel2.AutoSize = True
+        Me.LinkLabel2.Location = New System.Drawing.Point(22, 334)
+        Me.LinkLabel2.Name = "LinkLabel2"
+        Me.LinkLabel2.Size = New System.Drawing.Size(59, 13)
+        Me.LinkLabel2.TabIndex = 23
+        Me.LinkLabel2.TabStop = True
+        Me.LinkLabel2.Text = "LinkLabel2"
+        '
         'Information
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.ClientSize = New System.Drawing.Size(913, 371)
+        Me.Controls.Add(Me.LinkLabel2)
+        Me.Controls.Add(Me.LinkLabel1)
         Me.Controls.Add(Me.LbMessage)
         Me.Controls.Add(Me.DgvList)
         Me.Controls.Add(Me.BtnBack)
@@ -99,4 +123,6 @@ Partial Class Information
     Friend WithEvents 項目 As DataGridViewTextBoxColumn
     Friend WithEvents 件数 As DataGridViewTextBoxColumn
     Friend WithEvents LbMessage As Label
+    Friend WithEvents LinkLabel1 As LinkLabel
+    Friend WithEvents LinkLabel2 As LinkLabel
 End Class
