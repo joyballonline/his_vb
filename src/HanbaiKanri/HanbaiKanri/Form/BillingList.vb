@@ -40,6 +40,7 @@ Public Class BillingList
     Private CompanyCode As String = ""
     Private OrderingNo As String()
     Private _status As String = ""
+    Private _com As CommonLogic
 
     '-------------------------------------------------------------------------------
     'デフォルトコンストラクタ（隠蔽）
@@ -68,6 +69,8 @@ Public Class BillingList
         _parentForm = prmRefForm
         _status = prmRefStatus
         '_gh = New UtilDataGridViewHandler(dgvLIST)                          'DataGridViewユーティリティクラス
+        _com = New CommonLogic(_db, _msgHd)
+
         StartPosition = FormStartPosition.CenterScreen                      '画面中央表示
         Me.Text = Me.Text & "[" & frmC01F10_Login.loginValue.BumonNM & "][" & frmC01F10_Login.loginValue.TantoNM & "]" & StartUp.BackUpServerPrint                                  'フォームタイトル表示
         Me.ControlBox = Not Me.ControlBox
@@ -134,25 +137,21 @@ Public Class BillingList
         Dim Sql As String = ""
         Dim reccnt As Integer = 0 'DB用（デフォルト）
 
-        Dim curds As DataSet  'm25_currency
-        Dim cur As String
-
-
         Try
 
             Sql = "SELECT t23.* FROM  public.t23_skyuhd t23 "
 
-            Sql += " INNER JOIN t10_cymnhd t10"
-            Sql += " ON t23.会社コード = t10.会社コード "
-            Sql += "  AND t23.受注番号 = t10.受注番号"
-            Sql += "  AND t23.受注番号枝番 = t10.受注番号枝番"
-            Sql += "  AND t10.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED '受注取消されていないデータ
+            'Sql += " INNER JOIN t10_cymnhd t10"
+            'Sql += " ON t23.会社コード = t10.会社コード "
+            'Sql += "  AND t23.受注番号 = t10.受注番号"
+            'Sql += "  AND t23.受注番号枝番 = t10.受注番号枝番"
+            'Sql += "  AND t10.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED '受注取消されていないデータ
 
             Sql += " WHERE t23.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
 
             Sql += viewSearchConditions() '抽出条件取得
 
-            Sql += " ORDER BY t23.更新日 DESC"
+            Sql += " ORDER BY t23.請求番号 DESC"
 
             ds = _db.selectDB(Sql, RS, reccnt)
 
@@ -164,11 +163,12 @@ Public Class BillingList
                 DgvBilling.Columns.Add("請求日", "SalesInvoiceDate")
                 DgvBilling.Columns.Add("客先番号", "CustomerNumber")
                 DgvBilling.Columns.Add("受注番号", "JobOrderNumber")
-                DgvBilling.Columns.Add("受注番号枝番", "JobOrderSubNumber")
+                DgvBilling.Columns.Add("受注番号枝番", "JobOrderVer")
                 DgvBilling.Columns.Add("得意先コード", "CustomerCode")
                 DgvBilling.Columns.Add("得意先名", "CustomerName")
                 DgvBilling.Columns.Add("通貨_外貨", "Currency")
                 DgvBilling.Columns.Add("請求金額計_外貨", "TotalBillingAmount")
+                DgvBilling.Columns.Add("VAT", "VAT-OUT")
                 DgvBilling.Columns.Add("売掛残高_外貨", "AccountsReceivableBalance")
                 DgvBilling.Columns.Add("通貨", "Currency")
                 DgvBilling.Columns.Add("請求金額計", "TotalBillingAmount")
@@ -189,6 +189,7 @@ Public Class BillingList
                 DgvBilling.Columns.Add("得意先名", "得意先名")
                 DgvBilling.Columns.Add("通貨_外貨", "通貨")
                 DgvBilling.Columns.Add("請求金額計_外貨", "請求金額計(外貨)")
+                DgvBilling.Columns.Add("VAT", "VAT-OUT")
                 DgvBilling.Columns.Add("売掛残高_外貨", "売掛残高(外貨)")
                 DgvBilling.Columns.Add("通貨", "通貨")
                 DgvBilling.Columns.Add("請求金額計", "請求金額計")
@@ -199,25 +200,20 @@ Public Class BillingList
                 DgvBilling.Columns.Add("更新者", "更新者")
             End If
 
+            DgvBilling.Columns("請求金額計_外貨").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+            DgvBilling.Columns("売掛残高_外貨").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
             DgvBilling.Columns("請求金額計").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
             DgvBilling.Columns("売掛残高").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+            DgvBilling.Columns("VAT").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
 
             '数字形式
             DgvBilling.Columns("請求金額計_外貨").DefaultCellStyle.Format = "N2"
             DgvBilling.Columns("売掛残高_外貨").DefaultCellStyle.Format = "N2"
             DgvBilling.Columns("請求金額計").DefaultCellStyle.Format = "N2"
             DgvBilling.Columns("売掛残高").DefaultCellStyle.Format = "N2"
+            DgvBilling.Columns("VAT").DefaultCellStyle.Format = "N2"
 
             For i As Integer = 0 To ds.Tables(RS).Rows.Count - 1
-
-                If IsDBNull(ds.Tables(RS).Rows(i)("通貨")) Then
-                    cur = vbNullString
-                Else
-                    Sql = " and 採番キー = " & ds.Tables(RS).Rows(i)("通貨")
-                    curds = getDsData("m25_currency", Sql)
-
-                    cur = curds.Tables(RS).Rows(0)("通貨コード")
-                End If
 
                 DgvBilling.Rows.Add()
                 DgvBilling.Rows(i).Cells("請求番号").Value = ds.Tables(RS).Rows(i)("請求番号")
@@ -236,23 +232,24 @@ Public Class BillingList
                         )
                 End If
 
-                DgvBilling.Rows(i).Cells("取消").Value = getDelKbnTxt(ds.Tables(RS).Rows(i)("取消区分"))
+                DgvBilling.Rows(i).Cells("取消").Value = _com.getDelKbnTxt(ds.Tables(RS).Rows(i)("取消区分"))
                 DgvBilling.Rows(i).Cells("請求日").Value = ds.Tables(RS).Rows(i)("請求日").ToShortDateString()
                 DgvBilling.Rows(i).Cells("客先番号").Value = ds.Tables(RS).Rows(i)("客先番号")
                 DgvBilling.Rows(i).Cells("受注番号").Value = ds.Tables(RS).Rows(i)("受注番号")
                 DgvBilling.Rows(i).Cells("受注番号枝番").Value = ds.Tables(RS).Rows(i)("受注番号枝番")
                 DgvBilling.Rows(i).Cells("得意先コード").Value = ds.Tables(RS).Rows(i)("得意先コード")
                 DgvBilling.Rows(i).Cells("得意先名").Value = ds.Tables(RS).Rows(i)("得意先名")
-                DgvBilling.Rows(i).Cells("通貨_外貨").Value = cur
+                DgvBilling.Rows(i).Cells("通貨_外貨").Value = _com.getCurrencyEx(ds.Tables(RS).Rows(i)("通貨"))
                 DgvBilling.Rows(i).Cells("請求金額計_外貨").Value = ds.Tables(RS).Rows(i)("請求金額計_外貨")
                 DgvBilling.Rows(i).Cells("売掛残高_外貨").Value = ds.Tables(RS).Rows(i)("売掛残高_外貨")
-                DgvBilling.Rows(i).Cells("通貨").Value = setBaseCurrency()
+                DgvBilling.Rows(i).Cells("通貨").Value = _com.setBaseCurrency()
                 DgvBilling.Rows(i).Cells("請求金額計").Value = ds.Tables(RS).Rows(i)("請求金額計")
                 DgvBilling.Rows(i).Cells("売掛残高").Value = ds.Tables(RS).Rows(i)("売掛残高")
                 DgvBilling.Rows(i).Cells("備考1").Value = ds.Tables(RS).Rows(i)("備考1")
                 DgvBilling.Rows(i).Cells("備考2").Value = ds.Tables(RS).Rows(i)("備考2")
                 DgvBilling.Rows(i).Cells("更新日").Value = ds.Tables(RS).Rows(i)("更新日")
                 DgvBilling.Rows(i).Cells("更新者").Value = ds.Tables(RS).Rows(i)("更新者")
+                DgvBilling.Rows(i).Cells("VAT").Value = ds.Tables(RS).Rows(i)("請求消費税計")
             Next
 
         Catch ue As UsrDefException
@@ -384,7 +381,7 @@ Public Class BillingList
         Dim customerCode As String = UtilClass.escapeSql(TxtCustomerCode.Text)
         Dim sinceDate As String = UtilClass.strFormatDate(dtBillingDateSince.Text)
         Dim untilDate As String = UtilClass.strFormatDate(dtBillingDateUntil.Text)
-        Dim sinceNum As String = escapeSql(TxtBillingNoSince.Text)
+        Dim sinceNum As String = UtilClass.escapeSql(TxtBillingNoSince.Text)
         Dim poNum As String = UtilClass.escapeSql(TxtCustomerPO.Text)
         Dim itemName As String = UtilClass.escapeSql(TxtItemName.Text)
         Dim spec As String = UtilClass.escapeSql(TxtSpec.Text)
@@ -413,11 +410,11 @@ Public Class BillingList
         End If
 
         If itemName <> Nothing Then
-            Sql += " And t10.受注番号 In (Select 受注番号 From t11_cymndt t11 Where t11.品名 ILIKE '%" & itemName & "%')"
+            Sql += " And t23.受注番号 In (Select 受注番号 From t11_cymndt t11 Where t11.品名 ILIKE '%" & itemName & "%')"
         End If
 
         If spec <> Nothing Then
-            Sql += " And t10.受注番号 In (Select 受注番号 From t11_cymndt t11 Where t11.型式 ILIKE '%" & spec & "%')"
+            Sql += " And t23.受注番号 In (Select 受注番号 From t11_cymndt t11 Where t11.型式 ILIKE '%" & spec & "%')"
         End If
 
         '取消データを含めない場合
@@ -439,7 +436,7 @@ Public Class BillingList
         Sql = " AND 請求番号 ='" & DgvBilling.Rows(DgvBilling.CurrentCell.RowIndex).Cells("請求番号").Value & "'"
 
         '画面を開いた時から対象データに対して更新がされていないかどうか確認
-        ds = getDsData("t23_skyuhd", Sql)
+        ds = _com.getDsData("t23_skyuhd", Sql)
 
         If ds.Tables(RS).Rows(0)("更新日") = DgvBilling.Rows(DgvBilling.CurrentCell.RowIndex).Cells("更新日").Value Then
 
@@ -485,16 +482,6 @@ Public Class BillingList
 
     End Sub
 
-    'sqlで実行する文字列からシングルクォーテーションを文字コードにする
-    Private Function escapeSql(ByVal prmSql As String) As String
-        Dim sql As String = prmSql
-
-        sql = sql.Replace("'"c, "''") 'シングルクォーテーションを置換
-
-        Return Regex.Escape(sql)
-        Return sql
-    End Function
-
     Private Function actionChk() As Boolean
         '対象データがない場合は取消操作不可能
         If DgvBilling.Rows.Count = 0 Then
@@ -509,46 +496,6 @@ Public Class BillingList
             Return True
 
         End If
-    End Function
-
-    'param1：String テーブル名
-    'param2：String 詳細条件
-    'Return: DataSet
-    Private Function getDsData(ByVal tableName As String, Optional ByRef txtParam As String = "") As DataSet
-        Dim reccnt As Integer = 0 'DB用（デフォルト）
-        Dim Sql As String = ""
-
-        Sql += "SELECT * FROM public." & tableName
-        Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-        Sql += txtParam
-        Return _db.selectDB(Sql, RS, reccnt)
-    End Function
-
-    '取消区分の表示テキストを返す
-    'param1：String テーブル名
-    'param2：String 詳細条件
-    'Return: DataSet
-    Public Function getDelKbnTxt(ByVal delKbn As String) As String
-        '区分の値を取得し、使用言語に応じて値を返却
-
-        Dim reDelKbn As String = IIf(delKbn = CommonConst.CANCEL_KBN_DISABLED,
-                                    IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_JPN, CommonConst.CANCEL_KBN_JPN_TXT, CommonConst.CANCEL_KBN_ENG_TXT),
-                                    "")
-        Return reDelKbn
-    End Function
-
-
-    '基準通貨の通貨コードを取得する
-    Private Function setBaseCurrency() As String
-        Dim Sql As String
-        '通貨表示：ベースの設定
-        Sql = " AND 採番キー = " & CommonConst.CURRENCY_CD_IDR.ToString
-        Sql += " AND 取消区分 = " & CommonConst.CANCEL_KBN_ENABLED.ToString
-
-        Dim ds As DataSet = getDsData("m25_currency", Sql)
-        'TxtIDRCurrency.Text = ds.Tables(RS).Rows(0)("通貨コード")
-        setBaseCurrency = ds.Tables(RS).Rows(0)("通貨コード")
-
     End Function
 
 End Class

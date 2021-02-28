@@ -1940,7 +1940,7 @@ Public Class frmC01F30_Menu
             Case CommonConst.MENU_H0910  '請求登録
                 Dim Status As String = CommonConst.STATUS_BILL
                 Dim openForm As Form = Nothing
-                openForm = New OrderList(_msgHd, _db, _langHd, Me, Status)
+                openForm = New BillingScheduleList(_msgHd, _db, _langHd, Me, Status)
                 openForm.Show()
                 Me.Hide()
             Case CommonConst.MENU_H0920  '請求編集

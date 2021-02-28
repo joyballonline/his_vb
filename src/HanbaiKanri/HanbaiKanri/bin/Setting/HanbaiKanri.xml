@@ -1025,6 +1025,17 @@ No					7	ダイアログ ボックスの戻り値は No です。		("いいえ")
     <MEMO></MEMO>
   </MSG_DATA>
   <MSG_DATA>
+    <ID>chkNotSameCust</ID>
+    <MSG1>一括請求の場合は、同じ取引先である必要があります。</MSG1>
+    <MSG1_EN>all orders must have same customer in case of collective invoice.</MSG1_EN>
+    <MSG2>対象のデータを再度確認してください。</MSG2>
+    <MSG2_EN>Please check again whether these are correct data.</MSG2_EN>
+    <BUTTON_TYPE>OK</BUTTON_TYPE>
+    <ICONT_TYPE>Warning</ICONT_TYPE>
+    <CREATE_DATE>2019/01/22 15:00</CREATE_DATE>
+    <MEMO></MEMO>
+  </MSG_DATA>
+  <MSG_DATA>
     <ID>chkAPAddError</ID>
     <MSG1>入金入力または請求情報がありません。</MSG1>
     <MSG1_EN>There is no deposit input or billing information.</MSG1_EN>

@@ -35,6 +35,7 @@ Public Class CustomerList
     Private _parentForm As Form
     'Private _gh As UtilDataGridViewHandler
     Private _init As Boolean                             '初期処理済フラグ
+    Private _com As CommonLogic
 
     '-------------------------------------------------------------------------------
     'デフォルトコンストラクタ（隠蔽）
@@ -65,6 +66,7 @@ Public Class CustomerList
         Me.Text = Me.Text & "[" & frmC01F10_Login.loginValue.BumonNM & "][" & frmC01F10_Login.loginValue.TantoNM & "]" & StartUp.BackUpServerPrint                                  'フォームタイトル表示
         Me.ControlBox = Not Me.ControlBox
         _init = True
+        _com = New CommonLogic(_db, _msgHd)
 
     End Sub
 
@@ -83,10 +85,10 @@ Public Class CustomerList
             DgvCustomer.Columns("得意先名").HeaderText = "CustomerName"
 
             DgvCustomer.Columns("通貨_外貨").HeaderText = "Currency"
-            DgvCustomer.Columns("受注金額計_外貨").HeaderText = "TotalJobOrderAmount" & vbCrLf & "a"
-            DgvCustomer.Columns("VAT_OUT計_外貨").HeaderText = "TotalVAT-OUT" & vbCrLf & "b"
-            DgvCustomer.Columns("請求金額計_外貨").HeaderText = "TotalBillingAmount" & vbCrLf & "c"
-            DgvCustomer.Columns("請求残高_外貨").HeaderText = "BillingBalance" & vbCrLf & "d=a+b-c"
+            DgvCustomer.Columns("受注金額計_外貨").HeaderText = "TotalJobOrderAmount" '& vbCrLf & "a"
+            DgvCustomer.Columns("VAT_OUT計_外貨").HeaderText = "TotalVAT-OUT" '& vbCrLf & "b"
+            DgvCustomer.Columns("請求金額計_外貨").HeaderText = "TotalBillingAmount" '& vbCrLf & "c"
+            DgvCustomer.Columns("請求残高_外貨").HeaderText = "BillingBalance" '& vbCrLf & "d=a+b-c"
 
             DgvCustomer.Columns("通貨").HeaderText = "Currency"
             DgvCustomer.Columns("受注金額計").HeaderText = "TotalJobOrderAmount"
@@ -95,10 +97,10 @@ Public Class CustomerList
 
         Else  '日本語
 
-            DgvCustomer.Columns("受注金額計_外貨").HeaderText = "受注金額計" & vbCrLf & "a"
-            DgvCustomer.Columns("VAT_OUT計_外貨").HeaderText = "VAT-OUT計" & vbCrLf & "b"
-            DgvCustomer.Columns("請求金額計_外貨").HeaderText = "請求済金額計" & vbCrLf & "c"
-            DgvCustomer.Columns("請求残高_外貨").HeaderText = "未請求金額計" & vbCrLf & "d=a+b-c"
+            DgvCustomer.Columns("受注金額計_外貨").HeaderText = "受注金額計" '& vbCrLf & "a"
+            DgvCustomer.Columns("VAT_OUT計_外貨").HeaderText = "VAT-OUT計" '& vbCrLf & "b"
+            DgvCustomer.Columns("請求金額計_外貨").HeaderText = "請求済金額計" '& vbCrLf & "c"
+            DgvCustomer.Columns("請求残高_外貨").HeaderText = "未請求金額計" '& vbCrLf & "d=a+b-c"
 
         End If
 
@@ -140,150 +142,139 @@ Public Class CustomerList
         Dim Sql As String = ""
         Dim reccnt As Integer = 0
 
-        Dim curds As DataSet  'm25_currency
-        Dim cur As String
+        'Dim curds As DataSet  'm25_currency
+        'Dim cur As String
 
         'リストクリア
         DgvCustomer.Rows.Clear()
 
-        Sql += searchConditions()
+        'Sql += searchConditions()
 
-        Dim dsCustomer As DataSet = getDsData("m10_customer", Sql)
+        'Dim dsCustomer As DataSet = getDsData("m10_customer", Sql)
 
         Dim Count As Integer = 0
-        Dim CustomerCount As Integer = dsCustomer.Tables(RS).Rows.Count
+        'Dim CustomerCount As Integer '= dsCustomer.Tables(RS).Rows.Count
         Dim CustomerOrderCount As Integer
         Dim CustomerBillingCount As Integer
 
         Dim CustomerBillingAmountFC As Decimal
-        Dim CustomerOrderAmountFC As Decimal
+        'Dim CustomerOrderAmountFC As Decimal
         Dim VATFC As Decimal
 
         Dim CustomerBillingAmount As Decimal
-        Dim CustomerOrderAmount As Decimal
+        'Dim CustomerOrderAmount As Decimal
 
-        For i As Integer = 0 To dsCustomer.Tables(RS).Rows.Count - 1
+        'For i As Integer = 0 To dsCustomer.Tables(RS).Rows.Count - 1
 
-            Sql = "SELECT "
-            Sql += " SUM(見積金額_外貨) as 見積金額_外貨合計,SUM(見積金額) as 見積金額_合計,通貨"
-            Sql += ",ＶＡＴ"
-            Sql += " FROM "
+        Sql = "SELECT 会社コード,得意先コード,得意先名,通貨,sum(請求金額計_外貨) as 請求金額計_外貨合計,sum(請求金額計) as 請求金額計_合計, sum(請求消費税計) as 請求消費税計 FROM"
+        Sql += " Public.t23_skyuhd WHERE 取消区分=" & CommonConst.CANCEL_KBN_ENABLED
+        Sql += " and 会社コード='" & frmC01F10_Login.loginValue.BumonCD & "'"
+        Sql += searchConditions()
+        Sql += " Group by 会社コード,得意先コード,得意先名,通貨 order by 1,2,3,4"
 
-            Sql += "public.t10_cymnhd"
-            Sql += " WHERE "
-            Sql += "会社コード"
-            Sql += " ILIKE  "
-            Sql += "'" & frmC01F10_Login.loginValue.BumonCD & "'"
+        '得意先ごとの受注基本を取得
+        Dim dsSkyuhd As DataSet = _db.selectDB(Sql, RS, reccnt)
 
-            Sql += " AND "
-            Sql += "得意先コード"
-            Sql += " = "
-            Sql += "'"
-            Sql += dsCustomer.Tables(RS).Rows(i)("得意先コード")
-            Sql += "'"
-            Sql += " AND "
-            Sql += "取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
+        '受注件数を取得
+        CustomerOrderCount = dsSkyuhd.Tables(RS).Rows.Count
 
-            Sql += " group by 通貨,ＶＡＴ"
+        For j As Integer = 0 To dsSkyuhd.Tables(RS).Rows.Count - 1
 
-            '得意先ごとの受注基本を取得
-            Dim dsCymnhd As DataSet = _db.selectDB(Sql, RS, reccnt)
+            'If IsDBNull(dsCymnhd.Tables(RS).Rows(j)("見積金額_外貨合計")) Then
+            'CustomerOrderAmountFC = 0
+            'VATFC = 0
+            'Else
+            'CustomerOrderAmountFC = dsCymnhd.Tables(RS).Rows(j)("見積金額_外貨合計")
+            'VATFC = dsCymnhd.Tables(RS).Rows(j)("見積金額_外貨合計") * dsCymnhd.Tables(RS).Rows(j)("ＶＡＴ") / 100
+            'End If
 
-            '受注件数を取得
-            CustomerOrderCount = dsCymnhd.Tables(RS).Rows.Count.ToString
+            'If IsDBNull(dsCymnhd.Tables(RS).Rows(j)("見積金額_合計")) Then
+            'CustomerOrderAmount = 0
+            'Else
+            'CustomerOrderAmount = dsCymnhd.Tables(RS).Rows(j)("見積金額_合計")
+            'End If
 
-            For j As Integer = 0 To dsCymnhd.Tables(RS).Rows.Count - 1  't10_cymnhd
+            'Sql = "SELECT"
+            'Sql += " "
+            'Sql += " FROM "
 
-                If IsDBNull(dsCymnhd.Tables(RS).Rows(j)("見積金額_外貨合計")) Then
-                    CustomerOrderAmountFC = 0
-                    VATFC = 0
-                Else
-                    CustomerOrderAmountFC = dsCymnhd.Tables(RS).Rows(j)("見積金額_外貨合計")
-                    VATFC = dsCymnhd.Tables(RS).Rows(j)("見積金額_外貨合計") * dsCymnhd.Tables(RS).Rows(j)("ＶＡＴ") / 100
-                End If
+            'Sql += "public.t23_skyuhd"
+            'Sql += " WHERE "
+            'Sql += "会社コード"
+            'Sql += " ILIKE  "
+            'Sql += "'" & frmC01F10_Login.loginValue.BumonCD & "'"
+            'Sql += " AND "
+            'Sql += "得意先コード"
+            'Sql += " = "
+            'Sql += "'"
+            'Sql += dsCustomer.Tables(RS).Rows(i)("得意先コード")
+            'Sql += "'"
+            'Sql += " AND "
+            'Sql += "取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
 
-                If IsDBNull(dsCymnhd.Tables(RS).Rows(j)("見積金額_合計")) Then
-                    CustomerOrderAmount = 0
-                Else
-                    CustomerOrderAmount = dsCymnhd.Tables(RS).Rows(j)("見積金額_合計")
-                End If
+            'If IsDBNull(dsCymnhd.Tables(RS).Rows(j)("通貨")) Then
+            'Sql += " AND 通貨 is null "
+            'Else
+            'Sql += " AND 通貨 = " & dsCymnhd.Tables(RS).Rows(j)("通貨")
+            'End If
 
-                Sql = "SELECT"
-                Sql += " sum(請求金額計_外貨) as 請求金額計_外貨合計, sum(請求金額計) as 請求金額計_合計"
-                Sql += " FROM "
+            '得意先ごとの請求基本を取得
+            'Dim dsSkyuhd As DataSet = _db.selectDB(Sql, RS, reccnt)
 
-                Sql += "public.t23_skyuhd"
-                Sql += " WHERE "
-                Sql += "会社コード"
-                Sql += " ILIKE  "
-                Sql += "'" & frmC01F10_Login.loginValue.BumonCD & "'"
-                Sql += " AND "
-                Sql += "得意先コード"
-                Sql += " = "
-                Sql += "'"
-                Sql += dsCustomer.Tables(RS).Rows(i)("得意先コード")
-                Sql += "'"
-                Sql += " AND "
-                Sql += "取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
+            '請求件数を取得
+            'CustomerBillingCount = dsSkyuhd.Tables(RS).Rows.Count.ToString
 
-                If IsDBNull(dsCymnhd.Tables(RS).Rows(j)("通貨")) Then
-                    Sql += " AND 通貨 is null "
-                Else
-                    Sql += " AND 通貨 = " & dsCymnhd.Tables(RS).Rows(j)("通貨")
-                End If
+            If IsDBNull(dsSkyuhd.Tables(RS).Rows(j)("請求金額計_外貨合計")) Then
+                CustomerBillingAmountFC = 0
+            Else
+                CustomerBillingAmountFC = dsSkyuhd.Tables(RS).Rows(j)("請求金額計_外貨合計")
+            End If
 
-                '得意先ごとの請求基本を取得
-                Dim dsSkyuhd As DataSet = _db.selectDB(Sql, RS, reccnt)
+            If IsDBNull(dsSkyuhd.Tables(RS).Rows(j)("請求金額計_合計")) Then
+                CustomerBillingAmount = 0
+            Else
+                CustomerBillingAmount = dsSkyuhd.Tables(RS).Rows(j)("請求金額計_合計")
+            End If
 
-                '請求件数を取得
-                CustomerBillingCount = dsSkyuhd.Tables(RS).Rows.Count.ToString
+            If IsDBNull(dsSkyuhd.Tables(RS).Rows(j)("請求消費税計")) Then
+                VATFC = 0
+            Else
+                VATFC = dsSkyuhd.Tables(RS).Rows(j)("請求消費税計")
+            End If
 
-                If IsDBNull(dsSkyuhd.Tables(RS).Rows(0)("請求金額計_外貨合計")) Then
-                    CustomerBillingAmountFC = 0
-                Else
-                    CustomerBillingAmountFC = dsSkyuhd.Tables(RS).Rows(0)("請求金額計_外貨合計")
-                End If
+            Dim idx = DgvCustomer.Rows.Count()
 
-                If IsDBNull(dsSkyuhd.Tables(RS).Rows(0)("請求金額計_合計")) Then
-                    CustomerBillingAmount = 0
-                Else
-                    CustomerBillingAmount = dsSkyuhd.Tables(RS).Rows(0)("請求金額計_合計")
-                End If
+            'If IsDBNull(dsCymnhd.Tables(RS).Rows(j)("通貨")) Then
+            'cur = vbNullString
+            'Else
+            'Sql = " and 採番キー = " & dsCymnhd.Tables(RS).Rows(j)("通貨")
+            'curds = getDsData("m25_currency", Sql)
 
+            'cur = curds.Tables(RS).Rows(0)("通貨コード")
+            'End If
 
-                Dim idx = DgvCustomer.Rows.Count()
+            DgvCustomer.Rows.Add()
+            DgvCustomer.Rows(idx).Cells("得意先コード").Value = dsSkyuhd.Tables(RS).Rows(j)("得意先コード")
+            DgvCustomer.Rows(idx).Cells("得意先名").Value = dsSkyuhd.Tables(RS).Rows(j)("得意先名")
 
-                If IsDBNull(dsCymnhd.Tables(RS).Rows(j)("通貨")) Then
-                    cur = vbNullString
-                Else
-                    Sql = " and 採番キー = " & dsCymnhd.Tables(RS).Rows(j)("通貨")
-                    curds = getDsData("m25_currency", Sql)
+            DgvCustomer.Rows(idx).Cells("通貨_外貨").Value = _com.getCurrencyEx(dsSkyuhd.Tables(RS).Rows(j)("通貨"))
+            'DgvCustomer.Rows(idx).Cells("受注金額計_外貨").Value = CustomerOrderAmountFC
+            DgvCustomer.Rows(idx).Cells("VAT_OUT計_外貨").Value = VATFC
+            DgvCustomer.Rows(idx).Cells("請求金額計_外貨").Value = CustomerBillingAmountFC
+            'DgvCustomer.Rows(idx).Cells("請求残高_外貨").Value = CustomerOrderAmountFC + VATFC - CustomerBillingAmountFC
 
-                    cur = curds.Tables(RS).Rows(0)("通貨コード")
-                End If
+            DgvCustomer.Rows(idx).Cells("通貨").Value = _com.setBaseCurrency()
+            'DgvCustomer.Rows(idx).Cells("受注金額計").Value = CustomerOrderAmount
+            DgvCustomer.Rows(idx).Cells("請求金額計").Value = CustomerBillingAmount
+            'DgvCustomer.Rows(idx).Cells("請求残高").Value = CustomerOrderAmount - CustomerBillingAmount
+            DgvCustomer.Rows(idx).Cells("受注件数").Value = CustomerOrderCount
+            DgvCustomer.Rows(idx).Cells("請求件数").Value = CustomerBillingCount
+            DgvCustomer.Rows(idx).Cells("会社コード").Value = dsSkyuhd.Tables(RS).Rows(j)("会社コード")
 
-                DgvCustomer.Rows.Add()
-                DgvCustomer.Rows(idx).Cells("得意先コード").Value = dsCustomer.Tables(RS).Rows(i)("得意先コード")
-                DgvCustomer.Rows(idx).Cells("得意先名").Value = dsCustomer.Tables(RS).Rows(i)("得意先名")
+            DgvCustomer.Rows(idx).Cells("通貨_外貨コード").Value = dsSkyuhd.Tables(RS).Rows(j)("通貨")
 
-                DgvCustomer.Rows(idx).Cells("通貨_外貨").Value = cur
-                DgvCustomer.Rows(idx).Cells("受注金額計_外貨").Value = CustomerOrderAmountFC
-                DgvCustomer.Rows(idx).Cells("VAT_OUT計_外貨").Value = VATFC
-                DgvCustomer.Rows(idx).Cells("請求金額計_外貨").Value = CustomerBillingAmountFC
-                DgvCustomer.Rows(idx).Cells("請求残高_外貨").Value = CustomerOrderAmountFC + VATFC - CustomerBillingAmountFC
-
-                DgvCustomer.Rows(idx).Cells("通貨").Value = setBaseCurrency()
-                DgvCustomer.Rows(idx).Cells("受注金額計").Value = CustomerOrderAmount
-                DgvCustomer.Rows(idx).Cells("請求金額計").Value = CustomerBillingAmount
-                DgvCustomer.Rows(idx).Cells("請求残高").Value = CustomerOrderAmount - CustomerBillingAmount
-                DgvCustomer.Rows(idx).Cells("受注件数").Value = CustomerOrderCount
-                DgvCustomer.Rows(idx).Cells("請求件数").Value = CustomerBillingCount
-                DgvCustomer.Rows(idx).Cells("会社コード").Value = dsCustomer.Tables(RS).Rows(i)("会社コード")
-
-                DgvCustomer.Rows(idx).Cells("通貨_外貨コード").Value = dsCymnhd.Tables(RS).Rows(j)("通貨")
-
-            Next
         Next
+
     End Sub
 
     '戻るボタン押下時
@@ -330,7 +321,7 @@ Public Class CustomerList
         Dim Sql As String = ""
 
         '抽出条件
-        Dim customerName As String = escapeSql(TxtSearch.Text)
+        Dim customerName As String = UtilClass.escapeSql(TxtSearch.Text)
 
         If customerName <> Nothing Then
             Sql += " AND "
@@ -338,50 +329,6 @@ Public Class CustomerList
         End If
 
         Return Sql
-
-    End Function
-
-    'sqlで実行する文字列からシングルクォーテーションを文字コードにする
-    Private Function escapeSql(ByVal prmSql As String) As String
-        Dim sql As String = prmSql
-
-        sql = sql.Replace("'"c, "''") 'シングルクォーテーションを置換
-
-        Return Regex.Escape(sql)
-        Return sql
-    End Function
-
-    'param1：String テーブル名
-    'param2：String 詳細条件
-    'Return: DataSet
-    Private Function getDsData(ByVal tableName As String, Optional ByRef txtParam As String = "") As DataSet
-        Dim reccnt As Integer = 0 'DB用（デフォルト）
-        Dim Sql As String = ""
-
-        Sql += "SELECT"
-        Sql += " *"
-        Sql += " FROM "
-
-        Sql += "public." & tableName
-        Sql += " WHERE "
-        Sql += "会社コード"
-        Sql += " ILIKE  "
-        Sql += "'" & frmC01F10_Login.loginValue.BumonCD & "'"
-        Sql += txtParam
-
-        Return _db.selectDB(Sql, RS, reccnt)
-    End Function
-
-    '基準通貨の通貨コードを取得する
-    Private Function setBaseCurrency() As String
-        Dim Sql As String
-        '通貨表示：ベースの設定
-        Sql = " AND 採番キー = " & CommonConst.CURRENCY_CD_IDR.ToString
-        Sql += " AND 取消区分 = " & CommonConst.CANCEL_KBN_ENABLED.ToString
-
-        Dim ds As DataSet = getDsData("m25_currency", Sql)
-        'TxtIDRCurrency.Text = ds.Tables(RS).Rows(0)("通貨コード")
-        setBaseCurrency = ds.Tables(RS).Rows(0)("通貨コード")
 
     End Function
 

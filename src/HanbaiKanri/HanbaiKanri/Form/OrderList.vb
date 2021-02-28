@@ -2175,7 +2175,7 @@ Public Class OrderList
         Dim No As String = DgvCymnhd.Rows(RowIdx).Cells("受注番号").Value
         Dim Suffix As String = DgvCymnhd.Rows(RowIdx).Cells("受注番号枝番").Value
         Dim openForm As Form = Nothing
-        openForm = New BillingManagement(_msgHd, _db, _langHd, Me, No, Suffix)   '処理選択
+        openForm = New BillingManagement(_msgHd, _db, _langHd, Me, No, Suffix, "")   '処理選択
         Me.Enabled = False
         Me.Hide()
         openForm.ShowDialog(Me)

@@ -181,7 +181,7 @@ Public Class CustomerOrderList
             Sql += " AND "
             Sql += "取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
             If CurCode <> 0 Then
-                Sql += "AND 通貨 = " & CurCode
+                Sql += " AND 通貨 = " & CurCode
             End If
             Sql += " ORDER BY 更新日 DESC "
 
@@ -278,6 +278,10 @@ Public Class CustomerOrderList
         For Each r As DataGridViewRow In DgvBilling.SelectedRows
             If flg1 = False Then
                 BillingNo = DgvBilling.Rows(r.Index).Cells("請求番号").Value
+                If DgvBilling.Rows(r.Index).Cells("受注番号").Value = CommonConst.COLINV Then
+                    Call Print_Colinv(BillingNo, CType(DgvBilling.Rows(r.Index).Cells("請求日").Value, Date))
+                    Exit Sub
+                End If
                 flg1 = True
             End If
         Next r
@@ -486,6 +490,224 @@ Public Class CustomerOrderList
     Private Sub BtnSearch_Click(sender As Object, e As EventArgs) Handles BtnSearch.Click
         '一覧再表示
         PurchaseListLoad()
+    End Sub
+
+    Private Sub Print_Colinv(ByVal BillingNo As String, ByVal dtmInvoice As Date)
+        Dim BillingSubTotal As Decimal = 0
+        Dim Sql As String = ""
+        Dim Sql2 As String = ""
+        Dim Sql3 As String = ""
+        Dim reccnt As Integer = 0
+        Dim flg2 As Boolean = False
+        Dim flg3 As Boolean = False
+        Dim blnFlg As Boolean = False
+
+        '定義
+        Dim app As Excel.Application = Nothing
+        Dim book As Excel.Workbook = Nothing
+        Dim sheet As Excel.Worksheet = Nothing
+
+        'カーソルをビジー状態にする
+        Cursor.Current = Cursors.WaitCursor
+
+        Try
+            '雛形パス
+            Dim sHinaPath As String = ""
+            sHinaPath = StartUp._iniVal.BaseXlsPath
+
+            '雛形ファイル名
+            Dim sHinaFile As String = ""
+            sHinaFile = sHinaPath & "\" & "Invoice.xlsx"
+
+            '出力先パス
+            Dim sOutPath As String = ""
+            sOutPath = StartUp._iniVal.OutXlsPath
+
+            '出力ファイル名
+            Dim sOutFile As String = ""
+            sOutFile = sOutPath & "\" & BillingNo & ".xlsx"
+
+
+
+            app = New Excel.Application()
+            book = app.Workbooks.Add(sHinaFile)  'テンプレート
+            sheet = CType(book.Worksheets(1), Excel.Worksheet)
+
+            Dim currentRow As Integer = 19
+            Dim lastRow As Integer = 21
+            Dim addRow As Integer = 0
+            Dim currentNum As Integer = 1
+            Dim VAT As Decimal = 0
+
+            Dim cur As String = ""
+            Dim sCustName As String = ""
+            Dim sCustAdr As String = ""
+            Dim sCustPIC As String = ""
+            Dim sCustTel As String = ""
+
+            '受注基本（請求債情報）
+            'Dim dsCymnhd As DataSet = getDsData("t10_cymnhd", Sql)
+            Dim dsSeikyu1 As DataSet = Nothing
+
+            '入金予定日の取得
+            If flg2 = False Then
+                Sql = "Select 入金予定日,請求消費税計,得意先コード,通貨 From t23_skyuhd t23 "
+                Sql += " where t23.会社コード =  '" & frmC01F10_Login.loginValue.BumonCD & "'"
+                Sql += " and t23.請求番号 =  '" & BillingNo & "'"
+                Sql += " AND t23.取消区分 = '" & CommonConst.CANCEL_KBN_ENABLED & "'"
+                '請求データ取得
+                dsSeikyu1 = _db.selectDB(Sql, RS, reccnt)
+                If reccnt > 0 Then
+                    sheet.Range("E10").Value = dsSeikyu1.Tables(RS).Rows(0)("入金予定日")
+                    VAT = UtilClass.ToRoundDown(UtilClass.rmNullDecimal(dsSeikyu1.Tables(RS).Rows(0)("請求消費税計")), 0)
+                    cur = _com.getCurrencyEx(dsSeikyu1.Tables(RS).Rows(0)("通貨"))
+
+                    'get customer info
+                    Sql = " AND 得意先コード='" & dsSeikyu1.Tables(RS).Rows(0)("得意先コード") & "' "
+                    Dim dsCust As DataSet = _com.getDsData("m10_customer", Sql)
+                    sCustName = dsCust.Tables(RS).Rows(0)("得意先名")
+                    sCustAdr = dsCust.Tables(RS).Rows(0)("住所１") & " " & dsCust.Tables(RS).Rows(0)("住所２") & " " & dsCust.Tables(RS).Rows(0)("住所３") & " " & dsCust.Tables(RS).Rows(0)("郵便番号")
+                    sCustPIC = dsCust.Tables(RS).Rows(0)("担当者役職") & " " & dsCust.Tables(RS).Rows(0)("担当者名")
+                    sCustTel = "Telp." & dsCust.Tables(RS).Rows(0)("電話番号")
+                Else
+                    sheet.Range("E10").Value = ""
+                End If
+            End If
+
+            'get Sales info 
+            'Sql = "SELECT"
+            'Sql += " t31.*, t30.客先番号, t30.得意先名, t30.得意先住所, t30.得意先郵便番号, t30.得意先担当者役職, t30.得意先担当者名"
+            'Sql += ",t30.得意先電話番号, t30.通貨"
+            'Sql += " FROM t31_urigdt t31, "
+            'Sql += " t30_urighd t30 "
+            'Sql += " WHERE t31.売上番号=t30.売上番号 and t31.売上番号枝番=t30.売上番号枝番 and t31.会社コード=t30.会社コード "
+            'Sql += " AND t31.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+            'Sql += " AND t31.入金番号 = '" & BillingNo & "'"
+            'Sql += " AND t30.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
+            'Sql += " order by t31.受注番号,t31.受注番号枝番,t31.行番号"
+
+            'kafu
+            Sql = "SELECT"
+            Sql += " t11.*"
+            Sql += " FROM public.v_t31_urigdt_1 t11 "
+            Sql += " WHERE t11.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+            Sql += " AND t11.入金番号 = '" & BillingNo & "'"
+            Sql += " order by t11.受注番号,t11.受注番号枝番,t11.行番号"
+
+            '受注明細（商品情報）
+            Dim dsCymndt As DataSet = _db.selectDB(Sql, RS, reccnt)
+
+            '初回だけ
+            If flg2 = False Then
+                sheet.Range("B8").Value = sCustName 'dsCymndt.Tables(RS).Rows(0)("得意先名")
+                'sheet.Range("B13").Value = dsCymnhd.Tables(RS).Rows(0)("得意先郵便番号")
+                sheet.Range("B9").Value = sCustAdr 'dsCymndt.Tables(RS).Rows(0)("得意先住所") & " " & dsCymndt.Tables(RS).Rows(0)("得意先郵便番号")
+                sheet.Range("B14").Value = sCustPIC 'dsCymndt.Tables(RS).Rows(0)("得意先担当者役職") & " " & dsCymndt.Tables(RS).Rows(0)("得意先担当者名")
+                'sheet.Range("A15").Value = "Telp." & dsCymnhd.Tables(RS).Rows(0)("得意先電話番号") & "　Fax." & dsCymnhd.Tables(RS).Rows(0)("得意先ＦＡＸ")
+                sheet.Range("A15").Value = sCustTel '"Telp." & dsCymndt.Tables(RS).Rows(0)("得意先電話番号")
+                sheet.Range("E8").Value = "" & BillingNo  'InvoiceNo
+                sheet.Range("E9").Value = "" & UtilClass.strFormatDate(dtmInvoice)
+                'sheet.Range("E10").Value = "" & 
+                'sheet.Range("E12").Value = ": " & dsCymnhd.Tables(RS).Rows(0)("受注番号")
+                sheet.Range("E11").Value = "" & dsCymndt.Tables(RS).Rows(0)("客先番号")
+
+                'If dsShukkoHd.Tables(RS).Rows.Count > 0 Then
+                'For x As Integer = 0 To dsShukkoHd.Tables(RS).Rows.Count - 1
+                'sheet.Range("E12").Value += IIf(x > 0, ", " & dsShukkoHd.Tables(RS).Rows(x)("出庫番号"), dsShukkoHd.Tables(RS).Rows(x)("出庫番号"))
+                'Next
+                'End If
+
+                sheet.Range("E13").Value = dsCymndt.Tables(RS).Rows(0)("支払条件")
+
+                sheet.Range("E18").Value = "(" & cur & ")"
+                sheet.Range("F18").Value = "(" & cur & ")"
+
+                flg2 = True
+
+            Else
+                'sheet.Range("E8").Value = sheet.Range("E8").Value & vbLf & BillingNo
+            End If
+
+            'Dim order_no_ As String = ""
+
+            For i As Integer = 0 To dsCymndt.Tables(RS).Rows.Count - 1
+
+                If currentNum > 3 Then
+                    Dim obj As Object
+                    Dim cellPos = lastRow & ":" & lastRow
+                    obj = sheet.Range(cellPos)
+                    obj.Copy()
+                    obj.Insert()
+                    If Marshal.IsComObject(obj) Then
+                        Marshal.ReleaseComObject(obj)
+                    End If
+                    lastRow += 1
+                End If
+
+                sheet.Range("A" & currentRow).Value = currentNum
+                sheet.Range("B" & currentRow).Value = dsCymndt.Tables(RS).Rows(i)("メーカー") & Environment.NewLine & dsCymndt.Tables(RS).Rows(i)("品名") & Environment.NewLine & dsCymndt.Tables(RS).Rows(i)("型式") & Environment.NewLine & dsCymndt.Tables(RS).Rows(i)("受注番号")
+                Dim x As Decimal = dsCymndt.Tables(RS).Rows(i)("見積単価_外貨")
+                Dim y As Decimal = dsCymndt.Tables(RS).Rows(i)("売上数量")
+
+                sheet.Range("C" & currentRow).Value = y
+                sheet.Range("D" & currentRow).Value = dsCymndt.Tables(RS).Rows(i)("単位")
+
+                sheet.Range("E" & currentRow).Value = x 'dsCymndt.Tables(RS).Rows(i)("見積単価_外貨")
+                sheet.Range("F" & currentRow).Value = x * y 'dsCymndt.Tables(RS).Rows(i)("見積金額") '("売上金額_外貨")
+                BillingSubTotal += (x * y) 'dsCymndt.Tables(RS).Rows(i)("見積金額")
+                currentNum += 1
+                currentRow += 1
+
+            Next i
+
+            'sheet.Range("A" & lastRow & ":G" & lastRow).Borders(Excel.XlBordersIndex.xlEdgeBottom).LineStyle = Excel.XlLineStyle.xlContinuous
+
+            sheet.Range("F" & lastRow + 1).Value = BillingSubTotal
+
+            'VATなしの場合が考慮されていなかったため修正　2020.03.01
+            'sheet.Range("F" & lastRow + 2).Value = BillingSubTotal * 0.1
+            'sheet.Range("F" & lastRow + 3).Value = BillingSubTotal * 1.1
+
+            If VAT = 0 Then  'VATなし
+                sheet.Range("F" & lastRow + 2).Value = 0
+                sheet.Range("F" & lastRow + 3).Value = BillingSubTotal
+            Else
+                'Dim decVAT As Decimal = BillingSubTotal * VAT / 100
+                sheet.Range("F" & lastRow + 2).Value = VAT 'decVAT
+                sheet.Range("F" & lastRow + 3).Value = BillingSubTotal + VAT 'decVAT
+            End If
+
+            sheet.Range("C" & lastRow + 5).Value = sheet.Range("E" & lastRow + 3).Value
+            'sheet.Range("F" & lastRow + 9).Value = "Jakarta, " & dtmInvoice.Day & " " & dtmInvoice.ToString("MMMM") & " " & dtmInvoice.Year  'InvoiceDate
+
+            app.DisplayAlerts = False 'Microsoft Excelのアラート一旦無効化
+
+            Dim excelChk As Boolean = _com.excelOutput(sOutFile)
+            If excelChk = False Then
+                Exit Sub
+            End If
+            book.SaveAs(sOutFile) '書き込み実行
+
+            app.DisplayAlerts = True 'アラート無効化を解除
+            app.Visible = True
+
+            'カーソルをビジー状態から元に戻す
+            Cursor.Current = Cursors.Default
+
+            _msgHd.dspMSG("CreateExcel", frmC01F10_Login.loginValue.Language)
+
+        Catch ex As Exception
+            'カーソルをビジー状態から元に戻す
+            Cursor.Current = Cursors.Default
+
+            Throw ex
+        Finally
+            'app.Quit()
+            'Marshal.ReleaseComObject(sheet)
+            'Marshal.ReleaseComObject(book)
+            'Marshal.ReleaseComObject(app)
+
+        End Try
     End Sub
 
 End Class

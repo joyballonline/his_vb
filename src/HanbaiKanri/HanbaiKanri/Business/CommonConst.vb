@@ -14,7 +14,8 @@
 Public Class CommonConst
 
     '
-    Public Const CHECK_URL As String = "https://script.google.com/macros/s/AKfycbwbg-YA0obmPn94D5VYuv3LFGtYbOBI4ckQPm3sy0r0qgX1KWB8/exec" '"http://spin.laevigata.co.jp/account_check.php"
+    Public Const CHECK_URL As String = "https://script.google.com/macros/s/AKfycbwJNP4UpM2ABZYFi8rh4UBIgrZ9aDKAHCoLn8pKi7kRGocoWLC8PTywzw/exec"
+    Public Const CHECK_COM As String = "ZENBI"
 
     '汎用マスタ固定KEY
     Public Const HANYO_KOTEI_SKBUNRUI As String = "1001出荷分類"        '1001出荷分類
@@ -429,5 +430,8 @@ Public Class CommonConst
 
     'VAT
     Public Const TAX_VAT As Decimal = 0.1               '税率
+
+    'COLLECTIVE INVOICE
+    Public Const COLINV As String = "COLLECTIVE"
 
 End Class
