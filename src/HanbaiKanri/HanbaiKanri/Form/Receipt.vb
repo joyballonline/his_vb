@@ -972,7 +972,7 @@ Public Class Receipt
             Sql += "', '"
             Sql += dsHattyu.Tables(RS).Rows(0)("入力担当者").ToString
             Sql += "', '"
-            Sql += UtilClass.escapeSql(dsHattyu.Tables(RS).Rows(0)("備考").ToString)
+            Sql += UtilClass.escapeSql(TxtRemarks.Text) 'dsHattyu.Tables(RS).Rows(0)("備考").ToString)
             Sql += "', '"
             Sql += CommonConst.CANCEL_KBN_ENABLED.ToString
             Sql += "', '"
