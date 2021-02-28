@@ -121,10 +121,10 @@ Public Class InventoryControlTable
 
         makeTableLayoutPanel1()     'コンボボックスコントロールの表示制御
         createZaikoCombobox(cmWarehouseFrom)
-        createZaikoCombobox(cmSyubetsuFrom)
-        createZaikoCombobox(cmLocationFrom)
-        createZaikoCombobox(cmSerialNoFrom)
-        createZaikoCombobox(cmOrderNoFrom)
+        'createZaikoCombobox(cmSyubetsuFrom)
+        'createZaikoCombobox(cmLocationFrom)
+        'createZaikoCombobox(cmSerialNoFrom)
+        'createZaikoCombobox(cmOrderNoFrom)
 
         '対象年月
         Dim dtmTemp As Date = DateAdd("m", -1, Now)
@@ -177,7 +177,7 @@ Public Class InventoryControlTable
             DgvList.Columns.Add("製造番号", "SerialNo")
             DgvList.Columns.Add("伝票番号", "OrderNo")
             DgvList.Columns.Add("入出庫日", "InOutDate")
-            DgvList.Columns.Add("取引先", "Suppliers")
+            DgvList.Columns.Add("取引先", "SupplierCustomer")
             DgvList.Columns.Add("月末在庫数", "MonthEndInventory")
             DgvList.Columns.Add("入庫数量", "GoodsReceiptQuantity")
             DgvList.Columns.Add("入庫単価", "ReceiptUnitPrice")
@@ -264,6 +264,7 @@ Public Class InventoryControlTable
         End If
 
         DgvList.Columns("月末在庫数").Visible = False
+        DgvList.Columns("X").Visible = False
 
         If InventoryControl = "0" Then
             DgvList.Columns("メーカー").DisplayIndex = 0
@@ -401,11 +402,6 @@ Public Class InventoryControlTable
 
             Dim array2(DgvList.RowCount - 1, 16) As String
 
-            'Dim strSoko As String = DgvList.Rows(0).Cells("倉庫").Value
-            'Dim strMaker As String = DgvList.Rows(0).Cells("メーカー").Value
-            'Dim strItem As String = DgvList.Rows(0).Cells("品名").Value
-            'Dim strSpec As String = DgvList.Rows(0).Cells("型式").Value
-            'Dim cellRowIndex As Integer = 1
             For i As Integer = 0 To DgvList.RowCount - 1
 
                 array2(i, 0) = DgvList.Rows(i).Cells("倉庫").Value
@@ -1094,7 +1090,6 @@ Public Class InventoryControlTable
 
         MessageBox.Show(x.Cells("伝票番号").Value & vbCrLf & x.Cells("行番号").Value)
 
-
     End Sub
 
     Private Sub setList2()
@@ -1219,7 +1214,7 @@ Public Class InventoryControlTable
                         DgvList.Rows(intList).Cells("出庫単価").Value = ""
                         addqty(qtybypri, UtilClass.rmNullDecimal(dsList.Tables(RS).Rows(i)("recpr")), dsList.Tables(RS).Rows(i)("数量"))
                         'currentCul1 = currentCul1 + dsList.Tables(RS).Rows(i)("数量")
-                        DgvList.Rows(intList).Cells("在庫数").Value = qtybypri(dsList.Tables(RS).Rows(i)("recpr")) 'currentCul1
+                        DgvList.Rows(intList).Cells("在庫数").Value = qtybypri(UtilClass.rmNullDecimal(dsList.Tables(RS).Rows(i)("recpr"))) 'currentCul1
                         DgvList.Rows(intList).Cells("在庫金額”).Value = UtilClass.Round_2(DgvList.Rows(intList).Cells("在庫数").Value * UtilClass.rmNullDecimal(dsList.Tables(RS).Rows(i)("recpr")))
                     Else
                         DgvList.Rows(intList).Cells("取引先").Value = dsList.Tables(RS).Rows(i)("cust").ToString
@@ -1229,7 +1224,7 @@ Public Class InventoryControlTable
                         DgvList.Rows(intList).Cells("出庫単価").Value = dsList.Tables(RS).Rows(i)("isspr")
                         deductqty(qtybypri, UtilClass.rmNullDecimal(dsList.Tables(RS).Rows(i)("isspr")), dsList.Tables(RS).Rows(i)("数量"))
                         'currentCul1 = currentCul1 - dsList.Tables(RS).Rows(i)("数量")
-                        DgvList.Rows(intList).Cells("在庫数").Value = qtybypri(dsList.Tables(RS).Rows(i)("isspr")) 'currentCul1
+                        DgvList.Rows(intList).Cells("在庫数").Value = qtybypri(UtilClass.rmNullDecimal(dsList.Tables(RS).Rows(i)("isspr"))) 'currentCul1
                         DgvList.Rows(intList).Cells("在庫金額”).Value = UtilClass.Round_2(DgvList.Rows(intList).Cells("在庫数").Value * UtilClass.rmNullDecimal(dsList.Tables(RS).Rows(i)("isspr")))
                     End If
 
@@ -1345,7 +1340,7 @@ Public Class InventoryControlTable
             'startY = e.RowBounds.Top + e.RowBounds.Height - 1
 
             '線を引く 下
-            'e.Graphics.DrawLine(linePen,                                      startX,                                      startY,                                      endX,                                      startY)
+            'e.Graphics.DrawLine(linePen, startX, startY, endX, startY)
 
         End If
 
