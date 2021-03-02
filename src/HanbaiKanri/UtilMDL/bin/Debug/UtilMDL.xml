@@ -22,7 +22,7 @@ UtilMDL
   現在のスレッドの CurrentUICulture プロパティをオーバーライドします。
 </summary>
 </member>
-<member name="M:UtilMDL.DB.UtilPostgresDebugger.#ctor(System.String,System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Boolean,System.Int16)">
+<member name="M:UtilMDL.DB.UtilPostgresDebugger.#ctor(System.String,System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Boolean,System.Int16,System.String)">
  <summary>
  コンストラクタ
  </summary>
@@ -105,7 +105,7 @@ UtilMDL
  <param name="prmRefParameters">置換パラメータリスト</param>
  <remarks>ストアド実行などを想定(それ以外も実行可能)</remarks>
 </member>
-<member name="M:UtilMDL.DB.UtilPostgresHandler.#ctor(System.String,System.String,System.String,System.String,System.String,System.Int16)">
+<member name="M:UtilMDL.DB.UtilPostgresHandler.#ctor(System.String,System.String,System.String,System.String,System.String,System.Int16,System.Boolean)">
  <summary>
  コンストラクタ UDLファイルよりDBコネクションを新規生成する
  </summary>
@@ -123,7 +123,7 @@ UtilMDL
  </summary>
  <remarks></remarks>
 </member>
-<member name="M:UtilMDL.DB.UtilPostgresHandler.initInstance(System.String,System.String,System.String,System.String,System.String,System.Int16)">
+<member name="M:UtilMDL.DB.UtilPostgresHandler.initInstance(System.String,System.String,System.String,System.String,System.String,System.Int16,System.Boolean)">
  <summary>
  サブルーチン[サブクラス用] UDLファイルよりDBコネクションを新規生成する
  </summary>
@@ -1758,6 +1758,25 @@ Dim RtnDir As String = UtilDirectorySelector.choiceFolder("C:\WINDOWS", "○○�
  </summary>
  <returns>True=空白では無い, False=空白</returns>
  <remarks></remarks>
+</member>
+<member name="M:UtilMDL.UtilClass.RevoveChars(System.String)">
+ <summary>
+ 指定した文字列から指定した文字を全て削除する
+ </summary>
+ <param name="s">対象となる文字列。</param>
+ <returns>sに含まれている全てのcharacters文字が削除された文字列。</returns>
+</member>
+<member name="M:UtilMDL.UtilClass.ToRoundDown(System.Double,System.Int32)">
+ ------------------------------------------------------------------------
+ <summary>
+     指定した精度の数値に切り捨てします。</summary>
+ <param name="dValue">
+     丸め対象の倍精度浮動小数点数。</param>
+ <param name="iDigits">
+     戻り値の有効桁数の精度。</param>
+ <returns>
+     iDigits に等しい精度の数値に切り捨てられた数値。</returns>
+ ------------------------------------------------------------------------
 </member>
 <member name="T:UtilMDL.xls.UtilExcelHandler.HorizontalAlignment">
  <summary>

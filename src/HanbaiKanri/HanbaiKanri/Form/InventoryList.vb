@@ -126,8 +126,8 @@ Public Class InventoryList
             DgvList.Columns.Add("倉庫", "Warehouse")
             DgvList.Columns.Add("入出庫種別", "StorageType")
             DgvList.Columns.Add("ロケ番号", "LocationNo")
-            DgvList.Columns.Add("製造番号", "SerialNo")
-            DgvList.Columns.Add("伝票番号", "OrderNo")
+            DgvList.Columns.Add("製造番号", "PO")
+            DgvList.Columns.Add("伝票番号", "CustomerNumber")
             DgvList.Columns.Add("在庫数", "StockQuantity")
             DgvList.Columns.Add("単価（入庫単価）", "UnitPrice (ReceiptUnitPrice)")
             DgvList.Columns.Add("最終入庫日", "LastReceiptDate")
@@ -222,11 +222,13 @@ Public Class InventoryList
 
         setProductHd()                  '商品別の見出しセット（見出し初期値のセット）
 
-        SqlItem = "SELECT m21.メーカー, m21.品名, m21.型式,m20.名称 as 倉庫名,m21.入出庫種別 "
-        ''SqlItem += " ,m21.ロケ番号, m21.製造番号, m21.伝票番号, sum(m21.現在庫数) As 現在庫数 "
-        SqlItem += " ,m21.出庫開始サイン as ロケ番号, m21.製造番号, m21.伝票番号, m21.現在庫数 As 現在庫数 "
-        SqlItem += " ,m21.入庫単価, m21.最終入庫日, m21.最終出庫日, m90.文字１, m90.文字２ "
-        SqlItem += " ,t46.仕入先請求番号, t46.仕入先名"
+        SqlItem = "SELECT m21.メーカー, m21.品名, m21.型式,"
+        SqlItem += " m20.名称 as 倉庫名,"
+        SqlItem += " m21.入出庫種別,m21.出庫開始サイン as ロケ番号, m21.製造番号, m21.伝票番号, m21.現在庫数"
+        SqlItem += " ,m21.入庫単価, m21.最終入庫日, m21.最終出庫日,"
+        SqlItem += " m90.文字１, m90.文字２ "
+        SqlItem += " ,t46.仕入先請求番号, t43.仕入先名, t43.発注番号"
+        SqlItem += " ,t20_get_custpo(t43.会社コード,t43.発注番号,t43.発注番号枝番) as custpo "
 
         SqlJoin = " FROM m21_zaiko m21"
         SqlJoin += " LEFT JOIN "
@@ -241,21 +243,22 @@ Public Class InventoryList
         SqlJoin += " LEFT JOIN t43_nyukodt t43 "
         SqlJoin += "  on m21.伝票番号 = t43.入庫番号"
         SqlJoin += " and m21.行番号 = t43.行番号"
+        SqlJoin += " and m21.会社コード = t43.会社コード"
         't46_kikehd
         SqlJoin += " LEFT JOIN t46_kikehd t46 "
         SqlJoin += "  on t43.発注番号 = t46.発注番号"
         SqlJoin += " and t43.発注番号枝番 = t46.発注番号枝番"
-        SqlJoin += " and t46.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
+        SqlJoin += " and t43.会社コード = t46.会社コード"
         'm20
         SqlJoin += " LEFT JOIN "
         SqlJoin += " m20_warehouse m20 "
         SqlJoin += " ON "
-        SqlJoin += " m20.会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        SqlJoin += " m20.会社コード = m21.会社コード"
         SqlJoin += " AND "
-        SqlJoin += " m20.倉庫コード ILIKE m21.倉庫コード"
+        SqlJoin += " m20.倉庫コード = m21.倉庫コード"
 
         SqlWher = " WHERE "
-        SqlWher += " m21.会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        SqlWher += " m21.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
         SqlWher += " AND "
         SqlWher += " m21.無効フラグ = " & CommonConst.CANCEL_KBN_ENABLED.ToString
         SqlWher += " AND "
@@ -302,8 +305,8 @@ Public Class InventoryList
                                                                     dsList.Tables(RS).Rows(i)("文字１"))
                 'DgvList.Rows(i).Cells("ロケ番号").Value = dsList.Tables(RS).Rows(i)("ロケ番号").ToString
                 DgvList.Rows(i).Cells("ロケ番号").Value = dsList.Tables(RS).Rows(i)("伝票番号").ToString
-                DgvList.Rows(i).Cells("製造番号").Value = dsList.Tables(RS).Rows(i)("製造番号").ToString
-                DgvList.Rows(i).Cells("伝票番号").Value = dsList.Tables(RS).Rows(i)("伝票番号").ToString
+                DgvList.Rows(i).Cells("製造番号").Value = dsList.Tables(RS).Rows(i)("発注番号").ToString
+                DgvList.Rows(i).Cells("伝票番号").Value = dsList.Tables(RS).Rows(i)("custpo").ToString
                 DgvList.Rows(i).Cells("在庫数").Value = dsList.Tables(RS).Rows(i)("現在庫数")
                 DgvList.Rows(i).Cells("単価（入庫単価）").Value = dsList.Tables(RS).Rows(i)("入庫単価")
                 If dsList.Tables(RS).Rows(i)("最終入庫日") Is DBNull.Value Then
@@ -375,12 +378,12 @@ Public Class InventoryList
         Else
             DgvList.Columns("ロケ番号").Visible = False
         End If
-        If "89ABCDEFOPQRSTUV".Contains(InventoryViewer) Then
+        If "789ABCDEFOPQRSTUV".Contains(InventoryViewer) Then
             DgvList.Columns("製造番号").Visible = True
         Else
             DgvList.Columns("製造番号").Visible = False
         End If
-        If "GHIJKLMNOPQRSTUV".Contains(InventoryViewer) Then
+        If "7GHIJKLMNOPQRSTUV".Contains(InventoryViewer) Then
             DgvList.Columns("伝票番号").Visible = True
         Else
             DgvList.Columns("伝票番号").Visible = False
@@ -529,8 +532,8 @@ Public Class InventoryList
                     sheet.Range("D1").Value = "WarehouseName"
                     sheet.Range("E1").Value = "StorageType"
                     sheet.Range("F1").Value = "Location"
-                    sheet.Range("G1").Value = "SerialNo"
-                    sheet.Range("H1").Value = "OrderNo"
+                    sheet.Range("G1").Value = "PO"
+                    sheet.Range("H1").Value = "CustomerNumber"
                 End If
                 If rbWarehouse.Checked Then
                     sheet.Range("A1").Value = "WarehouseName"
@@ -539,8 +542,8 @@ Public Class InventoryList
                     sheet.Range("D1").Value = "Spec"
                     sheet.Range("E1").Value = "StorageType"
                     sheet.Range("F1").Value = "Location"
-                    sheet.Range("G1").Value = "SerialNo"
-                    sheet.Range("H1").Value = "OrderNo"
+                    sheet.Range("G1").Value = "PO"
+                    sheet.Range("H1").Value = "CustomerNumber"
                 End If
                 If rbSyubetsu.Checked Then
                     sheet.Range("A1").Value = "StorageType"
