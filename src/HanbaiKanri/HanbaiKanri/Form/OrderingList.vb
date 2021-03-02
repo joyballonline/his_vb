@@ -1992,15 +1992,15 @@ Public Class OrderingList
         Dim Sql As String = ""
 
         '抽出条件
-        Dim supplierName As String = escapeSql(TxtSupplierName.Text)
-        Dim supplierAddress As String = escapeSql(TxtAddress.Text)
-        Dim supplierTel As String = escapeSql(TxtTel.Text)
-        Dim supplierCode As String = escapeSql(TxtSupplierCode.Text)
+        Dim supplierName As String = UtilClass.escapeSql(TxtSupplierName.Text)
+        Dim supplierAddress As String = UtilClass.escapeSql(TxtAddress.Text)
+        Dim supplierTel As String = UtilClass.escapeSql(TxtTel.Text)
+        Dim supplierCode As String = UtilClass.escapeSql(TxtSupplierCode.Text)
         Dim sinceDate As String = UtilClass.strFormatDate(dtPurchaseDateSince.Text) '日付の書式を日本の形式に合わせる
         Dim untilDate As String = UtilClass.strFormatDate(dtPurchaseDateUntil.Text) '日付の書式を日本の形式に合わせる
-        Dim sinceNum As String = escapeSql(TxtPurchaseSince.Text)
-        Dim salesName As String = escapeSql(TxtSales.Text)
-        Dim poCode As String = escapeSql(TxtCustomerPO.Text)
+        Dim sinceNum As String = UtilClass.escapeSql(TxtPurchaseSince.Text)
+        Dim salesName As String = UtilClass.escapeSql(TxtSales.Text)
+        Dim poCode As String = UtilClass.escapeSql(TxtCustomerPO.Text)
         Dim itemName As String = UtilClass.escapeSql(TxtItemName.Text)
         Dim spec As String = UtilClass.escapeSql(TxtSpec.Text)
         Dim Maker As String = UtilClass.escapeSql(txtMaker.Text)
@@ -2033,7 +2033,7 @@ Public Class OrderingList
         End If
 
         If salesName <> Nothing Then
-            Sql += " AND t20.営業担当者 ILIKE '%" & salesName & "%' "
+            Sql += " AND t20.受注番号 ILIKE '%" & salesName & "%' "
         End If
 
         If poCode <> Nothing Then

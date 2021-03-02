@@ -454,14 +454,13 @@ Public Class ReceiptList
 
 #Region "nyukodt"
 
-        Dim Sql As String = "SELECT * "
+        Dim Sql As String = "SELECT t43.* "
 
-        Sql += " FROM t42_nyukohd t42"
-        Sql += " left join t43_nyukodt t43"
-        Sql += " on t42.入庫番号 = t43.入庫番号"
-
+        Sql += " FROM t42_nyukohd t42, t43_nyukodt t43"
         Sql += " where t42.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
         Sql += "   and t42.入庫番号 = '" & strNyukoNo & "'"
+        Sql += "   and t42.入庫番号 = t43.入庫番号"
+        Sql += "   and t42.会社コード = t43.会社コード"
 
         Dim dtNyukodt As DataTable = _db.selectDB(Sql, RS, reccnt).Tables(0)
 
@@ -473,20 +472,20 @@ Public Class ReceiptList
 
             Dim strHatyuNo As String = dtNyukodt.Rows(index1)("発注番号")
             Dim strEda As String = dtNyukodt.Rows(index1)("発注番号枝番")
-            Dim intNyukosu As Integer = dtNyukodt.Rows(index1)("入庫数量")
+            Dim intNyukosu As Decimal = dtNyukodt.Rows(index1)("入庫数量")
 
 
 #Region "t41_siredt"
 
             Dim Sql2 As String = "SELECT "
-            Sql2 += " *, coalesce(発注行番号, 行番号, 0) as 発注行番号 "
+            Sql2 += " *, coalesce(発注行番号, 行番号, 0) as 発注行番号2 "
             Sql2 += "FROM t41_siredt "
             Sql2 += " where 会社コード ='" & frmC01F10_Login.loginValue.BumonCD & "'"
             Sql2 += "   and 行番号 = '" & dtNyukodt.Rows(index1)("行番号") & "'"
             Sql2 += "   and 発注番号 = '" & strHatyuNo & "'"
             Sql2 += "   and 発注番号枝番 ='" & strEda & "'"
-            Sql2 += "   and 仕入日 ='" & UtilClass.strFormatDate(dtNyukodt.Rows(index1)("入庫日")） & "'"
-            Sql2 += "   and 仕入数量 ='" & intNyukosu & "'"
+            'Sql2 += "   and 仕入日 ='" & UtilClass.strFormatDate(dtNyukodt.Rows(index1)("入庫日")） & "'"
+            'Sql2 += "   and 仕入数量 ='" & intNyukosu & "'"
 
             Dim dtShiire As DataTable = _db.selectDB(Sql2, RS, reccnt).Tables(0)
 
@@ -505,9 +504,9 @@ Public Class ReceiptList
             Sql4 += ",更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
 
             Sql4 += " where 会社コード ='" & frmC01F10_Login.loginValue.BumonCD & "'"
-            Sql4 += "   and 発注番号 ='" & dtShiire.Rows(0)("発注番号") & "'"
-            Sql4 += "   and 発注番号枝番 ='" & dtShiire.Rows(0)("発注番号枝番") & "'"
-            Sql4 += "   and 行番号 = '" & dtShiire.Rows(0)("発注行番号") & "'"
+            Sql4 += "   and 発注番号 ='" & strHatyuNo & "'"
+            Sql4 += "   and 発注番号枝番 ='" & strEda & "'"
+            Sql4 += "   and 行番号 = " & dtShiire.Rows(0)("発注行番号2") & ""
 
             _db.executeDB(Sql4)
 

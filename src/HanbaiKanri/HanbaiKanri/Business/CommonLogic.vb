@@ -1281,7 +1281,7 @@ Public Class CommonLogic
     '入庫マスタから現在庫数一覧を取得
     '仕入区分 2 の時
     ' getavaqty_genzaiko_normal
-    Public Function cymn_getNukoList3(ByVal rowIndex As Integer, ByVal intZaikoHiki As Integer) As DataSet
+    Public Function cymn_getNukoList4(o_ As String, m_ As String, i_ As String, s_ As String, ByVal intZaikoHiki As Integer) As DataSet
         Dim Sql As String = ""
         Dim reccnt As Integer = 0 'DB用（デフォルト）
 
@@ -1293,20 +1293,20 @@ Public Class CommonLogic
         Sql += " t10.会社コード = t20.会社コード "
         Sql += " AND "
         Sql += " t10.受注番号 = t20.受注番号 "
-        Sql += " AND "
-        Sql += " t10.受注番号枝番 = t20.受注番号枝番 "
-        Sql += " AND "
-        Sql += " t20.発注番号枝番 = (SELECT MAX(発注番号枝番) AS 発注番号枝番 FROM t20_hattyu) "
+        'Sql += " AND "
+        'Sql += " t10.受注番号枝番 = t20.受注番号枝番 "
+        'Sql += " AND "
+        'Sql += " t20.発注番号枝番 = (SELECT MAX(発注番号枝番) AS 発注番号枝番 FROM t20_hattyu) "
 
         Sql += " LEFT JOIN t42_nyukohd t42 "
         Sql += " ON "
         Sql += " t20.会社コード = t42.会社コード "
         Sql += " AND "
         Sql += " t20.発注番号 = t42.発注番号 "
-        Sql += " AND "
-        Sql += " t20.発注番号枝番 = t42.発注番号枝番 "
-        Sql += " AND "
-        Sql += " t20.仕入先コード = t42.仕入先コード "
+        'Sql += " AND "
+        'Sql += " t20.発注番号枝番 = t42.発注番号枝番 "
+        'Sql += " AND "
+        'Sql += " t20.仕入先コード = t42.仕入先コード "
 
         Sql += " LEFT JOIN t43_nyukodt t43 "
         Sql += " ON "
@@ -1317,31 +1317,40 @@ Public Class CommonLogic
         Sql += " WHERE "
         Sql += " t10.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
         Sql += " AND "
-        'Sql += " t10.受注番号 = '" & TxtOrderNo.Text & "'"
-        Sql += " AND "
-        'Sql += " t10.受注番号枝番 = '" & TxtOrderSuffix.Text & "'"
+        Sql += " t10.受注番号 = '" & o_ & "'"
+        'Sql += " AND "
+        'Sql += " t10.受注番号枝番 = '" & TxtSuffixNo.Text & "'"
 
-        'Sql += " AND t43.メーカー ILIKE '" & DgvItemList.Rows(rowIndex).Cells("メーカー").Value.ToString & "'"
-        'Sql += " AND t43.品名 ILIKE '" & DgvItemList.Rows(rowIndex).Cells("品名").Value.ToString & "'"
-        'Sql += " AND t43.型式 ILIKE '" & DgvItemList.Rows(rowIndex).Cells("型式").Value.ToString & "'"
+        Sql += " AND t43.メーカー ILIKE '" & m_ & "'"
+        Sql += " AND t43.品名 ILIKE '" & i_ & "'"
+        Sql += " AND t43.型式 ILIKE '" & s_ & "'"
+        'Sql += " AND t42.倉庫コード ILIKE '" & DgvAdd.Rows(rowIndex).Cells("倉庫").Value.ToString & "'"
+        'Sql += " AND t43.仕入区分 = '" & DgvAdd.Rows(rowIndex).Cells("仕入区分値").Value.ToString & "'"
+        Sql += " AND t42.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED.ToString
+        'Sql += " AND t43.行番号 = " & v_
+        Sql += " AND t20.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED.ToString
 
-        'Sql += " AND t42.倉庫コード ILIKE '" & CmWarehouse.SelectedValue.ToString & "'"
+        Sql += " order by t20.発注番号枝番 desc"
 
-        'Sql += " AND t43.仕入区分 = '" & DgvItemList.Rows(rowIndex).Cells("仕入区分").Value.ToString & "'"
 
         Dim dsNyukoList As DataSet = _db.selectDB(Sql, RS, reccnt)
+        If reccnt = 0 Then
+            Return Nothing
+        End If
 
         '取得した入庫番号一覧から現在庫数を取得
-        Sql = "SELECT sum(現在庫数) as 現在庫数, 入出庫種別, 伝票番号, 行番号 from m21_zaiko"
+        Sql = "SELECT sum(現在庫数) as 在庫数量,伝票番号,行番号 from m21_zaiko"
 
-        Sql += " WHERE 会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonCD & "'"
+        Sql += " WHERE "
+        Sql += " 会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonCD & "'"
 
-        'Sql += " AND メーカー ILIKE '" & DgvItemList.Rows(rowIndex).Cells("メーカー").Value.ToString & "'"
-        'Sql += " AND 品名 ILIKE '" & UtilClass.escapeSql(DgvItemList.Rows(rowIndex).Cells("品名").Value.ToString) & "'"
-        'Sql += " AND 型式 ILIKE '" & UtilClass.escapeSql(DgvItemList.Rows(rowIndex).Cells("型式").Value.ToString) & "'"
-        'Sql += " AND 倉庫コード ILIKE '" & CmWarehouse.SelectedValue.ToString & "'"
-        Sql += " AND 入出庫種別 ILIKE '" & CommonConst.INOUT_KBN_NORMAL & "'"
+        Sql += " AND メーカー ILIKE '" & m_ & "'"
+        Sql += " AND 品名 ILIKE '" & i_ & "'"
+        Sql += " AND 型式 ILIKE '" & s_ & "'"
+        'Sql += " AND 倉庫コード ILIKE '" & DgvAdd.Rows(rowIndex).Cells("倉庫").Value.ToString & "'"
+        Sql += " AND 入出庫種別 ='0'"
         Sql += " AND 無効フラグ = " & CommonConst.CANCEL_KBN_ENABLED
+        'Sql += " AND 行番号 = " & v_
 
         '在庫引当区分の場合は条件に含めない
         If intZaikoHiki = 2 Then
@@ -1358,13 +1367,21 @@ Public Class CommonLogic
             Sql += " ) "
         End If
 
-        Sql += " GROUP BY 倉庫コード, 入出庫種別, 最終入庫日, 伝票番号, 行番号 "
-        Sql += " ORDER BY 最終入庫日 "
+        Sql += " GROUP BY 伝票番号,行番号 "
+        'Sql += " ORDER BY 最終入庫日 "
 
         '在庫マスタから現在庫数を取得
         Dim dsZaiko As DataSet = _db.selectDB(Sql, RS, reccnt)
-
         Return dsZaiko
+        'If dsZaiko.Tables(RS).Rows.Count > 0 Then
+        'If dsZaiko.Tables(RS).Rows(0)("在庫数量").ToString IsNot "" Then
+        'Return dsZaiko.Tables(RS).Rows(0)("在庫数量")
+        'Else
+        'Return 0
+        'End If
+        'Else
+        'Return 0
+        'End If
 
     End Function
 
