@@ -19,8 +19,7 @@
     </SccAuxPath>
     <SccProvider>
     </SccProvider>
-    <ApplicationIcon>
-    </ApplicationIcon>
+    <ApplicationIcon>Resources\spinball.ico</ApplicationIcon>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
@@ -108,6 +107,12 @@
     <Compile Include="Form\AccountsPayableBulk.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Form\BillingScheduleList.Designer.vb">
+      <DependentUpon>BillingScheduleList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\BillingScheduleList.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form\ClosingAdmin.Designer.vb">
       <DependentUpon>ClosingAdmin.vb</DependentUpon>
     </Compile>
@@ -130,6 +135,12 @@
       <DependentUpon>InitialRegistrationBulk.vb</DependentUpon>
     </Compile>
     <Compile Include="Form\InitialRegistrationBulk.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\MakerSearch.designer.vb">
+      <DependentUpon>MakerSearch.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\MakerSearch.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form\MovementInput.Designer.vb">
@@ -364,17 +375,10 @@
     <Compile Include="Form\Hanyo.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form\.Designer.vb">
-      <DependentUpon>MakerSearch.vb</DependentUpon>
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Form\Language.Designer.vb">
       <DependentUpon>Language.vb</DependentUpon>
     </Compile>
     <Compile Include="Form\Language.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form\MakerSearch.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form\MstCompany.Designer.vb">
@@ -607,6 +611,9 @@
     <EmbeddedResource Include="Form\AccountsPayableBulk.resx">
       <DependentUpon>AccountsPayableBulk.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Form\BillingScheduleList.resx">
+      <DependentUpon>BillingScheduleList.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form\ClosingAdmin.resx">
       <DependentUpon>ClosingAdmin.vb</DependentUpon>
     </EmbeddedResource>
@@ -618,6 +625,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form\InitialRegistrationBulk.resx">
       <DependentUpon>InitialRegistrationBulk.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\MakerSearch.resx">
+      <DependentUpon>MakerSearch.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\MovementInput.resx">
       <DependentUpon>MovementInput.vb</DependentUpon>
@@ -736,9 +746,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form\Language.resx">
       <DependentUpon>Language.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form\MakerSearch.resx">
-      <DependentUpon>MakerSearch.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\MstAccount.resx">
       <DependentUpon>MstAccount.vb</DependentUpon>
@@ -860,10 +867,12 @@
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="bin\BaseXls\AccountsPayableBulkList.xlsx" />
     <None Include="bin\BaseXls\APScheduledCollectionDateList.xlsx" />
     <None Include="bin\BaseXls\ARScheduledCollectionDateList.xlsx" />
     <None Include="bin\BaseXls\CustomerARList.xlsx" />
-    <None Include="bin\BaseXls\DeliveryNote_20191101.xlsx" />
+    <None Include="bin\BaseXls\DeliveryNote.xlsx" />
+    <None Include="bin\BaseXls\InventoryControlTable.xlsx" />
     <None Include="bin\BaseXls\Invoice.xlsx" />
     <None Include="bin\BaseXls\JobOrderList.xlsx" />
     <None Include="bin\BaseXls\OrderRemainingList.xlsx" />
@@ -877,6 +886,7 @@
     <None Include="bin\BaseXls\Receipt.xlsx" />
     <None Include="bin\BaseXls\SalesProfitList.xlsx" />
     <None Include="bin\BaseXls\SalesVATList.xlsx" />
+    <None Include="bin\BaseXls\StockProductList.xlsx" />
     <None Include="bin\BaseXls\SupplierAPList.xlsx" />
     <None Include="bin\Setting\HanbaiKanri.ini" />
     <None Include="My Project\app.manifest" />
@@ -899,19 +909,34 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="bin\BaseXls\readme.txt" />
-    <Content Include="bin\OutXls\readme.txt" />
     <Content Include="bin\Setting\HanbaiKanri-Lang.xml">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="bin\Setting\HanbaiKanri.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="bin\SQL\l11_aclog.sql" />
+    <Content Include="bin\SQL\m20_get_wh_name.sql" />
+    <Content Include="bin\SQL\m21zaiko_rec.sql" />
+    <Content Include="bin\SQL\m90_get_inout_class.sql" />
+    <Content Include="bin\SQL\s01_config.sql" />
+    <Content Include="bin\SQL\t11_get_pr.sql" />
+    <Content Include="bin\SQL\t20_get_custpo.sql" />
+    <Content Include="bin\SQL\t30_urighd.upg.sql" />
+    <Content Include="bin\SQL\t31_urigdt.upg.sql" />
+    <Content Include="bin\SQL\t31_urigdt_2.upg.sql" />
+    <Content Include="bin\SQL\t43_get_rec_price_idr.sql" />
+    <Content Include="bin\SQL\t43_get_supplier_name.sql" />
+    <Content Include="bin\SQL\t44_get_customer_name.sql" />
+    <Content Include="bin\SQL\t82_tmp_order.sql" />
+    <Content Include="bin\SQL\v_t23_skyuhd_1.sql" />
+    <Content Include="bin\SQL\v_t31_urigdt_1.sql" />
+    <Content Include="bin\SQL\v_t70_inout.sql" />
     <Content Include="dotNetIco.ico" />
+    <Content Include="Resources\spinball.ico" />
     <None Include="Resources\information_icon.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="bin\Log\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
       <Visible>False</Visible>
@@ -925,10 +950,19 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <COMReference Include="Microsoft.Office.Core">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>7</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
     <COMReference Include="Microsoft.Office.Interop.Excel">
       <Guid>{00020813-0000-0000-C000-000000000046}</Guid>
       <VersionMajor>1</VersionMajor>
-      <VersionMinor>9</VersionMinor>
+      <VersionMinor>8</VersionMinor>
       <Lcid>0</Lcid>
       <WrapperTool>primary</WrapperTool>
       <Isolated>False</Isolated>
