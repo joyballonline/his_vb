@@ -2071,13 +2071,13 @@ Public Class frmC01F30_Menu
                 Dim Status As String = CommonConst.STATUS_VIEW
                 openForm = New InventoryList(_msgHd, _db, _langHd, Me, Status)
                 openForm.Show()
-                Me.Hide()
+                'Me.Hide()
             Case CommonConst.MENU_H1420  '在庫管理表
                 Dim openForm As Form = Nothing
                 Dim Status As String = CommonConst.STATUS_VIEW
                 openForm = New InventoryControlTable(_msgHd, _db, _langHd, Me, Status)
                 openForm.Show()
-                Me.Hide()
+                'Me.Hide()
             Case CommonConst.MENU_H1430  '移動入力
                 Dim openForm As Form = Nothing
                 Dim Status As String = CommonConst.STATUS_VIEW
@@ -2177,7 +2177,7 @@ Public Class frmC01F30_Menu
                 Exit Sub
         End Select
 
-        Me.Hide()   ' 自分は隠れる
+        'Me.Hide()   ' 自分は隠れる
 
     End Sub
 
