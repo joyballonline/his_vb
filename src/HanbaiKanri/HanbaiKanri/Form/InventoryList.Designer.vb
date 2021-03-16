@@ -51,12 +51,13 @@ Partial Class InventoryList
         '
         Me.DgvList.AllowUserToAddRows = False
         Me.DgvList.AllowUserToDeleteRows = False
+        Me.DgvList.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText
         Me.DgvList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DgvList.Location = New System.Drawing.Point(13, 51)
         Me.DgvList.Name = "DgvList"
         Me.DgvList.RowHeadersVisible = False
         Me.DgvList.RowTemplate.Height = 21
-        Me.DgvList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.DgvList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
         Me.DgvList.Size = New System.Drawing.Size(1326, 444)
         Me.DgvList.TabIndex = 15
         '
@@ -64,7 +65,7 @@ Partial Class InventoryList
         '
         Me.LblMode.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblMode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LblMode.Font = New System.Drawing.Font("ＭＳ ゴシック", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LblMode.Font = New System.Drawing.Font("MS Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.LblMode.Location = New System.Drawing.Point(1106, 9)
         Me.LblMode.Name = "LblMode"
         Me.LblMode.Size = New System.Drawing.Size(233, 22)
@@ -89,7 +90,7 @@ Partial Class InventoryList
         Me.rbAll.Checked = True
         Me.rbAll.Location = New System.Drawing.Point(3, 8)
         Me.rbAll.Name = "rbAll"
-        Me.rbAll.Size = New System.Drawing.Size(59, 16)
+        Me.rbAll.Size = New System.Drawing.Size(61, 17)
         Me.rbAll.TabIndex = 68
         Me.rbAll.TabStop = True
         Me.rbAll.Text = "商品別"
@@ -101,7 +102,7 @@ Partial Class InventoryList
         Me.rbWarehouse.AutoSize = True
         Me.rbWarehouse.Location = New System.Drawing.Point(107, 8)
         Me.rbWarehouse.Name = "rbWarehouse"
-        Me.rbWarehouse.Size = New System.Drawing.Size(59, 16)
+        Me.rbWarehouse.Size = New System.Drawing.Size(61, 17)
         Me.rbWarehouse.TabIndex = 69
         Me.rbWarehouse.TabStop = True
         Me.rbWarehouse.Text = "倉庫別"
@@ -135,7 +136,7 @@ Partial Class InventoryList
         Me.rbSerialNo.AutoSize = True
         Me.rbSerialNo.Location = New System.Drawing.Point(399, 8)
         Me.rbSerialNo.Name = "rbSerialNo"
-        Me.rbSerialNo.Size = New System.Drawing.Size(83, 16)
+        Me.rbSerialNo.Size = New System.Drawing.Size(85, 17)
         Me.rbSerialNo.TabIndex = 73
         Me.rbSerialNo.TabStop = True
         Me.rbSerialNo.Text = "製造番号別"
@@ -147,7 +148,7 @@ Partial Class InventoryList
         Me.rbSyubetsu.AutoSize = True
         Me.rbSyubetsu.Location = New System.Drawing.Point(209, 8)
         Me.rbSyubetsu.Name = "rbSyubetsu"
-        Me.rbSyubetsu.Size = New System.Drawing.Size(83, 16)
+        Me.rbSyubetsu.Size = New System.Drawing.Size(85, 17)
         Me.rbSyubetsu.TabIndex = 72
         Me.rbSyubetsu.TabStop = True
         Me.rbSyubetsu.Text = "入出庫種別"
@@ -159,7 +160,7 @@ Partial Class InventoryList
         Me.rbOrderNo.AutoSize = True
         Me.rbOrderNo.Location = New System.Drawing.Point(506, 8)
         Me.rbOrderNo.Name = "rbOrderNo"
-        Me.rbOrderNo.Size = New System.Drawing.Size(59, 16)
+        Me.rbOrderNo.Size = New System.Drawing.Size(61, 17)
         Me.rbOrderNo.TabIndex = 74
         Me.rbOrderNo.TabStop = True
         Me.rbOrderNo.Text = "伝票別"
@@ -171,7 +172,7 @@ Partial Class InventoryList
         Me.rbLocation.AutoSize = True
         Me.rbLocation.Location = New System.Drawing.Point(309, 8)
         Me.rbLocation.Name = "rbLocation"
-        Me.rbLocation.Size = New System.Drawing.Size(84, 16)
+        Me.rbLocation.Size = New System.Drawing.Size(84, 17)
         Me.rbLocation.TabIndex = 70
         Me.rbLocation.TabStop = True
         Me.rbLocation.Text = "ロケーション別"
