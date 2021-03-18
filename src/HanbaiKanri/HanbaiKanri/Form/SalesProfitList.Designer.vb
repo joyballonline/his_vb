@@ -70,14 +70,14 @@ Partial Class SalesProfitList
         Me.仕入先名 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.仕入先コード = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.得意先コード = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.仕入単価_IDR = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.仕入通貨 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.仕入単価_原通貨 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.間接費 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.仕入単価_IDR = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.仕入原価_原通貨 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.仕入原価_IDR = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.利益 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.利益率 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.利益 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.仕入原価_IDR = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.仕入原価_原通貨 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.DgvList, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -116,15 +116,16 @@ Partial Class SalesProfitList
         'DgvList
         '
         Me.DgvList.AllowUserToAddRows = False
-        Me.DgvList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
+        Me.DgvList.AllowUserToOrderColumns = True
+        Me.DgvList.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText
         Me.DgvList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DgvList.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.行番号, Me.受注番号, Me.受注番号枝番, Me.受注行番号, Me.請求番号, Me.請求日, Me.受注数量, Me.販売通貨, Me.受注単価_原通貨, Me.受注金額_IDR, Me.受注金額_原通貨, Me.得意先名, Me.単位, Me.メーカー, Me.品名, Me.型式, Me.受注単価_IDR, Me.発注番号, Me.発注番号枝番, Me.発注行番号, Me.仕入区分, Me.仕入先名, Me.仕入先コード, Me.得意先コード, Me.仕入通貨, Me.仕入単価_原通貨, Me.間接費, Me.仕入単価_IDR, Me.仕入原価_原通貨, Me.仕入原価_IDR, Me.利益, Me.利益率})
+        Me.DgvList.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.行番号, Me.受注番号, Me.受注番号枝番, Me.受注行番号, Me.請求番号, Me.請求日, Me.受注数量, Me.販売通貨, Me.受注単価_原通貨, Me.受注金額_IDR, Me.受注金額_原通貨, Me.得意先名, Me.単位, Me.メーカー, Me.品名, Me.型式, Me.受注単価_IDR, Me.発注番号, Me.発注番号枝番, Me.発注行番号, Me.仕入区分, Me.仕入先名, Me.仕入先コード, Me.得意先コード, Me.仕入単価_IDR, Me.仕入通貨, Me.仕入単価_原通貨, Me.間接費, Me.利益率, Me.利益, Me.仕入原価_IDR, Me.仕入原価_原通貨})
         Me.DgvList.Location = New System.Drawing.Point(13, 102)
         Me.DgvList.Name = "DgvList"
         Me.DgvList.ReadOnly = True
         Me.DgvList.RowHeadersVisible = False
         Me.DgvList.RowTemplate.Height = 21
-        Me.DgvList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.DgvList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
         Me.DgvList.Size = New System.Drawing.Size(1326, 345)
         Me.DgvList.TabIndex = 14
         '
@@ -323,7 +324,7 @@ Partial Class SalesProfitList
         Me.行番号.HeaderText = "行番号"
         Me.行番号.Name = "行番号"
         Me.行番号.ReadOnly = True
-        Me.行番号.Width = 68
+        Me.行番号.Width = 50
         '
         '受注番号
         '
@@ -358,7 +359,7 @@ Partial Class SalesProfitList
         Me.請求番号.HeaderText = "SalesInvoiceNo"
         Me.請求番号.Name = "請求番号"
         Me.請求番号.ReadOnly = True
-        Me.請求番号.Width = 107
+        Me.請求番号.Width = 50
         '
         '請求日
         '
@@ -366,7 +367,7 @@ Partial Class SalesProfitList
         Me.請求日.HeaderText = "SalesInvoiceDate"
         Me.請求日.Name = "請求日"
         Me.請求日.ReadOnly = True
-        Me.請求日.Width = 116
+        Me.請求日.Width = 50
         '
         '受注数量
         '
@@ -374,7 +375,7 @@ Partial Class SalesProfitList
         Me.受注数量.HeaderText = "受注数量QTY"
         Me.受注数量.Name = "受注数量"
         Me.受注数量.ReadOnly = True
-        Me.受注数量.Width = 102
+        Me.受注数量.Width = 50
         '
         '販売通貨
         '
@@ -382,7 +383,7 @@ Partial Class SalesProfitList
         Me.販売通貨.HeaderText = "販売通貨"
         Me.販売通貨.Name = "販売通貨"
         Me.販売通貨.ReadOnly = True
-        Me.販売通貨.Width = 80
+        Me.販売通貨.Width = 50
         '
         '受注単価_原通貨
         '
@@ -390,7 +391,7 @@ Partial Class SalesProfitList
         Me.受注単価_原通貨.HeaderText = "受注単価_原通貨AMT"
         Me.受注単価_原通貨.Name = "受注単価_原通貨"
         Me.受注単価_原通貨.ReadOnly = True
-        Me.受注単価_原通貨.Width = 101
+        Me.受注単価_原通貨.Width = 50
         '
         '受注金額_IDR
         '
@@ -398,7 +399,7 @@ Partial Class SalesProfitList
         Me.受注金額_IDR.HeaderText = "受注金額_IDR10VAT"
         Me.受注金額_IDR.Name = "受注金額_IDR"
         Me.受注金額_IDR.ReadOnly = True
-        Me.受注金額_IDR.Width = 126
+        Me.受注金額_IDR.Width = 50
         '
         '受注金額_原通貨
         '
@@ -406,15 +407,14 @@ Partial Class SalesProfitList
         Me.受注金額_原通貨.HeaderText = "受注金額_原通貨TOTAL"
         Me.受注金額_原通貨.Name = "受注金額_原通貨"
         Me.受注金額_原通貨.ReadOnly = True
-        Me.受注金額_原通貨.Width = 101
+        Me.受注金額_原通貨.Width = 50
         '
         '得意先名
         '
-        Me.得意先名.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
         Me.得意先名.HeaderText = "得意先名CUST"
         Me.得意先名.Name = "得意先名"
         Me.得意先名.ReadOnly = True
-        Me.得意先名.Width = 74
+        Me.得意先名.Width = 50
         '
         '単位
         '
@@ -422,7 +422,7 @@ Partial Class SalesProfitList
         Me.単位.HeaderText = "単位CUSTPO"
         Me.単位.Name = "単位"
         Me.単位.ReadOnly = True
-        Me.単位.Width = 92
+        Me.単位.Width = 50
         '
         'メーカー
         '
@@ -491,7 +491,7 @@ Partial Class SalesProfitList
         Me.仕入区分.HeaderText = "仕入区分"
         Me.仕入区分.Name = "仕入区分"
         Me.仕入区分.ReadOnly = True
-        Me.仕入区分.Width = 63
+        Me.仕入区分.Width = 70
         '
         '仕入先名
         '
@@ -507,7 +507,7 @@ Partial Class SalesProfitList
         Me.仕入先コード.HeaderText = "仕入先コードINVNO"
         Me.仕入先コード.Name = "仕入先コード"
         Me.仕入先コード.ReadOnly = True
-        Me.仕入先コード.Width = 87
+        Me.仕入先コード.Width = 50
         '
         '得意先コード
         '
@@ -517,7 +517,15 @@ Partial Class SalesProfitList
         Me.得意先コード.HeaderText = "得意先コードDATE"
         Me.得意先コード.Name = "得意先コード"
         Me.得意先コード.ReadOnly = True
-        Me.得意先コード.Width = 87
+        Me.得意先コード.Width = 50
+        '
+        '仕入単価_IDR
+        '
+        Me.仕入単価_IDR.FillWeight = 5.795458!
+        Me.仕入単価_IDR.HeaderText = "仕入単価_IDRQTY"
+        Me.仕入単価_IDR.Name = "仕入単価_IDR"
+        Me.仕入単価_IDR.ReadOnly = True
+        Me.仕入単価_IDR.Width = 50
         '
         '仕入通貨
         '
@@ -533,11 +541,10 @@ Partial Class SalesProfitList
         Me.仕入単価_原通貨.HeaderText = "仕入単価_原通貨AMT"
         Me.仕入単価_原通貨.Name = "仕入単価_原通貨"
         Me.仕入単価_原通貨.ReadOnly = True
-        Me.仕入単価_原通貨.Width = 101
+        Me.仕入単価_原通貨.Width = 50
         '
         '間接費
         '
-        Me.間接費.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
         DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
         Me.間接費.DefaultCellStyle = DataGridViewCellStyle2
         Me.間接費.HeaderText = "間接費"
@@ -545,14 +552,31 @@ Partial Class SalesProfitList
         Me.間接費.ReadOnly = True
         Me.間接費.Width = 63
         '
-        '仕入単価_IDR
+        '利益率
         '
-        Me.仕入単価_IDR.FillWeight = 5.795458!
-        Me.仕入単価_IDR.HeaderText = "仕入単価_IDR"
-        Me.仕入単価_IDR.Name = "仕入単価_IDR"
-        Me.仕入単価_IDR.ReadOnly = True
-        Me.仕入単価_IDR.Visible = False
-        Me.仕入単価_IDR.Width = 74
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.利益率.DefaultCellStyle = DataGridViewCellStyle3
+        Me.利益率.HeaderText = "利益率BAL"
+        Me.利益率.Name = "利益率"
+        Me.利益率.ReadOnly = True
+        Me.利益率.Width = 50
+        '
+        '利益
+        '
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.利益.DefaultCellStyle = DataGridViewCellStyle4
+        Me.利益.HeaderText = "利益"
+        Me.利益.Name = "利益"
+        Me.利益.ReadOnly = True
+        Me.利益.Width = 52
+        '
+        '仕入原価_IDR
+        '
+        Me.仕入原価_IDR.FillWeight = 3.472213!
+        Me.仕入原価_IDR.HeaderText = "仕入原価_IDREMARK"
+        Me.仕入原価_IDR.Name = "仕入原価_IDR"
+        Me.仕入原価_IDR.ReadOnly = True
+        Me.仕入原価_IDR.Width = 50
         '
         '仕入原価_原通貨
         '
@@ -562,36 +586,6 @@ Partial Class SalesProfitList
         Me.仕入原価_原通貨.ReadOnly = True
         Me.仕入原価_原通貨.Visible = False
         Me.仕入原価_原通貨.Width = 90
-        '
-        '仕入原価_IDR
-        '
-        Me.仕入原価_IDR.FillWeight = 3.472213!
-        Me.仕入原価_IDR.HeaderText = "仕入原価_IDR"
-        Me.仕入原価_IDR.Name = "仕入原価_IDR"
-        Me.仕入原価_IDR.ReadOnly = True
-        Me.仕入原価_IDR.Visible = False
-        Me.仕入原価_IDR.Width = 74
-        '
-        '利益
-        '
-        Me.利益.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.利益.DefaultCellStyle = DataGridViewCellStyle3
-        Me.利益.HeaderText = "利益"
-        Me.利益.Name = "利益"
-        Me.利益.ReadOnly = True
-        Me.利益.Width = 52
-        '
-        '利益率
-        '
-        Me.利益率.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.利益率.DefaultCellStyle = DataGridViewCellStyle4
-        Me.利益率.HeaderText = "利益率(%)"
-        Me.利益率.Name = "利益率"
-        Me.利益率.ReadOnly = True
-        Me.利益率.Visible = False
-        Me.利益率.Width = 63
         '
         'SalesProfitList
         '
@@ -669,12 +663,12 @@ Partial Class SalesProfitList
     Friend WithEvents 仕入先名 As DataGridViewTextBoxColumn
     Friend WithEvents 仕入先コード As DataGridViewTextBoxColumn
     Friend WithEvents 得意先コード As DataGridViewTextBoxColumn
+    Friend WithEvents 仕入単価_IDR As DataGridViewTextBoxColumn
     Friend WithEvents 仕入通貨 As DataGridViewTextBoxColumn
     Friend WithEvents 仕入単価_原通貨 As DataGridViewTextBoxColumn
     Friend WithEvents 間接費 As DataGridViewTextBoxColumn
-    Friend WithEvents 仕入単価_IDR As DataGridViewTextBoxColumn
-    Friend WithEvents 仕入原価_原通貨 As DataGridViewTextBoxColumn
-    Friend WithEvents 仕入原価_IDR As DataGridViewTextBoxColumn
-    Friend WithEvents 利益 As DataGridViewTextBoxColumn
     Friend WithEvents 利益率 As DataGridViewTextBoxColumn
+    Friend WithEvents 利益 As DataGridViewTextBoxColumn
+    Friend WithEvents 仕入原価_IDR As DataGridViewTextBoxColumn
+    Friend WithEvents 仕入原価_原通貨 As DataGridViewTextBoxColumn
 End Class
