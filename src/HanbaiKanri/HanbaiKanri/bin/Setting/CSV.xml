@@ -1,26 +1,532 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
-	<!--
+  <!--
 	************************************************************************************************
-	*【CSV出力情報】
-	*    〇〇マスタ出力先          ：各種マスタCSVファイル出力先
-	*    〇〇マスタ                ：各種マスタCSVファイル名
 	************************************************************************************************
 	-->
-	<CSV出力情報>
-		<汎用マスタ出力先>d:\work\</汎用マスタ出力先>
-		<汎用マスタCSVファイル名>汎用マスタデータ.csv</汎用マスタCSVファイル名>
-		<取引先マスタ出力先>d:\work\</取引先マスタ出力先>
-		<取引先マスタCSVファイル名>取引先マスタデータ.csv</取引先マスタCSVファイル名>
-		<商品マスタ出力先>d:\work\</商品マスタ出力先>
-		<商品マスタCSVファイル名>商品マスタデータ.csv</商品マスタCSVファイル名>
-		<ユーザマスタ出力先>d:\work\</ユーザマスタ出力先>
-		<ユーザマスタCSVファイル名>ユーザマスタデータ.csv</ユーザマスタCSVファイル名>
-		<販売単価マスタ出力先>d:\work\</販売単価マスタ出力先>
-		<販売単価マスタCSVファイル名>販売単価マスタデータ.csv</販売単価マスタCSVファイル名>
-		<仕入単価マスタ出力先>d:\work\</仕入単価マスタ出力先>
-		<仕入単価マスタCSVファイル名>仕入単価マスタデータ.csv</仕入単価マスタCSVファイル名>
-		<消費税マスタ出力先>d:\work\</消費税マスタ出力先>
-		<消費税マスタCSVファイル名>消費税マスタデータ.csv</消費税マスタCSVファイル名>
-	</CSV出力情報>
+  <SETTING>
+    <DELIMITER>;</DELIMITER>
+  </SETTING>
+  <DATAOUTPUT>
+    <JOBORDER>
+      <COLUMN_DATA o="1">
+        <ORD>1</ORD>
+        <TAB>t10</TAB>
+        <DBCOL as="1">見積番号</DBCOL>
+        <ENG>QuotationNumber</ENG>
+        <JPN>見積番号</JPN>
+      </COLUMN_DATA>
+      <COLUMN_DATA o="2">
+        <ORD>2</ORD>
+        <TAB>t10</TAB>
+        <DBCOL>得意先名</DBCOL>
+        <ENG>CustomerName</ENG>
+        <JPN>得意先名</JPN>
+      </COLUMN_DATA>
+      <COLUMN_DATA o="3">
+        <ORD>3</ORD>
+        <TAB>t10</TAB>
+        <DBCOL>見積日</DBCOL>
+        <ENG>QuotationDate</ENG>
+        <JPN>見積日</JPN>
+        <FORMAT>d</FORMAT>
+      </COLUMN_DATA>
+      <COLUMN_DATA o="4">
+        <ORD>4</ORD>
+        <TAB>t10</TAB>
+        <DBCOL>営業担当者</DBCOL>
+        <ENG>SalesPersonInCharge</ENG>
+        <JPN>営業担当者</JPN>
+      </COLUMN_DATA>
+      <COLUMN_DATA o="5">
+        <ORD>5</ORD>
+        <TAB>t10</TAB>
+        <DBCOL>入力担当者</DBCOL>
+        <ENG>PICForInputting</ENG>
+        <JPN>入力担当者</JPN>
+      </COLUMN_DATA>
+      <COLUMN_DATA o="6">
+        <ORD>6</ORD>
+        <TAB>t10</TAB>
+        <DBCOL>受注日</DBCOL>
+        <ENG>JobOrderDate</ENG>
+        <JPN>受注日</JPN>
+        <FORMAT>d</FORMAT>
+      </COLUMN_DATA>
+      <COLUMN_DATA o="7">
+        <ORD>7</ORD>
+        <TAB>t10</TAB>
+        <DBCOL>客先番号</DBCOL>
+        <ENG>PO</ENG>
+        <JPN>客先番号</JPN>
+      </COLUMN_DATA>
+      <COLUMN_DATA o="8">
+        <ORD>8</ORD>
+        <TAB>t11</TAB>
+        <DBCOL>メーカー</DBCOL>
+        <ENG>Manufacturer</ENG>
+        <JPN>メーカー</JPN>
+      </COLUMN_DATA>
+      <COLUMN_DATA o="9">
+        <ORD>9</ORD>
+        <TAB>t11</TAB>
+        <DBCOL>品名</DBCOL>
+        <ENG>ItemName</ENG>
+        <JPN>品名</JPN>
+      </COLUMN_DATA>
+      <COLUMN_DATA o="10">
+        <ORD>10</ORD>
+        <TAB>t11</TAB>
+        <DBCOL>型式</DBCOL>
+        <ENG>Spec</ENG>
+        <JPN>型式</JPN>
+      </COLUMN_DATA>
+      <COLUMN_DATA o="11">
+        <ORD>11</ORD>
+        <TAB>t11</TAB>
+        <DBCOL>仕入先名</DBCOL>
+        <ENG>SupplierName</ENG>
+        <JPN>仕入先名</JPN>
+      </COLUMN_DATA>
+      <COLUMN_DATA o="12">
+        <ORD>12</ORD>
+        <TAB>t11</TAB>
+        <DBCOL>受注数量</DBCOL>
+        <ENG>JobOrderQuantity</ENG>
+        <JPN>受注数量</JPN>
+        <ALIGNMENT>64</ALIGNMENT>
+        <FORMAT>N2</FORMAT>
+      </COLUMN_DATA>
+      <COLUMN_DATA o="13">
+        <ORD>13</ORD>
+        <TAB>t11</TAB>
+        <DBCOL>単位</DBCOL>
+        <ENG>Unit</ENG>
+        <JPN>単位</JPN>
+      </COLUMN_DATA>
+      <COLUMN_DATA o="14">
+        <ORD>14</ORD>
+        <TAB>t11</TAB>
+        <DBCOL>仕入値</DBCOL>
+        <ENG>PurchaseAmount</ENG>
+        <JPN>仕入値</JPN>
+        <ALIGNMENT>64</ALIGNMENT>
+        <FORMAT>N2</FORMAT>
+      </COLUMN_DATA>
+      <COLUMN_DATA o="15">
+        <ORD>15</ORD>
+        <TAB>t11</TAB>
+        <DBCOL>仕入原価</DBCOL>
+        <ENG>PurchasingCost</ENG>
+        <JPN>仕入原価</JPN>
+        <FORMAT>N2</FORMAT>
+        <ALIGNMENT>64</ALIGNMENT>
+      </COLUMN_DATA>
+      <COLUMN_DATA o="16">
+        <ORD>16</ORD>
+        <TAB>t11</TAB>
+        <DBCOL>見積単価</DBCOL>
+        <ENG>QuotationUnitPrice</ENG>
+        <JPN>見積単価</JPN>
+        <FORMAT>N2</FORMAT>
+        <ALIGNMENT>64</ALIGNMENT>
+      </COLUMN_DATA>
+      <COLUMN_DATA o="17">
+        <ORD>17</ORD>
+        <TAB>t11</TAB>
+        <DBCOL as="1">見積金額</DBCOL>
+        <ENG>DetailsQuotationAmount</ENG>
+        <JPN>明細見積金額</JPN>
+        <FORMAT>N2</FORMAT>
+        <ALIGNMENT>64</ALIGNMENT>
+      </COLUMN_DATA>
+      <COLUMN_DATA o="18">
+        <ORD>18</ORD>
+        <TAB>t11</TAB>
+        <DBCOL as="1">粗利額</DBCOL>
+        <ENG>DetailsGrossMargin</ENG>
+        <JPN>明細粗利額</JPN>
+        <FORMAT>N2</FORMAT>
+        <ALIGNMENT>64</ALIGNMENT>
+      </COLUMN_DATA>
+      <COLUMN_DATA o="19">
+        <ORD>19</ORD>
+        <TAB>t11</TAB>
+        <DBCOL>粗利率</DBCOL>
+        <ENG>GrossMarginRate</ENG>
+        <JPN>粗利率</JPN>
+        <FORMAT>N1</FORMAT>
+        <ALIGNMENT>64</ALIGNMENT>
+      </COLUMN_DATA>
+      <COLUMN_DATA o="20">
+        <ORD>20</ORD>
+        <TAB>t11</TAB>
+        <DBCOL>リードタイム</DBCOL>
+        <ENG>LeadTime</ENG>
+        <JPN>リードタイム</JPN>
+      </COLUMN_DATA>
+    </JOBORDER>
+    <INVOICED>
+      <COLUMN_DATA o="1">
+        <ORD>1</ORD>
+        <TAB>t31</TAB>
+        <DBCOL>受注番号</DBCOL>
+        <ENG>JobOrderNumber</ENG>
+        <JPN>受注番号</JPN>
+      </COLUMN_DATA>
+      <COLUMN_DATA o="2">
+        <ORD>2</ORD>
+        <TAB>t23</TAB>
+        <DBCOL>請求番号</DBCOL>
+        <ENG>INVOICE NUMBER</ENG>
+        <JPN>請求番号</JPN>
+      </COLUMN_DATA>
+      <COLUMN_DATA o="99">
+        <ORD>99</ORD>
+        <TAB>t23</TAB>
+        <DBCOL>請求日</DBCOL>
+        <ENG>InvoiceDate</ENG>
+        <JPN>請求日</JPN>
+        <FORMAT>d</FORMAT>
+      </COLUMN_DATA>
+      <COLUMN_DATA o="3">
+        <ORD>3</ORD>
+        <TAB>t31</TAB>
+        <DBCOL>見積番号</DBCOL>
+        <ENG>QuotationNumber</ENG>
+        <JPN>見積番号</JPN>
+      </COLUMN_DATA>
+      <COLUMN_DATA o="4">
+        <ORD>4</ORD>
+        <TAB>t31</TAB>
+        <DBCOL>発注番号Z</DBCOL>
+        <ENG>ZENBI PO NUMBER</ENG>
+        <JPN>発注番号</JPN>
+      </COLUMN_DATA>
+      <COLUMN_DATA o="5">
+        <ORD>5</ORD>
+        <TAB>t23</TAB>
+        <DBCOL>客先番号</DBCOL>
+        <ENG>customer PO</ENG>
+        <JPN>客先番号</JPN>
+      </COLUMN_DATA>
+      <COLUMN_DATA o="6">
+        <ORD>6</ORD>
+        <TAB>t23</TAB>
+        <DBCOL>得意先名</DBCOL>
+        <ENG>CustomerName</ENG>
+        <JPN>得意先名</JPN>
+      </COLUMN_DATA>
+      <COLUMN_DATA o="7">
+        <ORD>7</ORD>
+        <TAB>t31</TAB>
+        <DBCOL>営業担当者</DBCOL>
+        <ENG>SalesPersonInCharge</ENG>
+        <JPN>営業担当者</JPN>
+      </COLUMN_DATA>
+      <COLUMN_DATA o="8">
+        <ORD>8</ORD>
+        <TAB>t31</TAB>
+        <DBCOL>メーカー</DBCOL>
+        <ENG>Manufacturer</ENG>
+        <JPN>メーカー</JPN>
+      </COLUMN_DATA>
+      <COLUMN_DATA o="9">
+        <ORD>9</ORD>
+        <TAB>t31</TAB>
+        <DBCOL>品名</DBCOL>
+        <ENG>ItemName</ENG>
+        <JPN>品名</JPN>
+      </COLUMN_DATA>
+      <COLUMN_DATA o="10">
+        <ORD>10</ORD>
+        <TAB>t31</TAB>
+        <DBCOL>型式</DBCOL>
+        <ENG>Spec</ENG>
+        <JPN>型式</JPN>
+      </COLUMN_DATA>
+      <COLUMN_DATA o="11">
+        <ORD>11</ORD>
+        <TAB>t31</TAB>
+        <DBCOL>仕入先名</DBCOL>
+        <ENG>SupplierName</ENG>
+        <JPN>仕入先名</JPN>
+      </COLUMN_DATA>
+      <COLUMN_DATA o="12">
+        <ORD>12</ORD>
+        <TAB>t31</TAB>
+        <DBCOL>売上数量</DBCOL>
+        <ENG>InvoicedQuantity</ENG>
+        <JPN>売上数量</JPN>
+        <ALIGNMENT>64</ALIGNMENT>
+        <FORMAT>N2</FORMAT>
+      </COLUMN_DATA>
+      <COLUMN_DATA o="13">
+        <ORD>13</ORD>
+        <TAB>t31</TAB>
+        <DBCOL>単位</DBCOL>
+        <ENG>Unit</ENG>
+        <JPN>単位</JPN>
+      </COLUMN_DATA>
+      <COLUMN_DATA o="14">
+        <ORD>14</ORD>
+        <TAB>t31</TAB>
+        <DBCOL>仕入値</DBCOL>
+        <ENG>PurchaseUnit</ENG>
+        <JPN>仕入単価</JPN>
+        <ALIGNMENT>64</ALIGNMENT>
+        <FORMAT>N2</FORMAT>
+      </COLUMN_DATA>
+      <COLUMN_DATA o="15">
+        <ORD>15</ORD>
+        <TAB>t31</TAB>
+        <DBCOL>仕入原価</DBCOL>
+        <ENG>PurchasingCost</ENG>
+        <JPN>仕入原価</JPN>
+        <FORMAT>N2</FORMAT>
+        <ALIGNMENT>64</ALIGNMENT>
+      </COLUMN_DATA>
+      <COLUMN_DATA o="16">
+        <ORD>16</ORD>
+        <TAB>t31</TAB>
+        <DBCOL>関税額</DBCOL>
+        <ENG>CustomsDuty</ENG>
+        <JPN>関税額</JPN>
+        <FORMAT>N2</FORMAT>
+        <ALIGNMENT>64</ALIGNMENT>
+      </COLUMN_DATA>
+      <COLUMN_DATA o="17">
+        <ORD>17</ORD>
+        <TAB>t31</TAB>
+        <DBCOL>前払法人税額</DBCOL>
+        <ENG>PrepaidCorporateTaxAmount</ENG>
+        <JPN>前払法人税額</JPN>
+        <FORMAT>N2</FORMAT>
+        <ALIGNMENT>64</ALIGNMENT>
+      </COLUMN_DATA>
+      <COLUMN_DATA o="18">
+        <ORD>18</ORD>
+        <TAB>t31</TAB>
+        <DBCOL>間接費</DBCOL>
+        <ENG>Overhead</ENG>
+        <JPN>間接費</JPN>
+        <FORMAT>N2</FORMAT>
+        <ALIGNMENT>64</ALIGNMENT>
+      </COLUMN_DATA>
+      <COLUMN_DATA o="19">
+        <ORD>19</ORD>
+        <TAB>t31</TAB>
+        <DBCOL>仕入金額</DBCOL>
+        <ENG>DetailsPurchaseAmount</ENG>
+        <JPN>仕入金額</JPN>
+        <FORMAT>N2</FORMAT>
+        <ALIGNMENT>64</ALIGNMENT>
+      </COLUMN_DATA>
+      <COLUMN_DATA o="20">
+        <ORD>20</ORD>
+        <TAB>t31</TAB>
+        <DBCOL>見積単価</DBCOL>
+        <ENG>QuotationUnitPrice</ENG>
+        <JPN>見積単価</JPN>
+        <FORMAT>N2</FORMAT>
+        <ALIGNMENT>64</ALIGNMENT>
+      </COLUMN_DATA>
+      <COLUMN_DATA o="21">
+        <ORD>21</ORD>
+        <TAB>t31</TAB>
+        <DBCOL>見積金額</DBCOL>
+        <ENG>DetailsQuotationAmount</ENG>
+        <JPN>見積金額</JPN>
+        <FORMAT>N2</FORMAT>
+        <ALIGNMENT>64</ALIGNMENT>
+      </COLUMN_DATA>
+      <COLUMN_DATA o="22">
+        <ORD>22</ORD>
+        <TAB>t31</TAB>
+        <DBCOL>粗利額</DBCOL>
+        <ENG>DetailsGrossMargin</ENG>
+        <JPN>粗利額</JPN>
+        <FORMAT>N2</FORMAT>
+        <ALIGNMENT>64</ALIGNMENT>
+      </COLUMN_DATA>
+    </INVOICED>
+    <DELIVERED>
+      <COLUMN_DATA o="1">
+        <ORD>1</ORD>
+        <TAB>t30</TAB>
+        <DBCOL>得意先名</DBCOL>
+        <ENG>CustomerName</ENG>
+        <JPN>得意先名</JPN>
+      </COLUMN_DATA>
+      <COLUMN_DATA o="2">
+        <ORD>2</ORD>
+        <TAB>t30</TAB>
+        <DBCOL>営業担当者</DBCOL>
+        <ENG>SalesPersonInCharge</ENG>
+        <JPN>営業担当者</JPN>
+      </COLUMN_DATA>
+      <COLUMN_DATA o="3">
+        <ORD>3</ORD>
+        <TAB>t30</TAB>
+        <DBCOL>入力担当者</DBCOL>
+        <ENG>PICForInputting</ENG>
+        <JPN>入力担当者</JPN>
+      </COLUMN_DATA>
+      <COLUMN_DATA o="4">
+        <ORD>4</ORD>
+        <TAB>t30</TAB>
+        <DBCOL>受注日</DBCOL>
+        <ENG>JobOrderDate</ENG>
+        <JPN>受注日</JPN>
+        <FORMAT>d</FORMAT>
+      </COLUMN_DATA>
+      <COLUMN_DATA o="5">
+        <ORD>5</ORD>
+        <TAB>t30</TAB>
+        <DBCOL>売上日</DBCOL>
+        <ENG>SalesDate</ENG>
+        <JPN>売上日</JPN>
+        <FORMAT>d</FORMAT>
+      </COLUMN_DATA>
+      <COLUMN_DATA o="6">
+        <ORD>6</ORD>
+        <TAB>t30</TAB>
+        <DBCOL>客先番号</DBCOL>
+        <ENG>PO</ENG>
+        <JPN>客先番号</JPN>
+      </COLUMN_DATA>
+      <COLUMN_DATA o="7">
+        <ORD>7</ORD>
+        <TAB>t31</TAB>
+        <DBCOL>メーカー</DBCOL>
+        <ENG>Manufacturer</ENG>
+        <JPN>メーカー</JPN>
+      </COLUMN_DATA>
+      <COLUMN_DATA o="8">
+        <ORD>8</ORD>
+        <TAB>t31</TAB>
+        <DBCOL>品名</DBCOL>
+        <ENG>ItemName</ENG>
+        <JPN>品名</JPN>
+      </COLUMN_DATA>
+      <COLUMN_DATA o="9">
+        <ORD>9</ORD>
+        <TAB>t31</TAB>
+        <DBCOL>型式</DBCOL>
+        <ENG>Spec</ENG>
+        <JPN>型式</JPN>
+      </COLUMN_DATA>
+      <COLUMN_DATA o="10">
+        <ORD>10</ORD>
+        <TAB>t31</TAB>
+        <DBCOL>仕入先名</DBCOL>
+        <ENG>SupplierName</ENG>
+        <JPN>仕入先名</JPN>
+      </COLUMN_DATA>
+      <COLUMN_DATA o="11">
+        <ORD>11</ORD>
+        <TAB>t31</TAB>
+        <DBCOL>受注数量</DBCOL>
+        <ENG>JobOrderQuantity</ENG>
+        <JPN>受注数量</JPN>
+        <ALIGNMENT>64</ALIGNMENT>
+        <FORMAT>N2</FORMAT>
+      </COLUMN_DATA>
+      <COLUMN_DATA o="12">
+        <ORD>12</ORD>
+        <TAB>t31</TAB>
+        <DBCOL>売上数量</DBCOL>
+        <ENG>SalesQuantity</ENG>
+        <JPN>売上数量</JPN>
+        <ALIGNMENT>64</ALIGNMENT>
+        <FORMAT>N2</FORMAT>
+      </COLUMN_DATA>
+      <COLUMN_DATA o="13">
+        <ORD>13</ORD>
+        <TAB>t31</TAB>
+        <DBCOL>受注残数</DBCOL>
+        <ENG>OrderRemainingAmount</ENG>
+        <JPN>受注残数</JPN>
+        <ALIGNMENT>64</ALIGNMENT>
+        <FORMAT>N2</FORMAT>
+      </COLUMN_DATA>
+      <COLUMN_DATA o="14">
+        <ORD>14</ORD>
+        <TAB>t31</TAB>
+        <DBCOL>単位</DBCOL>
+        <ENG>Unit</ENG>
+        <JPN>単位</JPN>
+      </COLUMN_DATA>
+      <COLUMN_DATA o="15">
+        <ORD>15</ORD>
+        <TAB>t31</TAB>
+        <DBCOL>仕入値</DBCOL>
+        <ENG>PurchaseAmount</ENG>
+        <JPN>仕入単価</JPN>
+        <FORMAT>N2</FORMAT>
+        <ALIGNMENT>64</ALIGNMENT>
+      </COLUMN_DATA>
+      <COLUMN_DATA o="16">
+        <ORD>16</ORD>
+        <TAB>t31</TAB>
+        <DBCOL>仕入原価</DBCOL>
+        <ENG>PurchasingCost</ENG>
+        <JPN>仕入原価</JPN>
+        <FORMAT>N2</FORMAT>
+        <ALIGNMENT>64</ALIGNMENT>
+      </COLUMN_DATA>
+      <COLUMN_DATA o="17">
+        <ORD>17</ORD>
+        <TAB>t31</TAB>
+        <DBCOL>見積単価</DBCOL>
+        <ENG>QuotationUnitPrice</ENG>
+        <JPN>見積単価</JPN>
+        <FORMAT>N2</FORMAT>
+        <ALIGNMENT>64</ALIGNMENT>
+      </COLUMN_DATA>
+      <COLUMN_DATA o="18">
+        <ORD>18</ORD>
+        <TAB>t31</TAB>
+        <DBCOL>見積金額</DBCOL>
+        <ENG>DetailsQuotationAmount</ENG>
+        <JPN>見積金額</JPN>
+        <FORMAT>N2</FORMAT>
+        <ALIGNMENT>64</ALIGNMENT>
+      </COLUMN_DATA>
+      <COLUMN_DATA o="19">
+        <ORD>19</ORD>
+        <TAB>t31</TAB>
+        <DBCOL>粗利額</DBCOL>
+        <ENG>DetailsGrossMargin</ENG>
+        <JPN>粗利額</JPN>
+        <FORMAT>N2</FORMAT>
+        <ALIGNMENT>64</ALIGNMENT>
+      </COLUMN_DATA>
+      <COLUMN_DATA o="20">
+        <ORD>20</ORD>
+        <TAB>t31</TAB>
+        <DBCOL>粗利率</DBCOL>
+        <ENG>GrossMarginRate</ENG>
+        <JPN>粗利率</JPN>
+        <FORMAT>N1</FORMAT>
+        <ALIGNMENT>64</ALIGNMENT>
+      </COLUMN_DATA>
+    </DELIVERED>
+  </DATAOUTPUT>
+  <CSV出力情報>
+    <汎用マスタ出力先>d:\work\</汎用マスタ出力先>
+    <汎用マスタCSVファイル名>汎用マスタデータ.csv</汎用マスタCSVファイル名>
+    <取引先マスタ出力先>d:\work\</取引先マスタ出力先>
+    <取引先マスタCSVファイル名>取引先マスタデータ.csv</取引先マスタCSVファイル名>
+    <商品マスタ出力先>d:\work\</商品マスタ出力先>
+    <商品マスタCSVファイル名>商品マスタデータ.csv</商品マスタCSVファイル名>
+    <ユーザマスタ出力先>d:\work\</ユーザマスタ出力先>
+    <ユーザマスタCSVファイル名>ユーザマスタデータ.csv</ユーザマスタCSVファイル名>
+    <販売単価マスタ出力先>d:\work\</販売単価マスタ出力先>
+    <販売単価マスタCSVファイル名>販売単価マスタデータ.csv</販売単価マスタCSVファイル名>
+    <仕入単価マスタ出力先>d:\work\</仕入単価マスタ出力先>
+    <仕入単価マスタCSVファイル名>仕入単価マスタデータ.csv</仕入単価マスタCSVファイル名>
+    <消費税マスタ出力先>d:\work\</消費税マスタ出力先>
+    <消費税マスタCSVファイル名>消費税マスタデータ.csv</消費税マスタCSVファイル名>
+  </CSV出力情報>
 </root>
