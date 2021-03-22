@@ -2453,7 +2453,7 @@ Public Class GoodsIssue
         Dim reccnt As Integer = 0 'DB用（デフォルト）
 
         Sql = "SELECT sum(m21.現在庫数) as 現在庫数, m21.入出庫種別, m21.伝票番号, m21.行番号 "
-        Sql += " from m21_zaiko m21, t70_inout t70 "
+        Sql += " from m21_zaiko m21" ', t70_inout t70 "
 
         Sql += " WHERE m21.会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonCD & "'"
 
@@ -2465,13 +2465,13 @@ Public Class GoodsIssue
         Sql += " AND  m21.無効フラグ = " & CommonConst.CANCEL_KBN_ENABLED
         Sql += " AND  m21.現在庫数 <> 0"
 
-        Sql += " AND m21.会社コード ILIKE t70.会社コード "
-        Sql += " AND m21.倉庫コード ILIKE t70.倉庫コード "
-        Sql += " AND m21.伝票番号 ILIKE t70.伝票番号 "
-        Sql += " AND m21.行番号 = t70.行番号 "
-        Sql += " AND COALESCE(t70.仕入区分,'NL') = '" & CommonConst.Sire_KBN_Zaiko.ToString & "'"
+        'Sql += " AND m21.会社コード ILIKE t70.会社コード "
+        'Sql += " AND m21.倉庫コード ILIKE t70.倉庫コード "
+        'Sql += " AND m21.伝票番号 ILIKE t70.伝票番号 "
+        'Sql += " AND m21.行番号 = t70.行番号 "
+        'Sql += " AND COALESCE(t70.仕入区分,'NL') = '" & CommonConst.Sire_KBN_Zaiko.ToString & "'"
 
-        Sql += " GROUP BY m21.倉庫コード, m21.入出庫種別, m21.最終入庫日, m21.伝票番号, m21.行番号 "
+        Sql += " GROUP BY m21.入出庫種別, m21.伝票番号, m21.行番号, m21.最終入庫日"
         Sql += " ORDER BY m21.最終入庫日 "
 
         '在庫マスタから現在庫数を取得
