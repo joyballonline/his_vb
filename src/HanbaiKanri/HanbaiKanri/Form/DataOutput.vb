@@ -11,6 +11,7 @@ Imports Microsoft.Office.Interop
 Imports Microsoft.Office.Interop.Excel
 Imports System.Globalization
 Imports System.IO
+Imports UtilMDL.Text
 
 Public Class DataOutput
     Inherits System.Windows.Forms.Form
@@ -39,11 +40,12 @@ Public Class DataOutput
     Private _parentForm As Form
     'Private _gh As UtilDataGridViewHandler
     Private _init As Boolean                             '初期処理済フラグ
-    Private CompanyCode As String = ""
-    Private SalesNo As String()
+    'Private CompanyCode As String = ""
+    'Private SalesNo As String()
     Private SalesStatus As String = ""
     Private _com As CommonLogic
-
+    Private _vs As String = "1"
+    Private _csv As UtilCsvHandler
     '-------------------------------------------------------------------------------
     'デフォルトコンストラクタ（隠蔽）
     '-------------------------------------------------------------------------------
@@ -72,7 +74,9 @@ Public Class DataOutput
         SalesStatus = prmRefStatus
         '_gh = New UtilDataGridViewHandler(dgvLIST)                          'DataGridViewユーティリティクラス
         _com = New CommonLogic(_db, _msgHd)
+        _csv = New UtilCsvHandler(UtilClass.getAppPath(StartUp.assembly) & "\..\Setting\CSV.xml")
         StartPosition = FormStartPosition.CenterScreen                      '画面中央表示
+        Me.Text += _vs
         Me.Text = Me.Text & "[" & frmC01F10_Login.loginValue.BumonNM & "][" & frmC01F10_Login.loginValue.TantoNM & "]" & StartUp.BackUpServerPrint                                  'フォームタイトル表示
         Me.ControlBox = Not Me.ControlBox
         _init = True
@@ -196,73 +200,16 @@ Public Class DataOutput
 
         ElseIf RbtnJobOrder.Checked Then
 
+            Dim n As Integer = _csv.load("JOBORDER")
             '受注選択時
+
             Sql = "SELECT "
-            Sql += " t10.会社コード"
-            Sql += ",t10.受注番号"
-            Sql += ",t10.受注番号枝番"
-            Sql += ",t10.見積番号"
-            Sql += ",t10.見積番号枝番"
-            Sql += ",t10.得意先コード"
-            Sql += ",t10.得意先名"
-            Sql += ",t10.得意先郵便番号"
-            Sql += ",t10.得意先住所"
-            Sql += ",t10.得意先電話番号"
-            Sql += ",t10.得意先ＦＡＸ"
-            Sql += ",t10.得意先担当者役職"
-            Sql += ",t10.得意先担当者名"
-            Sql += ",t10.見積日"
-            Sql += ",t10.見積有効期限"
-            Sql += ",t10.支払条件"
-            Sql += ",t10.見積金額"
-            Sql += ",t10.仕入金額"
-            Sql += ",t10.粗利額"
-            Sql += ",t10.営業担当者"
-            Sql += ",t10.入力担当者"
-            Sql += ",t10.備考"
-            Sql += ",t10.取消日"
-            Sql += ",t10.取消区分"
-            Sql += ",t10.ＶＡＴ"
-            Sql += ",t10.受注日"
-            Sql += ",t10.登録日"
-            Sql += ",t10.更新日"
-            Sql += ",t10.更新者"
-            Sql += ",t10.見積備考"
-            Sql += ",t10.ＰＰＨ"
-            Sql += ",t10.客先番号"
-            Sql += ",t10.営業担当者コード"
-            Sql += ",t10.入力担当者コード"
-            Sql += ",t11.行番号"
-            Sql += ",t11.仕入区分"
-            Sql += ",t11.メーカー"
-            Sql += ",t11.品名"
-            Sql += ",t11.型式"
-            Sql += ",t11.仕入先名"
-            Sql += ",t11.仕入値"
-            Sql += ",t11.受注数量"
-            Sql += ",t11.売上数量"
-            Sql += ",t11.受注残数"
-            Sql += ",t11.間接費"
-            Sql += ",t11.売単価"
-            Sql += ",t11.売上金額"
-            Sql += ",t11.粗利額 as 明細粗利額"
-            Sql += ",t11.粗利率"
-            Sql += ",t11.リードタイム"
-            Sql += ",t11.出庫数"
-            Sql += ",t11.未出庫数"
-            Sql += ",t11.備考 as 明細備考"
-            Sql += ",t11.単位"
-            Sql += ",t11.リードタイム単位"
-            Sql += ",t11.関税率"
-            Sql += ",t11.関税額"
-            Sql += ",t11.前払法人税率"
-            Sql += ",t11.前払法人税額"
-            Sql += ",t11.輸送費率"
-            Sql += ",t11.輸送費額"
-            Sql += ",t11.見積単価"
-            Sql += ",t11.見積金額 as 明細見積金額"
-            Sql += ",t11.仕入原価"
-            Sql += ",t11.仕入金額 as 明細仕入金額"
+
+            For i As Integer = 0 To n - 1
+                Sql += _csv.get_column_str(i) & ","
+            Next
+
+            Sql = Sql.Remove(Sql.Length - 1)
             Sql += " FROM t10_cymnhd t10 "
             Sql += " LEFT JOIN t11_cymndt t11 "
             Sql += " ON t10.会社コード = t11.会社コード "
@@ -272,165 +219,33 @@ Public Class DataOutput
             Sql += " AND t10.取消区分 = '" & CommonConst.CANCEL_KBN_ENABLED & "'"
             Sql += " AND t10.受注日 >= '" & UtilClass.strFormatDate(DtpDateSince.Text) & "'"
             Sql += " AND t10.受注日 <= '" & UtilClass.strFormatDate(DtpDateUntil.Text) & "'"
-            Sql += " ORDER BY t10.受注日, t10.受注番号, t10.受注番号枝番, t10.得意先コード "
+            Sql += " ORDER BY t10.受注日, t10.受注番号, t10.受注番号枝番 "
 
         ElseIf RbtnSales.Checked Then
 
             '売上選択時=Invoice
+            Dim n As Integer = _csv.load("INVOICED")
             Sql = "SELECT "
-            Sql += "t30.会社コード"
-            Sql += ",t30.請求番号"
-            Sql += ",t30.請求区分"
-            Sql += ",t30.請求日"
-            'Sql += ",t30.売上番号枝番"
-            Sql += ",t30.受注番号"
-            Sql += ",t30.受注番号枝番"
-            'Sql += ",t30.見積番号"
-            'Sql += ",t30.見積番号枝番"
-            Sql += ",t30.得意先コード"
-            Sql += ",t30.得意先名"
-            Sql += ",t30.客先番号"
 
-            'Sql += ",t30.得意先郵便番号"
-            'Sql += ",t30.得意先住所"
-            'Sql += ",t30.得意先電話番号"
-            'Sql += ",t30.得意先ＦＡＸ"
-            'Sql += ",t30.得意先担当者役職"
-            'Sql += ",t30.得意先担当者名"
-
-            'Sql += ",t30.見積有効期限"
-            'Sql += ",t30.支払条件"
-            'Sql += ",t30.見積金額"
-            'Sql += ",t30.売上金額"
-            'Sql += ",t30.粗利額"
-            'Sql += ",t30.営業担当者"
-            'Sql += ",t30.入力担当者"
-
-            Sql += ",t30.取消日"
-            Sql += ",t30.取消区分"
-            'Sql += ",t30.ＶＡＴ"
-            'Sql += ",t30.ＰＰＨ"
-            'Sql += ",t30.受注日"
-            'Sql += ",t30.売上日"
-
-            Sql += ",t30.登録日"
-            Sql += ",t30.更新日"
-            Sql += ",t30.更新者"
-            Sql += ",t30.締処理日"
-            'Sql += ",t30.仕入金額"
-            'Sql += ",t30.営業担当者コード"
-            'Sql += ",t30.入力担当者コード"
-            'Sql += ",t31.行番号"
-            'Sql += ",t31.メーカー"
-            'Sql += ",t31.品名"
-            'Sql += ",t31.型式"
-            'Sql += ",t31.仕入先名"
-            'Sql += ",t31.仕入値"
-            'Sql += ",t31.受注数量"
-            'Sql += ",t31.売上数量"
-            'Sql += ",t31.受注残数"
-            'Sql += ",t31.単位"
-            'Sql += ",t31.間接費"
-            'Sql += ",t31.売単価"
-            'Sql += ",t31.売上金額 as 明細売上金額"
-            'Sql += ",t31.粗利額 as 明細粗利額"
-            'Sql += ",t31.粗利率"
-            'Sql += ",t31.リードタイム"
-            'Sql += ",t31.入金有無"
-            Sql += ",t30.入金番号"
-            Sql += ",t30.入金予定日"
-            Sql += ",t30.入金完了日"
-            Sql += ",t30.備考1"
-            Sql += ",t30.備考2"
-            Sql += ",t30.通貨"
-            Sql += ",t30.レート"
-            'Sql += ",t31.関税額"
-            'Sql += ",t31.前払法人税率"
-            'Sql += ",t31.前払法人税額"
-            'Sql += ",t31.輸送費率"
-            'Sql += ",t31.輸送費額"
-            Sql += ",t30.請求金額計_外貨"
-            Sql += ",t30.売掛残高_外貨"
-            Sql += ",t30.請求消費税計"
-            Sql += ""
-            Sql += " FROM t23_skyuhd t30 "
-            Sql += " WHERE t30.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-            Sql += " AND t30.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED & ""
-            Sql += " AND t30.請求日 >= '" & UtilClass.strFormatDate(DtpDateSince.Text) & "'"
-            Sql += " AND t30.請求日 <= '" & UtilClass.strFormatDate(DtpDateUntil.Text) & "'"
-            Sql += " ORDER BY t30.請求日, t30.請求番号, t30.得意先コード"
+            For i As Integer = 0 To n - 1
+                Sql += _csv.get_column_str(i) & ","
+            Next
+            Sql = Sql.Remove(Sql.Length - 1)
+            Sql += " FROM t23_skyuhd t23, v_t31_urigdt_2 t31 "
+            Sql += " WHERE t23.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+            Sql += " AND t23.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED & ""
+            Sql += " AND t23.請求日 >= '" & UtilClass.strFormatDate(DtpDateSince.Text) & "'"
+            Sql += " AND t23.請求日 <= '" & UtilClass.strFormatDate(DtpDateUntil.Text) & "'"
+            Sql += " AND t23.会社コード = t31.会社コード and t23.請求番号=t31.入金番号"
+            Sql += " ORDER BY t23.請求日, t23.請求番号"
         ElseIf RbtnDelivered.Checked Then
+            Dim n As Integer = _csv.load("DELIVERED")
             Sql = "SELECT "
-            Sql += "t30.会社コード"
-            Sql += ",t30.売上番号"
-            Sql += ",t30.売上番号枝番"
-            Sql += ",t30.受注番号"
-            Sql += ",t30.受注番号枝番"
-            Sql += ",t30.見積番号"
-            Sql += ",t30.見積番号枝番"
-            Sql += ",t30.得意先コード"
-            Sql += ",t30.得意先名"
-            Sql += ",t30.得意先郵便番号"
-            Sql += ",t30.得意先住所"
-            Sql += ",t30.得意先電話番号"
-            Sql += ",t30.得意先ＦＡＸ"
-            Sql += ",t30.得意先担当者役職"
-            Sql += ",t30.得意先担当者名"
-            Sql += ",t30.見積日"
-            Sql += ",t30.見積有効期限"
-            Sql += ",t30.支払条件"
-            Sql += ",t30.見積金額"
-            Sql += ",t30.売上金額"
-            Sql += ",t30.粗利額"
-            Sql += ",t30.営業担当者"
-            Sql += ",t30.入力担当者"
-            Sql += ",t30.備考"
-            Sql += ",t30.取消日"
-            Sql += ",t30.取消区分"
-            Sql += ",t30.ＶＡＴ"
-            Sql += ",t30.ＰＰＨ"
-            Sql += ",t30.受注日"
-            Sql += ",t30.売上日"
-            Sql += ",t30.入金予定日"
-            Sql += ",t30.登録日"
-            Sql += ",t30.更新日"
-            Sql += ",t30.更新者"
-            Sql += ",t30.客先番号"
-            Sql += ",t30.締処理日"
-            Sql += ",t30.仕入金額"
-            Sql += ",t30.営業担当者コード"
-            Sql += ",t30.入力担当者コード"
-            Sql += ",t31.行番号"
-            Sql += ",t31.仕入区分"
-            Sql += ",t31.メーカー"
-            Sql += ",t31.品名"
-            Sql += ",t31.型式"
-            Sql += ",t31.仕入先名"
-            Sql += ",t31.仕入値"
-            Sql += ",t31.受注数量"
-            Sql += ",t31.売上数量"
-            Sql += ",t31.受注残数"
-            Sql += ",t31.単位"
-            Sql += ",t31.間接費"
-            Sql += ",t31.売単価"
-            Sql += ",t31.売上金額 as 明細売上金額"
-            Sql += ",t31.粗利額 as 明細粗利額"
-            Sql += ",t31.粗利率"
-            Sql += ",t31.リードタイム"
-            Sql += ",t31.入金有無"
-            Sql += ",t31.入金番号"
-            Sql += ",t31.入金日"
-            Sql += ",t31.備考 as 明細備考"
-            Sql += ",t31.仕入原価"
-            Sql += ",t31.関税率"
-            Sql += ",t31.関税額"
-            Sql += ",t31.前払法人税率"
-            Sql += ",t31.前払法人税額"
-            Sql += ",t31.輸送費率"
-            Sql += ",t31.輸送費額"
-            Sql += ",t31.仕入金額 as 明細仕入金額"
-            Sql += ",t31.見積単価"
-            Sql += ",t31.見積金額 as 明細見積金額"
+
+            For i As Integer = 0 To n - 1
+                Sql += _csv.get_column_str(i) & ","
+            Next
+            Sql = Sql.Remove(Sql.Length - 1)
             Sql += " FROM t30_urighd t30 "
             Sql += " LEFT JOIN t31_urigdt t31 "
             Sql += " ON t30.会社コード = t31.会社コード "
@@ -440,7 +255,7 @@ Public Class DataOutput
             Sql += " AND t30.取消区分 = '" & CommonConst.CANCEL_KBN_ENABLED & "'"
             Sql += " AND t30.売上日 >= '" & UtilClass.strFormatDate(DtpDateSince.Text) & "'"
             Sql += " AND t30.売上日 <= '" & UtilClass.strFormatDate(DtpDateUntil.Text) & "'"
-            Sql += " ORDER BY t30.売上日, t30.売上番号, t30.売上番号枝番, t30.得意先コード "
+            Sql += " ORDER BY t30.得意先名, t30.売上日, t30.売上番号, t30.売上番号枝番 "
         End If
 
         Try
@@ -472,11 +287,13 @@ Public Class DataOutput
             If RbtnQuotation.Checked Then
                 quantityHd()
             ElseIf RbtnJobOrder.Checked Then
-                JobOrderHd()
+                JobOrderHd_new()
             ElseIf RbtnDelivered.Checked Then
-                DeliveryHd()
+                'DeliveryHd()
+                JobOrderHd_new()
             Else
-                SalesHd()
+                'SalesHd()
+                JobOrderHd_new()
             End If
 
             DgvList.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells) 'すべての列の幅を自動調整する
@@ -486,10 +303,10 @@ Public Class DataOutput
 
         Catch ue As UsrDefException
             ue.dspMsg()
-            Throw ue
+            'Throw ue
         Catch ex As Exception
             'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
-            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
+            'Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
         End Try
 
     End Sub
@@ -596,7 +413,7 @@ Public Class DataOutput
 
     End Sub
 
-    Private Sub JobOrderHd()
+    Private Sub JobOrderHd_del()
         If DgvList.Columns.Count = 0 Then
             Exit Sub
         End If
@@ -706,7 +523,7 @@ Public Class DataOutput
 
     End Sub
 
-    Private Sub SalesHd()
+    Private Sub SalesHd_del()
         If DgvList.Columns.Count = 0 Then
             Exit Sub
         End If
@@ -831,7 +648,7 @@ Public Class DataOutput
 
     End Sub
 
-    Private Sub DeliveryHd()
+    Private Sub DeliveryHd_del()
         If DgvList.Columns.Count = 0 Then
             Exit Sub
         End If
@@ -988,6 +805,7 @@ Public Class DataOutput
 
 
         Dim enc As System.Text.Encoding = System.Text.Encoding.GetEncoding("UTF-8")
+        Dim sp As Char = _csv.getDelimiter()
         '出力先パス
         Dim sOutPath As String = ""
         sOutPath = StartUp._iniVal.OutXlsPath
@@ -1007,7 +825,7 @@ Public Class DataOutput
                     field = EncloseDoubleQuotesIfNeed(field)
                     sr.Write(field)
                     If y < DgvList.Columns.Count - 1 Then
-                        sr.Write(","c)
+                        sr.Write(";"c)
                     End If
                 Next
                 sr.Write(vbCrLf)
@@ -1016,12 +834,21 @@ Public Class DataOutput
             '基本
             For y As Integer = 0 To DgvList.Columns.Count - 1
                 Dim fieldName As String = DgvList.Columns(y).Name
+                Dim field As String = ""
 
-                Dim field As String = DgvList.Rows(i).Cells(fieldName).Value.ToString()
+                If _csv.get_(y, "FORMAT") Is Nothing Then
+                    field = DgvList.Rows(i).Cells(fieldName).Value.ToString()
+                Else
+                    If _csv.get_(y, "FORMAT").Equals("d") Then
+                        field = DgvList.Rows(i).Cells(fieldName).Value.ToShortDateString()
+                    Else
+                        field = DgvList.Rows(i).Cells(fieldName).Value.ToString()
+                    End If
+                End If
                 field = EncloseDoubleQuotesIfNeed(field)
                 sr.Write(field)
                 If y < DgvList.Columns.Count - 1 Then
-                    sr.Write(","c)
+                    sr.Write(sp)
                 End If
             Next
             sr.Write(vbCrLf)
@@ -1060,4 +887,24 @@ Public Class DataOutput
     Private Sub BtnSearch_Click(sender As Object, e As EventArgs) Handles BtnSearch.Click
         getList()
     End Sub
+
+    Private Sub JobOrderHd_new()
+        If DgvList.Columns.Count = 0 Then
+            Exit Sub
+        End If
+
+        For i As Integer = 0 To _csv.count - 1
+            DgvList.Columns(_csv.get_(i, "DBCOL")).HeaderText = _csv.get_hd_text_str(i, frmC01F10_Login.loginValue.Language)
+            If _csv.get_(i, "ALIGNMENT") Is Nothing Then
+            Else
+                DgvList.Columns(_csv.get_(i, "DBCOL")).DefaultCellStyle.Alignment = _csv.get_(i, "ALIGNMENT")
+            End If
+            If _csv.get_(i, "FORMAT") Is Nothing Then
+            Else
+                DgvList.Columns(_csv.get_(i, "DBCOL")).DefaultCellStyle.Format = _csv.get_(i, "FORMAT")
+            End If
+        Next
+
+    End Sub
+
 End Class
