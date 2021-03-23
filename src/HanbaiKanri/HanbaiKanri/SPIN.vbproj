@@ -870,6 +870,7 @@
     <None Include="bin\BaseXls\AccountsPayableBulkList.xlsx" />
     <None Include="bin\BaseXls\APScheduledCollectionDateList.xlsx" />
     <None Include="bin\BaseXls\ARScheduledCollectionDateList.xlsx" />
+    <None Include="bin\BaseXls\CollectiveInvoice.xlsx" />
     <None Include="bin\BaseXls\CustomerARList.xlsx" />
     <None Include="bin\BaseXls\DeliveryNote.xlsx" />
     <None Include="bin\BaseXls\InventoryControlTable.xlsx" />
@@ -909,6 +910,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="bin\BaseXls\readme.txt" />
+    <Content Include="bin\Setting\CSV.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="bin\Setting\HanbaiKanri-Lang.xml">
       <SubType>Designer</SubType>
     </Content>
@@ -920,8 +924,11 @@
     <Content Include="bin\SQL\m21zaiko_rec.sql" />
     <Content Include="bin\SQL\m90_get_inout_class.sql" />
     <Content Include="bin\SQL\s01_config.sql" />
+    <Content Include="bin\SQL\t10_get_qt.sql" />
+    <Content Include="bin\SQL\t10_get_salesman.sql" />
     <Content Include="bin\SQL\t11_get_pr.sql" />
     <Content Include="bin\SQL\t20_get_custpo.sql" />
+    <Content Include="bin\SQL\t21_get_po.sql" />
     <Content Include="bin\SQL\t30_urighd.upg.sql" />
     <Content Include="bin\SQL\t31_urigdt.upg.sql" />
     <Content Include="bin\SQL\t31_urigdt_2.upg.sql" />
@@ -931,6 +938,7 @@
     <Content Include="bin\SQL\t82_tmp_order.sql" />
     <Content Include="bin\SQL\v_t23_skyuhd_1.sql" />
     <Content Include="bin\SQL\v_t31_urigdt_1.sql" />
+    <Content Include="bin\SQL\v_t31_urigdt_2.sql" />
     <Content Include="bin\SQL\v_t70_inout.sql" />
     <Content Include="dotNetIco.ico" />
     <Content Include="Resources\spinball.ico" />

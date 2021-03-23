@@ -90,6 +90,7 @@
     <Compile Include="Util\DB\UtilPostgresDebugger.vb" />
     <Compile Include="Util\DB\UtilPostgresHandler.vb" />
     <Compile Include="Util\LANG\UtilLangHandler.vb" />
+    <Compile Include="Util\Text\UtilCsvHandler.vb" />
     <Compile Include="Util\UtilProgresBarCancelable.vb">
       <SubType>Form</SubType>
     </Compile>

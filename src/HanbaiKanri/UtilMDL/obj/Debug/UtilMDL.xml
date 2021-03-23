@@ -613,6 +613,117 @@ UtilMDL
  <returns>検索されたメッセージビーン(ValueObject)</returns>
  <remarks>発生例外       ：Exception,UsrDefException</remarks>
 </member>
+<member name="M:UtilMDL.Text.UtilCsvHandler.#ctor(System.String)">
+ <summary>
+ コンストラクタ
+ </summary>
+ <param name="prmFileName">フルパスメッセージファイル名</param>
+ <remarks></remarks>
+</member>
+<member name="M:UtilMDL.Text.UtilTextFunc.splitCSV(System.String,System.Char,System.Char)">
+ <summary>
+ CSV形式文字列の読み込み CSV形式の文字列から各フィールドをStringオブジェクトの配列として生成後返却する
+ </summary>
+ <param name="prmSource">分割対象文字列</param>
+ <param name="prmSeparator">区切り文字(省略時：,)</param>
+ <param name="prmEncloser">括り文字(省略時：")</param>
+ <returns>分割後のString配列</returns>
+ <remarks></remarks>
+</member>
+<member name="M:UtilMDL.Text.UtilTextFunc.splitFixedString(System.String,System.Int16[])">
+ <summary>
+ 固定長文字列形式の読み込み 固定長文字列形式のデータを各フィールドに分割しStringオブジェクトの配列として返却する
+ </summary>
+ <param name="prmSource">分割対象文字列</param>
+ <param name="prmSeparateCount">各フィールドのByte数</param>
+ <returns>分割後のString配列</returns>
+ <remarks></remarks>
+</member>
+<member name="M:UtilMDL.Text.UtilTextReader.#ctor(System.String)">
+ <summary> 
+ コンストラクタ
+ </summary>
+ <param name="prmFileName">ファイル名</param>
+ <remarks></remarks>
+</member>
+<member name="M:UtilMDL.Text.UtilTextReader.Finalize">
+ <summary>
+ デストラクタ
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:UtilMDL.Text.UtilTextReader.open">
+ <summary>
+ ファイルオープン　オープンしたら必ずcloseメソッドの呼出を保障すること
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:UtilMDL.Text.UtilTextReader.close">
+ <summary>
+ ファイルクローズ
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:UtilMDL.Text.UtilTextReader.readLine">
+ <summary>
+ リードライン
+ </summary>
+ <returns>読み込み文字列</returns>
+ <remarks></remarks>
+</member>
+<member name="M:UtilMDL.Text.UtilTextReader.readToEnd">
+ <summary>
+ 全読み込み(カレント行以降)
+ </summary>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:UtilMDL.Text.UtilTextWriter.#ctor(System.String)">
+ <summary>
+ コンストラクタ ファイルが存在しない場合はオープンしたタイミングでファイルを作成する。
+ </summary>
+ <param name="prmFileName"></param>
+ <remarks></remarks>
+</member>
+<member name="M:UtilMDL.Text.UtilTextWriter.Finalize">
+ <summary>
+ デストラクタ
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:UtilMDL.Text.UtilTextWriter.open(System.Boolean)">
+ <summary>
+ オープン オープンしたら必ずcloseメソッドの呼出を保障すること
+ </summary>
+ <param name="prmAppendFlg">追加書き込みするかどうかのフラグ(Falseの場合、上書きする)</param>
+ <remarks></remarks>
+</member>
+<member name="M:UtilMDL.Text.UtilTextWriter.close">
+ <summary>
+ クローズ
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:UtilMDL.Text.UtilTextWriter.write(System.String)">
+ <summary>
+ 指定された文字列を書き込む
+ </summary>
+ <param name="prmStr">書き込み文字列</param>
+ <remarks></remarks>
+</member>
+<member name="M:UtilMDL.Text.UtilTextWriter.writeLine(System.String)">
+ <summary>
+ 指定された文字列を書き込み、最後に改行を出力する
+ </summary>
+ <param name="prmStr">書き込み文字列</param>
+ <remarks></remarks>
+</member>
+<member name="M:UtilMDL.Text.UtilTextWriter.newLine">
+ <summary>
+ 改行
+ </summary>
+ <remarks></remarks>
+</member>
 <member name="T:UtilMDL.API.UtilDirectorySelector">
  <summary>
  ユーティリティモジュール
@@ -1323,110 +1434,6 @@ Dim RtnDir As String = UtilDirectorySelector.choiceFolder("C:\WINDOWS", "○○�
  <param name="prmButton">ボタンの種類</param>
  <param name="prmIcon">アイコン</param>
  <param name="prmDefaultButton">既定のボタン</param>
- <remarks></remarks>
-</member>
-<member name="M:UtilMDL.Text.UtilTextFunc.splitCSV(System.String,System.Char,System.Char)">
- <summary>
- CSV形式文字列の読み込み CSV形式の文字列から各フィールドをStringオブジェクトの配列として生成後返却する
- </summary>
- <param name="prmSource">分割対象文字列</param>
- <param name="prmSeparator">区切り文字(省略時：,)</param>
- <param name="prmEncloser">括り文字(省略時：")</param>
- <returns>分割後のString配列</returns>
- <remarks></remarks>
-</member>
-<member name="M:UtilMDL.Text.UtilTextFunc.splitFixedString(System.String,System.Int16[])">
- <summary>
- 固定長文字列形式の読み込み 固定長文字列形式のデータを各フィールドに分割しStringオブジェクトの配列として返却する
- </summary>
- <param name="prmSource">分割対象文字列</param>
- <param name="prmSeparateCount">各フィールドのByte数</param>
- <returns>分割後のString配列</returns>
- <remarks></remarks>
-</member>
-<member name="M:UtilMDL.Text.UtilTextReader.#ctor(System.String)">
- <summary> 
- コンストラクタ
- </summary>
- <param name="prmFileName">ファイル名</param>
- <remarks></remarks>
-</member>
-<member name="M:UtilMDL.Text.UtilTextReader.Finalize">
- <summary>
- デストラクタ
- </summary>
- <remarks></remarks>
-</member>
-<member name="M:UtilMDL.Text.UtilTextReader.open">
- <summary>
- ファイルオープン　オープンしたら必ずcloseメソッドの呼出を保障すること
- </summary>
- <remarks></remarks>
-</member>
-<member name="M:UtilMDL.Text.UtilTextReader.close">
- <summary>
- ファイルクローズ
- </summary>
- <remarks></remarks>
-</member>
-<member name="M:UtilMDL.Text.UtilTextReader.readLine">
- <summary>
- リードライン
- </summary>
- <returns>読み込み文字列</returns>
- <remarks></remarks>
-</member>
-<member name="M:UtilMDL.Text.UtilTextReader.readToEnd">
- <summary>
- 全読み込み(カレント行以降)
- </summary>
- <returns></returns>
- <remarks></remarks>
-</member>
-<member name="M:UtilMDL.Text.UtilTextWriter.#ctor(System.String)">
- <summary>
- コンストラクタ ファイルが存在しない場合はオープンしたタイミングでファイルを作成する。
- </summary>
- <param name="prmFileName"></param>
- <remarks></remarks>
-</member>
-<member name="M:UtilMDL.Text.UtilTextWriter.Finalize">
- <summary>
- デストラクタ
- </summary>
- <remarks></remarks>
-</member>
-<member name="M:UtilMDL.Text.UtilTextWriter.open(System.Boolean)">
- <summary>
- オープン オープンしたら必ずcloseメソッドの呼出を保障すること
- </summary>
- <param name="prmAppendFlg">追加書き込みするかどうかのフラグ(Falseの場合、上書きする)</param>
- <remarks></remarks>
-</member>
-<member name="M:UtilMDL.Text.UtilTextWriter.close">
- <summary>
- クローズ
- </summary>
- <remarks></remarks>
-</member>
-<member name="M:UtilMDL.Text.UtilTextWriter.write(System.String)">
- <summary>
- 指定された文字列を書き込む
- </summary>
- <param name="prmStr">書き込み文字列</param>
- <remarks></remarks>
-</member>
-<member name="M:UtilMDL.Text.UtilTextWriter.writeLine(System.String)">
- <summary>
- 指定された文字列を書き込み、最後に改行を出力する
- </summary>
- <param name="prmStr">書き込み文字列</param>
- <remarks></remarks>
-</member>
-<member name="M:UtilMDL.Text.UtilTextWriter.newLine">
- <summary>
- 改行
- </summary>
  <remarks></remarks>
 </member>
 <member name="M:UtilMDL.UsrDefException.#ctor(System.String)">

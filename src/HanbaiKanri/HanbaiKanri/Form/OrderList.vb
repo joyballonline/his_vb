@@ -396,7 +396,7 @@ Public Class OrderList
                 End If
 
                 If sinceNum <> Nothing Then
-                    Sql += " AND t11.受注番号 >= '" & sinceNum & "' "
+                    Sql += " AND t11.受注番号 ILIKE '%" & sinceNum & "%' "
                 End If
 
                 If salesName <> Nothing Then
