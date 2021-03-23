@@ -88,9 +88,6 @@ Public Class SalesProfitList
     Private Sub SalesProfitList_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
-        End If
-
-        If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
 
             LblMode.Text = SalesStatus & " Mode"
 
@@ -1413,9 +1410,9 @@ Public Class SalesProfitList
                             DgvList.Rows(intListCnt).Cells("仕入先名").Value = ds2.Tables(RS).Rows(ii)("仕入先名")
                             DgvList.Rows(intListCnt).Cells("仕入単価_IDR").Value = bal 'DgvList.Rows(intListCnt).Cells("受注数量").Value 'ds2.Tables(RS).Rows(ii)("入庫数")
                             DgvList.Rows(intListCnt).Cells("仕入単価_原通貨").Value = DgvList.Rows(intListCnt).Cells("仕入単価_IDR").Value * UtilClass.rmNullDecimal(ds2.Tables(RS).Rows(ii)("仕入値_外貨"))
-                            'DgvList.Rows(intListCnt).Cells("仕入原価_原通貨").Value = UtilClass.rmNullDecimal(ds2.Tables(RS).Rows(ii)("仕入金額_外貨"))
-                            DgvList.Rows(intListCnt).Cells("仕入原価_IDR").Value = Now
-                            Dim ind As Decimal = ds2.Tables(RS).Rows(ii)("関税額") + ds2.Tables(RS).Rows(ii)("前払法人税額") + ds2.Tables(RS).Rows(ii)("輸送費額")
+                        'DgvList.Rows(intListCnt).Cells("仕入原価_原通貨").Value = UtilClass.rmNullDecimal(ds2.Tables(RS).Rows(ii)("仕入金額_外貨"))
+                        DgvList.Rows(intListCnt).Cells("仕入原価_IDR").Value = ds.Tables(RS).Rows(i)("入金予定日")
+                        Dim ind As Decimal = ds2.Tables(RS).Rows(ii)("関税額") + ds2.Tables(RS).Rows(ii)("前払法人税額") + ds2.Tables(RS).Rows(ii)("輸送費額")
                             DgvList.Rows(intListCnt).Cells("間接費").Value = ind
                             DgvList.Rows(intListCnt).Cells("得意先コード").Value = invd
 
