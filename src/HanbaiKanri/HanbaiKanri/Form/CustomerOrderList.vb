@@ -38,12 +38,13 @@ Public Class CustomerOrderList
     Private _db As UtilDBIf
     'Private _gh As UtilDataGridViewHandler
     Private _init As Boolean                             '初期処理済フラグ
-    Private CompanyCode As String = ""
+    'Private CompanyCode As String = ""
     Private OrderingNo As String()
     Private CustomerCode As String = ""
     Private CurCode As String = ""  '通貨
     Private _parentForm As Form
     Private _com As CommonLogic
+    Private _vs As String = "1"
 
     '-------------------------------------------------------------------------------
     'デフォルトコンストラクタ（隠蔽）
@@ -71,13 +72,14 @@ Public Class CustomerOrderList
         _msgHd = prmRefMsgHd                                                'MSGハンドラの設定
         _db = prmRefDbHd                                                    'DBハンドラの設定
         _langHd = prmRefLang
-        CompanyCode = prmRefCompany
+        'CompanyCode = prmRefCompany
         CustomerCode = prmRefCustomer
         CurCode = prmCurCode
         _parentForm = prmRefForm
         '_gh = New UtilDataGridViewHandler(dgvLIST)                          'DataGridViewユーティリティクラス
         _com = New CommonLogic(_db, _msgHd)
         StartPosition = FormStartPosition.CenterScreen                      '画面中央表示
+        Me.Text += _vs
         Me.Text = Me.Text & "[" & frmC01F10_Login.loginValue.BumonNM & "][" & frmC01F10_Login.loginValue.TantoNM & "]" & StartUp.BackUpServerPrint                                  'フォームタイトル表示
         Me.ControlBox = Not Me.ControlBox
         _init = True
@@ -98,8 +100,8 @@ Public Class CustomerOrderList
             DgvBilling.Columns.Add("得意先コード", "CustomerCode")
             DgvBilling.Columns.Add("得意先名", "CustomerName")
 
-            DgvBilling.Columns.Add("受注番号", "JobOrderNo")
-            DgvBilling.Columns.Add("受注番号枝番", "JobOrderVer")
+            DgvBilling.Columns.Add("受注番号", _langHd.getLANG("受注番号", frmC01F10_Login.loginValue.Language))
+            DgvBilling.Columns.Add("受注番号枝番", _langHd.getLANG("受注番号枝番", frmC01F10_Login.loginValue.Language))
 
             DgvBilling.Columns.Add("請求番号", "SalesInvoiceNo")
             DgvBilling.Columns.Add("請求日", "SalesInvoiceDate")
@@ -111,32 +113,14 @@ Public Class CustomerOrderList
             DgvBilling.Columns.Add("備考1", "Remarks1")
             DgvBilling.Columns.Add("備考2", "Remarks2")
             DgvBilling.Columns.Add("登録日", "RegistrationDate")
-            DgvBilling.Columns.Add("更新者", "ModifiedBy")
+            DgvBilling.Columns.Add("更新者", "UpdatedBy")
 
         Else
-            'DgvBilling.Columns.Add("請求番号", "請求番号")
-            'DgvBilling.Columns.Add("請求区分", "請求区分")
-            'DgvBilling.Columns.Add("請求日", "請求日")
-            'DgvBilling.Columns.Add("受注番号", "受注番号")
-            'DgvBilling.Columns.Add("受注番号枝番", "受注番号枝番")
-            'DgvBilling.Columns.Add("得意先コード", "得意先コード")
-            'DgvBilling.Columns.Add("得意先名", "得意先名")
-            'DgvBilling.Columns.Add("通貨_外貨", "通貨")
-            'DgvBilling.Columns.Add("請求金額計_外貨", "請求金額計(外貨)")
-            'DgvBilling.Columns.Add("売掛残高_外貨", "売掛残高(外貨)")
-            'DgvBilling.Columns.Add("通貨", "通貨")
-            'DgvBilling.Columns.Add("請求金額計", "請求金額計")
-            'DgvBilling.Columns.Add("売掛残高", "売掛残高")
-            'DgvBilling.Columns.Add("備考1", "備考1")
-            'DgvBilling.Columns.Add("備考2", "備考2")
-            'DgvBilling.Columns.Add("登録日", "登録日")
-            'DgvBilling.Columns.Add("更新者", "更新者")
-
             DgvBilling.Columns.Add("得意先コード", "得意先コード")
             DgvBilling.Columns.Add("得意先名", "得意先名")
 
-            DgvBilling.Columns.Add("受注番号", "受注番号")
-            DgvBilling.Columns.Add("受注番号枝番", "受注Ver")
+            DgvBilling.Columns.Add("受注番号", _langHd.getLANG("受注番号", frmC01F10_Login.loginValue.Language))
+            DgvBilling.Columns.Add("受注番号枝番", _langHd.getLANG("受注番号枝番", frmC01F10_Login.loginValue.Language))
 
             DgvBilling.Columns.Add("請求番号", "SalesInvoiceNo")
             DgvBilling.Columns.Add("請求日", "SalesInvoiceDate")
@@ -425,7 +409,7 @@ Public Class CustomerOrderList
                         lastRow += 1
                     End If
                     sheet.Range("A" & currentRow).Value = currentNum
-                    sheet.Range("B" & currentRow).Value = dsCymndt.Tables(RS).Rows(i)("メーカー") & Environment.NewLine & dsCymndt.Tables(RS).Rows(i)("品名") & Environment.NewLine & dsCymndt.Tables(RS).Rows(i)("型式")
+                    sheet.Range("B" & currentRow).Value = dsCymndt.Tables(RS).Rows(i)("メーカー") & " " & dsCymndt.Tables(RS).Rows(i)("品名") & " " & dsCymndt.Tables(RS).Rows(i)("型式") & Environment.NewLine & dsCymndt.Tables(RS).Rows(i)("客先番号")
                     Dim x As Decimal = dsCymndt.Tables(RS).Rows(i)("見積単価_外貨")
                     Dim y As Decimal = dsCymndt.Tables(RS).Rows(i)("売上数量")
 
@@ -449,7 +433,7 @@ Public Class CustomerOrderList
             sheet.Range("F" & lastRow + 2).Value = VAT 'BillingSubTotal * 0.1
             sheet.Range("F" & lastRow + 3).Value = BillingSubTotal + VAT ' * 1.1
 
-            sheet.Range("C" & lastRow + 5).Value = sheet.Range("E" & lastRow + 3).Value
+            sheet.Range("C" & lastRow + 5).Value = sheet.Range("F" & lastRow + 3).Value
             'sheet.Range("C" & lastRow + 8).Value = dsCompany.Tables(RS).Rows(0)("銀行名") & " " & dsCompany.Tables(RS).Rows(0)("支店名") & " " & getHanyo.Tables(RS).Rows(0)("文字2")
             'sheet.Range("C" & lastRow + 9).Value = dsCompany.Tables(RS).Rows(0)("口座名義")
             'sheet.Range("C" & lastRow + 10).Value = dsCompany.Tables(RS).Rows(0)("口座番号")
@@ -517,7 +501,7 @@ Public Class CustomerOrderList
 
             '雛形ファイル名
             Dim sHinaFile As String = ""
-            sHinaFile = sHinaPath & "\" & "Invoice.xlsx"
+            sHinaFile = sHinaPath & "\" & "CollectiveInvoice.xlsx"
 
             '出力先パス
             Dim sOutPath As String = ""
@@ -558,7 +542,7 @@ Public Class CustomerOrderList
                 '請求データ取得
                 dsSeikyu1 = _db.selectDB(Sql, RS, reccnt)
                 If reccnt > 0 Then
-                    sheet.Range("E10").Value = dsSeikyu1.Tables(RS).Rows(0)("入金予定日")
+                    sheet.Range("F10").Value = dsSeikyu1.Tables(RS).Rows(0)("入金予定日")
                     VAT = UtilClass.ToRoundDown(UtilClass.rmNullDecimal(dsSeikyu1.Tables(RS).Rows(0)("請求消費税計")), 0)
                     cur = _com.getCurrencyEx(dsSeikyu1.Tables(RS).Rows(0)("通貨"))
 
@@ -570,23 +554,10 @@ Public Class CustomerOrderList
                     sCustPIC = dsCust.Tables(RS).Rows(0)("担当者役職") & " " & dsCust.Tables(RS).Rows(0)("担当者名")
                     sCustTel = "Telp." & dsCust.Tables(RS).Rows(0)("電話番号")
                 Else
-                    sheet.Range("E10").Value = ""
+                    sheet.Range("F10").Value = ""
                 End If
             End If
 
-            'get Sales info 
-            'Sql = "SELECT"
-            'Sql += " t31.*, t30.客先番号, t30.得意先名, t30.得意先住所, t30.得意先郵便番号, t30.得意先担当者役職, t30.得意先担当者名"
-            'Sql += ",t30.得意先電話番号, t30.通貨"
-            'Sql += " FROM t31_urigdt t31, "
-            'Sql += " t30_urighd t30 "
-            'Sql += " WHERE t31.売上番号=t30.売上番号 and t31.売上番号枝番=t30.売上番号枝番 and t31.会社コード=t30.会社コード "
-            'Sql += " AND t31.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-            'Sql += " AND t31.入金番号 = '" & BillingNo & "'"
-            'Sql += " AND t30.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
-            'Sql += " order by t31.受注番号,t31.受注番号枝番,t31.行番号"
-
-            'kafu
             Sql = "SELECT"
             Sql += " t11.*"
             Sql += " FROM public.v_t31_urigdt_1 t11 "
@@ -605,11 +576,11 @@ Public Class CustomerOrderList
                 sheet.Range("B14").Value = sCustPIC 'dsCymndt.Tables(RS).Rows(0)("得意先担当者役職") & " " & dsCymndt.Tables(RS).Rows(0)("得意先担当者名")
                 'sheet.Range("A15").Value = "Telp." & dsCymnhd.Tables(RS).Rows(0)("得意先電話番号") & "　Fax." & dsCymnhd.Tables(RS).Rows(0)("得意先ＦＡＸ")
                 sheet.Range("A15").Value = sCustTel '"Telp." & dsCymndt.Tables(RS).Rows(0)("得意先電話番号")
-                sheet.Range("E8").Value = "" & BillingNo  'InvoiceNo
-                sheet.Range("E9").Value = "" & UtilClass.strFormatDate(dtmInvoice)
+                sheet.Range("F8").Value = "" & BillingNo  'InvoiceNo
+                sheet.Range("F9").Value = "" & UtilClass.strFormatDate(dtmInvoice)
                 'sheet.Range("E10").Value = "" & 
                 'sheet.Range("E12").Value = ": " & dsCymnhd.Tables(RS).Rows(0)("受注番号")
-                sheet.Range("E11").Value = "" & dsCymndt.Tables(RS).Rows(0)("客先番号")
+                sheet.Range("F11").Value = "" '& dsCymndt.Tables(RS).Rows(0)("客先番号")
 
                 'If dsShukkoHd.Tables(RS).Rows.Count > 0 Then
                 'For x As Integer = 0 To dsShukkoHd.Tables(RS).Rows.Count - 1
@@ -617,10 +588,10 @@ Public Class CustomerOrderList
                 'Next
                 'End If
 
-                sheet.Range("E13").Value = dsCymndt.Tables(RS).Rows(0)("支払条件")
+                sheet.Range("F13").Value = dsCymndt.Tables(RS).Rows(0)("支払条件")
 
-                sheet.Range("E18").Value = "(" & cur & ")"
                 sheet.Range("F18").Value = "(" & cur & ")"
+                sheet.Range("G18").Value = "(" & cur & ")"
 
                 flg2 = True
 
@@ -645,15 +616,14 @@ Public Class CustomerOrderList
                 End If
 
                 sheet.Range("A" & currentRow).Value = currentNum
-                sheet.Range("B" & currentRow).Value = dsCymndt.Tables(RS).Rows(i)("メーカー") & Environment.NewLine & dsCymndt.Tables(RS).Rows(i)("品名") & Environment.NewLine & dsCymndt.Tables(RS).Rows(i)("型式") & Environment.NewLine & dsCymndt.Tables(RS).Rows(i)("受注番号")
+                sheet.Range("B" & currentRow).Value = dsCymndt.Tables(RS).Rows(i)("メーカー") & " " & dsCymndt.Tables(RS).Rows(i)("品名") & " " & dsCymndt.Tables(RS).Rows(i)("型式") & Environment.NewLine & dsCymndt.Tables(RS).Rows(i)("客先番号")
                 Dim x As Decimal = dsCymndt.Tables(RS).Rows(i)("見積単価_外貨")
                 Dim y As Decimal = dsCymndt.Tables(RS).Rows(i)("売上数量")
-
-                sheet.Range("C" & currentRow).Value = y
-                sheet.Range("D" & currentRow).Value = dsCymndt.Tables(RS).Rows(i)("単位")
-
-                sheet.Range("E" & currentRow).Value = x 'dsCymndt.Tables(RS).Rows(i)("見積単価_外貨")
-                sheet.Range("F" & currentRow).Value = x * y 'dsCymndt.Tables(RS).Rows(i)("見積金額") '("売上金額_外貨")
+                sheet.Range("C" & currentRow).Value = dsCymndt.Tables(RS).Rows(i)("客先番号")
+                sheet.Range("D" & currentRow).Value = y
+                sheet.Range("E" & currentRow).Value = dsCymndt.Tables(RS).Rows(i)("単位")
+                sheet.Range("F" & currentRow).Value = x 'dsCymndt.Tables(RS).Rows(i)("見積単価_外貨")
+                sheet.Range("G" & currentRow).Value = x * y 'dsCymndt.Tables(RS).Rows(i)("見積金額") '("売上金額_外貨")
                 BillingSubTotal += (x * y) 'dsCymndt.Tables(RS).Rows(i)("見積金額")
                 currentNum += 1
                 currentRow += 1
@@ -662,22 +632,22 @@ Public Class CustomerOrderList
 
             'sheet.Range("A" & lastRow & ":G" & lastRow).Borders(Excel.XlBordersIndex.xlEdgeBottom).LineStyle = Excel.XlLineStyle.xlContinuous
 
-            sheet.Range("F" & lastRow + 1).Value = BillingSubTotal
+            sheet.Range("G" & lastRow + 1).Value = BillingSubTotal
 
             'VATなしの場合が考慮されていなかったため修正　2020.03.01
             'sheet.Range("F" & lastRow + 2).Value = BillingSubTotal * 0.1
             'sheet.Range("F" & lastRow + 3).Value = BillingSubTotal * 1.1
 
             If VAT = 0 Then  'VATなし
-                sheet.Range("F" & lastRow + 2).Value = 0
-                sheet.Range("F" & lastRow + 3).Value = BillingSubTotal
+                sheet.Range("G" & lastRow + 2).Value = 0
+                sheet.Range("G" & lastRow + 3).Value = BillingSubTotal
             Else
                 'Dim decVAT As Decimal = BillingSubTotal * VAT / 100
-                sheet.Range("F" & lastRow + 2).Value = VAT 'decVAT
-                sheet.Range("F" & lastRow + 3).Value = BillingSubTotal + VAT 'decVAT
+                sheet.Range("G" & lastRow + 2).Value = VAT 'decVAT
+                sheet.Range("G" & lastRow + 3).Value = BillingSubTotal + VAT 'decVAT
             End If
 
-            sheet.Range("C" & lastRow + 5).Value = sheet.Range("E" & lastRow + 3).Value
+            sheet.Range("C" & lastRow + 5).Value = sheet.Range("G" & lastRow + 3).Value
             'sheet.Range("F" & lastRow + 9).Value = "Jakarta, " & dtmInvoice.Day & " " & dtmInvoice.ToString("MMMM") & " " & dtmInvoice.Year  'InvoiceDate
 
             app.DisplayAlerts = False 'Microsoft Excelのアラート一旦無効化

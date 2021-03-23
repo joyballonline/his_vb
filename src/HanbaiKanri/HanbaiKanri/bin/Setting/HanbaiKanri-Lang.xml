@@ -65,4 +65,34 @@
     <ENG>Purchase</ENG>
     <JPN>発注</JPN>
   </LANG_DATA>
+  <LANG_DATA>
+    <ID>受注番号</ID>
+    <ENG>JobOrderNo</ENG>
+    <JPN>受注番号</JPN>
+  </LANG_DATA>
+  <LANG_DATA>
+    <ID>受注番号枝番</ID>
+    <ENG>JobOrderVer</ENG>
+    <JPN>受注Ver</JPN>
+  </LANG_DATA>
+  <LANG_DATA>
+    <ID>発注番号</ID>
+    <ENG>PONo</ENG>
+    <JPN>発注番号</JPN>
+  </LANG_DATA>
+  <LANG_DATA>
+    <ID>発注番号枝番</ID>
+    <ENG>POVer</ENG>
+    <JPN>発注Ver</JPN>
+  </LANG_DATA>
+  <LANG_DATA>
+    <ID>客先番号</ID>
+    <ENG>CustomerNumber</ENG>
+    <JPN>客先番号</JPN>
+  </LANG_DATA>
+  <LANG_DATA>
+    <ID>行番号</ID>
+    <ENG>LineNo</ENG>
+    <JPN>行番号</JPN>
+  </LANG_DATA>
 </LANG_DEF>
