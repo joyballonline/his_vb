@@ -5,7 +5,7 @@
 	************************************************************************************************
 	-->
   <SETTING>
-    <DELIMITER>;</DELIMITER>
+    <DELIMITER>,</DELIMITER>
   </SETTING>
   <DATAOUTPUT>
     <JOBORDER>

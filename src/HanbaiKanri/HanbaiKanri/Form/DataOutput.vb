@@ -44,7 +44,7 @@ Public Class DataOutput
     'Private SalesNo As String()
     Private SalesStatus As String = ""
     Private _com As CommonLogic
-    Private _vs As String = "1"
+    Private _vs As String = "2"
     Private _csv As UtilCsvHandler
     '-------------------------------------------------------------------------------
     'デフォルトコンストラクタ（隠蔽）
@@ -825,7 +825,7 @@ Public Class DataOutput
                     field = EncloseDoubleQuotesIfNeed(field)
                     sr.Write(field)
                     If y < DgvList.Columns.Count - 1 Then
-                        sr.Write(";"c)
+                        sr.Write(sp)
                     End If
                 Next
                 sr.Write(vbCrLf)

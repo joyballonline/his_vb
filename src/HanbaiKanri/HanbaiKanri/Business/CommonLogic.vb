@@ -57,7 +57,7 @@ Public Class CommonLogic
     '                      prmMsgHd     MSGハンドラ
     '   ●メソッド戻り値 ：インスタンス
     '-------------------------------------------------------------------------------
-    Public Sub New(ByVal prmDbHd As UtilDBIf, ByVal prmMsgHd As UtilMsgHandler)
+    Public Sub New(ByRef prmDbHd As UtilDBIf, ByRef prmMsgHd As UtilMsgHandler)
         _db = prmDbHd
         _msgHd = prmMsgHd
     End Sub
