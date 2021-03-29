@@ -1554,11 +1554,11 @@ Public Class SalesProfitList
                 'sheet.Range("E" & cellRowIndex.ToString).Value = DgvList.Rows(i).Cells("売上番号枝番").Value '売上番号枝番
                 array2(i, 1) = DgvList.Rows(i).Cells("請求番号").Value '請求番号 B
                 array2(i, 2) = DgvList.Rows(i).Cells("請求日").Value '請求日 C
-                array2(i, 3) = UtilClass.rmNullDecimal(DgvList.Rows(i).Cells("受注数量").Value).ToString("N2") '受注数量 D
+                array2(i, 3) = UtilClass.rmNullDecimal(DgvList.Rows(i).Cells("受注数量").Value) '.ToString("N2") '受注数量 D
                 array2(i, 4) = DgvList.Rows(i).Cells("販売通貨").Value '販売通貨 E
-                array2(i, 5) = UtilClass.rmNullDecimal(DgvList.Rows(i).Cells("受注単価_原通貨").Value).ToString("N2") '受注単価_原通貨 F
-                array2(i, 6) = UtilClass.rmNullDecimal(DgvList.Rows(i).Cells("受注金額_IDR").Value).ToString("N2") '受注金額_IDR G
-                array2(i, 7) = UtilClass.rmNullDecimal(DgvList.Rows(i).Cells("受注金額_原通貨").Value).ToString("N2") '受注金額_原通貨 H
+                array2(i, 5) = UtilClass.rmNullDecimal(DgvList.Rows(i).Cells("受注単価_原通貨").Value) '.ToString("N2") '受注単価_原通貨 F
+                array2(i, 6) = UtilClass.rmNullDecimal(DgvList.Rows(i).Cells("受注金額_IDR").Value) '.ToString("N2") '受注金額_IDR G
+                array2(i, 7) = UtilClass.rmNullDecimal(DgvList.Rows(i).Cells("受注金額_原通貨").Value) '.ToString("N2") '受注金額_原通貨 H
                 array2(i, 8) = DgvList.Rows(i).Cells("得意先名").Value '得意先名 I
                 array2(i, 9) = DgvList.Rows(i).Cells("単位").Value '単位 J
                 array2(i, 10) = DgvList.Rows(i).Cells("発注番号").Value '発注番号 K
@@ -1567,11 +1567,11 @@ Public Class SalesProfitList
                 array2(i, 13) = DgvList.Rows(i).Cells("得意先コード").Value '得意先コード N
                 array2(i, 14) = DgvList.Rows(i).Cells("発注行番号").Value '発注行番号 O
                 array2(i, 15) = DgvList.Rows(i).Cells("仕入区分").Value '仕入区分 P
-                array2(i, 16) = UtilClass.rmNullDecimal(DgvList.Rows(i).Cells("仕入単価_IDR").Value).ToString("N2") '仕入単価_IDR Q
+                array2(i, 16) = UtilClass.rmNullDecimal(DgvList.Rows(i).Cells("仕入単価_IDR").Value) '.ToString("N2") '仕入単価_IDR Q
                 array2(i, 17) = DgvList.Rows(i).Cells("仕入通貨").Value '仕入通貨 R
-                array2(i, 18) = UtilClass.rmNullDecimal(DgvList.Rows(i).Cells("仕入単価_原通貨").Value).ToString("N2") '仕入単価_原通貨 S
-                array2(i, 19) = UtilClass.rmNullDecimal(DgvList.Rows(i).Cells("利益率").Value).ToString("N2") '利益率 T
-                array2(i, 20) = UtilClass.rmNullDecimal(DgvList.Rows(i).Cells("利益").Value).ToString("N2") '利益 U
+                array2(i, 18) = UtilClass.rmNullDecimal(DgvList.Rows(i).Cells("仕入単価_原通貨").Value) '.ToString("N2") '仕入単価_原通貨 S
+                array2(i, 19) = UtilClass.rmNullDecimal(DgvList.Rows(i).Cells("利益率").Value) '.ToString("N2") '利益率 T
+                array2(i, 20) = UtilClass.rmNullDecimal(DgvList.Rows(i).Cells("利益").Value) '.ToString("N2") '利益 U
                 array2(i, 21) = DgvList.Rows(i).Cells("仕入原価_IDR").Value '仕入原価_IDR V
 
                 'array2(i, 8) = DgvList.Rows(i).Cells("メーカー").Value 'メーカー

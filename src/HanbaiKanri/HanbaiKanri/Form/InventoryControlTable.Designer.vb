@@ -53,6 +53,7 @@ Partial Class InventoryControlTable
         Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.DtpFrom = New System.Windows.Forms.DateTimePicker()
         Me.DtpTo = New System.Windows.Forms.DateTimePicker()
+        Me.ChkBB = New System.Windows.Forms.CheckBox()
         CType(Me.DgvList, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ContextMenuStrip1.SuspendLayout()
         Me.SuspendLayout()
@@ -395,10 +396,23 @@ Partial Class InventoryControlTable
         Me.DtpTo.Size = New System.Drawing.Size(111, 20)
         Me.DtpTo.TabIndex = 69
         '
+        'ChkBB
+        '
+        Me.ChkBB.AutoSize = True
+        Me.ChkBB.Checked = True
+        Me.ChkBB.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.ChkBB.Location = New System.Drawing.Point(935, 59)
+        Me.ChkBB.Name = "ChkBB"
+        Me.ChkBB.Size = New System.Drawing.Size(152, 17)
+        Me.ChkBB.TabIndex = 70
+        Me.ChkBB.Text = "Display Begining Balance?"
+        Me.ChkBB.UseVisualStyleBackColor = True
+        '
         'InventoryControlTable
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.ClientSize = New System.Drawing.Size(1350, 561)
+        Me.Controls.Add(Me.ChkBB)
         Me.Controls.Add(Me.DtpTo)
         Me.Controls.Add(Me.DtpFrom)
         Me.Controls.Add(Me.cmOrderNoFrom)
@@ -467,4 +481,5 @@ Partial Class InventoryControlTable
     Friend WithEvents ToolStripMenuItem1 As ToolStripMenuItem
     Friend WithEvents DtpFrom As DateTimePicker
     Friend WithEvents DtpTo As DateTimePicker
+    Friend WithEvents ChkBB As CheckBox
 End Class

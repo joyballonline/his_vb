@@ -87,7 +87,7 @@ Public Class OrderProgress
     Private Sub MstHanyoue_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         'モード
-        If mSet_Mode = False Then
+        If mSet_Mode() = False Then
             Exit Sub
         End If
 
@@ -309,59 +309,66 @@ Public Class OrderProgress
 
 
                 '売掛請求登録
+                Sql = " SELECT distinct t23.請求番号"
+                Sql += " from v_t23_skyuhd_1 as t23"
+                Sql += " WHERE t23.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+                Sql += " and 受注番号 = '" & ds.Tables(RS).Rows(i)("受注番号") & "'"
+                Sql += " and 受注番号枝番 = '" & ds.Tables(RS).Rows(i)("受注番号枝番") & "'"
+                'Sql += " and 取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
+                Dim ds2 As DataSet = _db.selectDB(Sql, RS, reccnt)
+                Dim s2 As String = ""
+                For x As Integer = 0 To ds2.Tables(RS).Rows.Count - 1
+                    s2 += "'" & ds2.Tables(RS).Rows(x)("請求番号") & "'"
+                    If x < ds2.Tables(RS).Rows.Count - 1 Then
+                        s2 += ","
+                    End If
+                Next
+                DgvCymnhd.Rows(i).Cells("請求番号").Value = s2.Replace("'", "")
+
                 Sql = " SELECT sum(請求金額計) as 請求金額計, sum(売掛残高) as 売掛残高, sum(入金額計) as 入金額計"
                 Sql += " from t23_skyuhd as t23"
 
                 Sql += " WHERE t23.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-                Sql += " and 受注番号 = '" & ds.Tables(RS).Rows(i)("受注番号") & "'"
-                Sql += " and 受注番号枝番 = '" & ds.Tables(RS).Rows(i)("受注番号枝番") & "'"
-                Sql += " and 取消日 is null"
+                'Sql += " and 受注番号 = '" & ds.Tables(RS).Rows(i)("受注番号") & "'"
+                'Sql += " and 受注番号枝番 = '" & ds.Tables(RS).Rows(i)("受注番号枝番") & "'"
+                'Sql += " and 取消日 is null"
+                If s2.Equals("") Then
+                    s2 = "''"
+                End If
+                Sql += " and t23.請求番号 in (" & s2 & ")"
 
                 Dim ds_seikyu As DataSet = _db.selectDB(Sql, RS, reccnt)
 
-                Sql = " SELECT t23.請求番号"
-                Sql += " from t23_skyuhd as t23"
-                Sql += " WHERE t23.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-                Sql += " and 受注番号 = '" & ds.Tables(RS).Rows(i)("受注番号") & "'"
-                Sql += " and 受注番号枝番 = '" & ds.Tables(RS).Rows(i)("受注番号枝番") & "'"
-                Sql += " and 取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
-                Dim ds2 As DataSet = _db.selectDB(Sql, RS, reccnt)
-                Dim s2 As String = ""
-                For x As Integer = 0 To ds2.Tables(RS).Rows.Count - 1
-                    s2 += ds2.Tables(RS).Rows(x)("請求番号")
-                Next
-                DgvCymnhd.Rows(i).Cells("請求番号").Value = s2
-
                 If IsDBNull(ds_seikyu.Tables(RS).Rows(0)("売掛残高")) Then
-                        '請求なし
-                        DgvCymnhd.Rows(i).Cells("売掛請求登録").Value = ""
-                        DgvCymnhd.Rows(i).Cells("入金登録").Value = ""
+                    '請求なし
+                    DgvCymnhd.Rows(i).Cells("売掛請求登録").Value = ""
+                    DgvCymnhd.Rows(i).Cells("入金登録").Value = ""
+                Else
+                    If ds.Tables(RS).Rows(i)("見積金額") > ds_seikyu.Tables(RS).Rows(0)("請求金額計") Then
+                        DgvCymnhd.Rows(i).Cells("売掛請求登録").Value = "△"
                     Else
-                        If ds.Tables(RS).Rows(i)("見積金額") > ds_seikyu.Tables(RS).Rows(0)("請求金額計") Then
-                            DgvCymnhd.Rows(i).Cells("売掛請求登録").Value = "△"
-                        Else
-                            DgvCymnhd.Rows(i).Cells("売掛請求登録").Value = "〇"
-                        End If
-
-
-                        If ds_seikyu.Tables(RS).Rows(0)("売掛残高") = 0 Then
-                            '入金済み
-                            DgvCymnhd.Rows(i).Cells("入金登録").Value = "〇"
-                        ElseIf ds_seikyu.Tables(RS).Rows(0)("入金額計") > 0 AndAlso ds_seikyu.Tables(RS).Rows(0)("売掛残高") > 0 Then
-                            '一部
-                            DgvCymnhd.Rows(i).Cells("入金登録").Value = "△"
-                        Else
-                            '請求だけ
-                            DgvCymnhd.Rows(i).Cells("入金登録").Value = ""
-                        End If
-
+                        DgvCymnhd.Rows(i).Cells("売掛請求登録").Value = "〇"
                     End If
 
-                    ds_seikyu = Nothing
 
-                Next
+                    If ds_seikyu.Tables(RS).Rows(0)("売掛残高") = 0 Then
+                        '入金済み
+                        DgvCymnhd.Rows(i).Cells("入金登録").Value = "〇"
+                    ElseIf ds_seikyu.Tables(RS).Rows(0)("入金額計") > 0 AndAlso ds_seikyu.Tables(RS).Rows(0)("売掛残高") > 0 Then
+                        '一部
+                        DgvCymnhd.Rows(i).Cells("入金登録").Value = "△"
+                    Else
+                        '請求だけ
+                        DgvCymnhd.Rows(i).Cells("入金登録").Value = ""
+                    End If
 
-                DgvCymnhd.Columns("受注日").DefaultCellStyle.Format = "d"
+                End If
+
+                ds_seikyu = Nothing
+
+            Next
+
+            DgvCymnhd.Columns("受注日").DefaultCellStyle.Format = "d"
             DgvCymnhd.Columns("見積日").DefaultCellStyle.Format = "d"
 
             '中央寄せ

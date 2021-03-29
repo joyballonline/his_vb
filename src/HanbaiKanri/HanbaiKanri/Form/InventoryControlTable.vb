@@ -1271,30 +1271,34 @@ Public Class InventoryControlTable
     Private Sub setbeginingbalance2(ByRef intlist As Integer, m_ As String, i_ As String, s_ As String, dic_ As Dictionary(Of Decimal, Decimal), b_ As Boolean)
         Dim c_ As Boolean = True
         For Each t As KeyValuePair(Of Decimal, Decimal) In dic_
-            DgvList.Rows.Add()
-            DgvList.Rows(intlist).Cells("倉庫").Value = "" 'dsList.Tables(RS).Rows(i)("名称").ToString
-
-            DgvList.Rows(intlist).Cells("メーカー").Value = m_
-            DgvList.Rows(intlist).Cells("品名").Value = i_
-            DgvList.Rows(intlist).Cells("型式").Value = s_
-
-            DgvList.Rows(intlist).Cells("伝票番号").Value = "" 'dsList.Tables(RS).Rows(i)("伝票番号").ToString
-            DgvList.Rows(intlist).Cells("入出庫種別").Value = "Begining balance"
-
-            DgvList.Rows(intlist).Cells("入出庫日").Value = DateAdd(DateInterval.Day, -1, DtpFrom.Value) 'dsList.Tables(RS).Rows(i)("入出庫日") 't70 入出庫日
-            DgvList.Rows(intlist).Cells("取引先").Value = "" 'dsList.Tables(RS).Rows(i)("仕入先名").ToString
-
-            DgvList.Rows(intlist).Cells("月初数量").Value = t.Value 'dsList.Tables(RS).Rows(i)("数量")
-            DgvList.Rows(intlist).Cells("月初単価").Value = t.Key 'dsList.Tables(RS).Rows(i)("仕入値")
-            DgvList.Rows(intlist).Cells("在庫数").Value = t.Value
-            DgvList.Rows(intlist).Cells("在庫金額”).Value = UtilClass.Round_2(t.Value * t.Key)
-            If c_ Then
-                DgvList.Rows(intlist).Cells("X").Value = True
-                c_ = False
+            If ChkBB.Checked = False And t.Value = 0 Then
             Else
-                DgvList.Rows(intlist).Cells("X").Value = False
+
+                DgvList.Rows.Add()
+                DgvList.Rows(intlist).Cells("倉庫").Value = "" 'dsList.Tables(RS).Rows(i)("名称").ToString
+
+                DgvList.Rows(intlist).Cells("メーカー").Value = m_
+                DgvList.Rows(intlist).Cells("品名").Value = i_
+                DgvList.Rows(intlist).Cells("型式").Value = s_
+
+                DgvList.Rows(intlist).Cells("伝票番号").Value = "" 'dsList.Tables(RS).Rows(i)("伝票番号").ToString
+                DgvList.Rows(intlist).Cells("入出庫種別").Value = "Begining balance"
+
+                DgvList.Rows(intlist).Cells("入出庫日").Value = DateAdd(DateInterval.Day, -1, DtpFrom.Value) 'dsList.Tables(RS).Rows(i)("入出庫日") 't70 入出庫日
+                DgvList.Rows(intlist).Cells("取引先").Value = "" 'dsList.Tables(RS).Rows(i)("仕入先名").ToString
+
+                DgvList.Rows(intlist).Cells("月初数量").Value = t.Value 'dsList.Tables(RS).Rows(i)("数量")
+                DgvList.Rows(intlist).Cells("月初単価").Value = t.Key 'dsList.Tables(RS).Rows(i)("仕入値")
+                DgvList.Rows(intlist).Cells("在庫数").Value = t.Value
+                DgvList.Rows(intlist).Cells("在庫金額”).Value = UtilClass.Round_2(t.Value * t.Key)
+                If c_ Then
+                    DgvList.Rows(intlist).Cells("X").Value = True
+                    c_ = False
+                Else
+                    DgvList.Rows(intlist).Cells("X").Value = False
+                End If
+                intlist += 1
             End If
-            intlist += 1
         Next
 
     End Sub

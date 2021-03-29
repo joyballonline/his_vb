@@ -32,12 +32,14 @@ Public Class Order
     Private _init As Boolean                             '初期処理済フラグ
     Private _langHd As UtilLangHandler
     Private _ParentForm As Form
-    Private CompanyCode As String = ""
+    'Private CompanyCode As String = ""
     Private OrderNo As String = ""
     Private OrderSuffix As String = ""
-    Private OrderCount As Integer
+    'Private OrderCount As Integer
     Private OrderStatus As String = ""
     Private LoadFlg As Boolean = False
+    Private _com As CommonLogic
+    Private _vs As String = "1"
 
     '-------------------------------------------------------------------------------
     'デフォルトコンストラクタ（隠蔽）
@@ -69,8 +71,10 @@ Public Class Order
         OrderNo = prmRefNo
         OrderSuffix = prmRefSuffix
         OrderStatus = prmRefStatus
+        _com = New CommonLogic(_db, _msgHd)
         '_gh = New UtilDataGridViewHandler(dgvLIST)                          'DataGridViewユーティリティクラス
         StartPosition = FormStartPosition.CenterScreen                      '画面中央表示
+        Me.Text += _vs
         Me.Text = Me.Text & "[" & frmC01F10_Login.loginValue.BumonNM & "][" & frmC01F10_Login.loginValue.TantoNM & "]" & StartUp.BackUpServerPrint                                  'フォームタイトル表示
         Me.ControlBox = Not Me.ControlBox
         _init = True
@@ -109,7 +113,7 @@ Public Class Order
 
         'リードタイム単位コンボボックス作成
         Dim column2 As New DataGridViewComboBoxColumn()
-        column2.DataSource = getReadTime()
+        column2.DataSource = _com.getLeadTime()
         column2.ValueMember = "Value"
         column2.DisplayMember = "Display"
         column2.HeaderText = "リードタイム単位"
@@ -156,21 +160,6 @@ Public Class Order
         '
         If OrderStatus = CommonConst.STATUS_ADD Then
             '見積基本情報
-            Dim SqlSaiban As String = ""
-            SqlSaiban += "SELECT "
-            SqlSaiban += "会社コード, "
-            SqlSaiban += "採番キー, "
-            SqlSaiban += "最新値, "
-            SqlSaiban += "最小値, "
-            SqlSaiban += "最大値, "
-            SqlSaiban += "接頭文字, "
-            SqlSaiban += "連番桁数 "
-            SqlSaiban += "FROM public.m80_saiban"
-            SqlSaiban += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-            SqlSaiban += " AND 採番キー = '20'"
-
-            Dim Saiban1 As DataSet = _db.selectDB(SqlSaiban, RS, reccnt)
-
             Dim Sql1 As String = ""
             Sql1 += "SELECT * FROM public.t01_mithd"
             Sql1 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
@@ -178,16 +167,9 @@ Public Class Order
             Sql1 += " AND 見積番号枝番 = '" & OrderSuffix.ToString & "'"
 
             Dim ds1 = _db.selectDB(Sql1, RS, reccnt)
-            CompanyCode = Saiban1.Tables(RS).Rows(0)(0)
-            Dim NewOrderNo As String = Saiban1.Tables(RS).Rows(0)(5)
-            NewOrderNo += dtNow.ToString("MMdd")
-            OrderCount = Saiban1.Tables(RS).Rows(0)(2)
-            Dim TmpOrderCount As String = Saiban1.Tables(RS).Rows(0)(2)
-            NewOrderNo += TmpOrderCount.PadLeft(Saiban1.Tables(RS).Rows(0)(6), "0")
+            Dim NewOrderNo As String = _com.getSaiban("20", dtNow.Date)
 
-            SaibanSave()
-
-            CompanyCode = ds1.Tables(RS).Rows(0)("会社コード")
+            'CompanyCode = ds1.Tables(RS).Rows(0)("会社コード")
             TxtOrderNo.Text = NewOrderNo
             TxtOrderSuffix.Text = 1
             DtpOrderRegistration.Value = dtNow
@@ -367,33 +349,9 @@ Public Class Order
                 End If
             Next
 
-            CompanyCode = ds1.Tables(RS).Rows(0)("会社コード")
+            'CompanyCode = ds1.Tables(RS).Rows(0)("会社コード")
             If OrderStatus = CommonConst.STATUS_CLONE Then
-                Dim SqlSaiban As String = ""
-                SqlSaiban += "SELECT "
-                SqlSaiban += "会社コード, "
-                SqlSaiban += "採番キー, "
-                SqlSaiban += "最新値, "
-                SqlSaiban += "最小値, "
-                SqlSaiban += "最大値, "
-                SqlSaiban += "接頭文字, "
-                SqlSaiban += "連番桁数 "
-                SqlSaiban += "FROM public.m80_saiban"
-                SqlSaiban += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-                SqlSaiban += " AND 採番キー = '20'"
-
-                Dim Saiban1 As DataSet = _db.selectDB(SqlSaiban, RS, reccnt)
-
-                CompanyCode = Saiban1.Tables(RS).Rows(0)("会社コード")
-                Dim NewOrderNo As String = Saiban1.Tables(RS).Rows(0)("接頭文字")
-                NewOrderNo += dtNow.ToString("MMdd")
-                OrderCount = Saiban1.Tables(RS).Rows(0)("最新値")
-                Dim TmpOrderCount As String = Saiban1.Tables(RS).Rows(0)("最新値")
-                NewOrderNo += TmpOrderCount.PadLeft(Saiban1.Tables(RS).Rows(0)("連番桁数"), "0")
-
-                SaibanSave()
-
-                TxtOrderNo.Text = NewOrderNo
+                TxtOrderNo.Text = _com.getSaiban("20", dtNow.Date)
             Else
                 If ds1.Tables(RS).Rows(0)("受注番号") IsNot DBNull.Value Then
                     TxtOrderNo.Text = ds1.Tables(RS).Rows(0)("受注番号")
@@ -587,7 +545,7 @@ Public Class Order
             setRate()
 
             '通貨表示：ベースの設定
-            setBaseCurrency()
+            _com.setBaseCurrency()
             setChangeCurrency()
         End If
 
@@ -772,21 +730,6 @@ Public Class Order
 
     End Sub
 
-    Private Sub SaibanSave()
-        Dim dtNow As String = UtilClass.formatDatetime(DateTime.Now)
-        OrderCount += 1
-        Dim Saiban3 As String = ""
-        Saiban3 += "UPDATE Public.m80_saiban "
-        Saiban3 += "SET  最新値 = '" & OrderCount.ToString & "'"
-        Saiban3 += " , 更新者 = 'Admin'"
-        Saiban3 += " , 更新日 = '" & dtNow & "'"
-        Saiban3 += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-        Saiban3 += " AND 会社コード ='" & CompanyCode.ToString & "'"
-        Saiban3 += " AND 採番キー ='20' "
-
-        _db.executeDB(Saiban3)
-    End Sub
-
     '前の画面に戻る
     Private Sub BtnBack_Click(sender As Object, e As EventArgs) Handles BtnBack.Click
         _ParentForm.Enabled = True
@@ -819,6 +762,7 @@ Public Class Order
         If OrderStatus = CommonConst.STATUS_ADD Or OrderStatus = CommonConst.STATUS_EDIT Or OrderStatus = CommonConst.STATUS_CLONE Then
 
             Try
+                _db.beginTran()
                 Dim Sql1 As String = ""
                 Sql1 = ""
                 Sql1 += "INSERT INTO "
@@ -830,13 +774,13 @@ Public Class Order
                 Sql1 += ", 営業担当者コード, 入力担当者, 入力担当者コード, 備考, 見積備考, ＶＡＴ, 受注日, 登録日, 更新日"
                 Sql1 += ", 更新者, 取消区分, 見積金額_外貨, 通貨, レート, 客先希望納期)"
                 Sql1 += " VALUES("
-                Sql1 += "'" & CompanyCode & "'" '会社コード
+                Sql1 += "'" & frmC01F10_Login.loginValue.BumonCD & "'" '会社コード
                 Sql1 += ", '"
                 Sql1 += TxtOrderNo.Text '受注番号
                 Sql1 += "', '"
                 Sql1 += TxtOrderSuffix.Text '受注番号枝番
                 Sql1 += "', '"
-                Sql1 += RevoveChars(TxtCustomerPO.Text) '客先番号
+                Sql1 += UtilClass.RevoveChars(TxtCustomerPO.Text) '客先番号
                 Sql1 += "', '"
                 Sql1 += TxtQuoteNo.Text '見積番号
                 Sql1 += "', '"
@@ -878,7 +822,7 @@ Public Class Order
                 Sql1 += "', '"
                 Sql1 += TxtInput.Tag '入力担当者コード
                 Sql1 += "', '"
-                Sql1 += RevoveChars(TxtOrderRemark.Text) '備考
+                Sql1 += UtilClass.RevoveChars(TxtOrderRemark.Text) '備考
                 Sql1 += "', '"
                 Sql1 += TxtQuoteRemarks.Text '見積備考
                 Sql1 += "', '"
@@ -916,7 +860,7 @@ Public Class Order
                     Sql2 += ", 見積単価, 見積金額, 関税率, 関税額, 前払法人税率, 前払法人税額, 輸送費率, 輸送費額"
                     Sql2 += ", 仕入原価, 仕入金額, 見積単価_外貨, 見積金額_外貨, 通貨, レート, 仕入単価_外貨, 仕入通貨, 仕入レート)"
                     Sql2 += " VALUES('"
-                    Sql2 += CompanyCode '会社コード
+                    Sql2 += frmC01F10_Login.loginValue.BumonCD '会社コード
                     Sql2 += "', '"
                     Sql2 += TxtOrderNo.Text '受注番号
                     Sql2 += "', '"
@@ -967,7 +911,7 @@ Public Class Order
                     Sql2 += "', '"
                     Sql2 += DgvItemList.Rows(i).Cells("数量").Value.ToString '未出庫数
                     Sql2 += "', '"
-                    Sql2 += RevoveChars(DgvItemList.Rows(i).Cells("備考").Value.ToString) '備考
+                    Sql2 += UtilClass.RevoveChars(DgvItemList.Rows(i).Cells("備考").Value.ToString) '備考
                     Sql2 += "', '"
                     Sql2 += frmC01F10_Login.loginValue.TantoNM '更新者
                     Sql2 += "', '"
@@ -1009,7 +953,7 @@ Public Class Order
                         Sql2 += " ,0"
                     End If
 
-                    Sql2 += "," & RevoveChars(DgvItemList.Rows(i).Cells("仕入通貨").Value.ToString)    '仕入通貨
+                    Sql2 += "," & UtilClass.RevoveChars(DgvItemList.Rows(i).Cells("仕入通貨").Value.ToString)    '仕入通貨
 
                     If DgvItemList.Rows(i).Cells("仕入レート").Value IsNot Nothing Then
                         Sql2 += "," & UtilClass.formatNumberF10(DgvItemList.Rows(i).Cells("仕入レート").Value.ToString)    '仕入レート
@@ -1052,12 +996,17 @@ Public Class Order
 
                     _db.executeDB(Sql)
 
+                    _com.Cancel_t44_tmp_byao(OrderNo, OrderSuffix)
+
                 End If
+
+                _db.commitTran()
 
             Catch ue As UsrDefException
                 ue.dspMsg()
                 Throw ue
             Catch ex As Exception
+                _db.rollbackTran()
                 'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
                 Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
             End Try
@@ -1068,13 +1017,13 @@ Public Class Order
                 Dim Sql1 As String = ""
                 Sql1 = ""
                 Sql1 += "UPDATE Public.t10_cymnhd "
-                Sql1 += "SET 客先番号 = '" & RevoveChars(TxtCustomerPO.Text) & "'"
-                Sql1 += " , 備考 = '" & RevoveChars(TxtOrderRemark.Text) & "'"
+                Sql1 += "SET 客先番号 = '" & UtilClass.RevoveChars(TxtCustomerPO.Text) & "'"
+                Sql1 += " , 備考 = '" & UtilClass.RevoveChars(TxtOrderRemark.Text) & "'"
                 Sql1 += " , 受注日 = '" & UtilClass.strFormatDate(DtpOrderDate.Value) & "'"
                 Sql1 += " , 更新日 = '" & dtNow & "'"
                 Sql1 += " , 更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
 
-                Sql1 += " WHERE 会社コード ='" & CompanyCode & "'"
+                Sql1 += " WHERE 会社コード ='" & frmC01F10_Login.loginValue.BumonCD & "'"
                 Sql1 += " AND 受注番号 ='" & OrderNo & "'"
                 Sql1 += " AND 受注番号枝番 ='" & OrderSuffix & "'"
 
@@ -1094,37 +1043,12 @@ Public Class Order
         Me.Dispose()
 
     End Sub
-    ''' <summary>
-    ''' 指定した文字列から指定した文字を全て削除する
-    ''' </summary>
-    ''' <param name="s">対象となる文字列。</param>
-    ''' <returns>sに含まれている全てのcharacters文字が削除された文字列。</returns>
-    Public Shared Function RevoveChars(s As String) As String
-        Dim buf As New System.Text.StringBuilder(s)
-        '削除する文字の配列
-        Dim removeChars As Char() = New Char() {vbCr, vbLf, Chr(39)}
-
-        For Each c As Char In removeChars
-            buf.Replace(c.ToString(), "")
-        Next
-        Return buf.ToString()
-    End Function
 
     'param1：String テーブル名
     'param2：String 詳細条件
     'Return: DataSet
     Private Function getDsData(ByVal tableName As String, Optional ByRef txtParam As String = "") As DataSet
-        Dim reccnt As Integer = 0 'DB用（デフォルト）
-        Dim Sql As String = ""
-
-        Sql += "SELECT * FROM "
-
-        Sql += "public." & tableName
-        Sql += " WHERE "
-        Sql += "会社コード ILIKE '" & frmC01F10_Login.loginValue.BumonCD & "'"
-        Sql += txtParam
-
-        Return _db.selectDB(Sql, RS, reccnt)
+        Return _com.getDsData(tableName, txtParam)
     End Function
 
     'Return: DataTable
@@ -1187,7 +1111,7 @@ Public Class Order
             Dim tmp4 As Decimal = 0
 
             If DgvItemList.Rows.Count = 0 Then
-                Exit Sub
+                GoTo saigo_
             End If
 
             '仕入通貨が変更されたら仕入レートを更新する
@@ -1226,97 +1150,97 @@ Public Class Order
             If Not IsNumeric(DgvItemList.Rows(e.RowIndex).Cells("数量").Value) And (DgvItemList.Rows(e.RowIndex).Cells("数量").Value IsNot Nothing) Then
                 MessageBox.Show("Please enter with numeric value.", "Quantity Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 DgvItemList.Rows(e.RowIndex).Cells("数量").Value = Nothing
-                Exit Sub
+                GoTo saigo_
             End If
             If Not IsNumeric(DgvItemList.Rows(e.RowIndex).Cells("仕入値").Value) And (DgvItemList.Rows(e.RowIndex).Cells("仕入値").Value IsNot Nothing) Then
                 MessageBox.Show("Please enter with numeric value.", "PurchaseUnitPrice Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 DgvItemList.Rows(e.RowIndex).Cells("仕入値").Value = Nothing
-                Exit Sub
+                GoTo saigo_
             End If
             If Not IsNumeric(DgvItemList.Rows(e.RowIndex).Cells("仕入単価_外貨").Value) And (DgvItemList.Rows(e.RowIndex).Cells("仕入単価_外貨").Value IsNot Nothing) Then
                 MessageBox.Show("Please enter with numeric value.", "PurchaseUnitPrice Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 DgvItemList.Rows(e.RowIndex).Cells("仕入単価_外貨").Value = Nothing
-                Exit Sub
+                GoTo saigo_
             End If
             If Not IsNumeric(DgvItemList.Rows(e.RowIndex).Cells("仕入原価").Value) And (DgvItemList.Rows(e.RowIndex).Cells("仕入原価").Value IsNot Nothing) Then
                 MessageBox.Show("Please enter with numeric value.", "PurchasingCost Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 DgvItemList.Rows(e.RowIndex).Cells("仕入原価").Value = Nothing
-                Exit Sub
+                GoTo saigo_
             End If
             If Not IsNumeric(DgvItemList.Rows(e.RowIndex).Cells("関税率").Value) And (DgvItemList.Rows(e.RowIndex).Cells("関税率").Value IsNot Nothing) Then
                 MessageBox.Show("Please enter with numeric value.", "CustomsDutyRate Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 DgvItemList.Rows(e.RowIndex).Cells("関税率").Value = Nothing
-                Exit Sub
+                GoTo saigo_
             End If
             If Not IsNumeric(DgvItemList.Rows(e.RowIndex).Cells("関税額").Value) And (DgvItemList.Rows(e.RowIndex).Cells("関税額").Value IsNot Nothing) Then
                 MessageBox.Show("Please enter with numeric value.", "CustomsDuty Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 DgvItemList.Rows(e.RowIndex).Cells("関税額").Value = Nothing
-                Exit Sub
+                GoTo saigo_
             End If
             If Not IsNumeric(DgvItemList.Rows(e.RowIndex).Cells("前払法人税率").Value) And (DgvItemList.Rows(e.RowIndex).Cells("前払法人税率").Value IsNot Nothing) Then
                 MessageBox.Show("Please enter with numeric value.", "PrepaidCorporateTaxRate Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 DgvItemList.Rows(e.RowIndex).Cells("前払法人税率").Value = Nothing
-                Exit Sub
+                GoTo saigo_
             End If
             If Not IsNumeric(DgvItemList.Rows(e.RowIndex).Cells("前払法人税額").Value) And (DgvItemList.Rows(e.RowIndex).Cells("前払法人税額").Value IsNot Nothing) Then
                 MessageBox.Show("Please enter with numeric value.", "PrepaidCorporateTaxAmount Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 DgvItemList.Rows(e.RowIndex).Cells("前払法人税額").Value = Nothing
-                Exit Sub
+                GoTo saigo_
             End If
             If Not IsNumeric(DgvItemList.Rows(e.RowIndex).Cells("輸送費率").Value) And (DgvItemList.Rows(e.RowIndex).Cells("輸送費率").Value IsNot Nothing) Then
                 MessageBox.Show("Please enter with numeric value.", "TransportationCostRate Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 DgvItemList.Rows(e.RowIndex).Cells("輸送費率").Value = Nothing
-                Exit Sub
+                GoTo saigo_
             End If
             If Not IsNumeric(DgvItemList.Rows(e.RowIndex).Cells("輸送費額").Value) And (DgvItemList.Rows(e.RowIndex).Cells("輸送費額").Value IsNot Nothing) Then
                 MessageBox.Show("Please enter with numeric value.", "TransportationCost Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 DgvItemList.Rows(e.RowIndex).Cells("輸送費額").Value = Nothing
-                Exit Sub
+                GoTo saigo_
             End If
             If Not IsNumeric(DgvItemList.Rows(e.RowIndex).Cells("仕入金額").Value) And (DgvItemList.Rows(e.RowIndex).Cells("仕入金額").Value IsNot Nothing) Then
                 MessageBox.Show("Please enter with numeric value.", "PurchaseAmount Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 DgvItemList.Rows(e.RowIndex).Cells("仕入金額").Value = Nothing
-                Exit Sub
+                GoTo saigo_
             End If
             If Not IsNumeric(DgvItemList.Rows(e.RowIndex).Cells("売単価").Value) And (DgvItemList.Rows(e.RowIndex).Cells("売単価").Value IsNot Nothing) Then
                 MessageBox.Show("Please enter with numeric value.", "SellingPrice Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 DgvItemList.Rows(e.RowIndex).Cells("売単価").Value = Nothing
-                Exit Sub
+                GoTo saigo_
             End If
             If Not IsNumeric(DgvItemList.Rows(e.RowIndex).Cells("売上金額").Value) And (DgvItemList.Rows(e.RowIndex).Cells("売上金額").Value IsNot Nothing) Then
                 MessageBox.Show("Please enter with numeric value.", "SalesAmount Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 DgvItemList.Rows(e.RowIndex).Cells("売上金額").Value = Nothing
-                Exit Sub
+                GoTo saigo_
             End If
             If Not IsNumeric(DgvItemList.Rows(e.RowIndex).Cells("見積単価").Value) And (DgvItemList.Rows(e.RowIndex).Cells("見積単価").Value IsNot Nothing) Then
                 MessageBox.Show("Please enter with numeric value.", "QuotetionPrice Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 DgvItemList.Rows(e.RowIndex).Cells("見積単価").Value = Nothing
-                Exit Sub
+                GoTo saigo_
             End If
             If Not IsNumeric(DgvItemList.Rows(e.RowIndex).Cells("見積単価_外貨").Value) And (DgvItemList.Rows(e.RowIndex).Cells("見積単価_外貨").Value IsNot Nothing) Then
                 MessageBox.Show("Please enter with numeric value.", "QuotetionPrice Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 DgvItemList.Rows(e.RowIndex).Cells("見積単価_外貨").Value = Nothing
-                Exit Sub
+                GoTo saigo_
             End If
             If Not IsNumeric(DgvItemList.Rows(e.RowIndex).Cells("見積金額").Value) And (DgvItemList.Rows(e.RowIndex).Cells("見積金額").Value IsNot Nothing) Then
                 MessageBox.Show("Please enter with numeric value.", "QuotetionAmount Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 DgvItemList.Rows(e.RowIndex).Cells("見積金額").Value = Nothing
-                Exit Sub
+                GoTo saigo_
             End If
             If Not IsNumeric(DgvItemList.Rows(e.RowIndex).Cells("見積金額_外貨").Value) And (DgvItemList.Rows(e.RowIndex).Cells("見積金額_外貨").Value IsNot Nothing) Then
                 MessageBox.Show("Please enter with numeric value.", "QuotetionAmount Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 DgvItemList.Rows(e.RowIndex).Cells("見積金額_外貨").Value = Nothing
-                Exit Sub
+                GoTo saigo_
             End If
             If Not IsNumeric(DgvItemList.Rows(e.RowIndex).Cells("粗利額").Value) And (DgvItemList.Rows(e.RowIndex).Cells("粗利額").Value IsNot Nothing) Then
                 MessageBox.Show("Please enter with numeric value.", "GrossMargin Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 DgvItemList.Rows(e.RowIndex).Cells("粗利額").Value = Nothing
-                Exit Sub
+                GoTo saigo_
             End If
             If Not IsNumeric(DgvItemList.Rows(e.RowIndex).Cells("粗利率").Value) And (DgvItemList.Rows(e.RowIndex).Cells("粗利率").Value IsNot Nothing) Then
                 MessageBox.Show("Please enter with numeric value.", "GrossMarginRate(%) Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 DgvItemList.Rows(e.RowIndex).Cells("粗利率").Value = Nothing
-                Exit Sub
+                GoTo saigo_
             End If
 
             Try
@@ -1487,32 +1411,10 @@ Public Class Order
 
         End If
 
+saigo_:
+        setCellValueChanged()
 
     End Sub
-
-    'Return: DataTable
-    Private Function getReadTime() As DataTable
-
-        Dim Sql As String = ""
-        Sql += " AND 固定キー = '" & CommonConst.FIXED_KEY_READTIME & "'"
-
-        Dim ds As DataSet = getDsData("m90_hanyo", Sql)
-
-        Dim table As New DataTable("Table")
-        table.Columns.Add("Display", GetType(String))
-        table.Columns.Add("Value", GetType(Integer))
-
-        'リードタイム単位の多言語対応
-        For i As Integer = 0 To ds.Tables(RS).Rows.Count - 1
-            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
-                table.Rows.Add(ds.Tables(RS).Rows(i)("文字２"), ds.Tables(RS).Rows(i)("可変キー"))
-            Else
-                table.Rows.Add(ds.Tables(RS).Rows(i)("文字１"), ds.Tables(RS).Rows(i)("可変キー"))
-            End If
-
-        Next
-        Return table
-    End Function
 
     Private Function setSireCurrency(Optional ByRef prmCurrencyVal As Integer = CommonConst.CURRENCY_CD_IDR)
         Dim retVal As Decimal
@@ -1588,36 +1490,7 @@ Public Class Order
     '通貨の採番キーからレートを取得・設定
     '基準日が見積日「以前」の最新のもの
     Private Sub setRate()
-        Dim Sql As String
-
-        Sql = " AND 採番キー = " & CmCurrency.SelectedValue.ToString & ""
-        Sql += " AND 基準日 < '" & UtilClass.strFormatDate(DtpQuoteDate.Text) & "'"
-        Sql += " ORDER BY 基準日 DESC "
-
-        Dim ds As DataSet = getDsData("t71_exchangerate", Sql)
-
-        If ds.Tables(RS).Rows.Count > 0 Then
-            TxtRate.Text = ds.Tables(RS).Rows(0)("レート")
-        Else
-            'If CultureInfo.CurrentCulture.Name.ToString = CommonConst.CI_ID Then
-            '    TxtRate.Text = CommonConst.BASE_RATE_IDR
-            'Else
-            '    TxtRate.Text = CommonConst.BASE_RATE_JPY
-            'End If
-            TxtRate.Text = 1.ToString("F10")
-        End If
-
-    End Sub
-
-    Private Sub setBaseCurrency()
-        Dim Sql As String
-        '通貨表示：ベースの設定
-        Sql = " AND 採番キー = " & CommonConst.CURRENCY_CD_IDR.ToString
-        Sql += " AND 取消区分 = " & CommonConst.CANCEL_KBN_ENABLED.ToString
-
-        Dim ds As DataSet = getDsData("m25_currency", Sql)
-        TxtIDRCurrency.Text = ds.Tables(RS).Rows(0)("通貨コード")
-
+        TxtRate.Text = _com.setRate(CmCurrency.SelectedValue.ToString, UtilClass.strFormatDate(DtpQuoteDate.Text))
     End Sub
 
     '通貨表示：通貨変更の設定
