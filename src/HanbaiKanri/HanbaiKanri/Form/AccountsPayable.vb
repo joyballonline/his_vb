@@ -34,12 +34,15 @@ Public Class AccountsPayable
     Private _gh As UtilDataGridViewHandler
     Private _init As Boolean                             '初期処理済フラグ
 
-    Private CompanyCode As String = ""
+    'Private CompanyCode As String = ""
     Private HattyuNo As String = ""
     Private Suffix As String = ""
     Private _parentForm As Form
     Private _status As String = ""
-    Private checkAdd As Integer
+    'Private checkAdd As Integer
+    Private _com As CommonLogic
+    Private _vs As String = "1"
+
 
     '-------------------------------------------------------------------------------
     'デフォルトコンストラクタ（隠蔽）
@@ -73,10 +76,12 @@ Public Class AccountsPayable
         _status = prmRefStatus
         '_gh = New UtilDataGridViewHandler(dgvLIST)                          'DataGridViewユーティリティクラス
         StartPosition = FormStartPosition.CenterScreen                      '画面中央表示
+        Me.Text += _vs
         Me.Text = Me.Text & "[" & frmC01F10_Login.loginValue.BumonNM & "][" & frmC01F10_Login.loginValue.TantoNM & "]" & StartUp.BackUpServerPrint                                  'フォームタイトル表示
         Me.ControlBox = Not Me.ControlBox
         DtpAPDate.Value = Date.Now
         DtpPaymentDate.Value = Date.Now
+        _com = New CommonLogic(_db, _msgHd)
         _init = True
 
     End Sub
@@ -154,18 +159,16 @@ Public Class AccountsPayable
 
 
             DgvCymn.Height = 67
-            Label1.Text = "Order vouchers"
+            Label1.Text = "PurchaseOrder"
             LblIDRCurrency.Text = "Currency"
 
-
-
-            DgvCymn.Columns("発注番号").HeaderText = "PurchaseOrderNumber"
-            DgvCymn.Columns("発注番号枝番").HeaderText = "PurchaseOrderVer."
+            DgvCymn.Columns("発注番号").HeaderText = _langHd.getLANG("発注番号", frmC01F10_Login.loginValue.Language)
+            DgvCymn.Columns("発注番号枝番").HeaderText = _langHd.getLANG("発注番号枝番", frmC01F10_Login.loginValue.Language)
             DgvCymn.Columns("発注日").HeaderText = "OrderDate"
 
             DgvCymn.Columns("仕入先コード").HeaderText = "SupplierCode"
             DgvCymn.Columns("仕入先").HeaderText = "SupplierName"
-            DgvCymn.Columns("客先番号").HeaderText = "CustomerNumber"
+            DgvCymn.Columns("客先番号").HeaderText = _langHd.getLANG("客先番号", frmC01F10_Login.loginValue.Language)
 
             DgvCymn.Columns("仕入原価").HeaderText = "PurchaseCost" & vbCrLf & "a"
             DgvCymn.Columns("VAT_IN").HeaderText = "VAT-IN" & vbCrLf & "b"
@@ -183,8 +186,8 @@ Public Class AccountsPayable
             DgvCymndt.Columns("仕入数量").HeaderText = "PurchaseQuantity" & vbCrLf & "f"
             DgvCymndt.Columns("仕入単価").HeaderText = "PurchaseUnitPrice" & vbCrLf & "g"
             DgvCymndt.Columns("仕入金額").HeaderText = "PurchaseCost" & vbCrLf & "h=f*g"
-            DgvCymndt.Columns("VAT").HeaderText = "VAT-IN"
-            DgvCymndt.Columns("仕入金額計").HeaderText = "PurchaseCostSum"
+            DgvCymndt.Columns("VAT").HeaderText = "VAT-IN" & vbCrLf & "i"
+            DgvCymndt.Columns("仕入金額計").HeaderText = "PurchaseCostSum" & vbCrLf & "j=h+i"
 
             DgvCymndt.Columns("買掛").HeaderText = "Payable"
 
@@ -309,9 +312,10 @@ Public Class AccountsPayable
         DgvCymndt.Columns("仕入金額計").DefaultCellStyle.Format = "N2"
 
         DgvHistory.Columns("買掛金額").DefaultCellStyle.Format = "N2"
+        DgvHistory.Columns("VAT2").DefaultCellStyle.Format = "N2"
 
         DgvAdd.Columns("今回買掛金額計").DefaultCellStyle.Format = "N2"
-
+        DgvAdd.Columns("VAT3").DefaultCellStyle.Format = "N2"
 
         '右寄せ
         DgvCymn.Columns("仕入原価").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
@@ -334,9 +338,6 @@ Public Class AccountsPayable
         Dim reccnt As Integer = 0
         Dim Sql As String = ""
         Dim AccountsPayable As Decimal = 0 '買掛残高を集計
-        Dim curds As DataSet  'm25_currency
-        Dim cur As String
-
         Dim PurchaseCostFC As Decimal = 0  '仕入原価_外貨
         Dim PurchaseAmountFC As Decimal = 0  '仕入金額_外貨
         Dim VAT_FC As Decimal = 0
@@ -383,16 +384,7 @@ Public Class AccountsPayable
 
         Dim dsKikehd As DataSet = getDsData("t46_kikehd", Sql)
 
-
-        If IsDBNull(dsHattyu.Tables(RS).Rows(0)("通貨")) Then
-            cur = vbNullString
-        Else
-            Sql = " and 採番キー = " & dsHattyu.Tables(RS).Rows(0)("通貨")
-            curds = getDsData("m25_currency", Sql)
-
-            cur = curds.Tables(RS).Rows(0)("通貨コード")
-        End If
-        TxtIDRCurrency.Text = cur  '通貨
+        TxtIDRCurrency.Text = _com.getCurrencyEx(dsHattyu.Tables(RS).Rows(0)("通貨"))
 
         If dsKikehd.Tables(RS).Rows.Count > 0 Then
             '買掛データがある場合
@@ -411,7 +403,7 @@ Public Class AccountsPayable
             PurchaseCostFC = PurchaseCostFC + (dsHattyudt.Tables(RS).Rows(i)("仕入値_外貨") * dsHattyudt.Tables(RS).Rows(i)("発注数量"))
         Next
 
-        VAT_FC = Math.Round(PurchaseCostFC * dsHattyu.Tables(RS).Rows(0)("ＶＡＴ").ToString / 100, 2)
+        VAT_FC = UtilClass.VAT_round_AP(dsHattyu.Tables(RS).Rows(0)("ＶＡＴ"), PurchaseCostFC) 'Math.Round(PurchaseCostFC * dsHattyu.Tables(RS).Rows(0)("ＶＡＴ").ToString / 100, 2)
         PurchaseAmountFC = PurchaseCostFC + VAT_FC
 
         DgvCymn.Rows.Add()
@@ -435,7 +427,7 @@ Public Class AccountsPayable
         'DtpAPDate.MinDate = dsHattyu.Tables(RS).Rows(0)("発注日").ToShortDateString()
         'DtpPaymentDate.MinDate = dsHattyu.Tables(RS).Rows(0)("発注日").ToShortDateString()
 
-        checkAdd = DgvCymn.Rows(0).Cells("買掛残高").Value
+        'checkAdd = DgvCymn.Rows(0).Cells("買掛残高").Value
 
         For i As Integer = 0 To dsHattyudt.Tables(RS).Rows.Count - 1
             DgvCymndt.Rows.Add()
@@ -448,7 +440,7 @@ Public Class AccountsPayable
             DgvCymndt.Rows(i).Cells("仕入数量").Value = dsHattyudt.Tables(RS).Rows(i)("発注数量")
             DgvCymndt.Rows(i).Cells("仕入単価").Value = dsHattyudt.Tables(RS).Rows(i)("仕入値_外貨")
             DgvCymndt.Rows(i).Cells("仕入金額").Value = dsHattyudt.Tables(RS).Rows(i)("仕入値_外貨") * dsHattyudt.Tables(RS).Rows(i)("発注数量")
-            DgvCymndt.Rows(i).Cells("VAT").Value = (DgvCymndt.Rows(i).Cells("仕入金額").Value * dsHattyu.Tables(RS).Rows(0)("VAT") / 100)
+            DgvCymndt.Rows(i).Cells("VAT").Value = UtilClass.VAT_round_AP(dsHattyu.Tables(RS).Rows(0)("VAT"), DgvCymndt.Rows(i).Cells("仕入金額").Value) ' * dsHattyu.Tables(RS).Rows(0)("VAT") / 100)
             DgvCymndt.Rows(i).Cells("仕入金額計").Value = DgvCymndt.Rows(i).Cells("仕入金額").Value + DgvCymndt.Rows(i).Cells("VAT").Value
 
             DgvCymndt.Rows(i).Cells("買掛").Value = False
@@ -488,11 +480,12 @@ Public Class AccountsPayable
             DgvHistory.Rows(i).Cells("備考2").Value = dsKikehd.Tables(RS).Rows(i)("備考2")
             DgvHistory.Rows(i).Cells("買掛済み発注番号").Value = dsKikehd.Tables(RS).Rows(i)("発注番号")
             DgvHistory.Rows(i).Cells("買掛済み発注番号枝番").Value = dsKikehd.Tables(RS).Rows(i)("発注番号枝番")
+            DgvHistory.Rows(i).Cells("VAT2").Value = dsKikehd.Tables(RS).Rows(i)("買掛消費税計")
         Next
 
         TxtKikehdCount.Text = dsKikehd.Tables(RS).Rows.Count
 
-        If dsHattyu.Tables(RS).Rows(0)("仕入金額") - AccountsPayable <> 0 Then
+        If DgvCymn.Rows(0).Cells("買掛残高").Value > 0 Then 'dsHattyu.Tables(RS).Rows(0)("仕入金額") - AccountsPayable <> 0 Then
             DgvAdd.Rows.Add()
             DgvAdd.Rows(0).Cells("AddNo").Value = 1
             DgvAdd(1, 0).Value = 2
@@ -500,6 +493,7 @@ Public Class AccountsPayable
 
             '自動で買掛残高をセットする
             DgvAdd.Rows(0).Cells("今回買掛金額計").Value = DgvCymn.Rows(0).Cells("買掛残高").Value
+            DgvAdd.Rows(0).Cells("VAT3").Value = UtilClass.intax(DgvAdd.Rows(0).Cells("今回買掛金額計").Value, dsHattyu.Tables(RS).Rows(0)("ＶＡＴ"))
 
             TxtCount3.Text = 1
         End If
@@ -536,7 +530,7 @@ Public Class AccountsPayable
 
             Dim Sql As String = ""
 
-            Dim AP As String = getSaiban("100", dtToday)
+            'Dim AP As String = getSaiban("100", dtToday)
 
             Sql = " AND 発注番号 = '" & HattyuNo & "'"
             Sql += " AND 発注番号枝番 = '" & Suffix & "'"
@@ -557,8 +551,8 @@ Public Class AccountsPayable
             dsKikehd.Tables(RS).Compute("SUM(買掛金額計_外貨)", Nothing),
             0)
 
-            Dim APTotal As Decimal = DgvAdd.Rows(0).Cells("今回買掛金額計").Value + AccountsPayable
-            Dim Balance As Decimal = dsHattyu.Tables(RS).Rows(0)("仕入金額") - APTotal
+            'Dim APTotal As Decimal = DgvAdd.Rows(0).Cells("今回買掛金額計").Value + AccountsPayable
+            'Dim Balance As Decimal = dsHattyu.Tables(RS).Rows(0)("仕入金額") - APTotal
 
             'If Balance < 0 Then
             '    '対象データがないメッセージを表示
@@ -575,7 +569,7 @@ Public Class AccountsPayable
             End If
 
             'レートの取得
-            Dim strRate As Decimal = setRate(dsHattyu.Tables(RS).Rows(0)("通貨").ToString())
+            Dim strRate As Decimal = _com.setRate(dsHattyu.Tables(RS).Rows(0)("通貨"), UtilClass.strFormatDate(DtpAPDate.Text))
 
 
             '今回買掛金額計
@@ -590,13 +584,14 @@ Public Class AccountsPayable
             AccountsPayableFC = DgvAdd.Rows(0).Cells("今回買掛金額計").Value
             AccountsPayable = Math.Ceiling(AccountsPayableFC / strRate)  '画面の金額をIDRに変換　切り上げ
 
+            Dim AP As String = _com.getSaiban("100", dtToday)
 
             Sql = "INSERT INTO "
             Sql += "Public."
             Sql += "t46_kikehd("
             Sql += "会社コード, 買掛番号, 買掛区分, 買掛日, 発注番号, 発注番号枝番, 客先番号, 仕入先コード, 仕入先名, 買掛金額計, 買掛残高"
             Sql += ", 備考1, 備考2, 取消区分, 登録日, 更新者, 更新日, 支払予定日"
-            Sql += ", 買掛金額計_外貨, 買掛残高_外貨, 通貨, レート, 仕入先請求番号)"
+            Sql += ", 買掛金額計_外貨, 買掛残高_外貨, 通貨, レート, 仕入先請求番号, 買掛消費税計)"
 
             Sql += " VALUES('"
             Sql += dsHattyu.Tables(RS).Rows(0)("会社コード").ToString '会社コード
@@ -617,9 +612,9 @@ Public Class AccountsPayable
             Sql += "', '"
             Sql += dsHattyu.Tables(RS).Rows(0)("仕入先名").ToString '仕入先名
             Sql += "', "
-            Sql += formatStringToNumber(BuyToHangAmount) '買掛金額計
+            Sql += UtilClass.formatNumber(BuyToHangAmount) '買掛金額計
             Sql += ", "
-            Sql += formatStringToNumber(AccountsPayable) '買掛残高
+            Sql += UtilClass.formatNumber(AccountsPayable) '買掛残高
             Sql += ", '"
             Sql += DgvAdd.Rows(0).Cells("今回備考1").Value '備考1
             Sql += "', '"
@@ -636,9 +631,9 @@ Public Class AccountsPayable
             Sql += UtilClass.strFormatDate(DtpPaymentDate.Value) '支払予定日
 
             Sql += "',"
-            Sql += formatStringToNumber(BuyToHangAmountFC) '買掛金額計_外貨
+            Sql += UtilClass.formatNumber(BuyToHangAmountFC) '買掛金額計_外貨
             Sql += ","
-            Sql += formatStringToNumber(AccountsPayableFC) '買掛残高_外貨
+            Sql += UtilClass.formatNumber(AccountsPayableFC) '買掛残高_外貨
 
             Sql += ","
             Sql += dsHattyu.Tables(RS).Rows(0)("通貨").ToString() '通貨
@@ -647,8 +642,9 @@ Public Class AccountsPayable
 
             Sql += "','"
             Sql += VendorInvoiceNumber.Text  '仕入先請求番号
-
-            Sql += "')"
+            Sql += "',"
+            Sql += UtilClass.formatNumber(DgvAdd.Rows(0).Cells("VAT3").Value)
+            Sql += ")"
 
             _db.executeDB(Sql)
 
@@ -666,91 +662,6 @@ Public Class AccountsPayable
 
 
     End Sub
-
-
-    '通貨の採番キーからレートを取得・設定
-    '基準日が買掛日「以前」の最新のもの
-    Private Function setRate(ByVal strKey As Integer) As Decimal
-        Dim Sql As String
-
-        Sql = " AND 採番キー = " & strKey & ""
-        Sql += " AND 基準日 < '" & UtilClass.strFormatDate(DtpAPDate.Text) & "'"  '買掛日
-        Sql += " ORDER BY 基準日 DESC "
-
-        Dim ds As DataSet = getDsData("t71_exchangerate", Sql)
-
-        If ds.Tables(RS).Rows.Count > 0 Then
-            setRate = ds.Tables(RS).Rows(0)("レート")
-        Else
-            'If CultureInfo.CurrentCulture.Name.ToString = CommonConst.CI_ID Then
-            '    setRate = CommonConst.BASE_RATE_IDR
-            'Else
-            '    setRate = CommonConst.BASE_RATE_JPY
-            'End If
-            setRate = 1.ToString("F10")
-        End If
-
-    End Function
-
-    '金額フォーマット（登録の際の小数点指定子）を日本の形式に合わせる
-    '桁区切り記号は外す
-    Private Function formatStringToNumber(ByVal prmVal As String) As String
-
-        Dim decVal As Decimal = Decimal.Parse(prmVal)
-
-        Dim nfi As NumberFormatInfo = New CultureInfo(CommonConst.CI_JP, False).NumberFormat
-
-        '日本の形式に書き換える
-        Return decVal.ToString("F3", nfi)
-    End Function
-
-    'param1：String 採番キー
-    'param2：DateTime 登録日
-    'Return: String 伝票番号
-    '伝票番号を取得
-    Private Function getSaiban(ByVal key As String, ByVal today As DateTime) As String
-        Dim Sql As String = ""
-        Dim saibanID As String = ""
-        Dim reccnt As Integer = 0 'DB用（デフォルト）
-
-        Try
-            Sql = "SELECT * FROM public.m80_saiban"
-            Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-            Sql += " AND 採番キー = '" & key & "'"
-
-            Dim dsSaiban As DataSet = _db.selectDB(Sql, RS, reccnt)
-
-            saibanID = dsSaiban.Tables(RS).Rows(0)("接頭文字")
-            saibanID += today.ToString("MMdd")
-            saibanID += dsSaiban.Tables(RS).Rows(0)("最新値").ToString.PadLeft(dsSaiban.Tables(RS).Rows(0)("連番桁数"), "0")
-
-            Dim keyNo As Integer
-
-            If dsSaiban.Tables(RS).Rows(0)("最新値") = dsSaiban.Tables(RS).Rows(0)("最大値") Then
-                '最新値が最大と同じ場合、最小値にリセット
-                keyNo = dsSaiban.Tables(RS).Rows(0)("最小値")
-            Else
-                '最新値+1
-                keyNo = dsSaiban.Tables(RS).Rows(0)("最新値") + 1
-            End If
-
-            Sql = "UPDATE Public.m80_saiban "
-            Sql += "SET "
-            Sql += " 最新値  = '" & keyNo.ToString & "'"
-            Sql += ", 更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
-            Sql += ", 更新日 = '" & UtilClass.formatDatetime(today) & "'"
-            Sql += " WHERE 会社コード ='" & frmC01F10_Login.loginValue.BumonCD & "'"
-            Sql += " AND 採番キー = '" & key & "'"
-            Console.WriteLine(Sql)
-            _db.executeDB(Sql)
-
-            Return saibanID
-        Catch ex As Exception
-            'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
-            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
-        End Try
-
-    End Function
 
     '支払入力セルの値が変更されたら
     Private Sub DgvAddCellValueChanged(ByVal sender As Object, ByVal e As DataGridViewCellEventArgs) Handles DgvAdd.CellValueChanged
@@ -786,14 +697,7 @@ Public Class AccountsPayable
     'param2：String 詳細条件
     'Return: DataSet
     Private Function getDsData(ByVal tableName As String, Optional ByRef txtParam As String = "") As DataSet
-        Dim reccnt As Integer = 0 'DB用（デフォルト）
-        Dim Sql As String = ""
-
-        Sql += "SELECT * FROM public." & tableName
-        Sql += " WHERE "
-        Sql += "会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-        Sql += txtParam
-        Return _db.selectDB(Sql, RS, reccnt)
+        Return _com.getDsData(tableName, txtParam) 'b.selectDB(Sql, RS, reccnt)
     End Function
 
     'DGV内で指定列名(プルダウン)は一度のクリックで開く

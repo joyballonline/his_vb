@@ -1193,4 +1193,8 @@ Public Class UtilClass
         Return Math.Round(dFC, 2)
     End Function
 
+    Public Shared Function intax(y As Decimal, v As Decimal) As Decimal
+        Return y * (v / (100 + v))
+    End Function
+
 End Class
