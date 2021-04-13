@@ -73,6 +73,9 @@ Public Class CustomerList
     'ロード時
     Private Sub CustomerList_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        DtpFrom.Value = DateAdd(DateInterval.Month, -3, Now)
+        DtpTo.Value = Now
+
         CustomerListLoad()
 
         If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
@@ -141,12 +144,13 @@ Public Class CustomerList
     Private Sub CustomerListLoad()
         Dim Sql As String = ""
         Dim reccnt As Integer = 0
+        Me.Cursor = Cursors.WaitCursor
 
         'Dim curds As DataSet  'm25_currency
         'Dim cur As String
 
         'リストクリア
-        DgvCustomer.Rows.Clear()
+        'DgvCustomer.Rows.Clear()
 
         'Sql += searchConditions()
 
@@ -275,6 +279,8 @@ Public Class CustomerList
 
         Next
 
+        Me.Cursor = DefaultCursor
+
     End Sub
 
     '戻るボタン押下時
@@ -327,7 +333,8 @@ Public Class CustomerList
             Sql += " AND "
             Sql += " 得意先名 ILIKE '%" & customerName & "%' "
         End If
-
+        Sql += "AND 請求日>'" & UtilClass.formatDatetime(DtpFrom.Value) & "' AND 請求日<'" & UtilClass.formatDatetime(DtpTo.Value) & "' "
+        Sql += " AND 得意先コード in (select 得意先コード from m10_customer where 会社コード='" & frmC01F10_Login.loginValue.BumonCD & "' and is_active=0) "
         Return Sql
 
     End Function

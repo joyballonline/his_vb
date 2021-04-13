@@ -132,7 +132,8 @@ Public Class MstCustomer
             Sql += "m90.文字１, "
             Sql += "m90.文字２, "
             Sql += "m10.更新者, "
-            Sql += "m10.更新日 "
+            Sql += "m10.更新日, "
+            Sql += "m10.is_active "
             Sql += "FROM "
             Sql += "public"
             Sql += "."
@@ -184,6 +185,7 @@ Public Class MstCustomer
                                                                ds.Tables(RS).Rows(i)("文字１"))
                 Dgv_Customer.Rows(i).Cells("更新者").Value = ds.Tables(RS).Rows(i)("更新者")
                 Dgv_Customer.Rows(i).Cells("更新日").Value = ds.Tables(RS).Rows(i)("更新日")
+                Dgv_Customer.Rows(i).Cells("ACTIVE").Value = IIf(ds.Tables(RS).Rows(i)("is_active") = 0, True, False)
 
             Next
 
@@ -244,9 +246,6 @@ Public Class MstCustomer
         Dim book As Excel.Workbook = Nothing
         Dim sheet As Excel.Worksheet = Nothing
 
-        'Dim strSelectYear As String = cmbYear.SelectedValue.ToString()
-        'Dim strSelectMonth As String = cmbMonth.SelectedValue.ToString()
-
         ' セル
         Dim xlRngTmp As Range = Nothing
         Dim xlRng As Range = Nothing
@@ -274,8 +273,8 @@ Public Class MstCustomer
             sheet.PageSetup.RightHeader = "OutputDate：" & DateTime.Now.ToShortDateString
 
             If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
-                sheet.PageSetup.LeftHeader = "SPIN"
-                sheet.PageSetup.CenterHeader = "Customer List"
+                'sheet.PageSetup.LeftHeader = "SPIN"
+                'sheet.PageSetup.CenterHeader = "Customer List"
                 sheet.Range("A1").Value = "CustomerCode"
                 sheet.Range("B1").Value = "CustomerName"
                 sheet.Range("C1").Value = "CustomerShortName"
@@ -331,7 +330,6 @@ Public Class MstCustomer
 
             '最後に合計行の追加
             cellRowIndex += 1
-            'sheet.Range("K" & cellRowIndex.ToString).Value = TxtSalesAmount.Text '粗利率
 
             ' 境界線オブジェクトを作成 →7行目の下部に罫線を描画する
             xlBorders = xlRngTmp.Borders

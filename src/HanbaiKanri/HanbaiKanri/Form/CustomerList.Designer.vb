@@ -47,6 +47,9 @@ Partial Class CustomerList
         Me.請求件数 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.会社コード = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.通貨_外貨コード = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DtpFrom = New System.Windows.Forms.DateTimePicker()
+        Me.DtpTo = New System.Windows.Forms.DateTimePicker()
+        Me.Label1 = New System.Windows.Forms.Label()
         CType(Me.DgvCustomer, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -234,10 +237,38 @@ Partial Class CustomerList
         Me.通貨_外貨コード.ReadOnly = True
         Me.通貨_外貨コード.Visible = False
         '
+        'DtpFrom
+        '
+        Me.DtpFrom.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.DtpFrom.Location = New System.Drawing.Point(343, 12)
+        Me.DtpFrom.Name = "DtpFrom"
+        Me.DtpFrom.Size = New System.Drawing.Size(101, 20)
+        Me.DtpFrom.TabIndex = 19
+        '
+        'DtpTo
+        '
+        Me.DtpTo.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.DtpTo.Location = New System.Drawing.Point(467, 12)
+        Me.DtpTo.Name = "DtpTo"
+        Me.DtpTo.Size = New System.Drawing.Size(101, 20)
+        Me.DtpTo.TabIndex = 20
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(450, 15)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(13, 13)
+        Me.Label1.TabIndex = 21
+        Me.Label1.Text = "--"
+        '
         'CustomerList
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.ClientSize = New System.Drawing.Size(1350, 561)
+        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.DtpTo)
+        Me.Controls.Add(Me.DtpFrom)
         Me.Controls.Add(Me.DgvCustomer)
         Me.Controls.Add(Me.BtnSearch)
         Me.Controls.Add(Me.TxtSearch)
@@ -274,4 +305,7 @@ Partial Class CustomerList
     Friend WithEvents 請求件数 As DataGridViewTextBoxColumn
     Friend WithEvents 会社コード As DataGridViewTextBoxColumn
     Friend WithEvents 通貨_外貨コード As DataGridViewTextBoxColumn
+    Friend WithEvents DtpFrom As DateTimePicker
+    Friend WithEvents DtpTo As DateTimePicker
+    Friend WithEvents Label1 As Label
 End Class

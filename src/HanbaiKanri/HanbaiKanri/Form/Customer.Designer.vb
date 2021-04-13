@@ -62,6 +62,7 @@ Partial Class Customer
         Me.TxtAccountingVendorCode = New System.Windows.Forms.TextBox()
         Me.cmDomesticKbn = New System.Windows.Forms.ComboBox()
         Me.LblDomesticKbn = New System.Windows.Forms.Label()
+        Me.ChkActive = New System.Windows.Forms.CheckBox()
         Me.SuspendLayout()
         '
         'btnRegistrarion
@@ -353,7 +354,7 @@ Partial Class Customer
         '
         Me.TxtCompanyCode.Location = New System.Drawing.Point(754, 12)
         Me.TxtCompanyCode.Name = "TxtCompanyCode"
-        Me.TxtCompanyCode.Size = New System.Drawing.Size(23, 19)
+        Me.TxtCompanyCode.Size = New System.Drawing.Size(23, 20)
         Me.TxtCompanyCode.TabIndex = 52
         Me.TxtCompanyCode.TabStop = False
         Me.TxtCompanyCode.Visible = False
@@ -449,10 +450,23 @@ Partial Class Customer
         Me.LblDomesticKbn.TabIndex = 252
         Me.LblDomesticKbn.Text = "国内区分"
         '
+        'ChkActive
+        '
+        Me.ChkActive.AutoSize = True
+        Me.ChkActive.Checked = True
+        Me.ChkActive.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.ChkActive.Location = New System.Drawing.Point(14, 374)
+        Me.ChkActive.Name = "ChkActive"
+        Me.ChkActive.Size = New System.Drawing.Size(62, 17)
+        Me.ChkActive.TabIndex = 253
+        Me.ChkActive.Text = "Active?"
+        Me.ChkActive.UseVisualStyleBackColor = True
+        '
         'Customer
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.ClientSize = New System.Drawing.Size(729, 561)
+        Me.Controls.Add(Me.ChkActive)
         Me.Controls.Add(Me.LblDomesticKbn)
         Me.Controls.Add(Me.cmDomesticKbn)
         Me.Controls.Add(Me.TxtAccountingVendorCode)
@@ -541,4 +555,5 @@ Partial Class Customer
     Friend WithEvents TxtAccountingVendorCode As TextBox
     Friend WithEvents cmDomesticKbn As ComboBox
     Friend WithEvents LblDomesticKbn As Label
+    Friend WithEvents ChkActive As CheckBox
 End Class

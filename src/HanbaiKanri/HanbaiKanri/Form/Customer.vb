@@ -36,7 +36,7 @@ Public Class Customer
     'Private _gh As UtilDataGridViewHandler
     Private _init As Boolean                             '初期処理済フラグ
     Private _status As String = ""
-    Private _companyCode As String = ""
+    'Private _companyCode As String = ""
     Private _customerCode As String = ""
 
     '-------------------------------------------------------------------------------
@@ -67,7 +67,7 @@ Public Class Customer
         _langHd = prmRefLang
         _parentForm = prmRefForm
         _status = prmRefStatus
-        _companyCode = prmRefCompany
+        '_companyCode = prmRefCompany
         _customerCode = prmRefCustomer
         '_gh = New UtilDataGridViewHandler(dgvLIST)                          'DataGridViewユーティリティクラス
         StartPosition = FormStartPosition.CenterScreen                      '画面中央表示
@@ -134,7 +134,8 @@ Public Class Customer
             Sql += "会計用得意先コード, "
             Sql += "国内区分, "
             Sql += "更新者, "
-            Sql += "更新日 "
+            Sql += "更新日, "
+            Sql += "is_active "
             Sql += "FROM "
             Sql += "public"
             Sql += "."
@@ -143,7 +144,7 @@ Public Class Customer
             Sql += "会社コード"
             Sql += " ILIKE "
             Sql += "'"
-            Sql += _companyCode
+            Sql += frmC01F10_Login.loginValue.BumonCD
             Sql += "'"
             Sql += " AND "
             Sql += "得意先コード"
@@ -239,7 +240,10 @@ Public Class Customer
             Else
                 createCombobox(ds.Tables(RS).Rows(0)("国内区分"))
             End If
-
+            If ds.Tables(RS).Rows(0)("is_active") Is DBNull.Value Then
+            Else
+                ChkActive.Checked = IIf(ds.Tables(RS).Rows(0)("is_active") = 0, True, False)
+            End If
         End If
     End Sub
 
@@ -398,11 +402,12 @@ Public Class Customer
                 Sql += "更新日"
                 Sql += " = '"
                 Sql += dtToday
-                Sql += "' "
+                Sql += "', is_active="
+                Sql += (IIf(ChkActive.Checked, 0, 1)).ToString & " "
                 Sql += "WHERE"
                 Sql += " 会社コード"
                 Sql += "='"
-                Sql += _companyCode
+                Sql += frmC01F10_Login.loginValue.BumonCD
                 Sql += "'"
                 Sql += " AND"
                 Sql += " 得意先コード"

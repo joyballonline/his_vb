@@ -35,7 +35,7 @@ Public Class CustomerSearch
     Private _parentForm As Form
     'Private _gh As UtilDataGridViewHandler
     Private _init As Boolean                             '初期処理済フラグ
-    Private _companyCode As String = frmC01F10_Login.loginValue.BumonCD
+    'Private _companyCode As String = frmC01F10_Login.loginValue.BumonCD
 
     '-------------------------------------------------------------------------------
     'デフォルトコンストラクタ（隠蔽）
@@ -186,6 +186,7 @@ Public Class CustomerSearch
             Sql += "SELECT * FROM public.m10_customer"
             Sql += " WHERE 会社コード ='" & frmC01F10_Login.loginValue.BumonCD & "'"
             Sql += " and 得意先名 ILIKE '%" & UtilClass.escapeSql(Search.Text) & "%'"
+            Sql += " and is_active=0"
             Sql += " order by 会社コード, 得意先コード "
 
             Dim reccnt As Integer = 0

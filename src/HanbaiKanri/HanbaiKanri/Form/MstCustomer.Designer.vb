@@ -49,6 +49,7 @@ Partial Class MstCustomer
         Me.国内区分 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.更新者 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.更新日 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ACTIVE = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         CType(Me.Dgv_Customer, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -56,12 +57,9 @@ Partial Class MstCustomer
         '
         Me.Dgv_Customer.AllowUserToAddRows = False
         Me.Dgv_Customer.AllowUserToDeleteRows = False
-        Me.Dgv_Customer.AllowUserToResizeColumns = True
-        'Me.Dgv_Customer.AllowUserToResizeColumns = False
         Me.Dgv_Customer.AllowUserToResizeRows = False
-
         Me.Dgv_Customer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.Dgv_Customer.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.会社コード, Me.得意先コード, Me.得意先名, Me.得意先名略称, Me.郵便番号, Me.住所１, Me.住所２, Me.住所３, Me.電話番号, Me.電話番号検索用, Me.FAX番号, Me.担当者名, Me.担当者役職, Me.既定支払条件, Me.メモ, Me.会計用得意先コード, Me.国内区分, Me.更新者, Me.更新日})
+        Me.Dgv_Customer.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.会社コード, Me.得意先コード, Me.得意先名, Me.得意先名略称, Me.郵便番号, Me.住所１, Me.住所２, Me.住所３, Me.電話番号, Me.電話番号検索用, Me.FAX番号, Me.担当者名, Me.担当者役職, Me.既定支払条件, Me.メモ, Me.会計用得意先コード, Me.国内区分, Me.更新者, Me.更新日, Me.ACTIVE})
         Me.Dgv_Customer.Location = New System.Drawing.Point(12, 33)
         Me.Dgv_Customer.MultiSelect = False
         Me.Dgv_Customer.Name = "Dgv_Customer"
@@ -254,6 +252,13 @@ Partial Class MstCustomer
         Me.更新日.Name = "更新日"
         Me.更新日.ReadOnly = True
         '
+        'ACTIVE
+        '
+        Me.ACTIVE.HeaderText = "ACTIVE"
+        Me.ACTIVE.Name = "ACTIVE"
+        Me.ACTIVE.ReadOnly = True
+        Me.ACTIVE.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        '
         'MstCustomer
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
@@ -302,4 +307,5 @@ Partial Class MstCustomer
     Friend WithEvents 国内区分 As DataGridViewTextBoxColumn
     Friend WithEvents 更新者 As DataGridViewTextBoxColumn
     Friend WithEvents 更新日 As DataGridViewTextBoxColumn
+    Friend WithEvents ACTIVE As DataGridViewCheckBoxColumn
 End Class
