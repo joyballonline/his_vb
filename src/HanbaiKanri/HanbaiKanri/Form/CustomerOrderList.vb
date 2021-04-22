@@ -44,7 +44,7 @@ Public Class CustomerOrderList
     Private CurCode As String = ""  '通貨
     Private _parentForm As Form
     Private _com As CommonLogic
-    Private _vs As String = "1"
+    Private _vs As String = "2"
 
     '-------------------------------------------------------------------------------
     'デフォルトコンストラクタ（隠蔽）
@@ -409,7 +409,7 @@ Public Class CustomerOrderList
                         lastRow += 1
                     End If
                     sheet.Range("A" & currentRow).Value = currentNum
-                    sheet.Range("B" & currentRow).Value = dsCymndt.Tables(RS).Rows(i)("メーカー") & " " & dsCymndt.Tables(RS).Rows(i)("品名") & " " & dsCymndt.Tables(RS).Rows(i)("型式") & Environment.NewLine & dsCymndt.Tables(RS).Rows(i)("客先番号")
+                    sheet.Range("B" & currentRow).Value = dsCymndt.Tables(RS).Rows(i)("メーカー") & " " & dsCymndt.Tables(RS).Rows(i)("品名") & " " & dsCymndt.Tables(RS).Rows(i)("型式")  '& Environment.NewLine & dsCymndt.Tables(RS).Rows(i)("客先番号")
                     Dim x As Decimal = dsCymndt.Tables(RS).Rows(i)("見積単価_外貨")
                     Dim y As Decimal = dsCymndt.Tables(RS).Rows(i)("売上数量")
 
@@ -433,7 +433,7 @@ Public Class CustomerOrderList
             sheet.Range("F" & lastRow + 2).Value = VAT 'BillingSubTotal * 0.1
             sheet.Range("F" & lastRow + 3).Value = BillingSubTotal + VAT ' * 1.1
 
-            sheet.Range("C" & lastRow + 5).Value = sheet.Range("F" & lastRow + 3).Value
+            'sheet.Range("C" & lastRow + 5).Value = sheet.Range("F" & lastRow + 3).Value
             'sheet.Range("C" & lastRow + 8).Value = dsCompany.Tables(RS).Rows(0)("銀行名") & " " & dsCompany.Tables(RS).Rows(0)("支店名") & " " & getHanyo.Tables(RS).Rows(0)("文字2")
             'sheet.Range("C" & lastRow + 9).Value = dsCompany.Tables(RS).Rows(0)("口座名義")
             'sheet.Range("C" & lastRow + 10).Value = dsCompany.Tables(RS).Rows(0)("口座番号")
@@ -616,7 +616,7 @@ Public Class CustomerOrderList
                 End If
 
                 sheet.Range("A" & currentRow).Value = currentNum
-                sheet.Range("B" & currentRow).Value = dsCymndt.Tables(RS).Rows(i)("メーカー") & " " & dsCymndt.Tables(RS).Rows(i)("品名") & " " & dsCymndt.Tables(RS).Rows(i)("型式") & Environment.NewLine & dsCymndt.Tables(RS).Rows(i)("客先番号")
+                sheet.Range("B" & currentRow).Value = dsCymndt.Tables(RS).Rows(i)("メーカー") & " " & dsCymndt.Tables(RS).Rows(i)("品名") & " " & dsCymndt.Tables(RS).Rows(i)("型式")  '& Environment.NewLine & dsCymndt.Tables(RS).Rows(i)("客先番号")
                 Dim x As Decimal = dsCymndt.Tables(RS).Rows(i)("見積単価_外貨")
                 Dim y As Decimal = dsCymndt.Tables(RS).Rows(i)("売上数量")
                 sheet.Range("C" & currentRow).Value = dsCymndt.Tables(RS).Rows(i)("客先番号")
@@ -647,7 +647,7 @@ Public Class CustomerOrderList
                 sheet.Range("G" & lastRow + 3).Value = BillingSubTotal + VAT 'decVAT
             End If
 
-            sheet.Range("C" & lastRow + 5).Value = sheet.Range("G" & lastRow + 3).Value
+            'sheet.Range("C" & lastRow + 5).Value = sheet.Range("G" & lastRow + 3).Value
             'sheet.Range("F" & lastRow + 9).Value = "Jakarta, " & dtmInvoice.Day & " " & dtmInvoice.ToString("MMMM") & " " & dtmInvoice.Year  'InvoiceDate
 
             app.DisplayAlerts = False 'Microsoft Excelのアラート一旦無効化

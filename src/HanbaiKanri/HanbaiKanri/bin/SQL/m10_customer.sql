@@ -1,0 +1,1 @@
+﻿alter table m10_customer add column is_active numeric default 0;
