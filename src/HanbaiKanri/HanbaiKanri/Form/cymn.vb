@@ -860,7 +860,7 @@ Public Class Cymn
                                 Sql += "Public."
                                 Sql += "t45_shukodt("
                                 Sql += "会社コード, 出庫番号, 受注番号, 受注番号枝番, 行番号, 仕入区分, メーカー, 品名, 型式"
-                                Sql += ", 仕入先名, 売単価, 出庫数量, 単位, 備考, 更新者, 更新日, 出庫区分, 倉庫コード)"
+                                Sql += ", 仕入先名, 売単価, 出庫数量, 単位, 備考, 更新者, 更新日, 出庫区分, 倉庫コード,受注行番号)"
                                 Sql += " VALUES('" & frmC01F10_Login.loginValue.BumonCD & "'"   '会社コード
                                 Sql += ", '" & currentLS & "'"     '出庫番号
                                 Sql += ", '" & TxtOrderNo.Text & "'"    '受注番号
@@ -879,7 +879,8 @@ Public Class Cymn
                                 Sql += ", '" & frmC01F10_Login.loginValue.TantoNM & "'"                           '更新者
                                 Sql += ", '" & UtilClass.formatDatetime(dtNow) & "'"                 '更新日
                                 Sql += ", '" & CommonConst.SHUKO_KBN_TMP & "'" '仮出庫：2
-                                Sql += ", '" & CmWarehouse.SelectedValue & "')" '倉庫コード
+                                Sql += ", '" & CmWarehouse.SelectedValue & "'" '倉庫コード
+                                Sql += ", " & DgvItemList.Rows(i).Cells("No").Value.ToString & ")"
 
                                 _db.executeDB(Sql)
 

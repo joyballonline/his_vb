@@ -313,9 +313,10 @@ Public Class StartUp
             '接続に失敗した場合、「データベースに接続できませんでした」を出力して終了する
             '-----------------------------------------------------------------------
             'UtilPostgresDebuggerはインスタンスを生成すると、DBコネクションまで生成してくれる
-            Dim _db As UtilDBIf
+            Dim _db As UtilDBIf = Nothing
             Try
-                _db = New UtilPostgresDebugger(_iniVal.SVAddr, _iniVal.PortNo, _iniVal.DBName, _iniVal.UserId, _iniVal.Password, _iniVal.LogFilePath, _debugMode, True, _iniVal.DBtimeout, _iniVal.ssl)
+                '_db = New UtilPostgresDebugger(_iniVal.SVAddr, _iniVal.PortNo, _iniVal.DBName, _iniVal.UserId, _iniVal.Password, _iniVal.LogFilePath, _debugMode, True, _iniVal.DBtimeout, _iniVal.ssl)
+                _db = Connect()
             Catch ex As Exception
                 '確認メッセージを表示する
                 Dim piRtn As Integer
@@ -381,6 +382,11 @@ Public Class StartUp
         End Try
 
     End Sub
+
+    Public Shared Function Connect() As UtilDBIf
+        Return New UtilPostgresDebugger(_iniVal.SVAddr, _iniVal.PortNo, _iniVal.DBName, _iniVal.UserId, _iniVal.Password, _iniVal.LogFilePath, _debugMode, True, _iniVal.DBtimeout, _iniVal.ssl)
+    End Function
+
 
     '-------------------------------------------------------------------------------
     '   メッセージ用Xmlファイルの存在チェック

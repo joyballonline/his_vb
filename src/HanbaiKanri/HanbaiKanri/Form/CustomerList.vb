@@ -333,7 +333,7 @@ Public Class CustomerList
             Sql += " AND "
             Sql += " 得意先名 ILIKE '%" & customerName & "%' "
         End If
-        Sql += "AND 請求日>'" & UtilClass.formatDatetime(DtpFrom.Value) & "' AND 請求日<'" & UtilClass.formatDatetime(DtpTo.Value) & "' "
+        Sql += "AND 請求日>='" & UtilClass.formatDatetime(DtpFrom.Value) & "' AND 請求日<='" & UtilClass.formatDatetime(DtpTo.Value) & "' "
         Sql += " AND 得意先コード in (select 得意先コード from m10_customer where 会社コード='" & frmC01F10_Login.loginValue.BumonCD & "' and is_active=0) "
         Return Sql
 

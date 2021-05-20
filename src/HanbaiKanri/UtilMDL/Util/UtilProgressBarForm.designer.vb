@@ -20,50 +20,49 @@ Partial Class UtilProgressBar
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(UtilProgressBar))
-        Me.pgbBar = New System.Windows.Forms.ProgressBar
-        Me.lblJobName = New System.Windows.Forms.Label
-        Me.lblStatus = New System.Windows.Forms.Label
-        Me.lblStatusTitle = New System.Windows.Forms.Label
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox
+        Me.pgbBar = New System.Windows.Forms.ProgressBar()
+        Me.lblJobName = New System.Windows.Forms.Label()
+        Me.lblStatus = New System.Windows.Forms.Label()
+        Me.lblStatusTitle = New System.Windows.Forms.Label()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'pgbBar
         '
-        Me.pgbBar.Location = New System.Drawing.Point(96, 91)
+        Me.pgbBar.Location = New System.Drawing.Point(30, 74)
         Me.pgbBar.Name = "pgbBar"
-        Me.pgbBar.Size = New System.Drawing.Size(372, 20)
+        Me.pgbBar.Size = New System.Drawing.Size(291, 22)
         Me.pgbBar.TabIndex = 2
         '
         'lblJobName
         '
-        Me.lblJobName.Location = New System.Drawing.Point(94, 20)
+        Me.lblJobName.Location = New System.Drawing.Point(94, 22)
         Me.lblJobName.Name = "lblJobName"
-        Me.lblJobName.Size = New System.Drawing.Size(374, 20)
+        Me.lblJobName.Size = New System.Drawing.Size(374, 22)
         Me.lblJobName.TabIndex = 3
         Me.lblJobName.Text = "コピーしています。"
         '
         'lblStatus
         '
-        Me.lblStatus.Location = New System.Drawing.Point(134, 44)
+        Me.lblStatus.Location = New System.Drawing.Point(134, 48)
         Me.lblStatus.Name = "lblStatus"
-        Me.lblStatus.Size = New System.Drawing.Size(355, 44)
+        Me.lblStatus.Size = New System.Drawing.Size(201, 48)
         Me.lblStatus.TabIndex = 4
         Me.lblStatus.Text = "○○○から□□□へ．．．"
         '
         'lblStatusTitle
         '
         Me.lblStatusTitle.AutoSize = True
-        Me.lblStatusTitle.Location = New System.Drawing.Point(94, 44)
+        Me.lblStatusTitle.Location = New System.Drawing.Point(94, 48)
         Me.lblStatusTitle.Name = "lblStatusTitle"
-        Me.lblStatusTitle.Size = New System.Drawing.Size(35, 12)
+        Me.lblStatusTitle.Size = New System.Drawing.Size(0, 13)
         Me.lblStatusTitle.TabIndex = 5
-        Me.lblStatusTitle.Text = "状態："
         '
         'PictureBox1
         '
         Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
-        Me.PictureBox1.Location = New System.Drawing.Point(30, 19)
+        Me.PictureBox1.Location = New System.Drawing.Point(30, 21)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(32, 32)
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
@@ -72,15 +71,15 @@ Partial Class UtilProgressBar
         '
         'UtilProgressBar
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(501, 144)
+        Me.ClientSize = New System.Drawing.Size(350, 123)
         Me.ControlBox = False
+        Me.Controls.Add(Me.pgbBar)
         Me.Controls.Add(Me.PictureBox1)
         Me.Controls.Add(Me.lblStatusTitle)
         Me.Controls.Add(Me.lblStatus)
         Me.Controls.Add(Me.lblJobName)
-        Me.Controls.Add(Me.pgbBar)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
@@ -88,7 +87,7 @@ Partial Class UtilProgressBar
         Me.Name = "UtilProgressBar"
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-        Me.Text = "処理中です．．．"
+        Me.Text = "SPIN"
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()

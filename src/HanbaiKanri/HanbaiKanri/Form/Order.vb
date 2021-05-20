@@ -882,11 +882,11 @@ Public Class Order
                     Sql2 += "', '"
                     Sql2 += UtilClass.formatNumber(DgvItemList.Rows(i).Cells("仕入値").Value.ToString) '仕入値
                     Sql2 += "', '"
-                    Sql2 += DgvItemList.Rows(i).Cells("数量").Value.ToString '受注数量
+                    Sql2 += UtilClass.formatNumber(DgvItemList.Rows(i).Cells("数量").Value.ToString) '受注数量
                     Sql2 += "', '"
                     Sql2 += "0" '売上数量
                     Sql2 += "', '"
-                    Sql2 += DgvItemList.Rows(i).Cells("数量").Value.ToString '受注残数
+                    Sql2 += UtilClass.formatNumber(DgvItemList.Rows(i).Cells("数量").Value.ToString) '受注残数
                     Sql2 += "', '"
 
                     If DgvItemList.Rows(i).Cells("間接費").Value.ToString = "" Then
@@ -909,7 +909,7 @@ Public Class Order
                     Sql2 += "', '"
                     Sql2 += "0" '出庫数
                     Sql2 += "', '"
-                    Sql2 += DgvItemList.Rows(i).Cells("数量").Value.ToString '未出庫数
+                    Sql2 += UtilClass.formatNumber(DgvItemList.Rows(i).Cells("数量").Value.ToString) '未出庫数
                     Sql2 += "', '"
                     Sql2 += UtilClass.RevoveChars(DgvItemList.Rows(i).Cells("備考").Value.ToString) '備考
                     Sql2 += "', '"

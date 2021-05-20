@@ -483,9 +483,18 @@ Public Class frmC01F10_Login
             Dim ps As New System.Collections.Specialized.NameValueCollection
             '送信するデータ（フィールド名と値の組み合わせ）を追加
             ps.Add("name", companyname)
+
+            Dim pb As UtilProgressBar = New UtilProgressBar(Me)
+            pb.Show()
+            pb.jobName = "Checking Your Account"
+            pb.status = "Access Internet......"
+            pb.value = 100
+
             'データを送信し、また受信する
             Dim resData As Byte() = wc.UploadValues(url, ps)
             wc.Dispose()
+
+            pb.Close()
 
             '受信したデータを表示する
             Dim resText As String = System.Text.Encoding.UTF8.GetString(resData)

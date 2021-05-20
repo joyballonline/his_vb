@@ -249,6 +249,8 @@ Public Class InventoryList
         SqlJoin += "  on t43.発注番号 = t46.発注番号"
         SqlJoin += " and t43.発注番号枝番 = t46.発注番号枝番"
         SqlJoin += " and t43.会社コード = t46.会社コード"
+        SqlJoin += " and t46.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED '取消区分=0
+
         'm20
         SqlJoin += " LEFT JOIN "
         SqlJoin += " m20_warehouse m20 "

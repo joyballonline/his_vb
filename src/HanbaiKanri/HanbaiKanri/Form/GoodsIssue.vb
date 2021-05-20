@@ -39,13 +39,15 @@ Public Class GoodsIssue
     Private _db As UtilDBIf
     'Private _gh As UtilDataGridViewHandler
     Private _init As Boolean                             '初期処理済フラグ
-    Private CompanyCode As String = ""
+    'Private CompanyCode As String = ""
     Private No As String = ""
     Private Suffix As String = ""
     Private _status As String = ""
     Private _langHd As UtilLangHandler
     Private Input As String = frmC01F10_Login.loginValue.TantoNM
     Private _com As CommonLogic
+    Private _vs As String = "1"
+    Private _hash As Dictionary(Of String, String)
 
     '-------------------------------------------------------------------------------
     'デフォルトコンストラクタ（隠蔽）
@@ -63,7 +65,8 @@ Public Class GoodsIssue
                    ByRef prmRefLang As UtilLangHandler,
                    ByRef prmRefNo As String,
                    ByRef prmRefSuffix As String,
-                   Optional ByRef prmRefStatus As String = "")
+                   Optional ByRef prmRefStatus As String = "",
+                   Optional ByRef prmHash As Dictionary(Of String, String) = Nothing)
         Call Me.New()
 
         _init = False
@@ -78,6 +81,8 @@ Public Class GoodsIssue
         '_gh = New UtilDataGridViewHandler(dgvLIST)                          'DataGridViewユーティリティクラス
         StartPosition = FormStartPosition.CenterScreen                      '画面中央表示
         _com = New CommonLogic(_db, _msgHd)
+        _hash = prmHash
+        Me.Text += _vs
         Me.Text = Me.Text & "[" & frmC01F10_Login.loginValue.BumonNM & "][" & frmC01F10_Login.loginValue.TantoNM & "]" & StartUp.BackUpServerPrint                                  'フォームタイトル表示
         Me.ControlBox = Not Me.ControlBox
         _init = True
@@ -88,7 +93,7 @@ Public Class GoodsIssue
     Private Sub GoodsIssue_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
-            LblOrderNo.Text = "JobOrderNumber"
+            LblOrderNo.Text = "JobOrderNo"
             LblCustomerNo.Text = "CustomerNumber"
             LblOrderDate.Text = "JobOrderDate"
             LblCustomer.Text = "CustomerName"
@@ -195,331 +200,417 @@ Public Class GoodsIssue
         Dim Sql As String = ""
         Dim reccnt As Integer = 0
         Dim sireKbn As DataSet
+        Dim iCnt As Integer = 0
 
         Try
 
-            '受注情報取得
-            '------------------------------------
-            Sql = " AND "
-            Sql += "受注番号 ILIKE '" & No & "'"
-            Sql += " AND "
-            Sql += "受注番号枝番 ILIKE '" & Suffix & "'"
-            Sql += " AND "
-            Sql += "取消区分 = '" & CommonConst.CANCEL_KBN_ENABLED & "'"
-            Sql += " order by 会社コード, 受注番号, 受注番号枝番 "
+            If _status = CommonConst.STATUS_VIEW Then
 
-            Dim dsCymnhd As DataSet = getDsData("t10_cymnhd", Sql)
-            'If dsCymnhd.Tables(RS).Rows.Count = 0 Then
-            '    '受注が取り消されているものであることをアラートし、以降の処理を中止する
-            '    _msgHd.dspMSG("giOrderError", frmC01F10_Login.loginValue.Language)
-            'End If
-
-
-            '出庫情報取得
-            '------------------------------------
-            'Sql = "SELECT t45.*, t44.出庫日, t44.取消区分, t70.入出庫種別, t70.引当区分"
-            Sql = "SELECT t45.*, t44.出庫日, t44.取消区分, t70.入出庫種別"
-            Sql += " FROM  public.t45_shukodt t45 "
-
-            Sql += " INNER JOIN  t44_shukohd t44"
-            Sql += " ON t45.会社コード = t44.会社コード"
-            Sql += " AND  t45.出庫番号 = t44.出庫番号"
-
-            Sql += " LEFT JOIN  t70_inout t70"
-            Sql += " ON t70.会社コード = t44.会社コード"
-            Sql += " AND  t70.入出庫区分 = '2'"
-            'Sql += " AND  t70.倉庫コード = t45.倉庫コード"
-            Sql += " AND  t70.伝票番号 = t44.出庫番号"
-            Sql += " AND  t70.行番号 = t45.行番号"
-            'Sql += " AND  t70.出庫開始サイン = concat(t44.出庫番号, t45.行番号)"     '2020.01.09 REP
-
-            If dsCymnhd.Tables(RS).Rows.Count > 0 Then
+                '出庫情報取得
+                '------------------------------------
+                Sql = "SELECT t45.*, t44.出庫日, t44.取消区分, t70.入出庫種別, t44.得意先コード,t44.得意先名,t44.客先番号 "
+                Sql += " FROM  public.t45_shukodt t45 "
+                Sql += " INNER JOIN  t44_shukohd t44"
+                Sql += " ON t45.会社コード = t44.会社コード"
+                Sql += " AND  t45.出庫番号 = t44.出庫番号"
+                Sql += " LEFT JOIN  t70_inout t70"
+                Sql += " ON t70.会社コード = t44.会社コード"
+                Sql += " AND  t70.入出庫区分 = '2'"
+                Sql += " AND  t70.伝票番号 = t44.出庫番号"
+                Sql += " AND  t70.行番号 = t45.行番号"
                 Sql += " WHERE t45.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
                 Sql += " AND "
-                Sql += "t45.受注番号 ILIKE '" & No & "'"
-                Sql += " AND "
-                Sql += "t45.受注番号枝番 ILIKE '" & Suffix & "'"
+                Sql += "t45.出庫番号='" & No & "'"
                 Sql += " AND "
                 Sql += "t44.取消区分 = '" & CommonConst.CANCEL_KBN_ENABLED & "'"
                 Sql += " AND "
                 Sql += " t45.出庫区分 <> '" & CommonConst.SHUKO_KBN_TMP & "' " '仮出庫のものは省く
                 Sql += " ORDER BY t45.行番号"
-            Else
-                Sql += " WHERE t45.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-                Sql += " AND "
-                Sql += "t45.出庫番号 ILIKE '" & No & "'"
-                Sql += " AND "
-                Sql += "t44.取消区分 = '" & CommonConst.CANCEL_KBN_ENABLED & "'"
-                Sql += " AND "
-                Sql += " t45.出庫区分 <> '" & CommonConst.SHUKO_KBN_TMP & "' " '仮出庫のものは省く
-                Sql += " ORDER BY t45.行番号"
+                Dim dsShukodt As DataSet = _db.selectDB(Sql, RS, reccnt)
 
-            End If
-
-            Dim dsShukodt As DataSet = _db.selectDB(Sql, RS, reccnt)
-
-            'If _status = CommonConst.STATUS_VIEW And dsShukodt.Tables(RS).Rows.Count > 0 Then
-            '    If dsShukodt.Tables(RS).Rows(0)("取消区分") = CommonConst.CANCEL_KBN_DISABLED Then
-            '        BtnDeliveryNote.Visible = False
-            '    End If
-            'End If
-
-            Sql = "SELECT t11.*, t10.更新日"
-            Sql += " FROM  public.t11_cymndt t11 "
-            Sql += " INNER JOIN  t10_cymnhd t10"
-            Sql += " ON t11.会社コード = t10.会社コード"
-            Sql += " AND  t11.受注番号 = t10.受注番号"
-            Sql += " AND  t11.受注番号枝番 = t10.受注番号枝番"
-
-            Sql += " WHERE t11.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-            Sql += " AND "
-            Sql += "t11.受注番号 ILIKE '" & No & "'"
-            Sql += " AND "
-            Sql += "t11.受注番号枝番 ILIKE '" & Suffix & "'"
-            Sql += " AND "
-            Sql += "t10.取消区分 = '" & CommonConst.CANCEL_KBN_ENABLED & "'"
-
-            Sql += " ORDER BY t11.行番号"
-
-            Dim dsCymndt As DataSet = _db.selectDB(Sql, RS, reccnt)
-
-
-            '通貨の表示
-            Dim curds As DataSet  'm25_currency
-            Dim cur As String
-
-            If IsDBNull(dsCymnhd.Tables(RS).Rows(0)("通貨")) Then
-                cur = vbNullString
-            Else
-                Sql = " and 採番キー = " & dsCymnhd.Tables(RS).Rows(0)("通貨")
-                curds = getDsData("m25_currency", Sql)
-
-                cur = curds.Tables(RS).Rows(0)("通貨コード")
-            End If
-            TxtIDRCurrency.Text = cur
-
-            For i As Integer = 0 To dsCymndt.Tables(RS).Rows.Count - 1
-                DgvOrder.Rows.Add()
-                DgvOrder.Rows(i).Cells("メーカー").Value = dsCymndt.Tables(RS).Rows(i)("メーカー")
-                DgvOrder.Rows(i).Cells("品名").Value = dsCymndt.Tables(RS).Rows(i)("品名")
-                DgvOrder.Rows(i).Cells("型式").Value = dsCymndt.Tables(RS).Rows(i)("型式")
-                DgvOrder.Rows(i).Cells("受注数量").Value = dsCymndt.Tables(RS).Rows(i)("受注数量")
-                DgvOrder.Rows(i).Cells("単位").Value = dsCymndt.Tables(RS).Rows(i)("単位")
-
-                'DgvOrder.Rows(i).Cells("売上数量").Value = dsCymndt.Tables(RS).Rows(i)("売上数量")
-                DgvOrder.Rows(i).Cells("売上数量").Value = dsCymndt.Tables(RS).Rows(i)("出庫数")
-                DgvOrder.Rows(i).Cells("受注残数").Value = dsCymndt.Tables(RS).Rows(i)("未出庫数")
-                DgvOrder.Rows(i).Cells("売単価").Value = dsCymndt.Tables(RS).Rows(i)("見積単価_外貨") '見積単価")
-
-                DgvOrder.Rows(i).Cells("売上金額").Value = dsCymndt.Tables(RS).Rows(i)("売上金額")
-                DgvOrder.Rows(i).Cells("未出庫数").Value = dsCymndt.Tables(RS).Rows(i)("未出庫数")
-                DgvOrder.Rows(i).Cells("更新日").Value = dsCymndt.Tables(RS).Rows(i)("更新日")
-            Next
-
-
-            For i As Integer = 0 To dsShukodt.Tables(RS).Rows.Count - 1
-                '汎用マスタから仕入区分名称取得
-                sireKbn = getDsHanyoData(CommonConst.FIXED_KEY_PURCHASING_CLASS, dsShukodt.Tables(RS).Rows(i)("仕入区分").ToString)
-
-                DgvHistory.Rows.Add()
-                DgvHistory.Rows(i).Cells("No").Value = i + 1
-                DgvHistory.Rows(i).Cells("出庫番号").Value = dsShukodt.Tables(RS).Rows(i)("出庫番号")
-                DgvHistory.Rows(i).Cells("行番号").Value = dsShukodt.Tables(RS).Rows(i)("行番号")
-                DgvHistory.Rows(i).Cells("仕入区分").Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG,
-                                                                sireKbn.Tables(RS).Rows(0)("文字２"),
-                                                                sireKbn.Tables(RS).Rows(0)("文字１"))
-                DgvHistory.Rows(i).Cells("メーカー").Value = dsShukodt.Tables(RS).Rows(i)("メーカー")
-                DgvHistory.Rows(i).Cells("品名").Value = dsShukodt.Tables(RS).Rows(i)("品名")
-                DgvHistory.Rows(i).Cells("型式").Value = dsShukodt.Tables(RS).Rows(i)("型式")
-                DgvHistory.Rows(i).Cells("単位").Value = dsShukodt.Tables(RS).Rows(i)("単位")
-                DgvHistory.Rows(i).Cells("仕入先").Value = dsShukodt.Tables(RS).Rows(i)("仕入先名")
-                DgvHistory.Rows(i).Cells("売単価").Value = dsShukodt.Tables(RS).Rows(i)("売単価")
-                DgvHistory.Rows(i).Cells("出庫数量").Value = dsShukodt.Tables(RS).Rows(i)("出庫数量")
-
-                If dsShukodt.Tables(RS).Rows(i).IsNull(("倉庫コード")) = False Then
-                    DgvHistory.Rows(i).Cells("倉庫").Value = getWarehouseName(dsShukodt.Tables(RS).Rows(i)("倉庫コード"))
-                End If
-
-                If dsShukodt.Tables(RS).Rows(i).IsNull("入出庫種別") = False Then
-                    DgvHistory.Rows(i).Cells("入出庫種別").Value = getInOutName(dsShukodt.Tables(RS).Rows(i)("入出庫種別"))
-                End If
-
-                DgvHistory.Rows(i).Cells("出庫日").Value = dsShukodt.Tables(RS).Rows(i)("出庫日").ToShortDateString
-                DgvHistory.Rows(i).Cells("備考").Value = dsShukodt.Tables(RS).Rows(i)("備考")
-
-            Next
-
-            Sql = " AND 出庫番号 = '" & No & "'"
-            '出庫基本取得
-            Dim dsShukohd As DataSet = getDsData("t44_shukohd", Sql)
-
-            '倉庫マスタを取得、コンボボックスを作成
-            Sql = " AND "
-            Sql += " 無効フラグ = '" & CommonConst.FLAG_ENABLED & "'"
-
-            Dim dsWarehouse As DataSet = getDsData("m20_warehouse", Sql)
-
-            'ComboBoxに表示する項目のリストを作成する
-            Dim table As New DataTable("Table")
-            table.Columns.Add("Display", GetType(String))
-            table.Columns.Add("Value", GetType(String))
-            For i As Integer = 0 To dsWarehouse.Tables(RS).Rows.Count - 1
-                table.Rows.Add(dsWarehouse.Tables(RS).Rows(i)("名称"), dsWarehouse.Tables(RS).Rows(i)("倉庫コード"))
-            Next
-
-            '指定列をコンボボックスに変換
-            Dim cmWarehouse As New DataGridViewComboBoxColumn()
-            cmWarehouse.DataSource = table
-            '実際の値が"Value"列、表示するテキストが"Display"列とする
-            cmWarehouse.ValueMember = "Value"
-            cmWarehouse.DisplayMember = "Display"
-            cmWarehouse.HeaderText = "倉庫"
-            cmWarehouse.Name = "倉庫"
-            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
-                cmWarehouse.HeaderText = "Warehouse"
-            End If
-
-            DgvAdd.Columns.Insert(8, cmWarehouse)
-            'DgvAdd.Columns("倉庫").DefaultCellStyle.BackColor = Color.FromArgb(255, 255, 192)
-            'DgvAdd.Columns("倉庫").ReadOnly = True
-
-
-            '入出庫種別コンボボックス作成
-            Dim cmInOutKbn As New DataGridViewComboBoxColumn()
-            cmInOutKbn.DataSource = getInOutKbn("0,1")
-            '実際の値が"Value"列、表示するテキストが"Display"列とする
-            cmInOutKbn.ValueMember = "Value"
-            cmInOutKbn.DisplayMember = "Display"
-            cmInOutKbn.HeaderText = "入出庫種別"
-            cmInOutKbn.Name = "入出庫種別"
-            If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
-                cmInOutKbn.HeaderText = "StorageType"
-            End If
-
-            DgvAdd.Columns.Insert(13, cmInOutKbn)
-
-            ''引当区分コンボボックス作成
-            'Dim cmAllocationKbn As New DataGridViewComboBoxColumn()
-            'cmAllocationKbn.DataSource = getAssignKbn()
-            ''実際の値が"Value"列、表示するテキストが"Display"列とする
-            'cmAllocationKbn.ValueMember = "Value"
-            'cmAllocationKbn.DisplayMember = "Display"
-            'cmAllocationKbn.HeaderText = "引当区分"
-            'cmAllocationKbn.Name = "引当区分"
-            'If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
-            '    cmAllocationKbn.HeaderText = "AssignClassification"
-            'End If
-
-            'DgvAdd.Columns.Insert(13, cmAllocationKbn)
-
-            'リードタイムのリストを汎用マスタから取得
-            Dim dsHanyo As DataSet = getDsHanyoData(CommonConst.INOUT_CLASS, "0,1")
-
-            Dim rowIndex As Long = 0
-
-            For i As Integer = 0 To dsCymndt.Tables(RS).Rows.Count - 1
-                If dsCymndt.Tables(RS).Rows(i)("未出庫数") <> 0 Then
+                Dim j As Integer = DgvHistory.RowCount
+                For i As Integer = 0 To dsShukodt.Tables(RS).Rows.Count - 1
                     '汎用マスタから仕入区分名称取得
-                    sireKbn = getDsHanyoData(CommonConst.FIXED_KEY_PURCHASING_CLASS, dsCymndt.Tables(RS).Rows(i)("仕入区分").ToString)
+                    sireKbn = getDsHanyoData(CommonConst.FIXED_KEY_PURCHASING_CLASS, dsShukodt.Tables(RS).Rows(i)("仕入区分").ToString)
 
-                    DgvAdd.Rows.Add()
-
-                    rowIndex = DgvAdd.RowCount - 1
-
-                    DgvAdd.Rows(rowIndex).Cells("No").Value = i + 1
-                    DgvAdd.Rows(rowIndex).Cells("行番号").Value = dsCymndt.Tables(RS).Rows(i)("行番号")
-                    DgvAdd.Rows(rowIndex).Cells("仕入区分").Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG,
+                    DgvHistory.Rows.Add()
+                    DgvHistory.Rows(j + i).Cells("No").Value = j + i + 1
+                    DgvHistory.Rows(j + i).Cells("出庫番号").Value = dsShukodt.Tables(RS).Rows(i)("出庫番号")
+                    DgvHistory.Rows(j + i).Cells("行番号").Value = dsShukodt.Tables(RS).Rows(i)("行番号")
+                    DgvHistory.Rows(j + i).Cells("受注番号").Value = dsShukodt.Tables(RS).Rows(i)("受注番号")
+                    DgvHistory.Rows(j + i).Cells("受注番号枝番").Value = dsShukodt.Tables(RS).Rows(i)("受注番号枝番")
+                    DgvHistory.Rows(j + i).Cells("仕入区分").Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG,
                                                                 sireKbn.Tables(RS).Rows(0)("文字２"),
                                                                 sireKbn.Tables(RS).Rows(0)("文字１"))
-                    DgvAdd.Rows(rowIndex).Cells("仕入区分値").Value = dsCymndt.Tables(RS).Rows(i)("仕入区分")
-                    DgvAdd.Rows(rowIndex).Cells("メーカー").Value = dsCymndt.Tables(RS).Rows(i)("メーカー")
-                    DgvAdd.Rows(rowIndex).Cells("品名").Value = dsCymndt.Tables(RS).Rows(i)("品名")
-                    DgvAdd.Rows(rowIndex).Cells("型式").Value = dsCymndt.Tables(RS).Rows(i)("型式")
-                    DgvAdd.Rows(rowIndex).Cells("仕入先").Value = dsCymndt.Tables(RS).Rows(i)("仕入先名")
+                    DgvHistory.Rows(j + i).Cells("メーカー").Value = dsShukodt.Tables(RS).Rows(i)("メーカー")
+                    DgvHistory.Rows(j + i).Cells("品名").Value = dsShukodt.Tables(RS).Rows(i)("品名")
+                    DgvHistory.Rows(j + i).Cells("型式").Value = dsShukodt.Tables(RS).Rows(i)("型式")
+                    DgvHistory.Rows(j + i).Cells("単位").Value = dsShukodt.Tables(RS).Rows(i)("単位")
+                    DgvHistory.Rows(j + i).Cells("仕入先").Value = dsShukodt.Tables(RS).Rows(i)("仕入先名")
+                    DgvHistory.Rows(j + i).Cells("売単価").Value = dsShukodt.Tables(RS).Rows(i)("売単価")
+                    DgvHistory.Rows(j + i).Cells("出庫数量").Value = dsShukodt.Tables(RS).Rows(i)("出庫数量")
 
-                    DgvAdd.Rows(rowIndex).Cells("単位").Value = dsCymndt.Tables(RS).Rows(i)("単位")
-                    DgvAdd.Rows(rowIndex).Cells("未出庫数量").Value = dsCymndt.Tables(RS).Rows(i)("未出庫数")
-
-                    '今回出庫数量に未出庫数をセットする
-                    DgvAdd.Rows(rowIndex).Cells("出庫数量").Value = dsCymndt.Tables(RS).Rows(i)("未出庫数")
-
-
-                    DgvAdd.Rows(rowIndex).Cells("売単価").Value = dsCymndt.Tables(RS).Rows(i)("見積単価")
-                    'DgvAdd.Rows(rowIndex).Cells("出庫数量").Value = 0
-
-
-
-                    If dsCymnhd.Tables(RS).Rows.Count > 0 Then
-                        DgvAdd.Rows(rowIndex).Cells("倉庫").Value = dsWarehouse.Tables(RS).Rows(0)("倉庫コード")
-                    Else
-                        DgvAdd.Rows(rowIndex).Cells("倉庫").Value = dsShukohd.Tables(RS).Rows(0)("倉庫コード")
+                    If dsShukodt.Tables(RS).Rows(i).IsNull(("倉庫コード")) = False Then
+                        DgvHistory.Rows(j + i).Cells("倉庫").Value = getWarehouseName(dsShukodt.Tables(RS).Rows(i)("倉庫コード"))
                     End If
 
-                    DgvAdd.Rows(rowIndex).Cells("入出庫種別").Value = dsHanyo.Tables(RS).Rows(0)("可変キー")
-                    DgvAdd.Rows(rowIndex).Cells("備考").Value = dsCymndt.Tables(RS).Rows(i)("備考")
-
-                    'DgvAdd.Rows(rowIndex).Cells("在庫数量").Value = setZaikoQuantity(rowIndex) 'セットされた内容から現在庫数をセット
-                    'DgvAdd.Rows(rowIndex).Cells("在庫数量").Value = getZikoQuantity(rowIndex) 'セットされた内容から現在庫数をセット
-                    '仕入区分が「サービス時」
-                    If dsCymndt.Tables(RS).Rows(i)("仕入区分").ToString = CommonConst.Sire_KBN_SERVICE.ToString Then
-                        DgvAdd.Rows(rowIndex).Cells("在庫数量").Style.BackColor = Color.FromArgb(255, 255, 192)
+                    If dsShukodt.Tables(RS).Rows(i).IsNull("入出庫種別") = False Then
+                        DgvHistory.Rows(j + i).Cells("入出庫種別").Value = getInOutName(dsShukodt.Tables(RS).Rows(i)("入出庫種別"))
                     End If
-                End If
-            Next
 
-            '行番号の振り直し
-            Dim i1 As Integer = DgvOrder.Rows.Count()
-            Dim No1 As Integer = 1
-            For i As Integer = 0 To i1 - 1
-                DgvOrder.Rows(i).Cells("明細").Value = No1
-                No1 += 1
-            Next i
+                    DgvHistory.Rows(j + i).Cells("出庫日").Value = dsShukodt.Tables(RS).Rows(i)("出庫日").ToShortDateString
+                    DgvHistory.Rows(j + i).Cells("備考").Value = dsShukodt.Tables(RS).Rows(i)("備考")
+                    DgvHistory.Rows(j + i).Cells("受注行番号").Value = dsShukodt.Tables(RS).Rows(i)("受注行番号")
+                Next
 
-            '各項目件数表示
-            TxtCount1.Text = DgvOrder.Rows.Count()
-            TxtCount2.Text = DgvHistory.Rows.Count()
-            TxtCount3.Text = DgvAdd.Rows.Count()
+                TxtOrderNo.Text = dsShukodt.Tables(RS).Rows(0)("受注番号").ToString
+                TxtSuffixNo.Text = dsShukodt.Tables(RS).Rows(0)("受注番号枝番").ToString
+                TxtCustomerPO.Text = dsShukodt.Tables(RS).Rows(0)("客先番号").ToString
+                'TxtOrderDate.Text = ""
+                TxtCustomerCode.Text = dsShukodt.Tables(RS).Rows(0)("得意先コード").ToString
+                TxtCustomerName.Text = dsShukodt.Tables(RS).Rows(0)("得意先名").ToString
+                'DtpGoodsIssueDate.Value = dsShukodt.Tables(RS).Rows(0)("出庫日") '出庫日
+                'TxtIDRCurrency.Text = ""
 
-            '受注データがある場合
-            If dsCymnhd.Tables(RS).Rows.Count > 0 Then
-                TxtOrderNo.Text = dsCymnhd.Tables(RS).Rows(0)("受注番号")
-                TxtSuffixNo.Text = dsCymnhd.Tables(RS).Rows(0)("受注番号枝番")
-                TxtCustomerPO.Text = dsCymnhd.Tables(RS).Rows(0)("客先番号").ToString
-                TxtOrderDate.Text = dsCymnhd.Tables(RS).Rows(0)("受注日")
-                TxtCustomerCode.Text = dsCymnhd.Tables(RS).Rows(0)("得意先コード")
-                TxtCustomerName.Text = dsCymnhd.Tables(RS).Rows(0)("得意先名")
-                DtpGoodsIssueDate.Value = Date.Now '出庫日
-                '#633 のためコメントアウト
-                'DtpGoodsIssueDate.MinDate = dsCymnhd.Tables(RS).Rows(0)("受注日") '出庫日のMinDateに受注日を設定する
+
+
+
+
+
             Else
-                TxtOrderNo.Text = dsShukohd.Tables(RS).Rows(0)("受注番号").ToString
-                TxtSuffixNo.Text = dsShukohd.Tables(RS).Rows(0)("受注番号枝番").ToString
-                TxtCustomerPO.Text = dsShukohd.Tables(RS).Rows(0)("客先番号").ToString
-                TxtOrderDate.Text = ""
-                TxtCustomerCode.Text = dsShukohd.Tables(RS).Rows(0)("得意先コード").ToString
-                TxtCustomerName.Text = dsShukohd.Tables(RS).Rows(0)("得意先名").ToString
-                DtpGoodsIssueDate.Value = dsShukohd.Tables(RS).Rows(0)("出庫日") '出庫日
+
+                '倉庫マスタを取得、コンボボックスを作成
+                Sql = " AND "
+                Sql += " 無効フラグ = '" & CommonConst.FLAG_ENABLED & "'"
+
+                Dim dsWarehouse As DataSet = getDsData("m20_warehouse", Sql)
+
+                'ComboBoxに表示する項目のリストを作成する
+                Dim table As New DataTable("Table")
+                table.Columns.Add("Display", GetType(String))
+                table.Columns.Add("Value", GetType(String))
+                For i As Integer = 0 To dsWarehouse.Tables(RS).Rows.Count - 1
+                    table.Rows.Add(dsWarehouse.Tables(RS).Rows(i)("名称"), dsWarehouse.Tables(RS).Rows(i)("倉庫コード"))
+                Next
+
+                '指定列をコンボボックスに変換
+                Dim cmWarehouse As New DataGridViewComboBoxColumn()
+                cmWarehouse.DataSource = table
+                '実際の値が"Value"列、表示するテキストが"Display"列とする
+                cmWarehouse.ValueMember = "Value"
+                cmWarehouse.DisplayMember = "Display"
+                cmWarehouse.HeaderText = "倉庫"
+                cmWarehouse.Name = "倉庫"
+                If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
+                    cmWarehouse.HeaderText = "Warehouse"
+                End If
+
+                DgvAdd.Columns.Insert(10, cmWarehouse)
+                'DgvAdd.Columns("倉庫").DefaultCellStyle.BackColor = Color.FromArgb(255, 255, 192)
+                'DgvAdd.Columns("倉庫").ReadOnly = True
+
+
+                '入出庫種別コンボボックス作成
+                Dim cmInOutKbn As New DataGridViewComboBoxColumn()
+                cmInOutKbn.DataSource = getInOutKbn("0,1")
+                '実際の値が"Value"列、表示するテキストが"Display"列とする
+                cmInOutKbn.ValueMember = "Value"
+                cmInOutKbn.DisplayMember = "Display"
+                cmInOutKbn.HeaderText = "入出庫種別"
+                cmInOutKbn.Name = "入出庫種別"
+                If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
+                    cmInOutKbn.HeaderText = "StorageType"
+                End If
+
+                DgvAdd.Columns.Insert(15, cmInOutKbn)
+
+                ''引当区分コンボボックス作成
+                'Dim cmAllocationKbn As New DataGridViewComboBoxColumn()
+                'cmAllocationKbn.DataSource = getAssignKbn()
+                ''実際の値が"Value"列、表示するテキストが"Display"列とする
+                'cmAllocationKbn.ValueMember = "Value"
+                'cmAllocationKbn.DisplayMember = "Display"
+                'cmAllocationKbn.HeaderText = "引当区分"
+                'cmAllocationKbn.Name = "引当区分"
+                'If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
+                '    cmAllocationKbn.HeaderText = "AssignClassification"
+                'End If
+
+                'DgvAdd.Columns.Insert(13, cmAllocationKbn)
+
+                'リードタイムのリストを汎用マスタから取得
+                Dim dsHanyo As DataSet = getDsHanyoData(CommonConst.INOUT_CLASS, "0,1")
+
+                For Each yx As KeyValuePair(Of String, String) In _hash
+
+                    No = yx.Key
+                    Suffix = yx.Value
+
+                    '受注情報取得
+                    '------------------------------------
+                    Sql = " AND "
+                    Sql += "受注番号 ILIKE '" & No & "'"
+                    Sql += " AND "
+                    Sql += "受注番号枝番 ILIKE '" & Suffix & "'"
+                    Sql += " AND "
+                    Sql += "取消区分 = '" & CommonConst.CANCEL_KBN_ENABLED & "'"
+                    Sql += " order by 会社コード, 受注番号, 受注番号枝番 "
+
+                    Dim dsCymnhd As DataSet = getDsData("t10_cymnhd", Sql)
+                    'If dsCymnhd.Tables(RS).Rows.Count = 0 Then
+                    '    '受注が取り消されているものであることをアラートし、以降の処理を中止する
+                    '    _msgHd.dspMSG("giOrderError", frmC01F10_Login.loginValue.Language)
+                    'End If
+
+
+                    '出庫情報取得
+                    '------------------------------------
+                    'Sql = "SELECT t45.*, t44.出庫日, t44.取消区分, t70.入出庫種別, t70.引当区分"
+                    Sql = "SELECT t45.*, t44.出庫日, t44.取消区分, t70.入出庫種別"
+                    Sql += " FROM  public.t45_shukodt t45 "
+
+                    Sql += " INNER JOIN  t44_shukohd t44"
+                    Sql += " ON t45.会社コード = t44.会社コード"
+                    Sql += " AND  t45.出庫番号 = t44.出庫番号"
+
+                    Sql += " LEFT JOIN  t70_inout t70"
+                    Sql += " ON t70.会社コード = t44.会社コード"
+                    Sql += " AND  t70.入出庫区分 = '2'"
+                    'Sql += " AND  t70.倉庫コード = t45.倉庫コード"
+                    Sql += " AND  t70.伝票番号 = t44.出庫番号"
+                    Sql += " AND  t70.行番号 = t45.行番号"
+                    'Sql += " AND  t70.出庫開始サイン = concat(t44.出庫番号, t45.行番号)"     '2020.01.09 REP
+
+                    'If dsCymnhd.Tables(RS).Rows.Count > 0 Then
+                    Sql += " WHERE t45.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+                        Sql += " AND "
+                        Sql += "t45.受注番号 ILIKE '" & No & "'"
+                        Sql += " AND "
+                        Sql += "t45.受注番号枝番 ILIKE '" & Suffix & "'"
+                        Sql += " AND "
+                        Sql += "t44.取消区分 = '" & CommonConst.CANCEL_KBN_ENABLED & "'"
+                        Sql += " AND "
+                        Sql += " t45.出庫区分 <> '" & CommonConst.SHUKO_KBN_TMP & "' " '仮出庫のものは省く
+                        Sql += " ORDER BY t45.行番号"
+                    'Else
+                    'Sql += " WHERE t45.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+                    'Sql += " AND "
+                    'Sql += "t45.出庫番号 ILIKE '" & No & "'"
+                    'Sql += " AND "
+                    'Sql += "t44.取消区分 = '" & CommonConst.CANCEL_KBN_ENABLED & "'"
+                    'Sql += " AND "
+                    'Sql += " t45.出庫区分 <> '" & CommonConst.SHUKO_KBN_TMP & "' " '仮出庫のものは省く
+                    'Sql += " ORDER BY t45.行番号"
+
+                    'End If
+
+                    Dim dsShukodt As DataSet = _db.selectDB(Sql, RS, reccnt)
+
+                    Sql = "SELECT t11.*, t10.更新日"
+                    Sql += " FROM  public.t11_cymndt t11 "
+                    Sql += " INNER JOIN  t10_cymnhd t10"
+                    Sql += " ON t11.会社コード = t10.会社コード"
+                    Sql += " AND  t11.受注番号 = t10.受注番号"
+                    Sql += " AND  t11.受注番号枝番 = t10.受注番号枝番"
+
+                    Sql += " WHERE t11.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+                    Sql += " AND "
+                    Sql += "t11.受注番号 ILIKE '" & No & "'"
+                    Sql += " AND "
+                    Sql += "t11.受注番号枝番 ILIKE '" & Suffix & "'"
+                    Sql += " AND "
+                    Sql += "t10.取消区分 = '" & CommonConst.CANCEL_KBN_ENABLED & "'"
+
+                    Sql += " ORDER BY t11.行番号"
+
+                    Dim dsCymndt As DataSet = _db.selectDB(Sql, RS, reccnt)
+
+
+
+                    Dim j As Integer = DgvOrder.RowCount
+                    For i As Integer = 0 To dsCymndt.Tables(RS).Rows.Count - 1
+                        DgvOrder.Rows.Add()
+                        DgvOrder.Rows(j + i).Cells("受注番号").Value = dsCymndt.Tables(RS).Rows(i)("受注番号")
+                        DgvOrder.Rows(j + i).Cells("受注番号枝番").Value = dsCymndt.Tables(RS).Rows(i)("受注番号枝番")
+                        DgvOrder.Rows(j + i).Cells("受注日").Value = dsCymnhd.Tables(RS).Rows(0)("受注日")
+                        DgvOrder.Rows(j + i).Cells("客先番号").Value = dsCymnhd.Tables(RS).Rows(0)("客先番号")
+                        DgvOrder.Rows(j + i).Cells("明細").Value = dsCymndt.Tables(RS).Rows(i)("行番号")
+                        DgvOrder.Rows(j + i).Cells("メーカー").Value = dsCymndt.Tables(RS).Rows(i)("メーカー")
+                        DgvOrder.Rows(j + i).Cells("品名").Value = dsCymndt.Tables(RS).Rows(i)("品名")
+                        DgvOrder.Rows(j + i).Cells("型式").Value = dsCymndt.Tables(RS).Rows(i)("型式")
+                        DgvOrder.Rows(j + i).Cells("受注数量").Value = dsCymndt.Tables(RS).Rows(i)("受注数量")
+                        DgvOrder.Rows(j + i).Cells("単位").Value = dsCymndt.Tables(RS).Rows(i)("単位")
+
+                        'DgvOrder.Rows(i).Cells("売上数量").Value = dsCymndt.Tables(RS).Rows(i)("売上数量")
+                        DgvOrder.Rows(j + i).Cells("売上数量").Value = dsCymndt.Tables(RS).Rows(i)("出庫数")
+                        DgvOrder.Rows(j + i).Cells("受注残数").Value = dsCymndt.Tables(RS).Rows(i)("未出庫数")
+
+                        DgvOrder.Rows(j + i).Cells("通貨").Value = _com.getCurrencyEx(dsCymnhd.Tables(RS).Rows(0)("通貨"))
+                        DgvOrder.Rows(j + i).Cells("売単価").Value = dsCymndt.Tables(RS).Rows(i)("見積単価_外貨") '見積単価")
+
+                        DgvOrder.Rows(j + i).Cells("売上金額").Value = dsCymndt.Tables(RS).Rows(i)("売上金額")
+                        DgvOrder.Rows(j + i).Cells("未出庫数").Value = dsCymndt.Tables(RS).Rows(i)("未出庫数")
+                        DgvOrder.Rows(j + i).Cells("更新日").Value = dsCymndt.Tables(RS).Rows(i)("更新日")
+                    Next
+
+                    j = DgvHistory.RowCount
+                    For i As Integer = 0 To dsShukodt.Tables(RS).Rows.Count - 1
+                        '汎用マスタから仕入区分名称取得
+                        sireKbn = getDsHanyoData(CommonConst.FIXED_KEY_PURCHASING_CLASS, dsShukodt.Tables(RS).Rows(i)("仕入区分").ToString)
+
+                        DgvHistory.Rows.Add()
+                        DgvHistory.Rows(j + i).Cells("No").Value = j + i + 1
+                        DgvHistory.Rows(j + i).Cells("出庫番号").Value = dsShukodt.Tables(RS).Rows(i)("出庫番号")
+                        DgvHistory.Rows(j + i).Cells("行番号").Value = dsShukodt.Tables(RS).Rows(i)("行番号")
+                        DgvHistory.Rows(j + i).Cells("受注番号").Value = dsShukodt.Tables(RS).Rows(i)("受注番号")
+                        DgvHistory.Rows(j + i).Cells("受注番号枝番").Value = dsShukodt.Tables(RS).Rows(i)("受注番号枝番")
+                        DgvHistory.Rows(j + i).Cells("仕入区分").Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG,
+                                                                    sireKbn.Tables(RS).Rows(0)("文字２"),
+                                                                    sireKbn.Tables(RS).Rows(0)("文字１"))
+                        DgvHistory.Rows(j + i).Cells("メーカー").Value = dsShukodt.Tables(RS).Rows(i)("メーカー")
+                        DgvHistory.Rows(j + i).Cells("品名").Value = dsShukodt.Tables(RS).Rows(i)("品名")
+                        DgvHistory.Rows(j + i).Cells("型式").Value = dsShukodt.Tables(RS).Rows(i)("型式")
+                        DgvHistory.Rows(j + i).Cells("単位").Value = dsShukodt.Tables(RS).Rows(i)("単位")
+                        DgvHistory.Rows(j + i).Cells("仕入先").Value = dsShukodt.Tables(RS).Rows(i)("仕入先名")
+                        DgvHistory.Rows(j + i).Cells("売単価").Value = dsShukodt.Tables(RS).Rows(i)("売単価")
+                        DgvHistory.Rows(j + i).Cells("出庫数量").Value = dsShukodt.Tables(RS).Rows(i)("出庫数量")
+
+                        If dsShukodt.Tables(RS).Rows(i).IsNull(("倉庫コード")) = False Then
+                            DgvHistory.Rows(j + i).Cells("倉庫").Value = getWarehouseName(dsShukodt.Tables(RS).Rows(i)("倉庫コード"))
+                        End If
+
+                        If dsShukodt.Tables(RS).Rows(i).IsNull("入出庫種別") = False Then
+                            DgvHistory.Rows(j + i).Cells("入出庫種別").Value = getInOutName(dsShukodt.Tables(RS).Rows(i)("入出庫種別"))
+                        End If
+
+                        DgvHistory.Rows(j + i).Cells("出庫日").Value = dsShukodt.Tables(RS).Rows(i)("出庫日").ToShortDateString
+                        DgvHistory.Rows(j + i).Cells("備考").Value = dsShukodt.Tables(RS).Rows(i)("備考")
+                        DgvHistory.Rows(j + i).Cells("受注行番号").Value = dsShukodt.Tables(RS).Rows(i)("受注行番号")
+
+                    Next
+
+                    Sql = " AND 出庫番号 = '" & No & "'"
+                    '出庫基本取得
+                    Dim dsShukohd As DataSet = getDsData("t44_shukohd", Sql)
+
+                    Dim rowIndex As Long = 0
+
+                    For i As Integer = 0 To dsCymndt.Tables(RS).Rows.Count - 1
+                        If dsCymndt.Tables(RS).Rows(i)("未出庫数") <> 0 Then
+                            '汎用マスタから仕入区分名称取得
+                            sireKbn = getDsHanyoData(CommonConst.FIXED_KEY_PURCHASING_CLASS, dsCymndt.Tables(RS).Rows(i)("仕入区分").ToString)
+
+                            DgvAdd.Rows.Add()
+
+                            rowIndex = DgvAdd.RowCount - 1
+
+                            DgvAdd.Rows(rowIndex).Cells("No").Value = rowIndex + 1
+                            DgvAdd.Rows(rowIndex).Cells("受注番号").Value = dsCymndt.Tables(RS).Rows(i)("受注番号")
+                            DgvAdd.Rows(rowIndex).Cells("受注番号枝番").Value = dsCymndt.Tables(RS).Rows(i)("受注番号枝番")
+                            DgvAdd.Rows(rowIndex).Cells("行番号").Value = dsCymndt.Tables(RS).Rows(i)("行番号")
+                            DgvAdd.Rows(rowIndex).Cells("仕入区分").Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG,
+                                                                    sireKbn.Tables(RS).Rows(0)("文字２"),
+                                                                    sireKbn.Tables(RS).Rows(0)("文字１"))
+                            DgvAdd.Rows(rowIndex).Cells("仕入区分値").Value = dsCymndt.Tables(RS).Rows(i)("仕入区分")
+                            DgvAdd.Rows(rowIndex).Cells("メーカー").Value = dsCymndt.Tables(RS).Rows(i)("メーカー")
+                            DgvAdd.Rows(rowIndex).Cells("品名").Value = dsCymndt.Tables(RS).Rows(i)("品名")
+                            DgvAdd.Rows(rowIndex).Cells("型式").Value = dsCymndt.Tables(RS).Rows(i)("型式")
+                            DgvAdd.Rows(rowIndex).Cells("仕入先").Value = dsCymndt.Tables(RS).Rows(i)("仕入先名")
+
+                            DgvAdd.Rows(rowIndex).Cells("単位").Value = dsCymndt.Tables(RS).Rows(i)("単位")
+                            DgvAdd.Rows(rowIndex).Cells("未出庫数量").Value = dsCymndt.Tables(RS).Rows(i)("未出庫数")
+                            DgvAdd.Rows(rowIndex).Cells("出庫数").Value = dsCymndt.Tables(RS).Rows(i)("出庫数")
+
+                            '今回出庫数量に未出庫数をセットする
+                            DgvAdd.Rows(rowIndex).Cells("出庫数量").Value = dsCymndt.Tables(RS).Rows(i)("未出庫数")
+
+
+                            DgvAdd.Rows(rowIndex).Cells("売単価").Value = dsCymndt.Tables(RS).Rows(i)("見積単価")
+                            'DgvAdd.Rows(rowIndex).Cells("出庫数量").Value = 0
+
+                            If dsCymnhd.Tables(RS).Rows.Count > 0 Then
+                                DgvAdd.Rows(rowIndex).Cells("倉庫").Value = dsWarehouse.Tables(RS).Rows(0)("倉庫コード")
+                            Else
+                                DgvAdd.Rows(rowIndex).Cells("倉庫").Value = dsShukohd.Tables(RS).Rows(0)("倉庫コード")
+                            End If
+
+                            DgvAdd.Rows(rowIndex).Cells("入出庫種別").Value = dsHanyo.Tables(RS).Rows(0)("可変キー")
+                            DgvAdd.Rows(rowIndex).Cells("備考").Value = dsCymndt.Tables(RS).Rows(i)("備考")
+
+                            'DgvAdd.Rows(rowIndex).Cells("在庫数量").Value = setZaikoQuantity(rowIndex) 'セットされた内容から現在庫数をセット
+                            'DgvAdd.Rows(rowIndex).Cells("在庫数量").Value = getZikoQuantity(rowIndex) 'セットされた内容から現在庫数をセット
+                            '仕入区分が「サービス時」
+                            'If dsCymndt.Tables(RS).Rows(i)("仕入区分").ToString = CommonConst.Sire_KBN_SERVICE.ToString Then
+                            'DgvAdd.Rows(rowIndex).Cells("在庫数量").Style.BackColor = Color.FromArgb(255, 255, 192)
+                            'End If
+                        End If
+                    Next
+
+                    '行番号の振り直し
+                    'Dim i1 As Integer = DgvOrder.Rows.Count()
+                    'Dim No1 As Integer = 1
+                    'For i As Integer = 0 To i1 - 1
+                    '    DgvOrder.Rows(i).Cells("明細").Value = No1
+                    '    No1 += 1
+                    'Next i
+
+                    '各項目件数表示
+                    TxtCount1.Text = DgvOrder.Rows.Count()
+                    TxtCount2.Text = DgvHistory.Rows.Count()
+                    TxtCount3.Text = DgvAdd.Rows.Count()
+
+                    '受注データがある場合
+                    If dsCymnhd.Tables(RS).Rows.Count > 0 Then
+                        TxtOrderNo.Text = dsCymnhd.Tables(RS).Rows(0)("受注番号")
+                        TxtSuffixNo.Text = dsCymnhd.Tables(RS).Rows(0)("受注番号枝番")
+                        TxtCustomerPO.Text = dsCymnhd.Tables(RS).Rows(0)("客先番号").ToString
+                        TxtOrderDate.Text = dsCymnhd.Tables(RS).Rows(0)("受注日")
+                        TxtCustomerCode.Text = dsCymnhd.Tables(RS).Rows(0)("得意先コード")
+                        TxtCustomerName.Text = dsCymnhd.Tables(RS).Rows(0)("得意先名")
+                        DtpGoodsIssueDate.Value = Date.Now '出庫日
+                        '#633 のためコメントアウト
+                        'DtpGoodsIssueDate.MinDate = dsCymnhd.Tables(RS).Rows(0)("受注日") '出庫日のMinDateに受注日を設定する
+                        '通貨の表示
+                        TxtIDRCurrency.Text = _com.getCurrencyEx(dsCymnhd.Tables(RS).Rows(0)("通貨"))
+                    Else
+                        TxtOrderNo.Text = dsShukohd.Tables(RS).Rows(0)("受注番号").ToString
+                        TxtSuffixNo.Text = dsShukohd.Tables(RS).Rows(0)("受注番号枝番").ToString
+                        TxtCustomerPO.Text = dsShukohd.Tables(RS).Rows(0)("客先番号").ToString
+                        TxtOrderDate.Text = ""
+                        TxtCustomerCode.Text = dsShukohd.Tables(RS).Rows(0)("得意先コード").ToString
+                        TxtCustomerName.Text = dsShukohd.Tables(RS).Rows(0)("得意先名").ToString
+                        DtpGoodsIssueDate.Value = dsShukohd.Tables(RS).Rows(0)("出庫日") '出庫日
+                        TxtIDRCurrency.Text = ""
+                    End If
+
+                    '出庫入力一覧をループしながら今回出庫の「在庫数」を確認・セット
+                    For i As Integer = 0 To DgvAdd.Rows.Count() - 1
+                        '仕入区分が「サービス時」
+                        'If dsCymndt.Tables(RS).Rows(i)("仕入区分").ToString = CommonConst.Sire_KBN_SERVICE.ToString Then
+                        If DgvAdd.Rows(i).Cells("仕入区分値").Value.ToString = CommonConst.Sire_KBN_SERVICE.ToString Then
+                            DgvAdd.Rows(i).Cells("在庫数量").Style.BackColor = Color.LightGray
+                        Else
+                            '仕入区分が「サービス時」以外
+                            DgvAdd.Rows(i).Cells("在庫数量").Value = getZikoQuantity(i)
+                        End If
+
+                    Next
+
+                Next
             End If
 
-            '出庫入力一覧をループしながら今回出庫の「在庫数」を確認・セット
-            For i As Integer = 0 To DgvAdd.Rows.Count() - 1
-                '仕入区分が「サービス時」
-                'If dsCymndt.Tables(RS).Rows(i)("仕入区分").ToString = CommonConst.Sire_KBN_SERVICE.ToString Then
-                If DgvAdd.Rows(i).Cells("仕入区分").ToString = CommonConst.Sire_KBN_SERVICE.ToString Then
-                    DgvAdd.Rows(i).Cells("在庫数量").Style.BackColor = Color.LightGray
-                Else
-                    '仕入区分が「サービス時」以外
-                    DgvAdd.Rows(i).Cells("在庫数量").Value = getZikoQuantity(i)
-                End If
-
-            Next
 
         Catch ue As UsrDefException
             ue.dspMsg()
             Throw ue
         Catch ex As Exception
-            'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
-            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
+            If ex.HResult = -2147467259 Then
+                MessageBox.Show("Signal is not so good, Reconnect...", "SPIN", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                _db = StartUp.Connect()
+            Else
+                'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
+                'Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
+            End If
         End Try
 
     End Sub
@@ -529,6 +620,11 @@ Public Class GoodsIssue
         '受注エリア見出しセット
         '
         If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
+            DgvOrder.Columns.Add("受注番号", "JobOrderNo")
+            DgvOrder.Columns.Add("受注番号枝番", "JobOrderVer")
+            DgvOrder.Columns.Add("受注日", "OrderDate")
+            DgvOrder.Columns.Add("客先番号", "CustomerNumber")
+
             DgvOrder.Columns.Add("明細", "LineNo")
             DgvOrder.Columns.Add("メーカー", "Manufacturer")
             DgvOrder.Columns.Add("品名", "ItemName")
@@ -538,6 +634,7 @@ Public Class GoodsIssue
 
             DgvOrder.Columns.Add("売上数量", "IssuedQuantity" & vbCrLf & "b")
             DgvOrder.Columns.Add("受注残数", "UnissuedQuantity" & vbCrLf & "c=a-b")
+            DgvOrder.Columns.Add("通貨", "Currency")
             DgvOrder.Columns.Add("売単価", "OrderUnitPrice")
 
             DgvOrder.Columns.Add("売上金額", "SalesAmount")
@@ -545,6 +642,12 @@ Public Class GoodsIssue
 
             DgvOrder.Columns.Add("更新日", "UpdateDate")
         Else
+            DgvOrder.Columns.Add("受注番号", "受注番号")
+            DgvOrder.Columns.Add("受注番号枝番", "受注番号枝番")
+            DgvOrder.Columns.Add("受注日", "受注日")
+            DgvOrder.Columns.Add("客先番号", "客先番号")
+            DgvOrder.Columns.Add("通貨", "通貨")
+
             DgvOrder.Columns.Add("明細", "行No")
             DgvOrder.Columns.Add("メーカー", "メーカー")
             DgvOrder.Columns.Add("品名", "品名")
@@ -593,7 +696,7 @@ Public Class GoodsIssue
         DgvOrder.Columns("売上金額").DefaultCellStyle.Format = "N2"
         DgvOrder.Columns("受注残数").DefaultCellStyle.Format = "N2"
         DgvOrder.Columns("未出庫数").DefaultCellStyle.Format = "N2"
-
+        DgvOrder.Columns("受注日").DefaultCellStyle.Format = "d"
 
         '出庫済みエリア見出しセット
         '
@@ -601,6 +704,9 @@ Public Class GoodsIssue
             DgvHistory.Columns.Add("No", "No")
             DgvHistory.Columns.Add("出庫番号", "GoodsDeliveryNumber")
             DgvHistory.Columns.Add("行番号", "LineNo")
+            DgvHistory.Columns.Add("受注番号", "JobOrderNo")
+            DgvHistory.Columns.Add("受注番号枝番", "JobOrderVer")
+            DgvHistory.Columns.Add("受注行番号", "LineNo")
             DgvHistory.Columns.Add("仕入区分", "PurchasingClassification")
             DgvHistory.Columns.Add("メーカー", "Manufacturer")
             DgvHistory.Columns.Add("品名", "ItemName")
@@ -618,6 +724,9 @@ Public Class GoodsIssue
             DgvHistory.Columns.Add("No", "No")
             DgvHistory.Columns.Add("出庫番号", "出庫番号")
             DgvHistory.Columns.Add("行番号", "行No")
+            DgvHistory.Columns.Add("受注番号", "受注番号")
+            DgvHistory.Columns.Add("受注番号枝番", "受注番号枝番")
+            DgvHistory.Columns.Add("受注行番号", "受注行番号")
             DgvHistory.Columns.Add("仕入区分", "仕入区分")
             DgvHistory.Columns.Add("メーカー", "メーカー")
             DgvHistory.Columns.Add("品名", "品名")
@@ -643,13 +752,15 @@ Public Class GoodsIssue
 
         DgvHistory.Columns("仕入先").Visible = False
         DgvHistory.Columns("売単価").Visible = False
-
+        DgvHistory.Columns("No").Visible = False
 
 
         '今回出庫エリア見出しセット
         '
         If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
             DgvAdd.Columns.Add("No", "No")
+            DgvAdd.Columns.Add("受注番号", "JobOrderNo")
+            DgvAdd.Columns.Add("受注番号枝番", "JobOrderVer")
             DgvAdd.Columns.Add("行番号", "LineNo")
             DgvAdd.Columns.Add("仕入区分", "PurchasingClassification")
             DgvAdd.Columns.Add("仕入区分値", "仕入区分値")
@@ -662,6 +773,7 @@ Public Class GoodsIssue
             DgvAdd.Columns.Add("単位", "Unit")
             DgvAdd.Columns.Add("未出庫数量", "UnissuedQuantity")
             DgvAdd.Columns.Add("出庫数量", "GoodsDeliveryQuantity")
+            DgvAdd.Columns.Add("出庫数", "IssuedQuantity")
 
             DgvAdd.Columns.Add("備考", "Remarks")
 
@@ -669,6 +781,8 @@ Public Class GoodsIssue
 
         Else
             DgvAdd.Columns.Add("No", "No")
+            DgvAdd.Columns.Add("受注番号", "受注番号")
+            DgvAdd.Columns.Add("受注番号枝番", "受注番号枝番")
             DgvAdd.Columns.Add("行番号", "行No")
             DgvAdd.Columns.Add("仕入区分", "仕入区分")
             DgvAdd.Columns.Add("仕入区分値", "仕入区分値")
@@ -681,6 +795,7 @@ Public Class GoodsIssue
             DgvAdd.Columns.Add("単位", "単位")
             DgvAdd.Columns.Add("未出庫数量", "未出庫数量")
             DgvAdd.Columns.Add("出庫数量", "今回出庫数量")
+            DgvAdd.Columns.Add("出庫数", "出庫数")
 
             DgvAdd.Columns.Add("備考", "備考")
 
@@ -722,10 +837,14 @@ Public Class GoodsIssue
         DgvAdd.Columns("単位").ReadOnly = True
         DgvAdd.Columns("未出庫数量").DefaultCellStyle.BackColor = Color.FromArgb(255, 255, 192)
         DgvAdd.Columns("未出庫数量").ReadOnly = True
-
+        DgvAdd.Columns("受注番号").DefaultCellStyle.BackColor = Color.FromArgb(255, 255, 192)
+        DgvAdd.Columns("受注番号枝番").DefaultCellStyle.BackColor = Color.FromArgb(255, 255, 192)
+        DgvAdd.Columns("受注番号").ReadOnly = True
+        DgvAdd.Columns("受注番号枝番").ReadOnly = True
 
         DgvAdd.Columns("売単価").ReadOnly = True
         DgvAdd.Columns("売単価").Visible = False
+        DgvAdd.Columns("出庫数").Visible = False
     End Sub
 
     'セルの値が変更されたら
@@ -764,8 +883,8 @@ Public Class GoodsIssue
 
         Dim dtToday As DateTime = DateTime.Now
 
-        Dim shukkoTime As TimeSpan = dtToday.TimeOfDay
-        Dim shukkoDate As String = UtilClass.formatDatetime(DtpGoodsIssueDate.Text & " " & shukkoTime.ToString)
+        'Dim shukkoTime As TimeSpan = dtToday.TimeOfDay
+        Dim shukkoDate As String = UtilClass.formatDatetime(DtpGoodsIssueDate.Value) '.Text & " " & shukkoTime.ToString)
 
         Dim reccnt As Integer = 0 'DB用（デフォルト）
         Dim Sql As String = ""
@@ -775,13 +894,13 @@ Public Class GoodsIssue
 
         '受注基本
         Sql = " And "
-        Sql += "受注番号 ILIKE '" & No & "'"
+        'Sql += "受注番号 ILIKE '" & No & "'"
         Sql += " AND "
-        Sql += "受注番号枝番 ILIKE '" & Suffix & "'"
+        'Sql += "受注番号枝番 ILIKE '" & Suffix & "'"
         Sql += " AND "
         Sql += "取消区分 = " & CommonConst.CANCEL_KBN_ENABLED '取消区分=0
 
-        Dim dsCymnhd As DataSet = getDsData("t10_cymnhd", Sql)
+        Dim dsCymnhd As DataSet '= getDsData("t10_cymnhd", Sql)
 
         '受注明細
         Sql = "SELECT t11.行番号, t11.出庫数, t11.未出庫数 FROM "
@@ -799,14 +918,14 @@ Public Class GoodsIssue
 
         Sql += " where t10.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
         Sql += " AND "
-        Sql += "t10.受注番号 ILIKE '" & No & "'"
+        'Sql += "t10.受注番号 ILIKE '" & No & "'"
         Sql += " AND "
-        Sql += "t10.受注番号枝番 ILIKE '" & Suffix & "'"
+        'Sql += "t10.受注番号枝番 ILIKE '" & Suffix & "'"
         Sql += " AND "
         Sql += "t10.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED '取消区分=0
 
         '受注明細の「出庫数」更新に使用
-        Dim dsCymndt As DataSet = _db.selectDB(Sql, RS, reccnt)
+        'Dim dsCymndt As DataSet = _db.selectDB(Sql, RS, reccnt)
 
 #End Region
 
@@ -821,7 +940,7 @@ Public Class GoodsIssue
             Return
         End If
 
-        Dim chkGIAmount As Integer = 0 '出庫データがあるか合算する用
+        Dim chkGIAmount As Decimal = 0 '出庫データがあるか合算する用
         Dim chkShukkoFlg As Boolean = True '在庫チェック用フラグ
         '最初に今回出庫に入力がなかったらエラーで返す
         For i As Integer = 0 To DgvAdd.RowCount - 1
@@ -864,13 +983,13 @@ Public Class GoodsIssue
             Next
         Next
 
-        If DgvOrder.Rows(0).Cells("更新日").Value <> dsCymnhd.Tables(RS).Rows(0)("更新日") Then
-            '画面を開いたときの日時とデータの日時が異なっていた場合
-            'データが誰かに変更された旨を伝える
-            _msgHd.dspMSG("chkData", frmC01F10_Login.loginValue.Language)
+        'If DgvOrder.Rows(0).Cells("更新日").Value <> dsCymnhd.Tables(RS).Rows(0)("更新日") Then
+        '画面を開いたときの日時とデータの日時が異なっていた場合
+        'データが誰かに変更された旨を伝える
+        '_msgHd.dspMSG("chkData", frmC01F10_Login.loginValue.Language)
 
-            Exit Sub
-        End If
+        'Exit Sub
+        'End If
 
         '入出庫データ(t70_input)を作成する前に在庫があるか最終チェック
         For i As Integer = 0 To DgvAdd.Rows.Count() - 1
@@ -888,17 +1007,21 @@ Public Class GoodsIssue
 
 
         Try
+            _db.beginTran()
 
             '出庫データ登録前に、「在庫引当」の商品があるかどうかチェック
             'あれば「仮出庫」データを取消更新する
             For i As Integer = 0 To DgvAdd.Rows.Count() - 1
+
+                'No = DgvAdd.Rows(i).Cells("受注番号").Value
+                'Suffix = DgvAdd.Rows(i).Cells("受注番号枝番").Value
 
                 '仕入区分が2（在庫引当）の場合、作成済みの仮出庫データを「取消区分=0, 取消日=Datetime.Date」でUPDATEする
                 If DgvAdd.Rows(i).Cells("仕入区分値").Value = CommonConst.Sire_KBN_Zaiko Then
 
 #Region "t44_shukohd"
 
-                    Sql = " SELECT t44.出庫番号,t45.行番号"
+                    Sql = " SELECT t44.出庫番号,t45.行番号 "
                     Sql += " FROM "
                     Sql += " t44_shukohd t44 "
                     Sql += " INNER JOIN "
@@ -907,7 +1030,7 @@ Public Class GoodsIssue
                     Sql += " AND t44.出庫番号 = t45.出庫番号 "
                     Sql += " WHERE "
                     Sql += " t44.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-                    Sql += " AND t44.受注番号 = '" & No & "'"
+                    Sql += " AND t44.受注番号 = '" & DgvAdd.Rows(i).Cells("受注番号").Value.ToString & "'"
                     'Sql += " AND t44.受注番号枝番 = '" & Suffix & "'"
                     Sql += " AND t45.出庫区分 = '" & CommonConst.SHUKO_KBN_TMP & "'" '仮出庫のものを取得
                     Sql += " AND t44.取消区分 = '" & CommonConst.CANCEL_KBN_ENABLED & "'" '見取消のもの
@@ -962,6 +1085,7 @@ Public Class GoodsIssue
                         Sql += "'"
                         Sql += " AND 伝票番号 ='" & shukkoTmpData.Tables(RS).Rows(x)("出庫番号") & "' "
                         Sql += " AND 行番号 ='" & shukkoTmpData.Tables(RS).Rows(x)("行番号") & "' "
+                        Sql += " AND 取消区分='" & CommonConst.CANCEL_KBN_ENABLED.ToString & "'"
 
                         _db.executeDB(Sql)
 
@@ -977,7 +1101,7 @@ Public Class GoodsIssue
 
             '採番データを取得・更新
             '出庫登録データの伝票番号は基本的に LS で統一される（1商品で複数の在庫マスタをまたぐ場合を除く）
-            Dim MAIN_LS As String = _com.getSaiban("70", dtToday.ToShortDateString())
+            Dim MAIN_LS As String = _com.getSaiban("70", dtToday)
 
             '出庫登録一覧をループし、出庫登録対象データがあれば登録処理を実行
             For i As Integer = 0 To DgvAdd.Rows.Count() - 1
@@ -988,8 +1112,8 @@ Public Class GoodsIssue
                     '該当する在庫データを取得・ループ
                     '対象の在庫がなくなるまでデータを作成する
                     Dim dsCurrentList As DataSet = Nothing
-                    Dim totalShukkoVal As Long = Long.Parse(DgvAdd.Rows(i).Cells("出庫数量").Value)
-                    Dim currentVal As Long = 0
+                    Dim totalShukkoVal As Decimal = Decimal.Parse(DgvAdd.Rows(i).Cells("出庫数量").Value)
+                    Dim currentVal As Decimal = 0
                     Dim currentLS As String = ""
 
                     If DgvAdd.Rows(i).Cells("仕入区分値").Value.ToString = CommonConst.Sire_KBN_Sire.ToString Then
@@ -1015,17 +1139,17 @@ Public Class GoodsIssue
                         Sql += "t45_shukodt("
                         Sql += "会社コード, 出庫番号, 受注番号, 受注番号枝番, 行番号, 仕入区分"
                         Sql += ", メーカー, 品名, 型式, 仕入先名, 売単価, 出庫数量, 単位, 備考"
-                        Sql += ", 更新者, 更新日, 出庫区分, 倉庫コード"
+                        Sql += ", 更新者, 更新日, 出庫区分, 倉庫コード,受注行番号"
                         Sql += " )VALUES('"
-                        Sql += dsCymnhd.Tables(RS).Rows(0)("会社コード").ToString '会社コード
+                        Sql += frmC01F10_Login.loginValue.BumonCD '会社コード
                         Sql += "', '"
                         Sql += MAIN_LS '出庫番号
                         Sql += "', '"
-                        Sql += dsCymnhd.Tables(RS).Rows(0)("受注番号").ToString '受注番号
+                        Sql += DgvAdd.Rows(i).Cells("受注番号").Value.ToString '受注番号
                         Sql += "', '"
-                        Sql += dsCymnhd.Tables(RS).Rows(0)("受注番号枝番").ToString '受注番号枝番
+                        Sql += DgvAdd.Rows(i).Cells("受注番号枝番").Value.ToString '受注番号枝番
                         Sql += "', '"
-                        Sql += DgvAdd.Rows(i).Cells("行番号").Value.ToString '行番号
+                        Sql += DgvAdd.Rows(i).Cells("No").Value.ToString '行番号
                         Sql += "', '"
                         Sql += DgvAdd.Rows(i).Cells("仕入区分値").Value.ToString '仕入区分
                         Sql += "', '"
@@ -1052,6 +1176,8 @@ Public Class GoodsIssue
                         Sql += CommonConst.SHUKO_KBN_NORMAL '出庫区分（通常出庫時は 1 ）
                         Sql += "', '"
                         Sql += DgvAdd.Rows(i).Cells("倉庫").Value.ToString '倉庫コード
+                        Sql += "', '"
+                        Sql += DgvAdd.Rows(i).Cells("行番号").Value.ToString()
                         Sql += "')"
 
                         _db.executeDB(Sql)
@@ -1061,48 +1187,48 @@ Public Class GoodsIssue
 
                         '受注明細更新　受注と出庫の行番号は一致する
                         '---------------------------------------
-                        If DgvAdd.Rows(i).Cells("行番号").Value = dsCymndt.Tables(RS).Rows(i)("行番号") Then
+                        'If DgvAdd.Rows(i).Cells("行番号").Value = dsCymndt.Tables(RS).Rows(i)("行番号") Then
 
-                            Dim calShukko As Integer = dsCymndt.Tables(RS).Rows(i)("出庫数") + DgvAdd.Rows(i).Cells("出庫数量").Value
-                            Dim calUnShukko As Integer = dsCymndt.Tables(RS).Rows(i)("未出庫数") - DgvAdd.Rows(i).Cells("出庫数量").Value
+                        Dim calShukko As Decimal = DgvAdd.Rows(i).Cells("出庫数").Value + DgvAdd.Rows(i).Cells("出庫数量").Value
+                        Dim calUnShukko As Decimal = DgvAdd.Rows(i).Cells("未出庫数量").Value - DgvAdd.Rows(i).Cells("出庫数量").Value
 
 #Region "t11_cymndt"
 
-                            Sql = "update t11_cymndt set "
-                            Sql += "出庫数 = '" & calShukko & "'"
-                            Sql += ",未出庫数 = '" & calUnShukko & "'"
-                            Sql += ",更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
-                            Sql += " where 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-                            Sql += " AND "
-                            Sql += "受注番号 ILIKE '" & No & "'"
-                            Sql += " AND "
-                            Sql += "受注番号枝番 ILIKE '" & Suffix & "'"
-                            Sql += " AND "
-                            Sql += "行番号 = '" & DgvAdd.Rows(i).Cells("行番号").Value & "'"
+                        Sql = "update t11_cymndt set "
+                        Sql += "出庫数 = '" & calShukko & "'"
+                        Sql += ",未出庫数 = '" & calUnShukko & "'"
+                        Sql += ",更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
+                        Sql += " where 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+                        Sql += " AND "
+                        Sql += "受注番号='" & DgvAdd.Rows(i).Cells("受注番号").Value.ToString & "'"
+                        Sql += " AND "
+                        Sql += "受注番号枝番='" & DgvAdd.Rows(i).Cells("受注番号枝番").Value.ToString & "'"
+                        Sql += " AND "
+                        Sql += "行番号 = '" & DgvAdd.Rows(i).Cells("行番号").Value.ToString & "'"
 
-                            _db.executeDB(Sql)
+                        _db.executeDB(Sql)
 
 #End Region
 
 
 #Region "t10_cymnhd"
 
-                            Sql = "update t10_cymnhd set "
-                            Sql += "更新日 = '" & UtilClass.formatDatetime(dtToday) & "'"
-                            Sql += ",更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
-                            Sql += " where 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-                            Sql += " AND "
-                            Sql += "受注番号 ILIKE '" & No & "'"
-                            Sql += " AND "
-                            Sql += "受注番号枝番 ILIKE '" & Suffix & "'"
-                            Sql += " AND "
-                            Sql += "取消区分 = " & CommonConst.CANCEL_KBN_ENABLED '取消区分=0
+                        Sql = "update t10_cymnhd set "
+                        Sql += "更新日 = '" & UtilClass.formatDatetime(dtToday) & "'"
+                        Sql += ",更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
+                        Sql += " where 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+                        Sql += " AND "
+                        Sql += "受注番号='" & DgvAdd.Rows(i).Cells("受注番号").Value.ToString & "'"
+                        Sql += " AND "
+                        Sql += "受注番号枝番='" & DgvAdd.Rows(i).Cells("受注番号枝番").Value.ToString & "'"
+                        Sql += " AND "
+                        Sql += "取消区分 = " & CommonConst.CANCEL_KBN_ENABLED '取消区分=0
 
-                            _db.executeDB(Sql)
+                        _db.executeDB(Sql)
 
 #End Region
 
-                        End If
+                        'End If
 
                     End If
 
@@ -1115,7 +1241,7 @@ Public Class GoodsIssue
                                     Exit For
                                 End If
 
-                                currentVal = Long.Parse(dsCurrentList.Tables(RS).Rows(x)("現在庫数"))
+                                currentVal = Decimal.Parse(dsCurrentList.Tables(RS).Rows(x)("現在庫数"))
 
                                 '現在庫数より出庫数量の方が大きかった場合、現在庫数をそのまま出庫データとして作成
                                 If currentVal < totalShukkoVal Then
@@ -1126,7 +1252,7 @@ Public Class GoodsIssue
                                 End If
 
                                 '作成データが複数以上の場合、出庫番号を新規取得
-                                currentLS = IIf(x = 0, MAIN_LS, _com.getSaiban("70", dtToday.ToShortDateString()))
+                                currentLS = IIf(x = 0, MAIN_LS, _com.getSaiban("70", dtToday))
 
                                 't45：出庫明細 新規作成
                                 '---------------------------------------
@@ -1137,17 +1263,17 @@ Public Class GoodsIssue
                                 Sql += "t45_shukodt("
                                 Sql += "会社コード, 出庫番号, 受注番号, 受注番号枝番, 行番号, 仕入区分"
                                 Sql += ", メーカー, 品名, 型式, 仕入先名, 売単価, 出庫数量, 単位, 備考"
-                                Sql += ", 更新者, 更新日, 出庫区分, 倉庫コード"
+                                Sql += ", 更新者, 更新日, 出庫区分, 倉庫コード,受注行番号"
                                 Sql += " )VALUES('"
-                                Sql += dsCymnhd.Tables(RS).Rows(0)("会社コード").ToString '会社コード
+                                Sql += frmC01F10_Login.loginValue.BumonCD '会社コード
                                 Sql += "', '"
                                 Sql += currentLS '出庫番号
                                 Sql += "', '"
-                                Sql += dsCymnhd.Tables(RS).Rows(0)("受注番号").ToString '受注番号
+                                Sql += DgvAdd.Rows(i).Cells("受注番号").Value.ToString '受注番号
                                 Sql += "', '"
-                                Sql += dsCymnhd.Tables(RS).Rows(0)("受注番号枝番").ToString '受注番号枝番
+                                Sql += DgvAdd.Rows(i).Cells("受注番号枝番").Value.ToString '受注番号枝番
                                 Sql += "', '"
-                                Sql += DgvAdd.Rows(i).Cells("行番号").Value.ToString '行番号
+                                Sql += DgvAdd.Rows(i).Cells("No").Value.ToString '行番号
                                 Sql += "', '"
                                 Sql += DgvAdd.Rows(i).Cells("仕入区分値").Value.ToString '仕入区分
                                 Sql += "', '"
@@ -1174,6 +1300,8 @@ Public Class GoodsIssue
                                 Sql += CommonConst.SHUKO_KBN_NORMAL '出庫区分（通常出庫時は 1 ）
                                 Sql += "', '"
                                 Sql += DgvAdd.Rows(i).Cells("倉庫").Value.ToString '倉庫コード
+                                Sql += "', '"
+                                Sql += DgvAdd.Rows(i).Cells("行番号").Value.ToString
                                 Sql += "')"
 
                                 _db.executeDB(Sql)
@@ -1183,48 +1311,48 @@ Public Class GoodsIssue
                                 '受注明細の「未出庫数」「出庫数」を更新
                                 '受注明細更新　受注と出庫の行番号は一致する
                                 '---------------------------------------
-                                If DgvAdd.Rows(i).Cells("行番号").Value = dsCymndt.Tables(RS).Rows(i)("行番号") Then
+                                'If DgvAdd.Rows(i).Cells("行番号").Value = dsCymndt.Tables(RS).Rows(i)("行番号") Then
 
-                                    Dim calShukko As Integer = dsCymndt.Tables(RS).Rows(i)("出庫数") + DgvAdd.Rows(i).Cells("出庫数量").Value
-                                    Dim calUnShukko As Integer = dsCymndt.Tables(RS).Rows(i)("未出庫数") - DgvAdd.Rows(i).Cells("出庫数量").Value
+                                Dim calShukko As Decimal = DgvAdd.Rows(i).Cells("出庫数").Value + DgvAdd.Rows(i).Cells("出庫数量").Value
+                                Dim calUnShukko As Decimal = DgvAdd.Rows(i).Cells("未出庫数量").Value - DgvAdd.Rows(i).Cells("出庫数量").Value
 
 #Region "t11_cymndt"
 
-                                    Sql = "update t11_cymndt set "
-                                    Sql += "出庫数 = '" & calShukko & "'"
-                                    Sql += ",未出庫数 = '" & calUnShukko & "'"
-                                    Sql += ",更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
-                                    Sql += " where 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-                                    Sql += " AND "
-                                    Sql += "受注番号 ILIKE '" & No & "'"
-                                    Sql += " AND "
-                                    Sql += "受注番号枝番 ILIKE '" & Suffix & "'"
-                                    Sql += " AND "
-                                    Sql += "行番号 = '" & DgvAdd.Rows(i).Cells("行番号").Value & "'"
+                                Sql = "update t11_cymndt set "
+                                Sql += "出庫数 = '" & calShukko & "'"
+                                Sql += ",未出庫数 = '" & calUnShukko & "'"
+                                Sql += ",更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
+                                Sql += " where 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+                                Sql += " AND "
+                                Sql += "受注番号 ILIKE '" & DgvAdd.Rows(i).Cells("受注番号").Value.ToString & "'"
+                                Sql += " AND "
+                                Sql += "受注番号枝番 ILIKE '" & DgvAdd.Rows(i).Cells("受注番号枝番").Value.ToString & "'"
+                                Sql += " AND "
+                                Sql += "行番号 = '" & DgvAdd.Rows(i).Cells("行番号").Value.ToString & "'"
 
-                                    _db.executeDB(Sql)
+                                _db.executeDB(Sql)
 
 #End Region
 
 
 #Region "t10_cymnhd"
 
-                                    Sql = "update t10_cymnhd set "
-                                    Sql += "更新日 = '" & UtilClass.formatDatetime(dtToday) & "'"
-                                    Sql += ",更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
-                                    Sql += " where 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-                                    Sql += " AND "
-                                    Sql += "受注番号 ILIKE '" & No & "'"
-                                    Sql += " AND "
-                                    Sql += "受注番号枝番 ILIKE '" & Suffix & "'"
-                                    Sql += " AND "
-                                    Sql += "取消区分 = " & CommonConst.CANCEL_KBN_ENABLED '取消区分=0
+                                Sql = "update t10_cymnhd set "
+                                Sql += "更新日 = '" & UtilClass.formatDatetime(dtToday) & "'"
+                                Sql += ",更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
+                                Sql += " where 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+                                Sql += " AND "
+                                Sql += "受注番号 ILIKE '" & DgvAdd.Rows(i).Cells("受注番号").Value.ToString & "'"
+                                Sql += " AND "
+                                Sql += "受注番号枝番 ILIKE '" & DgvAdd.Rows(i).Cells("受注番号枝番").Value.ToString & "'"
+                                Sql += " AND "
+                                Sql += "取消区分 = " & CommonConst.CANCEL_KBN_ENABLED '取消区分=0
 
-                                    _db.executeDB(Sql)
+                                _db.executeDB(Sql)
 #End Region
 
 
-                                End If
+                                'End If
 
 
 #Region "t70_inout"
@@ -1248,7 +1376,7 @@ Public Class GoodsIssue
                                 Sql += currentLS '伝票番号
                                 'Sql += dsCurrentList.Tables(RS).Rows(x)("伝票番号").ToString '伝票番号
                                 Sql += "', '"
-                                Sql += DgvAdd.Rows(i).Cells("行番号").Value.ToString '行番号
+                                Sql += DgvAdd.Rows(i).Cells("No").Value.ToString '行番号
                                 'Sql += dsCurrentList.Tables(RS).Rows(x)("行番号").ToString '行番号
                                 Sql += "', '"
                                 Sql += DgvAdd.Rows(i).Cells("入出庫種別").Value.ToString '入出庫種別
@@ -1293,6 +1421,15 @@ Public Class GoodsIssue
                                 If MAIN_LS <> currentLS Then
 
 #Region "t44_shukohd"
+                                    '受注基本
+                                    Sql = " And "
+                                    Sql += "受注番号 ILIKE '" & DgvAdd.Rows(i).Cells("受注番号").Value.ToString & "'"
+                                    Sql += " AND "
+                                    Sql += "受注番号枝番 ILIKE '" & DgvAdd.Rows(i).Cells("受注番号枝番").Value.ToString & "'"
+                                    Sql += " AND "
+                                    Sql += "取消区分 = " & CommonConst.CANCEL_KBN_ENABLED '取消区分=0
+
+                                    dsCymnhd = getDsData("t10_cymnhd", Sql)
 
                                     Sql = "INSERT INTO "
                                     Sql += "Public."
@@ -1302,7 +1439,7 @@ Public Class GoodsIssue
                                     Sql += ", 得意先担当者役職, 得意先担当者名, 営業担当者, 入力担当者, 備考, 取消日, 取消区分"
                                     Sql += ", 出庫日, 登録日, 更新日, 更新者, 営業担当者コード, 入力担当者コード)"
                                     Sql += " VALUES('"
-                                    Sql += dsCymnhd.Tables(RS).Rows(0)("会社コード").ToString '会社コード
+                                    Sql += frmC01F10_Login.loginValue.BumonCD  '会社コード
                                     Sql += "', '"
                                     Sql += currentLS '出庫番号
                                     Sql += "', '"
@@ -1310,9 +1447,9 @@ Public Class GoodsIssue
                                     Sql += "', '"
                                     Sql += dsCymnhd.Tables(RS).Rows(0)("見積番号枝番").ToString '見積番号枝番
                                     Sql += "', '"
-                                    Sql += dsCymnhd.Tables(RS).Rows(0)("受注番号").ToString '受注番号
+                                    Sql += DgvAdd.Rows(i).Cells("受注番号").Value.ToString '受注番号
                                     Sql += "', '"
-                                    Sql += dsCymnhd.Tables(RS).Rows(0)("受注番号枝番").ToString '受注番号枝番
+                                    Sql += DgvAdd.Rows(i).Cells("受注番号枝番").Value.ToString '受注番号枝番
                                     Sql += "', '"
                                     Sql += dsCymnhd.Tables(RS).Rows(0)("客先番号").ToString '客先番号
                                     Sql += "', '"
@@ -1334,7 +1471,7 @@ Public Class GoodsIssue
                                     Sql += "', '"
                                     Sql += dsCymnhd.Tables(RS).Rows(0)("営業担当者").ToString '営業担当者
                                     Sql += "', '"
-                                    Sql += dsCymnhd.Tables(RS).Rows(0)("入力担当者").ToString '入力担当者
+                                    Sql += frmC01F10_Login.loginValue.TantoNM '.Tables(RS).Rows(0)("入力担当者").ToString '入力担当者
                                     Sql += "', '"
                                     Sql += UtilClass.escapeSql(TxtRemarks.Text) 'dsCymnhd.Tables(RS).Rows(0)("備考").ToString '備考
                                     Sql += "', "
@@ -1373,6 +1510,15 @@ Public Class GoodsIssue
 
 
 #Region "t44_shukohd"
+            '受注基本
+            Sql = " And "
+            Sql += "受注番号 ILIKE '" & DgvAdd.Rows(0).Cells("受注番号").Value.ToString & "'"
+            Sql += " AND "
+            Sql += "受注番号枝番 ILIKE '" & DgvAdd.Rows(0).Cells("受注番号枝番").Value.ToString & "'"
+            Sql += " AND "
+            Sql += "取消区分 = " & CommonConst.CANCEL_KBN_ENABLED '取消区分=0
+
+            dsCymnhd = getDsData("t10_cymnhd", Sql)
 
             Sql = "INSERT INTO "
             Sql += "Public."
@@ -1414,7 +1560,7 @@ Public Class GoodsIssue
             Sql += "', '"
             Sql += dsCymnhd.Tables(RS).Rows(0)("営業担当者").ToString '営業担当者
             Sql += "', '"
-            Sql += dsCymnhd.Tables(RS).Rows(0)("入力担当者").ToString '入力担当者
+            Sql += frmC01F10_Login.loginValue.TantoNM '入力担当者
             Sql += "', '"
             Sql += UtilClass.escapeSql(TxtRemarks.Text) 'dsCymnhd.Tables(RS).Rows(0)("備考").ToString '備考
             Sql += "', "
@@ -1438,12 +1584,14 @@ Public Class GoodsIssue
             _db.executeDB(Sql)
 
 #End Region
-
+            _db.commitTran()
 
         Catch ue As UsrDefException
+            _db.rollbackTran()
             ue.dspMsg()
             Throw ue
         Catch ex As Exception
+            _db.rollbackTran()
             'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
             Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
         End Try
@@ -1488,11 +1636,11 @@ Public Class GoodsIssue
 
         Dim Sql As String = "SELECT * FROM public.t10_cymnhd"
         Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-        Sql += " AND 受注番号 = '" & No & "'"
-        Sql += " AND 受注番号枝番 = '" & Suffix & "'"
+        'Sql += " AND 受注番号 = '" & No & "'"
+        'Sql += " AND 受注番号枝番 = '" & Suffix & "'"
         Sql += " AND 取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
 
-        Dim dsCymnHd As DataSet = _db.selectDB(Sql, RS, reccnt)
+        'Dim dsCymnHd As DataSet = _db.selectDB(Sql, RS, reccnt)
 
 
         'joinするのでとりあえず直書き
@@ -1514,28 +1662,32 @@ Public Class GoodsIssue
         Sql2 += " WHERE "
         Sql2 += " t11.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
         Sql2 += " AND "
-        Sql2 += " t11.受注番号 = '" & No & "'"
+        'Sql2 += " t11.受注番号 = '" & No & "'"
         Sql2 += " AND "
-        Sql2 += " t11.受注番号枝番 = '" & Suffix & "'"
+        'Sql2 += " t11.受注番号枝番 = '" & Suffix & "'"
         Sql2 += " AND "
         Sql2 += "t10.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
 
         '受注明細取得
-        Dim dsCymndt As DataSet = _db.selectDB(Sql2, RS, reccnt)
+        'Dim dsCymndt As DataSet = _db.selectDB(Sql2, RS, reccnt)
 
 #End Region
 
 
         Try
+            _db.beginTran()
 
-            Dim ER As String = _com.getSaiban("40", dtToday)
+            'Dim ER As String = _com.getSaiban("40", dtToday)
             'Dim LS As String = getSaiban("70", dtToday　  // 使用されていない
 
             Dim totalUriAmount As Decimal = 0
             Dim totalArariAmount As Decimal = 0
             Dim totalmitsuAmount As Decimal = 0
             Dim totalSalesAmount_cur As Decimal = 0
-
+            Dim ao_ As String = ""
+            Dim v_ As String = ""
+            Dim b_ As Boolean = False
+            Dim ER As String = "" '= _com.getSaiban("40", dtToday)
 
             't31_urigdt 売上明細更新
             For i As Integer = 0 To DgvAdd.Rows.Count() - 1
@@ -1545,268 +1697,307 @@ Public Class GoodsIssue
                     Continue For
                 End If
 
+                If ao_ & v_ <> DgvAdd.Rows(i).Cells("受注番号").Value & DgvAdd.Rows(i).Cells("受注番号枝番").Value Then
+                    ao_ = DgvAdd.Rows(i).Cells("受注番号").Value
+                    v_ = DgvAdd.Rows(i).Cells("受注番号枝番").Value
+                    b_ = True
+                    ER = _com.getSaiban("40", dtToday)
+                End If
+
+                'joinするのでとりあえず直書き
+                Sql2 = "SELECT"
+                Sql2 += " t11.* "
+                Sql2 += " FROM "
+                Sql2 += " public.t11_cymndt t11 "
+
+                Sql2 += " INNER JOIN "
+                Sql2 += " t10_cymnhd t10"
+                Sql2 += " ON "
+
+                Sql2 += " t11.会社コード = t10.会社コード"
+                Sql2 += " AND "
+                Sql2 += " t11.受注番号 = t10.受注番号"
+                Sql2 += " AND "
+                Sql2 += " t11.受注番号 = t10.受注番号"
+
+                Sql2 += " WHERE "
+                Sql2 += " t11.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+                Sql2 += " AND "
+                Sql2 += " t11.受注番号 = '" & ao_ & "'"
+                Sql2 += " AND "
+                Sql2 += " t11.受注番号枝番 = '" & v_ & "'"
+                Sql2 += " AND "
+                Sql2 += "t10.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
+                Sql2 += " AND "
+                Sql2 += " t11.行番号=" & DgvAdd.Rows(i).Cells("行番号").Value & ""
+
+                '受注明細取得
+                Dim dsCymndt As DataSet = _db.selectDB(Sql2, RS, reccnt)
 
                 For x As Integer = 0 To dsCymndt.Tables(RS).Rows.Count - 1  '受注ループ
 
-                    If DgvAdd.Rows(i).Cells("行番号").Value = dsCymndt.Tables(RS).Rows(x)("行番号") Then  '受注と売上の行が一致した場合
-
 #Region "t31_urigdt"
 
-                        Dim Sql4 As String = "INSERT INTO "
-                        Sql4 += "Public."
-                        Sql4 += "t31_urigdt("
-                        Sql4 += "会社コード, 売上番号, 売上番号枝番, 受注番号, 受注番号枝番, 行番号, 仕入区分, メーカー, 品名, 型式"
-                        Sql4 += ", 仕入先名, 仕入値, 受注数量, 売上数量, 受注残数, 単位, 売単価, 売上金額, 粗利額, 粗利率, 間接費"
-                        Sql4 += ", リードタイム, 備考, 更新者, 更新日, 仕入原価, 関税率, 関税額, 前払法人税率, 前払法人税額"
-                        Sql4 += ", 輸送費率, 輸送費額, 仕入金額, 見積単価, 見積金額,売上金額_外貨,売上単価_外貨)"
-                        Sql4 += " VALUES('"
-                        Sql4 += dsCymndt.Tables(RS).Rows(x)("会社コード").ToString
-                        Sql4 += "', '"
-                        Sql4 += ER '売上番号
-                        Sql4 += "', '"
-                        Sql4 += "1" '売上番号枝番
-                        Sql4 += "', '"
-                        Sql4 += dsCymndt.Tables(RS).Rows(x)("受注番号").ToString '受注番号
-                        Sql4 += "', '"
-                        Sql4 += dsCymndt.Tables(RS).Rows(x)("受注番号枝番").ToString '受注番号枝番
-                        Sql4 += "', '"
-                        Sql4 += DgvAdd.Rows(i).Cells("行番号").Value.ToString '行番号
-                        Sql4 += "', '"
-                        Sql4 += DgvAdd.Rows(i).Cells("仕入区分値").Value.ToString '仕入区分値
-                        Sql4 += "', '"
-                        Sql4 += UtilClass.escapeSql(DgvAdd.Rows(i).Cells("メーカー").Value.ToString) 'メーカー
-                        Sql4 += "', '"
-                        Sql4 += UtilClass.escapeSql(DgvAdd.Rows(i).Cells("品名").Value.ToString) '品名
-                        Sql4 += "', '"
-                        Sql4 += UtilClass.escapeSql(DgvAdd.Rows(i).Cells("型式").Value.ToString) '型式
-                        Sql4 += "', '"
-                        Sql4 += DgvAdd.Rows(i).Cells("仕入先").Value.ToString '仕入先名
-                        Sql4 += "', '"
-                        Sql4 += UtilClass.formatNumber(dsCymndt.Tables(RS).Rows(x)("仕入値").ToString) '仕入値
-                        Sql4 += "', '"
-                        Sql4 += UtilClass.formatNumber(dsCymndt.Tables(RS).Rows(x)("受注数量").ToString) '受注数量
-                        Sql4 += "', '"
-                        Sql4 += UtilClass.formatNumber(DgvAdd.Rows(i).Cells("出庫数量").Value.ToString) '売上数量
-                        Sql4 += "', '"
+                    Dim Sql4 As String = "INSERT INTO "
+                    Sql4 += "Public."
+                    Sql4 += "t31_urigdt("
+                    Sql4 += "会社コード, 売上番号, 売上番号枝番, 受注番号, 受注番号枝番, 行番号, 仕入区分, メーカー, 品名, 型式"
+                    Sql4 += ", 仕入先名, 仕入値, 受注数量, 売上数量, 受注残数, 単位, 売単価, 売上金額, 粗利額, 粗利率, 間接費"
+                    Sql4 += ", リードタイム, 備考, 更新者, 更新日, 仕入原価, 関税率, 関税額, 前払法人税率, 前払法人税額"
+                    Sql4 += ", 輸送費率, 輸送費額, 仕入金額, 見積単価, 見積金額,売上金額_外貨,売上単価_外貨)"
+                    Sql4 += " VALUES('"
+                    Sql4 += frmC01F10_Login.loginValue.BumonCD
+                    Sql4 += "', '"
+                    Sql4 += ER '売上番号
+                    Sql4 += "', '"
+                    Sql4 += "1" '売上番号枝番
+                    Sql4 += "', '"
+                    Sql4 += ao_ '受注番号
+                    Sql4 += "', '"
+                    Sql4 += v_ '受注番号枝番
+                    Sql4 += "', '"
+                    Sql4 += DgvAdd.Rows(i).Cells("行番号").Value.ToString '行番号
+                    Sql4 += "', '"
+                    Sql4 += DgvAdd.Rows(i).Cells("仕入区分値").Value.ToString '仕入区分値
+                    Sql4 += "', '"
+                    Sql4 += UtilClass.escapeSql(DgvAdd.Rows(i).Cells("メーカー").Value.ToString) 'メーカー
+                    Sql4 += "', '"
+                    Sql4 += UtilClass.escapeSql(DgvAdd.Rows(i).Cells("品名").Value.ToString) '品名
+                    Sql4 += "', '"
+                    Sql4 += UtilClass.escapeSql(DgvAdd.Rows(i).Cells("型式").Value.ToString) '型式
+                    Sql4 += "', '"
+                    Sql4 += DgvAdd.Rows(i).Cells("仕入先").Value.ToString '仕入先名
+                    Sql4 += "', '"
+                    Sql4 += UtilClass.formatNumber(dsCymndt.Tables(RS).Rows(x)("仕入値").ToString) '仕入値
+                    Sql4 += "', '"
+                    Sql4 += UtilClass.formatNumber(dsCymndt.Tables(RS).Rows(x)("受注数量").ToString) '受注数量
+                    Sql4 += "', '"
+                    Sql4 += UtilClass.formatNumber(DgvAdd.Rows(i).Cells("出庫数量").Value.ToString) '売上数量
+                    Sql4 += "', '"
 
-                        'Dim OrderNo As Integer = dsCymndt.Tables(RS).Rows(x)("受注数量")
-                        Dim OrderNo As Integer = dsCymndt.Tables(RS).Rows(x)("受注残数")
-                        Dim PurchaseNo As Integer = DgvAdd.Rows(i).Cells("出庫数量").Value
-                        Dim RemainingNo As Integer = OrderNo - PurchaseNo
+                    'Dim OrderNo As Integer = dsCymndt.Tables(RS).Rows(x)("受注数量")
+                    Dim OrderNo As Decimal = dsCymndt.Tables(RS).Rows(x)("受注残数")
+                    Dim PurchaseNo As Decimal = DgvAdd.Rows(i).Cells("出庫数量").Value
+                    Dim RemainingNo As Decimal = OrderNo - PurchaseNo
 
-                        Sql4 += UtilClass.formatNumber(RemainingNo) '受注残数
-                        Sql4 += "', '"
-                        Sql4 += DgvAdd.Rows(i).Cells("単位").Value '単位
-                        Sql4 += "', '"
-                        Sql4 += UtilClass.formatNumber(dsCymndt.Tables(RS).Rows(x)("売単価").ToString) '売単価
-                        Sql4 += "', '"
+                    Sql4 += UtilClass.formatNumber(RemainingNo) '受注残数
+                    Sql4 += "', '"
+                    Sql4 += DgvAdd.Rows(i).Cells("単位").Value '単位
+                    Sql4 += "', '"
+                    Sql4 += UtilClass.formatNumber(dsCymndt.Tables(RS).Rows(x)("売単価").ToString) '売単価
+                    Sql4 += "', '"
 
-                        Dim uriAmount As Decimal = IIf(dsCymndt.Tables(RS).Rows(x)("売単価").ToString <> 0,
-                                                          Decimal.Parse(dsCymndt.Tables(RS).Rows(x)("売単価").ToString * DgvAdd.Rows(i).Cells("出庫数量").Value.ToString),
-                                                          0)
+                    Dim uriAmount As Decimal = IIf(dsCymndt.Tables(RS).Rows(x)("売単価").ToString <> 0,
+                                                      Decimal.Parse(dsCymndt.Tables(RS).Rows(x)("売単価").ToString * DgvAdd.Rows(i).Cells("出庫数量").Value.ToString),
+                                                      0)
 
-                        Sql4 += UtilClass.formatNumber(Format(uriAmount, "0.000")) '売上金額
-                        Sql4 += "', '"
+                    Sql4 += UtilClass.formatNumber(Format(uriAmount, "0.000")) '売上金額
+                    Sql4 += "', '"
 
-                        Dim arariAmount As Decimal = IIf(dsCymndt.Tables(RS).Rows(x)("売単価").ToString <> 0,
-                                                          Decimal.Parse((dsCymndt.Tables(RS).Rows(x)("売単価").ToString - dsCymndt.Tables(RS).Rows(x)("仕入値").ToString) * DgvAdd.Rows(i).Cells("出庫数量").Value),
-                                                          0)
+                    Dim arariAmount As Decimal = IIf(dsCymndt.Tables(RS).Rows(x)("売単価").ToString <> 0,
+                                                      Decimal.Parse((dsCymndt.Tables(RS).Rows(x)("売単価").ToString - dsCymndt.Tables(RS).Rows(x)("仕入値").ToString) * DgvAdd.Rows(i).Cells("出庫数量").Value),
+                                                      0)
 
-                        Sql4 += UtilClass.formatNumber(Format(arariAmount, "0.000")) '粗利額
-                        Sql4 += "', '"
+                    Sql4 += UtilClass.formatNumber(Format(arariAmount, "0.000")) '粗利額
+                    Sql4 += "', '"
 
-                        If dsCymndt.Tables(RS).Rows(x)("売単価").ToString > 0 Then
-                            Sql4 += UtilClass.formatNumber(Format(100 - (dsCymndt.Tables(RS).Rows(x)("仕入値").ToString / dsCymndt.Tables(RS).Rows(x)("売単価").ToString) * 100, "0.0")) '粗利率
-                        Else
-                            Sql4 += "0" '粗利率
-                        End If
-                        Sql4 += "', '"
+                    If dsCymndt.Tables(RS).Rows(x)("売単価").ToString > 0 Then
+                        Sql4 += UtilClass.formatNumber(Format(100 - (dsCymndt.Tables(RS).Rows(x)("仕入値").ToString / dsCymndt.Tables(RS).Rows(x)("売単価").ToString) * 100, "0.0")) '粗利率
+                    Else
+                        Sql4 += "0" '粗利率
+                    End If
+                    Sql4 += "', '"
 
-                        Dim kansetsuhi As Decimal = (dsCymndt.Tables(RS).Rows(x)("関税額") + dsCymndt.Tables(RS).Rows(x)("前払法人税額") + dsCymndt.Tables(RS).Rows(x)("輸送費額")) * DgvAdd.Rows(i).Cells("出庫数量").Value.ToString
+                    Dim kansetsuhi As Decimal = (dsCymndt.Tables(RS).Rows(x)("関税額") + dsCymndt.Tables(RS).Rows(x)("前払法人税額") + dsCymndt.Tables(RS).Rows(x)("輸送費額")) * DgvAdd.Rows(i).Cells("出庫数量").Value.ToString
 
-                        Sql4 += UtilClass.formatNumber(kansetsuhi) '間接費
-                        Sql4 += "', '"
-                        Sql4 += dsCymndt.Tables(RS).Rows(x)("リードタイム").ToString
-                        Sql4 += "', '"
-                        Sql4 += DgvAdd.Rows(i).Cells("備考").Value
-                        Sql4 += "', '"
-                        Sql4 += Input '更新者
-                        Sql4 += "', '"
-                        Sql4 += strToday '更新日
-                        Sql4 += "', '"
-                        Sql4 += UtilClass.formatNumber(dsCymndt.Tables(RS).Rows(x)("仕入値").ToString * DgvAdd.Rows(i).Cells("出庫数量").Value.ToString)
-                        Sql4 += "', '"
-                        Sql4 += UtilClass.formatNumber(dsCymndt.Tables(RS).Rows(x)("関税率").ToString)
-                        Sql4 += "', '"
-                        Sql4 += UtilClass.formatNumber(dsCymndt.Tables(RS).Rows(x)("関税額").ToString)
-                        Sql4 += "', '"
-                        Sql4 += UtilClass.formatNumber(dsCymndt.Tables(RS).Rows(x)("前払法人税率").ToString)
-                        Sql4 += "', '"
-                        Sql4 += UtilClass.formatNumber(dsCymndt.Tables(RS).Rows(x)("前払法人税額").ToString)
-                        Sql4 += "', '"
-                        Sql4 += UtilClass.formatNumber(dsCymndt.Tables(RS).Rows(x)("輸送費率").ToString)
-                        Sql4 += "', '"
-                        Sql4 += UtilClass.formatNumber(dsCymndt.Tables(RS).Rows(x)("輸送費額").ToString)
-                        Sql4 += "', '"
-                        'Sql4 += UtilClass.formatNumber((dsCymndt.Tables(RS).Rows(x)("仕入値").ToString + kansetsuhi) * DgvAdd.Rows(i).Cells("出庫数量").Value.ToString)
-                        Sql4 += UtilClass.formatNumber(dsCymndt.Tables(RS).Rows(x)("仕入値").ToString * DgvAdd.Rows(i).Cells("出庫数量").Value.ToString + kansetsuhi)
-                        Sql4 += "',"
-                        Sql4 += UtilClass.formatNumber(dsCymndt.Tables(RS).Rows(x)("見積単価").ToString)
-                        Sql4 += ","
+                    Sql4 += UtilClass.formatNumber(kansetsuhi) '間接費
+                    Sql4 += "', '"
+                    Sql4 += dsCymndt.Tables(RS).Rows(x)("リードタイム").ToString
+                    Sql4 += "', '"
+                    Sql4 += DgvAdd.Rows(i).Cells("備考").Value
+                    Sql4 += "', '"
+                    Sql4 += Input '更新者
+                    Sql4 += "', '"
+                    Sql4 += strToday '更新日
+                    Sql4 += "', '"
+                    Sql4 += UtilClass.formatNumber(dsCymndt.Tables(RS).Rows(x)("仕入値").ToString * DgvAdd.Rows(i).Cells("出庫数量").Value.ToString)
+                    Sql4 += "', '"
+                    Sql4 += UtilClass.formatNumber(dsCymndt.Tables(RS).Rows(x)("関税率").ToString)
+                    Sql4 += "', '"
+                    Sql4 += UtilClass.formatNumber(dsCymndt.Tables(RS).Rows(x)("関税額").ToString)
+                    Sql4 += "', '"
+                    Sql4 += UtilClass.formatNumber(dsCymndt.Tables(RS).Rows(x)("前払法人税率").ToString)
+                    Sql4 += "', '"
+                    Sql4 += UtilClass.formatNumber(dsCymndt.Tables(RS).Rows(x)("前払法人税額").ToString)
+                    Sql4 += "', '"
+                    Sql4 += UtilClass.formatNumber(dsCymndt.Tables(RS).Rows(x)("輸送費率").ToString)
+                    Sql4 += "', '"
+                    Sql4 += UtilClass.formatNumber(dsCymndt.Tables(RS).Rows(x)("輸送費額").ToString)
+                    Sql4 += "', '"
+                    'Sql4 += UtilClass.formatNumber((dsCymndt.Tables(RS).Rows(x)("仕入値").ToString + kansetsuhi) * DgvAdd.Rows(i).Cells("出庫数量").Value.ToString)
+                    Sql4 += UtilClass.formatNumber(dsCymndt.Tables(RS).Rows(x)("仕入値").ToString * DgvAdd.Rows(i).Cells("出庫数量").Value.ToString + kansetsuhi)
+                    Sql4 += "',"
+                    Sql4 += UtilClass.formatNumber(dsCymndt.Tables(RS).Rows(x)("見積単価").ToString)
+                    Sql4 += ","
 
-                        Dim mitsuAmount As Decimal = dsCymndt.Tables(RS).Rows(x)("見積単価").ToString * DgvAdd.Rows(i).Cells("出庫数量").Value.ToString
+                    Dim mitsuAmount As Decimal = dsCymndt.Tables(RS).Rows(x)("見積単価").ToString * DgvAdd.Rows(i).Cells("出庫数量").Value.ToString
 
-                        Sql4 += UtilClass.formatNumber(mitsuAmount) '見積金額
+                    Sql4 += UtilClass.formatNumber(mitsuAmount) '見積金額
 
-                        Dim decUriTanka As Decimal = Decimal.Parse(dsCymndt.Tables(RS).Rows(x)("見積単価_外貨").ToString)
-                        Dim decUrikingaku As Decimal = decUriTanka * Decimal.Parse(DgvAdd.Rows(i).Cells("出庫数量").Value.ToString)
-                        Sql4 += "," + UtilClass.formatNumber(decUrikingaku) + ""  '売上金額_外貨  2020.02.23
-                        Sql4 += "," + UtilClass.formatNumber(decUriTanka) + ""    '売上単価_外貨  2020.02.23
-                        Sql4 += ")"
-                        _db.executeDB(Sql4)
+                    Dim decUriTanka As Decimal = Decimal.Parse(dsCymndt.Tables(RS).Rows(x)("見積単価_外貨").ToString)
+                    Dim decUrikingaku As Decimal = decUriTanka * Decimal.Parse(DgvAdd.Rows(i).Cells("出庫数量").Value.ToString)
+                    Sql4 += "," + UtilClass.formatNumber(decUrikingaku) + ""  '売上金額_外貨  2020.02.23
+                    Sql4 += "," + UtilClass.formatNumber(decUriTanka) + ""    '売上単価_外貨  2020.02.23
+                    Sql4 += ")"
+                    _db.executeDB(Sql4)
 
 #End Region
 
-                        totalUriAmount += uriAmount
-                        totalArariAmount += arariAmount
-                        totalmitsuAmount += mitsuAmount
-                        totalSalesAmount_cur += decUrikingaku
+                    totalUriAmount += uriAmount
+                    totalArariAmount += arariAmount
+                    totalmitsuAmount += mitsuAmount
+                    totalSalesAmount_cur += decUrikingaku
 
 #Region "t11_cymndt"
 
-                        Dim PurchaseNum As Integer = 0
-                        Dim OrdingNum As Integer = 0
+                    Dim PurchaseNum As Decimal = 0
+                    Dim OrdingNum As Decimal = 0
 
 
-                        Dim Sql6 As String = "UPDATE Public.t11_cymndt "
-                        Sql6 += "SET "
-                        Sql6 += "売上数量"
-                        Sql6 += " = '"
-                        PurchaseNum = dsCymndt.Tables(RS).Rows(x)("売上数量") + DgvAdd.Rows(i).Cells("出庫数量").Value
-                        Sql6 += UtilClass.formatNumber(PurchaseNum.ToString)
-                        Sql6 += "'"
-                        Sql6 += " ,受注残数 = '"
-                        OrdingNum = dsCymndt.Tables(RS).Rows(x)("受注残数") - DgvAdd.Rows(i).Cells("出庫数量").Value
-                        Sql6 += UtilClass.formatNumber(OrdingNum.ToString)
-                        Sql6 += "' "
-                        Sql6 += " ,更新者 = '" & Input & "' "
-                        Sql6 += "WHERE 会社コード='" & dsCymnHd.Tables(RS).Rows(0)("会社コード").ToString & "'"
-                        Sql6 += " AND 受注番号='" & dsCymndt.Tables(RS).Rows(x)("受注番号").ToString & "'"
-                        Sql6 += " AND 受注番号枝番='" & dsCymndt.Tables(RS).Rows(x)("受注番号枝番").ToString & "'"
-                        Sql6 += " AND 行番号='" & dsCymndt.Tables(RS).Rows(x)("行番号").ToString & "' "
+                    Dim Sql6 As String = "UPDATE Public.t11_cymndt "
+                    Sql6 += "SET "
+                    Sql6 += "売上数量"
+                    Sql6 += " = '"
+                    PurchaseNum = dsCymndt.Tables(RS).Rows(x)("売上数量") + DgvAdd.Rows(i).Cells("出庫数量").Value
+                    Sql6 += UtilClass.formatNumber(PurchaseNum.ToString)
+                    Sql6 += "'"
+                    Sql6 += " ,受注残数 = '"
+                    OrdingNum = dsCymndt.Tables(RS).Rows(x)("受注残数") - DgvAdd.Rows(i).Cells("出庫数量").Value
+                    Sql6 += UtilClass.formatNumber(OrdingNum.ToString)
+                    Sql6 += "' "
+                    Sql6 += " ,更新者 = '" & Input & "' "
+                    Sql6 += "WHERE 会社コード='" & frmC01F10_Login.loginValue.BumonCD & "'"
+                    Sql6 += " AND 受注番号='" & ao_ & "'"
+                    Sql6 += " AND 受注番号枝番='" & v_ & "'"
+                    Sql6 += " AND 行番号='" & dsCymndt.Tables(RS).Rows(x)("行番号").ToString & "' "
 
-                        _db.executeDB(Sql6)
+                    _db.executeDB(Sql6)
 
 #End Region
-
-                    End If
 
                 Next
-            Next
-
-
+                If b_ Then
 #Region "t30_urighd"
+                    Sql = "SELECT * FROM public.t10_cymnhd"
+                    Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+                    Sql += " AND 受注番号 = '" & ao_ & "'"
+                    Sql += " AND 受注番号枝番 = '" & v_ & "'"
+                    Sql += " AND 取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
 
-            't30_urighd 売上基本更新
-            Dim Sql3 As String = "INSERT INTO "
-            Sql3 += "Public."
-            Sql3 += "t30_urighd("
-            Sql3 += "会社コード, 売上番号, 売上番号枝番, 客先番号, 受注番号, 受注番号枝番, 見積番号, 見積番号枝番"
-            Sql3 += ", 得意先コード, 得意先名, 得意先郵便番号, 得意先住所, 得意先電話番号, 得意先ＦＡＸ, 得意先担当者役職"
-            Sql3 += ", 得意先担当者名, 見積日, 見積有効期限, 支払条件, 見積金額, 売上金額, 粗利額, 営業担当者, 入力担当者"
-            Sql3 += ", 備考, 取消日, 取消区分, ＶＡＴ, ＰＰＨ, 受注日, 売上日, 入金予定日, 登録日, 更新日, 更新者, 仕入金額"
-            Sql3 += ", 営業担当者コード, 入力担当者コード,売上金額_外貨, 通貨, レート)"
-            Sql3 += " VALUES('"
-            Sql3 += dsCymnHd.Tables(RS).Rows(0)("会社コード").ToString '会社コード
-            Sql3 += "', '"
-            Sql3 += ER '売上番号
-            Sql3 += "', '"
-            Sql3 += "1" '売上番号枝番
-            Sql3 += "', '"
-            Sql3 += dsCymnHd.Tables(RS).Rows(0)("客先番号").ToString '客先番号
-            Sql3 += "', '"
-            Sql3 += dsCymnHd.Tables(RS).Rows(0)("受注番号").ToString '受注番号
-            Sql3 += "', '"
-            Sql3 += dsCymnHd.Tables(RS).Rows(0)("受注番号枝番").ToString '受注番号枝番
-            Sql3 += "', '"
-            Sql3 += dsCymnHd.Tables(RS).Rows(0)("見積番号").ToString '見積番号
-            Sql3 += "', '"
-            Sql3 += dsCymnHd.Tables(RS).Rows(0)("見積番号枝番").ToString '見積番号枝番
-            Sql3 += "', '"
-            Sql3 += dsCymnHd.Tables(RS).Rows(0)("得意先コード").ToString '得意先コード
-            Sql3 += "', '"
-            Sql3 += dsCymnHd.Tables(RS).Rows(0)("得意先名").ToString '得意先名
-            Sql3 += "', '"
-            Sql3 += dsCymnHd.Tables(RS).Rows(0)("得意先郵便番号").ToString '得意先郵便番号
-            Sql3 += "', '"
-            Sql3 += dsCymnHd.Tables(RS).Rows(0)("得意先住所").ToString '得意先住所
-            Sql3 += "', '"
-            Sql3 += dsCymnHd.Tables(RS).Rows(0)("得意先電話番号").ToString '得意先電話番号
-            Sql3 += "', '"
-            Sql3 += dsCymnHd.Tables(RS).Rows(0)("得意先ＦＡＸ").ToString '得意先ＦＡＸ
-            Sql3 += "', '"
-            Sql3 += dsCymnHd.Tables(RS).Rows(0)("得意先担当者役職").ToString '得意先担当者役職
-            Sql3 += "', '"
-            Sql3 += dsCymnHd.Tables(RS).Rows(0)("得意先担当者名").ToString '得意先担当者名
-            Sql3 += "', '"
-            Sql3 += UtilClass.strFormatDate(dsCymnHd.Tables(RS).Rows(0)("見積日").ToString) '見積日
-            Sql3 += "', '"
-            Sql3 += UtilClass.strFormatDate(dsCymnHd.Tables(RS).Rows(0)("見積有効期限").ToString) '見積有効期限
-            Sql3 += "', '"
-            Sql3 += dsCymnHd.Tables(RS).Rows(0)("支払条件").ToString '支払条件
-            Sql3 += "', '"
-            Sql3 += UtilClass.formatNumber(totalmitsuAmount) '見積金額
-            Sql3 += "', '"
-            Sql3 += UtilClass.formatNumber(totalUriAmount) '売上金額（売単価 * 数量）
-            Sql3 += "', '"
-            Sql3 += UtilClass.formatNumber(totalArariAmount) '粗利額
-            Sql3 += "', '"
-            Sql3 += dsCymnHd.Tables(RS).Rows(0)("営業担当者").ToString '営業担当者
-            Sql3 += "', '"
-            Sql3 += dsCymnHd.Tables(RS).Rows(0)("入力担当者").ToString '入力担当者
-            Sql3 += "', '"
-            Sql3 += TxtRemarks.Text '備考
-            Sql3 += "', "
-            Sql3 += "null" '取消日
-            Sql3 += ", "
-            Sql3 += "0" '取消区分
-            Sql3 += ", '"
-            Sql3 += UtilClass.formatNumber(dsCymnHd.Tables(RS).Rows(0)("ＶＡＴ")) 'ＶＡＴ 率
-            Sql3 += "', '"
-            If dsCymnHd.Tables(RS).Rows(0)("ＰＰＨ") Is DBNull.Value Then
-                Sql3 += "0" 'ＰＰＨ
-            Else
-                Sql3 += UtilClass.formatNumber(dsCymnHd.Tables(RS).Rows(0)("ＰＰＨ")) 'ＰＰＨ
-            End If
-            Sql3 += "', '"
-            Sql3 += UtilClass.strFormatDate(TxtOrderDate.Text) '受注日
-            Sql3 += "', '"
-            Sql3 += UtilClass.strFormatDate(DtpGoodsIssueDate.Text) '売上日
-            Sql3 += "', '"
-            Sql3 += UtilClass.strFormatDate(DtpDepositDate.Text) '入金予定日
-            Sql3 += "', '"
-            Sql3 += strToday '登録日
-            Sql3 += "', '"
-            Sql3 += strToday '更新日
-            Sql3 += "', '"
-            Sql3 += Input '更新者
-            Sql3 += "', "
-            Sql3 += UtilClass.formatNumber(dsCymnHd.Tables(RS).Rows(0)("仕入金額")) '仕入金額
-            Sql3 += ", '"
-            Sql3 += dsCymnHd.Tables(RS).Rows(0)("営業担当者コード").ToString '営業担当者コード
-            Sql3 += "', '"
-            Sql3 += frmC01F10_Login.loginValue.TantoCD '入力担当者コード
-            Sql3 += "'," + UtilClass.formatNumber(totalSalesAmount_cur) + ""               '売上金額_外貨
-            Sql3 += ",'" + dsCymnHd.Tables(RS).Rows(0)("通貨").ToString() + "'"  '通貨
-            Sql3 += "," + UtilClass.formatNumberF10(_com.setRate(dsCymnHd.Tables(RS).Rows(0)("通貨"), DtpGoodsIssueDate.Text)) + ""              'レート
-            Sql3 += ")"
+                    Dim dsCymnHd As DataSet = _db.selectDB(Sql, RS, reccnt)
 
-            _db.executeDB(Sql3)
+                    't30_urighd 売上基本更新
+                    Dim Sql3 As String = "INSERT INTO "
+                    Sql3 += "Public."
+                    Sql3 += "t30_urighd("
+                    Sql3 += "会社コード, 売上番号, 売上番号枝番, 客先番号, 受注番号, 受注番号枝番, 見積番号, 見積番号枝番"
+                    Sql3 += ", 得意先コード, 得意先名, 得意先郵便番号, 得意先住所, 得意先電話番号, 得意先ＦＡＸ, 得意先担当者役職"
+                    Sql3 += ", 得意先担当者名, 見積日, 見積有効期限, 支払条件, 見積金額, 売上金額, 粗利額, 営業担当者, 入力担当者"
+                    Sql3 += ", 備考, 取消日, 取消区分, ＶＡＴ, ＰＰＨ, 受注日, 売上日, 入金予定日, 登録日, 更新日, 更新者, 仕入金額"
+                    Sql3 += ", 営業担当者コード, 入力担当者コード,売上金額_外貨, 通貨, レート)"
+                    Sql3 += " VALUES('"
+                    Sql3 += frmC01F10_Login.loginValue.BumonCD '会社コード
+                    Sql3 += "', '"
+                    Sql3 += ER '売上番号
+                    Sql3 += "', '"
+                    Sql3 += "1" '売上番号枝番
+                    Sql3 += "', '"
+                    Sql3 += dsCymnHd.Tables(RS).Rows(0)("客先番号").ToString '客先番号
+                    Sql3 += "', '"
+                    Sql3 += ao_ '受注番号
+                    Sql3 += "', '"
+                    Sql3 += v_ '受注番号枝番
+                    Sql3 += "', '"
+                    Sql3 += dsCymnHd.Tables(RS).Rows(0)("見積番号").ToString '見積番号
+                    Sql3 += "', '"
+                    Sql3 += dsCymnHd.Tables(RS).Rows(0)("見積番号枝番").ToString '見積番号枝番
+                    Sql3 += "', '"
+                    Sql3 += dsCymnHd.Tables(RS).Rows(0)("得意先コード").ToString '得意先コード
+                    Sql3 += "', '"
+                    Sql3 += dsCymnHd.Tables(RS).Rows(0)("得意先名").ToString '得意先名
+                    Sql3 += "', '"
+                    Sql3 += dsCymnHd.Tables(RS).Rows(0)("得意先郵便番号").ToString '得意先郵便番号
+                    Sql3 += "', '"
+                    Sql3 += dsCymnHd.Tables(RS).Rows(0)("得意先住所").ToString '得意先住所
+                    Sql3 += "', '"
+                    Sql3 += dsCymnHd.Tables(RS).Rows(0)("得意先電話番号").ToString '得意先電話番号
+                    Sql3 += "', '"
+                    Sql3 += dsCymnHd.Tables(RS).Rows(0)("得意先ＦＡＸ").ToString '得意先ＦＡＸ
+                    Sql3 += "', '"
+                    Sql3 += dsCymnHd.Tables(RS).Rows(0)("得意先担当者役職").ToString '得意先担当者役職
+                    Sql3 += "', '"
+                    Sql3 += dsCymnHd.Tables(RS).Rows(0)("得意先担当者名").ToString '得意先担当者名
+                    Sql3 += "', '"
+                    Sql3 += UtilClass.strFormatDate(dsCymnHd.Tables(RS).Rows(0)("見積日").ToString) '見積日
+                    Sql3 += "', '"
+                    Sql3 += UtilClass.strFormatDate(dsCymnHd.Tables(RS).Rows(0)("見積有効期限").ToString) '見積有効期限
+                    Sql3 += "', '"
+                    Sql3 += dsCymnHd.Tables(RS).Rows(0)("支払条件").ToString '支払条件
+                    Sql3 += "', '"
+                    Sql3 += UtilClass.formatNumber(totalmitsuAmount) '見積金額
+                    Sql3 += "', '"
+                    Sql3 += UtilClass.formatNumber(totalUriAmount) '売上金額（売単価 * 数量）
+                    Sql3 += "', '"
+                    Sql3 += UtilClass.formatNumber(totalArariAmount) '粗利額
+                    Sql3 += "', '"
+                    Sql3 += dsCymnHd.Tables(RS).Rows(0)("営業担当者").ToString '営業担当者
+                    Sql3 += "', '"
+                    Sql3 += dsCymnHd.Tables(RS).Rows(0)("入力担当者").ToString '入力担当者
+                    Sql3 += "', '"
+                    Sql3 += TxtRemarks.Text '備考
+                    Sql3 += "', "
+                    Sql3 += "null" '取消日
+                    Sql3 += ", "
+                    Sql3 += "0" '取消区分
+                    Sql3 += ", '"
+                    Sql3 += UtilClass.formatNumber(dsCymnHd.Tables(RS).Rows(0)("ＶＡＴ")) 'ＶＡＴ 率
+                    Sql3 += "', '"
+                    If dsCymnHd.Tables(RS).Rows(0)("ＰＰＨ") Is DBNull.Value Then
+                        Sql3 += "0" 'ＰＰＨ
+                    Else
+                        Sql3 += UtilClass.formatNumber(dsCymnHd.Tables(RS).Rows(0)("ＰＰＨ")) 'ＰＰＨ
+                    End If
+                    Sql3 += "', '"
+                    Sql3 += UtilClass.strFormatDate(TxtOrderDate.Text) '受注日
+                    Sql3 += "', '"
+                    Sql3 += UtilClass.strFormatDate(DtpGoodsIssueDate.Text) '売上日
+                    Sql3 += "', '"
+                    Sql3 += UtilClass.strFormatDate(DtpDepositDate.Text) '入金予定日
+                    Sql3 += "', '"
+                    Sql3 += strToday '登録日
+                    Sql3 += "', '"
+                    Sql3 += strToday '更新日
+                    Sql3 += "', '"
+                    Sql3 += Input '更新者
+                    Sql3 += "', "
+                    Sql3 += UtilClass.formatNumber(dsCymnHd.Tables(RS).Rows(0)("仕入金額")) '仕入金額
+                    Sql3 += ", '"
+                    Sql3 += dsCymnHd.Tables(RS).Rows(0)("営業担当者コード").ToString '営業担当者コード
+                    Sql3 += "', '"
+                    Sql3 += frmC01F10_Login.loginValue.TantoCD '入力担当者コード
+                    Sql3 += "'," + UtilClass.formatNumber(totalSalesAmount_cur) + ""               '売上金額_外貨
+                    Sql3 += ",'" + dsCymnHd.Tables(RS).Rows(0)("通貨").ToString() + "'"  '通貨
+                    Sql3 += "," + UtilClass.formatNumberF10(_com.setRate(dsCymnHd.Tables(RS).Rows(0)("通貨"), DtpGoodsIssueDate.Text)) + ""              'レート
+                    Sql3 += ")"
 
+                    _db.executeDB(Sql3)
+                    b_ = False
+                End If
 #End Region
-
+            Next
+            _db.commitTran()
         Catch ex As Exception
-
+            _db.rollbackTran()
             'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
             Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
 
@@ -2347,7 +2538,7 @@ Public Class GoodsIssue
         Sql += " and "
         Sql += " t44.出庫番号 ILIKE t45.出庫番号 "
         Sql += " and "
-        Sql += " t45.行番号 = '" & DgvAdd.Rows(rowIndex).Cells("行番号").Value.ToString() & "'"
+        Sql += " t45.受注行番号 = '" & DgvAdd.Rows(rowIndex).Cells("行番号").Value.ToString() & "'"
         Sql += " and "
         Sql += " t45.倉庫コード ILIKE '" & DgvAdd.Rows(rowIndex).Cells("倉庫").Value.ToString() & "'"
         Sql += " and "
@@ -2414,12 +2605,12 @@ Public Class GoodsIssue
         Sql += " on t45.出庫番号 = t44.出庫番号"
 
         Sql += " WHERE t45.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-        Sql += " AND  t45.受注番号 = '" & TxtOrderNo.Text & "'"
+        Sql += " AND  t45.受注番号 = '" & DgvAdd.Rows(rowIndex).Cells("受注番号").Value.ToString & "'"
         'Sql += " AND  t45.受注番号枝番 = '" & TxtSuffixNo.Text & "'"
-        Sql += " AND  t45.行番号 = " & DgvAdd.Rows(rowIndex).Cells("行番号").Value.ToString
+        Sql += " AND  t45.受注行番号 = " & DgvAdd.Rows(rowIndex).Cells("行番号").Value.ToString
         Sql += " AND  t45.出庫区分 = '" & CommonConst.SHUKO_KBN_TMP & "'"  '仮出庫
         Sql += " AND  t44.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED.ToString
-
+        Sql += " AND  t45.倉庫コード='" & DgvAdd.Rows(rowIndex).Cells("倉庫").Value.ToString & "'"
 
         '在庫マスタから現在庫数を取得
         Dim dsSyuko As DataSet = _db.selectDB(Sql, RS, reccnt)
@@ -2520,7 +2711,7 @@ Public Class GoodsIssue
         Sql += " WHERE "
         Sql += " t10.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
         Sql += " AND "
-        Sql += " t10.受注番号 = '" & TxtOrderNo.Text & "'"
+        Sql += " t10.受注番号 = '" & DgvAdd.Rows(rowIndex).Cells("受注番号").Value.ToString & "'"
         'Sql += " AND "
         'Sql += " t10.受注番号枝番 = '" & TxtSuffixNo.Text & "'"
 
@@ -2609,7 +2800,7 @@ Public Class GoodsIssue
         Sql += " AND t43.型式 ILIKE '" & DgvAdd.Rows(rowIndex).Cells("型式").Value.ToString & "'"
         'Sql += " AND t43.仕入区分 = '" & DgvAdd.Rows(rowIndex).Cells("仕入区分値").Value.ToString & "'"
         Sql += " AND t42.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED.ToString
-        Sql += " and t20.受注番号 = '" & TxtOrderNo.Text & "'"
+        Sql += " and t20.受注番号 = '" & DgvAdd.Rows(rowIndex).Cells("受注番号").Value.ToString & "'"
         'Sql += " and t20.受注番号枝番 = '" & TxtSuffixNo.Text & "'"
 
         'Sql = " SELECT t42.入庫番号 "
@@ -2851,7 +3042,8 @@ Public Class GoodsIssue
                     xls.setValue(DgvHistory.Rows(j).Cells("型式").Value, lstRow, 2) 'Environment.NewLine & DgvHistory.Rows(j).Cells("備考").Value &
                     insert_row(xls, lstlstRow, lstRow)
                     'lstRow += 1
-                    xls.setValue("JobOrderNo." & ds1.Tables(RS).Rows(0)("受注番号") & "-" & ds1.Tables(RS).Rows(0)("受注番号枝番"), lstRow, 2)
+                    xls.setValue("JobOrderNo." & DgvHistory.Rows(j).Cells("受注番号").Value & "-" & DgvHistory.Rows(j).Cells("受注番号枝番").Value, lstRow, 2)
+                    'xls.setValue("JobOrderNo." & ds1.Tables(RS).Rows(0)("受注番号") & "-" & ds1.Tables(RS).Rows(0)("受注番号枝番"), lstRow, 2)
                     'sheet.Range("C" & lstRow).Value = ds2.Tables(RS).Rows(j)("出庫数量")
                     'sheet.Range("D" & lstRow).Value = ds2.Tables(RS).Rows(j)("単位")
                     'sheet.Range("E" & lstRow).Value = ds2.Tables(RS).Rows(j)("備考")
@@ -3057,7 +3249,7 @@ Public Class GoodsIssue
                                     Sql += "t45_shukodt("
                                     Sql += "会社コード, 出庫番号, 受注番号, 受注番号枝番, 行番号, 仕入区分"
                                     Sql += ", メーカー, 品名, 型式, 仕入先名, 売単価, 出庫数量, 単位, 備考"
-                                    Sql += ", 更新者, 更新日, 出庫区分, 倉庫コード"
+                                    Sql += ", 更新者, 更新日, 出庫区分, 倉庫コード,受注行番号"
                                     Sql += " )VALUES('"
                                     Sql += dsCymnhd.Tables(RS).Rows(0)("会社コード").ToString '会社コード
                                     Sql += "', '"
@@ -3094,6 +3286,8 @@ Public Class GoodsIssue
                                     Sql += CommonConst.SHUKO_KBN_NORMAL '出庫区分（通常出庫時は 1 ）
                                     Sql += "', '"
                                     Sql += wh '倉庫コード
+                                    Sql += "', '"
+                                    Sql += dsCymndt.Tables(RS).Rows(i)("行番号").ToString
                                     Sql += "')"
 
                                     _db.executeDB(Sql)

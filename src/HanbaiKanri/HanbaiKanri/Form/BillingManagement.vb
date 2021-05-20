@@ -145,7 +145,7 @@ Public Class BillingManagement
             BtnRegist.Text = "Registration"
             BtnBack.Text = "Back"
 
-            DgvCymn.Columns("受注番号").HeaderText = "JobOrderNumber"
+            DgvCymn.Columns("受注番号").HeaderText = "JobOrderNo"
             DgvCymn.Columns("受注番号枝番").HeaderText = "JobOrderVer"
             DgvCymn.Columns("受注日").HeaderText = "OrderDate"
             DgvCymn.Columns("得意先").HeaderText = "CustomerName"
@@ -154,7 +154,7 @@ Public Class BillingManagement
             DgvCymn.Columns("受注金額").HeaderText = "JobOrderAmount"
             DgvCymn.Columns("売上番号").HeaderText = "SalesNumber"
             DgvCymn.Columns("売上番号枝番").HeaderText = "SalesVer"
-            DgvCymn.Columns("行番号").HeaderText = "Line"
+            DgvCymn.Columns("行番号").HeaderText = "LineNo"
             DgvCymn.Columns("売上金額ヘッダ").HeaderText = "SalesAmount"
             DgvCymn.Columns("請求金額計").HeaderText = "TotalBillingAmount"
             DgvCymn.Columns("請求残高").HeaderText = "BillingBalance"

@@ -19,7 +19,7 @@ Public Class OrderList
     'メンバー定数宣言
     '------------------------------------------------------------------------------------------------------
     'PG制御文字 
-    Dim ds As DataSet
+    'Dim ds As DataSet
     Private Const N As String = ControlChars.NewLine            '改行文字
     Private Const RS As String = "RecSet"                               'レコードセットテーブル
     Private Const HAIFUN_ID As String = "H@@@@@"
@@ -39,10 +39,11 @@ Public Class OrderList
     Private _parentForm As Form
     'Private _gh As UtilDataGridViewHandler
     Private _init As Boolean                             '初期処理済フラグ
-    Private CompanyCode As String = ""
+    'Private CompanyCode As String = ""
     Private OrderNo As String()
     Private OrderStatus As String = ""
-
+    Private _com As CommonLogic
+    Private _vs As String = "1"
 
     '-------------------------------------------------------------------------------
     'デフォルトコンストラクタ（隠蔽）
@@ -72,9 +73,10 @@ Public Class OrderList
         OrderStatus = prmRefStatus
         '_gh = New UtilDataGridViewHandler(dgvLIST)                          'DataGridViewユーティリティクラス
         StartPosition = FormStartPosition.CenterScreen                      '画面中央表示
+        _com = New CommonLogic(_db, _msgHd)
+        Me.Text += _vs
         Me.Text = Me.Text & "[" & frmC01F10_Login.loginValue.BumonNM & "][" & frmC01F10_Login.loginValue.TantoNM & "]" & StartUp.BackUpServerPrint                                  'フォームタイトル表示
         Me.ControlBox = Not Me.ControlBox
-        _init = True
         DgvCymnhd.AutoSizeColumnsMode = DataGridViewAutoSizeColumnMode.DisplayedCells
 
         '受注参照以外では隠す
@@ -82,6 +84,7 @@ Public Class OrderList
         TxtItemName.Visible = False
         LblSpec.Visible = False
         TxtSpec.Visible = False
+        _init = True
 
     End Sub
 
@@ -205,13 +208,13 @@ Public Class OrderList
             Label3.Text = "PhoneNumber"
             Label4.Text = "CustomerCode"
             Label8.Text = "OrderDate"
-            Label7.Text = "OrdernNumber"
+            Label7.Text = "JobOrdernNo"
             Label6.Text = "SalesPersonInCharge"
             lblCustomerPO.Text = "CustomerNumber"
             Label10.Text = "DisplayFormat"
             RbtnSlip.Text = "UnitOfVoucher"
-            lblMaker.Text = "Maker"
-            lblPurchaseSince.Text = "PurchaseOrderNo"
+            lblMaker.Text = "Manufacture"
+            lblPurchaseSince.Text = "PONo"
 
             RbtnDetails.Text = "LineItemUnit"
             RbtnDetails.Location = New Point(166, 202)
@@ -252,22 +255,22 @@ Public Class OrderList
 
         Dim reccnt As Integer = 0 'DB用（デフォルト）
         Dim Sql As String = ""
+        Dim ds As DataSet
 
         '抽出条件
-        Dim customerName As String = escapeSql(TxtCustomerName.Text)
-        Dim customerAddress As String = escapeSql(TxtAddress.Text)
-        Dim customerTel As String = escapeSql(TxtTel.Text)
-        Dim customerCode As String = escapeSql(TxtCustomerCode.Text)
-        Dim sinceDate As String = UtilClass.strFormatDate(dtOrderDateSince.Text)
-        Dim untilDate As String = UtilClass.strFormatDate(dtOrderDateUntil.Text)
-        Dim sinceNum As String = escapeSql(TxtOrderSince.Text)
-        Dim salesName As String = escapeSql(TxtSales.Text)
-        Dim customerPO As String = escapeSql(TxtCustomerPO.Text)
-        Dim itemName As String = escapeSql(TxtItemName.Text)
-        Dim spec As String = escapeSql(TxtSpec.Text)
-        Dim Maker As String = UtilClass.escapeSql(txtMaker.Text)
-        Dim PurchaseSince As String = escapeSql(TxtPurchaseSince.Text)
-
+        'Dim customerName As String = escapeSql(TxtCustomerName.Text)
+        'Dim customerAddress As String = escapeSql(TxtAddress.Text)
+        'Dim customerTel As String = escapeSql(TxtTel.Text)
+        'Dim customerCode As String = escapeSql(TxtCustomerCode.Text)
+        'Dim sinceDate As String = UtilClass.strFormatDate(dtOrderDateSince.Text)
+        'Dim untilDate As String = UtilClass.strFormatDate(dtOrderDateUntil.Text)
+        'Dim sinceNum As String = escapeSql(TxtOrderSince.Text)
+        'Dim salesName As String = escapeSql(TxtSales.Text)
+        'Dim customerPO As String = escapeSql(TxtCustomerPO.Text)
+        'Dim itemName As String = escapeSql(TxtItemName.Text)
+        'Dim spec As String = escapeSql(TxtSpec.Text)
+        'Dim Maker As String = UtilClass.escapeSql(txtMaker.Text)
+        'Dim PurchaseSince As String = escapeSql(TxtPurchaseSince.Text)
 
         Try
 
@@ -337,7 +340,8 @@ Public Class OrderList
                 End If
                 DgvCymnhd.Visible = True
 
-                Exit Sub
+                'Exit Sub
+                GoTo finalmente
 
             End If
 
@@ -372,63 +376,64 @@ Public Class OrderList
 
                 Sql += " WHERE t11.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
 
-                If customerName <> Nothing Then
-                    Sql += " AND t10.得意先名 ILIKE '%" & customerName & "%' "
-                End If
+                'If customerName <> Nothing Then
+                '    Sql += " AND t10.得意先名 ILIKE '%" & customerName & "%' "
+                'End If
 
-                If customerAddress <> Nothing Then
-                    Sql += " AND t10.得意先住所 ILIKE '%" & customerAddress & "%' "
-                End If
+                'If customerAddress <> Nothing Then
+                '    Sql += " AND t10.得意先住所 ILIKE '%" & customerAddress & "%' "
+                'End If
 
-                If customerTel <> Nothing Then
-                    Sql += " AND t10.得意先電話番号 ILIKE '%" & customerTel & "%' "
-                End If
+                'If customerTel <> Nothing Then
+                '    Sql += " AND t10.得意先電話番号 ILIKE '%" & customerTel & "%' "
+                'End If
 
-                If customerCode <> Nothing Then
-                    Sql += " AND t10.得意先コード ILIKE '%" & customerCode & "%' "
-                End If
+                'If customerCode <> Nothing Then
+                '    Sql += " AND t10.得意先コード ILIKE '%" & customerCode & "%' "
+                'End If
 
-                If sinceDate <> Nothing Then
-                    Sql += " AND t10.受注日 >= '" & sinceDate & "'"
-                End If
-                If untilDate <> Nothing Then
-                    Sql += " AND t10.受注日 <= '" & untilDate & "'"
-                End If
+                'If sinceDate <> Nothing Then
+                '    Sql += " AND t10.受注日 >= '" & sinceDate & "'"
+                'End If
+                'If untilDate <> Nothing Then
+                '    Sql += " AND t10.受注日 <= '" & untilDate & "'"
+                'End If
 
-                If sinceNum <> Nothing Then
-                    Sql += " AND t11.受注番号 ILIKE '%" & sinceNum & "%' "
-                End If
+                'If sinceNum <> Nothing Then
+                '    Sql += " AND t11.受注番号 ILIKE '%" & sinceNum & "%' "
+                'End If
 
-                If salesName <> Nothing Then
-                    Sql += " AND t10.営業担当者 ILIKE '%" & salesName & "%' "
-                End If
+                'If salesName <> Nothing Then
+                '    Sql += " AND t10.営業担当者 ILIKE '%" & salesName & "%' "
+                'End If
 
-                If customerPO <> Nothing Then
-                    Sql += " AND t10.客先番号 ILIKE '%" & customerPO & "%' "
-                End If
+                'If customerPO <> Nothing Then
+                '    Sql += " AND t10.客先番号 ILIKE '%" & customerPO & "%' "
+                'End If
 
-                If Maker <> Nothing Then
-                    Sql += " AND t11.メーカー ILIKE '%" & Maker & "%' "
-                End If
+                'If Maker <> Nothing Then
+                '    Sql += " AND t11.メーカー ILIKE '%" & Maker & "%' "
+                'End If
 
-                If itemName <> Nothing Then
-                    Sql += " AND t11.品名 ILIKE '%" & itemName & "%' "
-                End If
+                'If itemName <> Nothing Then
+                '    Sql += " AND t11.品名 ILIKE '%" & itemName & "%' "
+                'End If
 
-                If spec <> Nothing Then
-                    Sql += " AND t11.型式 ILIKE '%" & spec & "%' "
-                End If
+                'If spec <> Nothing Then
+                '    Sql += " AND t11.型式 ILIKE '%" & spec & "%' "
+                'End If
 
-                If PurchaseSince <> Nothing Then
-                    Sql += "And t10.受注番号 In (Select 受注番号 From t20_hattyu t20 Where 発注番号 In('" & PurchaseSince & "'))"
-                End If
+                'If PurchaseSince <> Nothing Then
+                '    Sql += "And t10.受注番号 In (Select 受注番号 From t20_hattyu t20 Where 発注番号 In('" & PurchaseSince & "'))"
+                'End If
 
 
-                '取消データを含めない場合
-                If ChkCancelData.Checked = False Then
-                    Sql += " AND t10.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
-                End If
+                ''取消データを含めない場合
+                'If ChkCancelData.Checked = False Then
+                '    Sql += " AND t10.取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
+                'End If
 
+                Sql += viewSearchConditions() '検索条件
                 Sql += " ORDER BY t11.登録日 DESC"
 
                 ds = _db.selectDB(Sql, RS, reccnt)
@@ -436,6 +441,9 @@ Public Class OrderList
                 setRows(ds) '行をセット
 
             End If
+
+finalmente:
+
             '自動でサイズを設定するのは、行や列を追加したり、セルに値を設定した後にする。
             DgvCymnhd.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells
             DgvCymnhd.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells
@@ -461,25 +469,12 @@ Public Class OrderList
         '------------------------------
         If RbtnSlip.Checked Then
 
-            Dim curds As DataSet  'm25_currency
-            Dim cur As String
-            Dim Sql As String
-
             setHdColumns() '表示カラムの設定
 
             For i As Integer = 0 To ds.Tables(RS).Rows.Count - 1
 
-                If IsDBNull(ds.Tables(RS).Rows(i)("通貨")) Then
-                    cur = vbNullString
-                Else
-                    Sql = " and 採番キー = " & ds.Tables(RS).Rows(i)("通貨")
-                    curds = getDsData("m25_currency", Sql)
-
-                    cur = curds.Tables(RS).Rows(0)("通貨コード")
-                End If
-
                 DgvCymnhd.Rows.Add()
-                DgvCymnhd.Rows(i).Cells("取消").Value = getDelKbnTxt(ds.Tables(RS).Rows(i)("取消区分"))
+                DgvCymnhd.Rows(i).Cells("取消").Value = _com.getDelKbnTxt(ds.Tables(RS).Rows(i)("取消区分"))
                 DgvCymnhd.Rows(i).Cells("受注番号").Value = ds.Tables(RS).Rows(i)("受注番号")
                 DgvCymnhd.Rows(i).Cells("受注番号枝番").Value = ds.Tables(RS).Rows(i)("受注番号枝番")
 
@@ -492,8 +487,7 @@ Public Class OrderList
                 DgvCymnhd.Rows(i).Cells("得意先コード").Value = ds.Tables(RS).Rows(i)("得意先コード")
                 DgvCymnhd.Rows(i).Cells("得意先名").Value = ds.Tables(RS).Rows(i)("得意先名")
 
-
-                DgvCymnhd.Rows(i).Cells("通貨_外貨").Value = cur
+                DgvCymnhd.Rows(i).Cells("通貨_外貨").Value = _com.getCurrencyEx(ds.Tables(RS).Rows(i)("通貨"))
                 DgvCymnhd.Rows(i).Cells("受注金額_外貨").Value = ds.Tables(RS).Rows(i)("見積金額_外貨")
 
                 DgvCymnhd.Rows(i).Cells("受注金額").Value = ds.Tables(RS).Rows(i)("見積金額")
@@ -524,6 +518,10 @@ Public Class OrderList
                 DgvCymnhd.Rows(i).Cells("更新者").Value = ds.Tables(RS).Rows(i)("更新者")
                 DgvCymnhd.Rows(i).Cells("更新日").Value = ds.Tables(RS).Rows(i)("更新日")
 
+                If OrderStatus = CommonConst.STATUS_GOODS_ISSUE Then
+                    DgvCymnhd.Rows(i).Cells("B").Value = False
+                End If
+
             Next
 
         Else
@@ -538,13 +536,13 @@ Public Class OrderList
             For i As Integer = 0 To ds.Tables(RS).Rows.Count - 1
 
                 DgvCymnhd.Rows.Add()
-                DgvCymnhd.Rows(i).Cells("取消").Value = getDelKbnTxt(ds.Tables(RS).Rows(i)("取消区分"))
+                DgvCymnhd.Rows(i).Cells("取消").Value = _com.getDelKbnTxt(ds.Tables(RS).Rows(i)("取消区分"))
                 DgvCymnhd.Rows(i).Cells("受注番号").Value = ds.Tables(RS).Rows(i)("受注番号")
                 DgvCymnhd.Rows(i).Cells("受注番号枝番").Value = ds.Tables(RS).Rows(i)("受注番号枝番")
                 DgvCymnhd.Rows(i).Cells("行番号").Value = ds.Tables(RS).Rows(i)("行番号")
 
                 '汎用マスタから仕入区分を取得
-                Dim dsSireKbn As DataSet = getDsHanyoData(CommonConst.FIXED_KEY_PURCHASING_CLASS, ds.Tables(RS).Rows(i)("仕入区分").ToString)
+                Dim dsSireKbn As DataSet = _com.getDsHanyoData(CommonConst.FIXED_KEY_PURCHASING_CLASS, ds.Tables(RS).Rows(i)("仕入区分").ToString)
                 DgvCymnhd.Rows(i).Cells("仕入区分").Value = IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG,
                                                         dsSireKbn.Tables(RS).Rows(0)("文字２"),
                                                         dsSireKbn.Tables(RS).Rows(0)("文字１"))
@@ -725,21 +723,27 @@ Public Class OrderList
             Exit Sub
         End If
 
-        '取消済みデータは取消操作不可能
-        If DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("取消").Value =
-            IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_JPN, CommonConst.CANCEL_KBN_JPN_TXT, CommonConst.CANCEL_KBN_ENG_TXT) Then
-            '取消データは選択できないアラートを出す
-            _msgHd.dspMSG("cannotSelectTorikeshiData", frmC01F10_Login.loginValue.Language)
-            Exit Sub
-        End If
+        Dim dicNo As New Dictionary(Of String, String)
+        For RowIdx As Integer = 0 To DgvCymnhd.RowCount - 1
+            If DgvCymnhd.Rows(RowIdx).Cells("B").Value Then
 
-        Dim RowIdx As Integer
-        RowIdx = Me.DgvCymnhd.CurrentCell.RowIndex
-        Dim No As String = DgvCymnhd.Rows(RowIdx).Cells("受注番号").Value
-        Dim Suffix As String = DgvCymnhd.Rows(RowIdx).Cells("受注番号枝番").Value
+                '取消済みデータは取消操作不可能
+                If DgvCymnhd.Rows(RowIdx).Cells("取消").Value =
+            IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_JPN, CommonConst.CANCEL_KBN_JPN_TXT, CommonConst.CANCEL_KBN_ENG_TXT) Then
+                    '取消データは選択できないアラートを出す
+                    _msgHd.dspMSG("cannotSelectTorikeshiData", frmC01F10_Login.loginValue.Language)
+                    Exit Sub
+                End If
+
+                dicNo.Add(DgvCymnhd.Rows(RowIdx).Cells("受注番号").Value, DgvCymnhd.Rows(RowIdx).Cells("受注番号枝番").Value)
+            End If
+
+        Next
+
         Dim openForm As Form = Nothing
-        openForm = New GoodsIssue(_msgHd, _db, _langHd, No, Suffix)   '処理選択
+        openForm = New GoodsIssue(_msgHd, _db, _langHd, "", "", "", dicNo)   '処理選択
         openForm.Show(Me)
+
     End Sub
 
     '受注取消
@@ -1213,6 +1217,7 @@ Public Class OrderList
         Dim strNow As String = UtilClass.formatDatetime(dtNow)
         Dim reccnt As Integer = 0
         Dim Sql As String = ""
+        Dim ds As DataSet
 
         '画面を開いた時から対象データに対して更新がされていないかどうか確認
         Sql = " AND "
@@ -2185,11 +2190,22 @@ Public Class OrderList
 
     '使用言語に合わせて受注基本見出しを切替
     Private Sub setHdColumns()
+
+        If OrderStatus = CommonConst.STATUS_GOODS_ISSUE Then
+            Dim objcol As DataGridViewColumn = New DataGridViewColumn()
+            objcol.HeaderText = "Check"
+            objcol.Name = "B"
+            objcol.CellTemplate = New DataGridViewCheckBoxCell()
+            objcol.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+            objcol.ReadOnly = False
+            DgvCymnhd.Columns.Add(objcol)
+        End If
+
         If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
 
             DgvCymnhd.Columns.Add("取消", "Cancel")
-            DgvCymnhd.Columns.Add("受注番号", "OrderNumber")
-            DgvCymnhd.Columns.Add("受注番号枝番", "JobOrderSubNumber")
+            DgvCymnhd.Columns.Add("受注番号", "JobOrderNo")
+            DgvCymnhd.Columns.Add("受注番号枝番", "JobOrderVer")
 
             DgvCymnhd.Columns.Add("客先番号", "CustomerNumber")
             DgvCymnhd.Columns.Add("受注日", "JobOrderDate")
@@ -2383,9 +2399,9 @@ Public Class OrderList
 
         If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
             DgvCymnhd.Columns.Add("取消", "Cancel")
-            DgvCymnhd.Columns.Add("受注番号", "OrderNumber")
-            DgvCymnhd.Columns.Add("受注番号枝番", "OrderSuffixNumber")
-            DgvCymnhd.Columns.Add("行番号", "LineNumber")
+            DgvCymnhd.Columns.Add("受注番号", "JobOrderNo")
+            DgvCymnhd.Columns.Add("受注番号枝番", "JobOrderVer")
+            DgvCymnhd.Columns.Add("行番号", "LineNo")
 
             DgvCymnhd.Columns.Add("仕入区分", "PurchasingClassification")
             DgvCymnhd.Columns.Add("メーカー", "Manufacturer")
@@ -2536,61 +2552,6 @@ Public Class OrderList
 
     End Sub
 
-    '抽出条件取得
-    Private Function searchConditions() As String
-
-        Dim Sql As String = ""
-
-        '抽出条件
-        Dim customerName As String = escapeSql(TxtCustomerName.Text)
-        Dim customerAddress As String = escapeSql(TxtAddress.Text)
-        Dim customerTel As String = escapeSql(TxtTel.Text)
-        Dim customerCode As String = escapeSql(TxtCustomerCode.Text)
-        Dim sinceDate As String = UtilClass.strFormatDate(dtOrderDateSince.Text)
-        Dim untilDate As String = UtilClass.strFormatDate(dtOrderDateUntil.Text)
-        Dim sinceNum As String = escapeSql(TxtOrderSince.Text)
-        Dim salesName As String = escapeSql(TxtSales.Text)
-        Dim customerPO As String = escapeSql(TxtCustomerPO.Text)
-
-        If customerName <> Nothing Then
-            Sql += " And 得意先名 ILIKE '%" & customerName & "%' "
-        End If
-
-        If customerAddress <> Nothing Then
-            Sql += " AND 得意先住所 ILIKE '%" & customerAddress & "%' "
-        End If
-
-        If customerTel <> Nothing Then
-            Sql += " AND 得意先電話番号 ILIKE '%" & customerTel & "%' "
-        End If
-
-        If customerCode <> Nothing Then
-            Sql += " AND 得意先コード ILIKE '%" & customerCode & "%' "
-        End If
-
-        If sinceDate <> Nothing Then
-            Sql += " AND 受注日 >= '" & sinceDate & "'"
-        End If
-        If untilDate <> Nothing Then
-            Sql += " AND 受注日 <= '" & untilDate & "'"
-        End If
-
-        If sinceNum <> Nothing Then
-            Sql += " AND 受注番号 ILIKE '%" & sinceNum & "%' "
-        End If
-
-        If salesName <> Nothing Then
-            Sql += " AND 営業担当者 ILIKE '%" & salesName & "%' "
-        End If
-
-        If customerPO <> Nothing Then
-            Sql += " AND 客先番号 ILIKE '%" & customerPO & "%' "
-        End If
-
-        Return Sql
-
-    End Function
-
     Private Function viewSearchConditions() As String
         Dim Sql As String = ""
 
@@ -2686,71 +2647,11 @@ Public Class OrderList
         End If
     End Function
 
-    '表示形式条件
-    Private Function viewFormat() As String
-        Dim Sql As String = ""
-
-        '取消データを含めない場合
-        If ChkCancelData.Checked = False Then
-            Sql += " AND 取消区分 = " & CommonConst.CANCEL_KBN_ENABLED
-        End If
-
-        Return Sql
-
-    End Function
-
-    '取消区分の表示テキストを返す
-    'param1：String テーブル名
-    'param2：String 詳細条件
-    'Return: DataSet
-    Public Function getDelKbnTxt(ByVal delKbn As String) As String
-        '区分の値を取得し、使用言語に応じて値を返却
-
-        Dim reDelKbn As String = IIf(delKbn = CommonConst.CANCEL_KBN_DISABLED,
-                                    IIf(frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_JPN, CommonConst.CANCEL_KBN_JPN_TXT, CommonConst.CANCEL_KBN_ENG_TXT),
-                                    "")
-        Return reDelKbn
-    End Function
-
     'param1：String テーブル名
     'param2：String 詳細条件
     'Return: DataSet
     Private Function getDsData(ByVal tableName As String, Optional ByRef txtParam As String = "") As DataSet
-        Dim reccnt As Integer = 0 'DB用（デフォルト）
-        Dim Sql As String = ""
-
-        Sql += "SELECT * FROM public." & tableName
-        Sql += " WHERE 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "' "
-        Sql += txtParam
-        Return _db.selectDB(Sql, RS, reccnt)
-    End Function
-
-    'sqlで実行する文字列からシングルクォーテーションを文字コードにする
-    Private Function escapeSql(ByVal prmSql As String) As String
-        Dim sql As String = prmSql
-
-        sql = sql.Replace("'"c, "''") 'シングルクォーテーションを置換
-
-        Return Regex.Escape(sql)
-        Return sql
-    End Function
-
-    '汎用マスタから固定キー、可変キーに応じた結果を返す
-    'param1：String 固定キー
-    'param2：String 可変キー
-    'Return: DataSet
-    Private Function getDsHanyoData(ByVal prmFixed As String, Optional ByVal prmVariable As String = "") As DataSet
-        Dim Sql As String = ""
-
-        Sql = " AND 固定キー = '" & prmFixed & "'"
-
-        If prmVariable IsNot "" Then
-            Sql += " AND 可変キー = '" & prmVariable & "'"
-        End If
-
-        'リードタイムのリストを汎用マスタから取得
-        Return getDsData("m90_hanyo", Sql)
-
+        Return _com.getDsData(tableName, txtParam)
     End Function
 
     Private Sub OrderList_Activated(sender As Object, e As EventArgs) Handles MyBase.Activated
@@ -2759,13 +2660,6 @@ Public Class OrderList
 
     '基準通貨の通貨コードを取得する
     Private Function setBaseCurrency() As String
-        Dim Sql As String
-        '通貨表示：ベースの設定
-        Sql = " AND 採番キー = " & CommonConst.CURRENCY_CD_IDR.ToString
-        Sql += " AND 取消区分 = " & CommonConst.CANCEL_KBN_ENABLED.ToString
-
-        Dim ds As DataSet = getDsData("m25_currency", Sql)
-        setBaseCurrency = ds.Tables(RS).Rows(0)("通貨コード")
-
+        setBaseCurrency = _com.setBaseCurrency()
     End Function
 End Class

@@ -1185,7 +1185,7 @@ Public Class CommonLogic
             Sql += ", 更新日 = '" & UtilClass.formatDatetime(Now) & "'"
             Sql += " ,更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
 
-            Sql += "WHERE"
+            Sql += " WHERE"
             Sql += " 会社コード"
             Sql += "='"
             Sql += frmC01F10_Login.loginValue.BumonCD
@@ -1195,9 +1195,7 @@ Public Class CommonLogic
             Sql += " AND 引当区分 ='1'"
             _db.executeDB(Sql)
 
-        Next
-
-        Sql = "UPDATE "
+            Sql = "UPDATE "
             Sql += " t44_shukohd "
             Sql += " SET "
             Sql += " 取消区分 = '" & CommonConst.CANCEL_KBN_DISABLED.ToString & "'"
@@ -1206,10 +1204,12 @@ Public Class CommonLogic
             Sql += " ,更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
             Sql += " WHERE "
             Sql += " 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-        Sql += " AND 受注番号 = '" & o_ & "'"
-        Sql += " AND 受注番号枝番 = '" & v_ & "'"
-        'Sql += " AND 出庫番号 = '" & ds.Tables(RS).Rows(i)("出庫番号") & "'"
-        _db.executeDB(Sql)
+            'Sql += " AND 受注番号 = '" & o_ & "'"
+            'Sql += " AND 受注番号枝番 = '" & v_ & "'"
+            Sql += " AND 出庫番号 = '" & ds.Tables(RS).Rows(i)("出庫番号") & "'"
+            _db.executeDB(Sql)
+
+        Next
 
         Return True
     End Function

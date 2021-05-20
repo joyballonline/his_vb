@@ -229,10 +229,10 @@ Public Class GoodsIssueList
             '----------------------------
             If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 DgvCymnhd.Columns.Add("取消", "Cancel")
-                DgvCymnhd.Columns.Add("受注番号", "JobOrderNumber")
-                DgvCymnhd.Columns.Add("受注番号枝番", "JobOrderSubNumber")
+                DgvCymnhd.Columns.Add("受注番号", "JobOrderNo")
+                DgvCymnhd.Columns.Add("受注番号枝番", "JobOrderVer")
                 DgvCymnhd.Columns.Add("出庫番号", "GoodsDeliveryNumber")
-                DgvCymnhd.Columns.Add("行番号", "LineNumber")
+                DgvCymnhd.Columns.Add("行番号", "LineNo")
                 DgvCymnhd.Columns.Add("出庫日", "GoodsDeliveryDate")
                 DgvCymnhd.Columns.Add("仕入区分", "PurchasingClassification")
                 DgvCymnhd.Columns.Add("メーカー", "Manufacturer")
@@ -560,13 +560,12 @@ Public Class GoodsIssueList
 
 #Region "select_t45_shukodt"
 
-            Dim Sql As String = "SELECT * "
+            Dim Sql As String = "SELECT t45.受注番号,t45.受注番号枝番,t45.出庫数量,t45.受注行番号,t44.出庫日 "
 
-            Sql += " FROM t44_shukohd t44"
-            Sql += " left join t45_shukodt t45"
-            Sql += " on t44.出庫番号 = t45.出庫番号"
-
-            Sql += " where t44.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
+            Sql += " FROM t44_shukohd t44, "
+            Sql += " t45_shukodt t45 "
+            Sql += " where t44.出庫番号 = t45.出庫番号"
+            Sql += " and t44.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
             Sql += "   and t44.出庫番号 = '" & strSyukoNo & "'"
 
             Dim dtSyukodt As DataTable = _db.selectDB(Sql, RS, reccnt).Tables(0)
@@ -581,7 +580,7 @@ Public Class GoodsIssueList
                 Dim strJyutyuNo As String = dtSyukodt.Rows(index1)("受注番号")
                 Dim strEda As String = dtSyukodt.Rows(index1)("受注番号枝番")
                 Dim intSyukosu As Integer = dtSyukodt.Rows(index1)("出庫数量")
-                Dim intLineNo As Integer = dtSyukodt.Rows(index1)("行番号")
+                Dim intLineNo As Integer = dtSyukodt.Rows(index1)("受注行番号")
 
 
 #Region "select_t31_urigdt"
@@ -627,13 +626,13 @@ Public Class GoodsIssueList
 
 
 
-                If index1 = 0 Then
+                'If index1 = 0 Then
 
 
 #Region "update_t10_cymnhd"
 
-                    '受注基本データを更新
-                    Dim Sql5 As String = "UPDATE t10_cymnhd "
+                '受注基本データを更新
+                Dim Sql5 As String = "UPDATE t10_cymnhd "
                     Sql5 += " SET "
                     Sql5 += " 更新日 = '" & UtilClass.formatDatetime(dtNow) & "'"
                     Sql5 += ",更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
@@ -665,7 +664,7 @@ Public Class GoodsIssueList
 #End Region
 
 
-                End If
+                'End If
 
             Next
 
@@ -760,7 +759,7 @@ Public Class GoodsIssueList
                     Sql += "Public."
                     Sql += "t45_shukodt("
                     Sql += "会社コード, 出庫番号, 受注番号, 受注番号枝番, 行番号, 仕入区分, メーカー, 品名, 型式"
-                    Sql += ", 仕入先名, 売単価, 出庫数量, 単位, 備考, 更新者, 更新日, 出庫区分, 倉庫コード)"
+                    Sql += ", 仕入先名, 売単価, 出庫数量, 単位, 備考, 更新者, 更新日, 出庫区分, 倉庫コード,受注行番号)"
                     Sql += " VALUES('" & frmC01F10_Login.loginValue.BumonCD & "'"   '会社コード
                     Sql += ", '" & MAIN_LS & "'"     '出庫番号
                     Sql += ", '" & dsShuko.Tables(RS).Rows(i)("受注番号") & "'"            '受注番号
@@ -778,7 +777,8 @@ Public Class GoodsIssueList
                     Sql += ", '" & frmC01F10_Login.loginValue.TantoNM & "'"                           '更新者
                     Sql += ", '" & UtilClass.formatDatetime(dtNow) & "'"                              '更新日
                     Sql += ", '" & CommonConst.SHUKO_KBN_TMP & "'" '仮出庫：2
-                    Sql += ", '" & dsShuko.Tables(RS).Rows(i)("倉庫コード") & "')" '倉庫コード
+                    Sql += ", '" & dsShuko.Tables(RS).Rows(i)("倉庫コード") & "'" '倉庫コード
+                    Sql += ", " & dsShuko.Tables(RS).Rows(i)("受注行番号") & ")"
 
                     _db.executeDB(Sql)
 
@@ -938,7 +938,7 @@ Public Class GoodsIssueList
             Sql += " AND "
             Sql += "受注番号枝番 ILIKE '" & DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号枝番").Value & "'"
 
-            Dim dsCymndt As DataSet = getDsData("t11_cymndt", Sql)
+            'Dim dsCymndt As DataSet = getDsData("t11_cymndt", Sql)
 
             '出庫データ
             Sql = " AND"
@@ -951,42 +951,54 @@ Public Class GoodsIssueList
 
 
             '受注データを更新する
-            For i As Integer = 0 To dsCymndt.Tables(RS).Rows.Count - 1
-                For x As Integer = 0 To dsShukodt.Tables(RS).Rows.Count - 1
+            'For i As Integer = 0 To dsCymndt.Tables(RS).Rows.Count - 1
+            For x As Integer = 0 To dsShukodt.Tables(RS).Rows.Count - 1
+
+                '受注データ
+                Sql = " AND "
+                Sql += "受注番号='" & dsShukodt.Tables(RS).Rows(x)("受注番号") & "'"
+                Sql += " AND "
+                Sql += "受注番号枝番='" & dsShukodt.Tables(RS).Rows(x)("受注番号枝番") & "'"
+                Sql += " AND "
+                Sql += "行番号='" & dsShukodt.Tables(RS).Rows(x)("受注行番号") & "'"
+
+                Dim dsCymndt As DataSet = getDsData("t11_cymndt", Sql)
+
+                For i As Integer = 0 To dsCymndt.Tables(RS).Rows.Count - 1
 
                     '行番号が一致したら
-                    If dsCymndt.Tables(RS).Rows(i)("行番号") = dsShukodt.Tables(RS).Rows(x)("行番号") Then
-                        Dim calShukko As Integer = dsCymndt.Tables(RS).Rows(i)("出庫数") - dsShukodt.Tables(RS).Rows(x)("出庫数量")
-                        Dim calUnShukko As Integer = dsCymndt.Tables(RS).Rows(i)("未出庫数") + dsShukodt.Tables(RS).Rows(x)("出庫数量")
+                    'If dsCymndt.Tables(RS).Rows(i)("行番号") = dsShukodt.Tables(RS).Rows(x)("行番号") Then
+                    Dim calShukko As Decimal = dsCymndt.Tables(RS).Rows(i)("出庫数") - dsShukodt.Tables(RS).Rows(x)("出庫数量")
+                    Dim calUnShukko As Decimal = dsCymndt.Tables(RS).Rows(i)("未出庫数") + dsShukodt.Tables(RS).Rows(x)("出庫数量")
 
-                        Sql = "update t11_cymndt set "
+                    Sql = "update t11_cymndt set "
                         Sql += "出庫数 = '" & calShukko & "'"
                         Sql += ",未出庫数 = '" & calUnShukko & "'"
                         Sql += ",更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
                         Sql += " where 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
                         Sql += " AND "
-                        Sql += "受注番号 ILIKE '" & DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号").Value & "'"
-                        Sql += " AND "
-                        Sql += "受注番号枝番 ILIKE '" & DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号枝番").Value & "'"
-                        Sql += " AND "
-                        Sql += "行番号 = '" & dsCymndt.Tables(RS).Rows(i)("行番号") & "'"
+                    Sql += "受注番号 ILIKE '" & dsShukodt.Tables(RS).Rows(x)("受注番号") & "'"
+                    Sql += " AND "
+                    Sql += "受注番号枝番 ILIKE '" & dsShukodt.Tables(RS).Rows(x)("受注番号枝番") & "'"
+                    Sql += " AND "
+                    Sql += "行番号 = '" & dsShukodt.Tables(RS).Rows(x)("受注行番号") & "'"
 
-                        _db.executeDB(Sql)
+                    _db.executeDB(Sql)
 
                         Sql = "update t10_cymnhd set "
                         Sql += "更新日 = '" & dtNow & "'"
                         Sql += ",更新者 = '" & frmC01F10_Login.loginValue.TantoNM & "'"
                         Sql += " where 会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
                         Sql += " AND "
-                        Sql += "受注番号 ILIKE '" & DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号").Value & "'"
-                        Sql += " AND "
-                        Sql += "受注番号枝番 ILIKE '" & DgvCymnhd.Rows(DgvCymnhd.CurrentCell.RowIndex).Cells("受注番号枝番").Value & "'"
-                        Sql += " AND "
+                    Sql += "受注番号 ILIKE '" & dsShukodt.Tables(RS).Rows(x)("受注番号") & "'"
+                    Sql += " AND "
+                    Sql += "受注番号枝番 ILIKE '" & dsShukodt.Tables(RS).Rows(x)("受注番号枝番") & "'"
+                    Sql += " AND "
                         Sql += "取消区分 = " & CommonConst.CANCEL_KBN_ENABLED '取消区分=0
 
                         _db.executeDB(Sql)
 
-                    End If
+                    'End If
 
                 Next
 
@@ -1064,16 +1076,17 @@ Public Class GoodsIssueList
 
         Dim RowIdx As Integer
         RowIdx = Me.DgvCymnhd.CurrentCell.RowIndex
-        Dim No As String = DgvCymnhd.Rows(RowIdx).Cells("受注番号").Value
-        Dim Suffix As String = DgvCymnhd.Rows(RowIdx).Cells("受注番号枝番").Value
+
+        Dim No As String = DgvCymnhd.Rows(RowIdx).Cells("出庫番号").Value 'DgvCymnhd.Rows(RowIdx).Cells("受注番号").Value
+        Dim Suffix As String = "" 'DgvCymnhd.Rows(RowIdx).Cells("受注番号枝番").Value
         Dim Status As String = CommonConst.STATUS_VIEW
 
-        Dim denpyoNo As String = "00000000000000"
-        Dim denpyoEda As String = "00"
+        'Dim denpyoNo As String = "00000000000000"
+        'Dim denpyoEda As String = "00"
 
-        If No = denpyoNo And Suffix = denpyoEda Then
-            No = DgvCymnhd.Rows(RowIdx).Cells("出庫番号").Value
-        End If
+        'If No = denpyoNo And Suffix = denpyoEda Then
+        'No = DgvCymnhd.Rows(RowIdx).Cells("出庫番号").Value
+        'End If
 
         Dim openForm As Form = Nothing
         openForm = New GoodsIssue(_msgHd, _db, _langHd, No, Suffix, Status)   '処理選択
