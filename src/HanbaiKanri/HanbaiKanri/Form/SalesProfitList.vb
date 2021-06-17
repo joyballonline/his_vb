@@ -46,7 +46,7 @@ Public Class SalesProfitList
     Private SalesNo As String()
     Private SalesStatus As String = ""
     Private _com As CommonLogic
-    Private _vs As String = "1"
+    Private _vs As String = "2"
 
     '-------------------------------------------------------------------------------
     'デフォルトコンストラクタ（隠蔽）

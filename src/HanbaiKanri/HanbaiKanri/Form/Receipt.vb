@@ -553,11 +553,10 @@ Public Class Receipt
                 DgvPurchase.Rows(i).Cells("未入庫数").Value = dsHattyudt.Tables(RS).Rows(i)("未入庫数")
                 DgvPurchase.Rows(i).Cells("更新日").Value = dsHattyudt.Tables(RS).Rows(i)("更新日")
 
-                '20200809
-                Dim dsItem As DataTable = mSetHatyuItem(No, Suffix, dsHattyudt.Tables(RS).Rows(i)("行番号"))
 
                 If frmC01F10_Login.loginValue.BumonCD = "ZENBI" Then  'ゼンビさんの場合
-
+                    '20200809
+                    Dim dsItem As DataTable = mSetHatyuItem(No, Suffix, dsHattyudt.Tables(RS).Rows(i)("行番号"))
                     If dsItem.Rows.Count > 0 Then
                         'データが存在した場合は品名をセット
                         DgvPurchase.Rows(i).Cells("仕入メーカー").Value = dsItem.Rows(0)("メーカー")
@@ -599,14 +598,15 @@ Public Class Receipt
                 DgvHistory.Rows(i).Cells("入庫日").Value = dsNyukodt.Tables(RS).Rows(i)("入庫日").ToShortDateString
                 DgvHistory.Rows(i).Cells("備考").Value = dsNyukodt.Tables(RS).Rows(i)("備考")
 
-                '20200809
-                Dim dsItem As DataTable = mSetHatyuItem(No, Suffix, dsNyukodt.Tables(RS).Rows(i)("行番号"))
-
-                If dsItem.Rows.Count > 0 Then
-                    'データが存在した場合は品名をセット
-                    DgvHistory.Rows(i).Cells("仕入メーカー").Value = dsItem.Rows(0)("メーカー")
-                    DgvHistory.Rows(i).Cells("仕入品名").Value = dsItem.Rows(0)("品名")
-                    DgvHistory.Rows(i).Cells("仕入型式").Value = dsItem.Rows(0)("型式")
+                If frmC01F10_Login.loginValue.BumonCD = "ZENBI" Then  'ゼンビさんの場合
+                    '20200809
+                    Dim dsItem As DataTable = mSetHatyuItem(No, Suffix, dsNyukodt.Tables(RS).Rows(i)("行番号"))
+                    If dsItem.Rows.Count > 0 Then
+                        'データが存在した場合は品名をセット
+                        DgvHistory.Rows(i).Cells("仕入メーカー").Value = dsItem.Rows(0)("メーカー")
+                        DgvHistory.Rows(i).Cells("仕入品名").Value = dsItem.Rows(0)("品名")
+                        DgvHistory.Rows(i).Cells("仕入型式").Value = dsItem.Rows(0)("型式")
+                    End If
                 End If
 
             Next
@@ -1753,10 +1753,10 @@ Public Class Receipt
     Private Function mSetHatyuItem(ByVal No As String, ByVal Suffix As String, ByVal Gyo As Integer) As DataTable
 
         '20200809
-        If frmC01F10_Login.loginValue.BumonCD = "ZENBI" Then  'ゼンビさんの場合
+        'If frmC01F10_Login.loginValue.BumonCD = "ZENBI" Then  'ゼンビさんの場合
 
-            '発注品名を取得する
-            Dim Sql As String = "SELECT t21_i.*"
+        '発注品名を取得する
+        Dim Sql As String = "SELECT t21_i.*"
             Sql += " FROM  public.t21_hattyu_item t21_i "
 
             Sql += " WHERE t21_i.会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
@@ -1765,9 +1765,9 @@ Public Class Receipt
             Sql += " AND t21_i.行番号 = '" & Gyo & "'"
 
             mSetHatyuItem = _db.selectDB(Sql, RS, 0).Tables(0)
-        Else
-            mSetHatyuItem = Nothing
-        End If
+        'Else
+        'mSetHatyuItem = Nothing
+        'End If
 
     End Function
 

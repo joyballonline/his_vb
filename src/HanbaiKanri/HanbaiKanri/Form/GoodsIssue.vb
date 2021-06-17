@@ -46,7 +46,7 @@ Public Class GoodsIssue
     Private _langHd As UtilLangHandler
     Private Input As String = frmC01F10_Login.loginValue.TantoNM
     Private _com As CommonLogic
-    Private _vs As String = "1"
+    Private _vs As String = "2"
     Private _hash As Dictionary(Of String, String)
 
     '-------------------------------------------------------------------------------
@@ -967,21 +967,20 @@ Public Class GoodsIssue
             Exit Sub
         End If
 
-        For i As Integer = 0 To DgvAdd.Rows.Count() - 1
-            For x As Integer = 0 To DgvOrder.Rows.Count() - 1
-                '行番号が一致したら
-                If DgvOrder.Rows(x).Cells("明細").Value = DgvAdd.Rows(i).Cells("行番号").Value Then
-                    '出庫数が未出庫数を超えたら
-                    If DgvOrder.Rows(x).Cells("未出庫数").Value < DgvAdd.Rows(i).Cells("出庫数量").Value Then
+        'For i As Integer = 0 To DgvAdd.Rows.Count() - 1
+        'For x As Integer = 0 To DgvOrder.Rows.Count() - 1
+        '行番号が一致したら
+        'If DgvOrder.Rows(x).Cells("明細").Value = DgvAdd.Rows(i).Cells("行番号").Value Then
+        '出庫数が未出庫数を超えたら
+        'If DgvOrder.Rows(x).Cells("未出庫数").Value < DgvAdd.Rows(i).Cells("出庫数量").Value Then
 
-                        '操作できないアラートを出す
-                        _msgHd.dspMSG("chkGIBalanceError", frmC01F10_Login.loginValue.Language)
-
-                        Return
-                    End If
-                End If
-            Next
-        Next
+        '操作できないアラートを出す
+        '_msgHd.dspMSG("chkGIBalanceError", frmC01F10_Login.loginValue.Language)
+        'Return
+        'End If
+        'End If
+        'Next
+        'Next
 
         'If DgvOrder.Rows(0).Cells("更新日").Value <> dsCymnhd.Tables(RS).Rows(0)("更新日") Then
         '画面を開いたときの日時とデータの日時が異なっていた場合
@@ -1604,16 +1603,13 @@ Public Class GoodsIssue
         Dim dsHanyo As DataTable = getDsData("m90_hanyo", Sql).Tables(0)
 
         If dsHanyo.Rows.Count = 0 Then  'データなしの場合は終了
-            Exit Sub
+        Else
+            '売上処理
+            Dim blnFlg As Boolean = mUpdate_Uriage()
+            If blnFlg = False Then
+                Exit Sub
+            End If
         End If
-
-
-        '売上処理
-        Dim blnFlg As Boolean = mUpdate_Uriage()
-        If blnFlg = False Then
-            Exit Sub
-        End If
-
 
 
         '登録完了メッセージ

@@ -35,12 +35,14 @@ Public Class OrderManagement
     Private _parentForm As Form
     'Private _gh As UtilDataGridViewHandler
     Private _init As Boolean                             '初期処理済フラグ
-    Private CompanyCode As String = ""
+    'Private CompanyCode As String = ""
     Private No As String = ""
     Private Suffix As String = ""
     Private _langHd As UtilLangHandler
     Private _status As String = ""
     Private Input As String = frmC01F10_Login.loginValue.TantoNM
+    Private _com As CommonLogic
+    Private _vs As String = "1"
 
     '-------------------------------------------------------------------------------
     'デフォルトコンストラクタ（隠蔽）
@@ -74,6 +76,8 @@ Public Class OrderManagement
         _status = prmRefStatus
         '_gh = New UtilDataGridViewHandler(dgvLIST)                          'DataGridViewユーティリティクラス
         StartPosition = FormStartPosition.CenterScreen                      '画面中央表示
+        _com = New CommonLogic(_db, _msgHd)
+        Me.Text += _vs
         Me.Text = Me.Text & "[" & frmC01F10_Login.loginValue.BumonNM & "][" & frmC01F10_Login.loginValue.TantoNM & "]" & StartUp.BackUpServerPrint                                  'フォームタイトル表示
         Me.ControlBox = Not Me.ControlBox
         DtpOrderDate.Value = Date.Now
@@ -87,7 +91,7 @@ Public Class OrderManagement
 
         If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
 
-            LblOrderNo.Text = "OrderNumber"
+            LblOrderNo.Text = "JobOrderNo"
             LblCutomerNo.Text = "CustomerNumber"
             LblOrderDate.Text = "OrderDate"
             LblCustomer.Text = "CustomerName"
@@ -295,21 +299,7 @@ Public Class OrderManagement
             DgvOrder.Columns("受注金額").DefaultCellStyle.Format = "N2"
             DgvOrder.Columns("未登録額").DefaultCellStyle.Format = "N2"
 
-            Dim curds As DataSet  'm25_currency
-            Dim cur As String
-            Dim Sql As String
-
-            '通貨の表示
-            If IsDBNull(ds1.Tables(RS).Rows(0)("通貨")) Then
-                cur = vbNullString
-            Else
-                Sql = " and 採番キー = " & ds1.Tables(RS).Rows(0)("通貨")
-                curds = getDsData("m25_currency", Sql)
-
-                cur = curds.Tables(RS).Rows(0)("通貨コード")
-            End If
-            TxtIDRCurrency.Text = cur
-
+            TxtIDRCurrency.Text = _com.getCurrencyEx(ds1.Tables(RS).Rows(0)("通貨"))
 
             For i As Integer = 0 To ds3.Tables(RS).Rows.Count - 1
                 DgvOrder.Rows.Add()
@@ -345,7 +335,7 @@ Public Class OrderManagement
             If frmC01F10_Login.loginValue.Language = CommonConst.LANG_KBN_ENG Then
                 DgvHistory.Columns.Add("No", "No")
                 DgvHistory.Columns.Add("売上番号", "SalesNumber")
-                DgvHistory.Columns.Add("行番号", "LineNumber")
+                DgvHistory.Columns.Add("行番号", "LineNo")
                 DgvHistory.Columns.Add("仕入区分", "PurchasingClassification")
                 DgvHistory.Columns.Add("メーカー", "Manufacturer")
                 DgvHistory.Columns.Add("品名", "ItemName")
@@ -665,6 +655,7 @@ Public Class OrderManagement
             Dim totalUriAmount As Decimal = 0
             Dim totalArariAmount As Decimal = 0
             Dim totalmitsuAmount As Decimal = 0
+            Dim totalSalesAmount_cur As Decimal = 0
 
             't31_urigdt 売上明細更新
             For i As Integer = 0 To DgvAdd.Rows.Count() - 1
@@ -676,7 +667,7 @@ Public Class OrderManagement
                         Sql4 += "会社コード, 売上番号, 売上番号枝番, 受注番号, 受注番号枝番, 行番号, 仕入区分, メーカー, 品名, 型式"
                         Sql4 += ", 仕入先名, 仕入値, 受注数量, 売上数量, 受注残数, 単位, 売単価, 売上金額, 粗利額, 粗利率, 間接費"
                         Sql4 += ", リードタイム, 備考, 更新者, 更新日, 仕入原価, 関税率, 関税額, 前払法人税率, 前払法人税額"
-                        Sql4 += ", 輸送費率, 輸送費額, 仕入金額, 見積単価, 見積金額)"
+                        Sql4 += ", 輸送費率, 輸送費額, 仕入金額, 見積単価, 見積金額,売上金額_外貨,売上単価_外貨)"
                         Sql4 += " VALUES('"
                         Sql4 += dsCymndt.Tables(RS).Rows(x)("会社コード").ToString
                         Sql4 += "', '"
@@ -765,17 +756,24 @@ Public Class OrderManagement
                         Sql4 += UtilClass.formatNumber(dsCymndt.Tables(RS).Rows(x)("輸送費率").ToString)
                         Sql4 += "', '"
                         Sql4 += UtilClass.formatNumber(dsCymndt.Tables(RS).Rows(x)("輸送費額").ToString)
-                        Sql4 += "', '"
+                        Sql4 += "',"
                         'Sql4 += UtilClass.formatNumber((dsCymndt.Tables(RS).Rows(x)("仕入値").ToString + kansetsuhi) * DgvAdd.Rows(i).Cells("売上数量").Value.ToString)
                         Sql4 += UtilClass.formatNumber(dsCymndt.Tables(RS).Rows(x)("仕入値").ToString * DgvAdd.Rows(i).Cells("売上数量").Value.ToString + kansetsuhi)
-                        Sql4 += "', '"
+                        Sql4 += ","
                         Sql4 += UtilClass.formatNumber(dsCymndt.Tables(RS).Rows(x)("見積単価").ToString)
-                        Sql4 += "', '"
+                        Sql4 += ","
 
                         Dim mitsuAmount As Decimal = dsCymndt.Tables(RS).Rows(x)("見積単価").ToString * DgvAdd.Rows(i).Cells("売上数量").Value.ToString
 
                         Sql4 += UtilClass.formatNumber(mitsuAmount) '見積金額
-                        Sql4 += "')"
+
+                        Dim decUriTanka As Decimal = Decimal.Parse(dsCymndt.Tables(RS).Rows(x)("見積単価_外貨").ToString)
+                        Dim decUrikingaku As Decimal = decUriTanka * Decimal.Parse(DgvAdd.Rows(i).Cells("売上数量").Value.ToString)
+                        Sql4 += "," + UtilClass.formatNumber(decUrikingaku) + ""  '売上金額_外貨  2020.02.23
+                        Sql4 += "," + UtilClass.formatNumber(decUriTanka) + ""    '売上単価_外貨  2020.02.23
+                        Sql4 += ")"
+                        totalSalesAmount_cur += decUrikingaku
+
                         If DgvAdd.Rows(i).Cells("売上数量").Value <> 0 Then
                             _db.executeDB(Sql4)
                         End If
@@ -803,7 +801,7 @@ Public Class OrderManagement
             Sql3 += ", 得意先コード, 得意先名, 得意先郵便番号, 得意先住所, 得意先電話番号, 得意先ＦＡＸ, 得意先担当者役職"
             Sql3 += ", 得意先担当者名, 見積日, 見積有効期限, 支払条件, 見積金額, 売上金額, 粗利額, 営業担当者, 入力担当者"
             Sql3 += ", 備考, 取消日, 取消区分, ＶＡＴ, ＰＰＨ, 受注日, 売上日, 入金予定日, 登録日, 更新日, 更新者, 仕入金額"
-            Sql3 += ", 営業担当者コード, 入力担当者コード)"
+            Sql3 += ", 営業担当者コード, 入力担当者コード,売上金額_外貨,通貨,レート)"
             Sql3 += " VALUES('"
             Sql3 += dsCymnHd.Tables(RS).Rows(0)("会社コード").ToString '会社コード
             Sql3 += "', '"
@@ -885,7 +883,10 @@ Public Class OrderManagement
             Sql3 += dsCymnHd.Tables(RS).Rows(0)("営業担当者コード").ToString '営業担当者コード
             Sql3 += "', '"
             Sql3 += frmC01F10_Login.loginValue.TantoCD '入力担当者コード
-            Sql3 += "')"
+            Sql3 += "'," + UtilClass.formatNumber(totalSalesAmount_cur) + ""               '売上金額_外貨
+            Sql3 += ",'" + dsCymnHd.Tables(RS).Rows(0)("通貨").ToString() + "'"  '通貨
+            Sql3 += "," + UtilClass.formatNumberF10(_com.setRate(dsCymnHd.Tables(RS).Rows(0)("通貨"), DtpOrderDate.Text)) + ""              'レート
+            Sql3 += ")"
 
             _db.executeDB(Sql3)
 
@@ -1084,20 +1085,7 @@ Public Class OrderManagement
     'param2：String 詳細条件
     'Return: DataSet
     Private Function getDsData(ByVal tableName As String, Optional ByRef txtParam As String = "") As DataSet
-        Dim reccnt As Integer = 0 'DB用（デフォルト）
-        Dim Sql As String = ""
-
-        Sql += "SELECT"
-        Sql += " *"
-        Sql += " FROM "
-
-        Sql += "public." & tableName
-        Sql += " WHERE "
-        Sql += "会社コード"
-        Sql += " ILIKE  "
-        Sql += "'" & frmC01F10_Login.loginValue.BumonCD & "'"
-        Sql += txtParam
-        Return _db.selectDB(Sql, RS, reccnt)
+        Return _com.getDsData(tableName, txtParam)
     End Function
 
     '汎用マスタから固定キー、可変キーに応じた結果を返す
@@ -1105,19 +1093,7 @@ Public Class OrderManagement
     'param2：String 可変キー
     'Return: DataSet
     Private Function getDsHanyoData(ByVal prmFixed As String, Optional ByVal prmVariable As String = "") As DataSet
-        Dim Sql As String = ""
-
-        Sql = " AND "
-        Sql += "固定キー ILIKE '" & prmFixed & "'"
-
-        If prmVariable IsNot "" Then
-            Sql += " AND "
-            Sql += "可変キー ILIKE '" & prmVariable & "'"
-        End If
-
-        'リードタイムのリストを汎用マスタから取得
-        Return getDsData("m90_hanyo", Sql)
-
+        Return _com.getDsHanyoData(prmFixed, prmVariable)
     End Function
 
     'param1：String 採番キー
@@ -1125,67 +1101,7 @@ Public Class OrderManagement
     'Return: String 伝票番号
     '伝票番号を取得
     Private Function getSaiban(ByVal key As String, ByVal today As DateTime) As String
-        Dim Sql As String = ""
-        Dim saibanID As String = ""
-        Dim reccnt As Integer = 0 'DB用（デフォルト）
-
-        Try
-            Sql = "SELECT "
-            Sql += "* "
-            Sql += "FROM "
-            Sql += "public.m80_saiban"
-            Sql += " WHERE "
-            Sql += "会社コード = '" & frmC01F10_Login.loginValue.BumonCD & "'"
-            Sql += " AND "
-            Sql += "採番キー = '" & key & "'"
-
-            Dim dsSaiban As DataSet = _db.selectDB(Sql, RS, reccnt)
-
-            saibanID = dsSaiban.Tables(RS).Rows(0)("接頭文字")
-            saibanID += today.ToString("MMdd")
-            saibanID += dsSaiban.Tables(RS).Rows(0)("最新値").ToString.PadLeft(dsSaiban.Tables(RS).Rows(0)("連番桁数"), "0")
-
-            Dim keyNo As Integer
-
-            If dsSaiban.Tables(RS).Rows(0)("最新値") = dsSaiban.Tables(RS).Rows(0)("最大値") Then
-                '最新値が最大と同じ場合、最小値にリセット
-                keyNo = dsSaiban.Tables(RS).Rows(0)("最小値")
-            Else
-                '最新値+1
-                keyNo = dsSaiban.Tables(RS).Rows(0)("最新値") + 1
-            End If
-
-            Sql = "UPDATE "
-            Sql += "Public.m80_saiban "
-            Sql += "SET "
-            Sql += " 最新値 "
-            Sql += " = '"
-            Sql += keyNo.ToString
-            Sql += "', "
-            Sql += "更新者"
-            Sql += " = '"
-            Sql += frmC01F10_Login.loginValue.TantoNM
-            Sql += "', "
-            Sql += "更新日"
-            Sql += " = '"
-            Sql += UtilClass.formatDatetime(today)
-            Sql += "' "
-            Sql += "WHERE"
-            Sql += " 会社コード"
-            Sql += "='"
-            Sql += frmC01F10_Login.loginValue.BumonCD
-            Sql += "'"
-            Sql += " AND"
-            Sql += " 採番キー = '" & key & "'"
-            Console.WriteLine(Sql)
-            _db.executeDB(Sql)
-
-            Return saibanID
-        Catch ex As Exception
-            'キャッチした例外をユーザー定義例外に移し変えシステムエラーMSG出力後スロー
-            Throw New UsrDefException(ex, _msgHd.getMSG("SystemErr", frmC01F10_Login.loginValue.Language, UtilClass.getErrDetail(ex)))
-        End Try
-
+        Return _com.getSaiban(key, today)
     End Function
 
 End Class

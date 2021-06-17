@@ -722,6 +722,12 @@ finalmente:
             _msgHd.dspMSG("NonAction", frmC01F10_Login.loginValue.Language)
             Exit Sub
         End If
+        'Detailは次画面へ移動しない
+        If RbtnDetails.Checked Then
+            '操作できないアラートを出す
+            _msgHd.dspMSG("NonAction", frmC01F10_Login.loginValue.Language)
+            Exit Sub
+        End If
 
         Dim dicNo As New Dictionary(Of String, String)
         For RowIdx As Integer = 0 To DgvCymnhd.RowCount - 1

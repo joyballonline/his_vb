@@ -372,7 +372,7 @@ Partial Class SalesProfitList
         '受注数量
         '
         Me.受注数量.FillWeight = 58.92006!
-        Me.受注数量.HeaderText = "受注数量QTY"
+        Me.受注数量.HeaderText = "QTY"
         Me.受注数量.Name = "受注数量"
         Me.受注数量.ReadOnly = True
         Me.受注数量.Width = 50
@@ -388,7 +388,7 @@ Partial Class SalesProfitList
         '受注単価_原通貨
         '
         Me.受注単価_原通貨.FillWeight = 150.1842!
-        Me.受注単価_原通貨.HeaderText = "受注単価_原通貨AMT"
+        Me.受注単価_原通貨.HeaderText = "Amount"
         Me.受注単価_原通貨.Name = "受注単価_原通貨"
         Me.受注単価_原通貨.ReadOnly = True
         Me.受注単価_原通貨.Width = 50
@@ -396,7 +396,7 @@ Partial Class SalesProfitList
         '受注金額_IDR
         '
         Me.受注金額_IDR.FillWeight = 42.89459!
-        Me.受注金額_IDR.HeaderText = "受注金額_IDR10VAT"
+        Me.受注金額_IDR.HeaderText = "VAT"
         Me.受注金額_IDR.Name = "受注金額_IDR"
         Me.受注金額_IDR.ReadOnly = True
         Me.受注金額_IDR.Width = 50
@@ -404,14 +404,14 @@ Partial Class SalesProfitList
         '受注金額_原通貨
         '
         Me.受注金額_原通貨.FillWeight = 67.03494!
-        Me.受注金額_原通貨.HeaderText = "受注金額_原通貨TOTAL"
+        Me.受注金額_原通貨.HeaderText = "TOTAL"
         Me.受注金額_原通貨.Name = "受注金額_原通貨"
         Me.受注金額_原通貨.ReadOnly = True
         Me.受注金額_原通貨.Width = 50
         '
         '得意先名
         '
-        Me.得意先名.HeaderText = "得意先名CUST"
+        Me.得意先名.HeaderText = "得意先名"
         Me.得意先名.Name = "得意先名"
         Me.得意先名.ReadOnly = True
         Me.得意先名.Width = 50
@@ -419,7 +419,7 @@ Partial Class SalesProfitList
         '単位
         '
         Me.単位.FillWeight = 33.71944!
-        Me.単位.HeaderText = "単位CUSTPO"
+        Me.単位.HeaderText = "CUSTPO"
         Me.単位.Name = "単位"
         Me.単位.ReadOnly = True
         Me.単位.Width = 50
@@ -504,7 +504,7 @@ Partial Class SalesProfitList
         '仕入先コード
         '
         Me.仕入先コード.FillWeight = 12.51878!
-        Me.仕入先コード.HeaderText = "仕入先コードINVNO"
+        Me.仕入先コード.HeaderText = "INVOICENO"
         Me.仕入先コード.Name = "仕入先コード"
         Me.仕入先コード.ReadOnly = True
         Me.仕入先コード.Width = 50
@@ -514,7 +514,7 @@ Partial Class SalesProfitList
         DataGridViewCellStyle1.Format = "d"
         Me.得意先コード.DefaultCellStyle = DataGridViewCellStyle1
         Me.得意先コード.FillWeight = 255.3285!
-        Me.得意先コード.HeaderText = "得意先コードDATE"
+        Me.得意先コード.HeaderText = "INVOICE DATE"
         Me.得意先コード.Name = "得意先コード"
         Me.得意先コード.ReadOnly = True
         Me.得意先コード.Width = 50
@@ -522,7 +522,7 @@ Partial Class SalesProfitList
         '仕入単価_IDR
         '
         Me.仕入単価_IDR.FillWeight = 5.795458!
-        Me.仕入単価_IDR.HeaderText = "仕入単価_IDRQTY"
+        Me.仕入単価_IDR.HeaderText = "QTY"
         Me.仕入単価_IDR.Name = "仕入単価_IDR"
         Me.仕入単価_IDR.ReadOnly = True
         Me.仕入単価_IDR.Width = 50
@@ -538,7 +538,7 @@ Partial Class SalesProfitList
         '仕入単価_原通貨
         '
         Me.仕入単価_原通貨.FillWeight = 9.048973!
-        Me.仕入単価_原通貨.HeaderText = "仕入単価_原通貨AMT"
+        Me.仕入単価_原通貨.HeaderText = "Amount"
         Me.仕入単価_原通貨.Name = "仕入単価_原通貨"
         Me.仕入単価_原通貨.ReadOnly = True
         Me.仕入単価_原通貨.Width = 50
@@ -556,7 +556,7 @@ Partial Class SalesProfitList
         '
         DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
         Me.利益率.DefaultCellStyle = DataGridViewCellStyle3
-        Me.利益率.HeaderText = "利益率BAL"
+        Me.利益率.HeaderText = "BALANCE"
         Me.利益率.Name = "利益率"
         Me.利益率.ReadOnly = True
         Me.利益率.Width = 50
@@ -573,7 +573,7 @@ Partial Class SalesProfitList
         '仕入原価_IDR
         '
         Me.仕入原価_IDR.FillWeight = 3.472213!
-        Me.仕入原価_IDR.HeaderText = "仕入原価_IDREMARK"
+        Me.仕入原価_IDR.HeaderText = "REMARK"
         Me.仕入原価_IDR.Name = "仕入原価_IDR"
         Me.仕入原価_IDR.ReadOnly = True
         Me.仕入原価_IDR.Width = 50
